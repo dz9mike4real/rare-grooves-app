@@ -70,7 +70,7 @@ export const TrackCard = memo(function TrackCard({ track, onPlay, isPlaying, onF
             <Button
               size="icon"
               className={`h-14 w-14 rounded-full shadow-2xl ${
-                isPlaying ? 'gradient-bg' : 'bg-[#0a4d7f] hover:bg-[#8b2fd6]'
+                isPlaying ? 'gradient-bg' : 'bg-[#0a4d7f] hover:bg-[#1a7dbf]'
               }`}
               onClick={(e) => {
                 e.stopPropagation();

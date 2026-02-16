@@ -87,7 +87,7 @@ export default function FavoritesPage() {
     <div className="min-h-screen bg-[#121212]">
       {/* Background Effects */}
       <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#ff47e6]/5 rounded-full blur-3xl" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#17a2b8]/5 rounded-full blur-3xl" />
         <div className="absolute bottom-1/3 right-1/4 w-72 h-72 bg-[#0a4d7f]/5 rounded-full blur-3xl" />
       </div>
 
@@ -105,7 +105,7 @@ export default function FavoritesPage() {
               </Button>
             </Link>
             <div className="flex items-center gap-3">
-              <div className="p-2 rounded-xl bg-gradient-to-br from-[#ff47e6] to-[#0a4d7f]">
+              <div className="p-2 rounded-xl bg-gradient-to-br from-[#17a2b8] to-[#0a4d7f]">
                 <Heart className="h-5 w-5 text-white fill-white" />
               </div>
               <h1 className="text-2xl font-bold text-white">My Favorites</h1>
@@ -120,8 +120,8 @@ export default function FavoritesPage() {
           <div className="flex items-center justify-center py-20">
             <div className="text-center space-y-4">
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-[#ff47e6] to-[#0a4d7f] opacity-30 blur-2xl rounded-full" />
-                <Heart className="h-16 w-16 text-[#ff47e6] mx-auto animate-pulse" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#17a2b8] to-[#0a4d7f] opacity-30 blur-2xl rounded-full" />
+                <Heart className="h-16 w-16 text-[#17a2b8] mx-auto animate-pulse" />
               </div>
               <p className="text-white/60">Loading your favorites...</p>
             </div>
