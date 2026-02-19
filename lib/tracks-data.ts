@@ -3166,3 +3166,16 @@ export const loadRealAlbumCovers = async (tracks: Track[]): Promise<Track[]> => 
   
   return tracksWithCovers;
 };
+
+// Pre-load tracks with real album art (for server-side use)
+let tracksWithRealArt: Track[] | null = null;
+
+export const getTracksWithRealArt = async (): Promise<Track[]> => {
+  if (tracksWithRealArt) {
+    return tracksWithRealArt;
+  }
+  
+  console.log('[v0] Pre-loading tracks with real album art...');
+  tracksWithRealArt = await loadRealAudioFromDeezer(rareTracks);
+  return tracksWithRealArt;
+};

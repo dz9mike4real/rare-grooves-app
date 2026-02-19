@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Track } from '@/lib/types';
-import { rareTracks, loadRealAudioFromDeezer, loadAudioForTracks } from '@/lib/tracks-data';
+import { rareTracks, loadRealAudioFromDeezer, loadAudioForTracks, getTracksWithRealArt } from '@/lib/tracks-data';
 import { TrackCard } from '@/components/track-card';
 import { AudioPlayer } from '@/components/audio-player';
 import { FavoritesSidebar } from '@/components/favorites-sidebar';
@@ -23,18 +23,14 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedGenre, setSelectedGenre] = useState<string>('all');
   const [selectedYear, setSelectedYear] = useState<string>('all');
-  const [isLoadingAudio, setIsLoadingAudio] = useState(false);
+  const [isLoadingAudio, setIsLoadingAudio] = useState(true);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
-  const [tracksWithCovers, setTracksWithCovers] = useState<Track[]>(rareTracks);
-  const [displayedTracks, setDisplayedTracks] = useState<Track[]>(() => 
-    [...rareTracks].sort((a, b) => b.rarity - a.rarity).slice(0, ITEMS_PER_PAGE)
-  );
+  const [tracksWithCovers, setTracksWithCovers] = useState<Track[]>([]);
+  const [displayedTracks, setDisplayedTracks] = useState<Track[]>([]);
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
-  const [totalFilteredCount, setTotalFilteredCount] = useState(rareTracks.length);
+  const [totalFilteredCount, setTotalFilteredCount] = useState(0);
   const [isFavoritesOpen, setIsFavoritesOpen] = useState(false);
-  const [queue, setQueue] = useState<Track[]>(() => 
-    [...rareTracks].sort((a, b) => b.rarity - a.rarity)
-  );
+  const [queue, setQueue] = useState<Track[]>([]);
   const [queueIndex, setQueueIndex] = useState(-1);
   const [isDiscoveryOpen, setIsDiscoveryOpen] = useState(false);
   const [discoveredTracks, setDiscoveredTracks] = useState<Track[]>([]);
@@ -513,17 +509,35 @@ export default function Home() {
           <div>
             <h3 className="text-xl font-bold text-white">{getSectionTitle()}</h3>
             <p className="text-sm text-white/50">
-              {totalFilteredCount} {totalFilteredCount === 1 ? 'track' : 'tracks'}
-              {visibleCount < totalFilteredCount && ` (showing ${visibleCount})`}
-              {isLoadingAudio && (
-                <span className="text-[#0a4d7f]"> • Loading real audio...</span>
+              {isLoadingAudio ? (
+                <span className="text-[#0a4d7f]">Loading real tracks and album art...</span>
+              ) : (
+                <>
+                  {totalFilteredCount} {totalFilteredCount === 1 ? 'track' : 'tracks'}
+                  {visibleCount < totalFilteredCount && ` (showing ${visibleCount})`}
+                  {loadedCount > 0 && ` • ${loadedCount} with real audio`}
+                </>
               )}
-              {!isLoadingAudio && loadedCount > 0 && ` • ${loadedCount} with real audio`}
             </p>
           </div>
         </div>
 
-        {/* Tracks Grid - Always show tracks, even while loading audio */}
+        {/* Loading Skeletons */}
+        {isLoadingAudio ? (
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+            {Array.from({ length: ITEMS_PER_PAGE }).map((_, i) => (
+              <div key={i} className="glass-card overflow-hidden animate-pulse">
+                <div className="aspect-square bg-white/10" />
+                <div className="p-4 space-y-2">
+                  <div className="h-4 w-3/4 bg-white/10 rounded" />
+                  <div className="h-3 w-1/2 bg-white/10 rounded" />
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <>
+        {/* Tracks Grid */}
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
           {displayedTracks.slice(0, visibleCount).map((track) => (
             <TrackCard
@@ -544,8 +558,10 @@ export default function Home() {
             </p>
           </div>
         )}
+          </>
+        )}
 
-        {displayedTracks.length === 0 && (
+        {displayedTracks.length === 0 && !isLoadingAudio && (
           <div className="flex flex-col items-center justify-center py-20 text-center">
             <div className="glass-card p-8 rounded-full mb-6">
               <Disc3 className="h-16 w-16 text-white/30" />
