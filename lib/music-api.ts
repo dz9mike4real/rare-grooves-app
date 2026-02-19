@@ -20,65 +20,60 @@ interface iTunesSearchResult {
   }>;
 }
 
-// Fetch album artwork from iTunes API with multiple fallback strategies
+// Fetch album artwork - prioritize MusicBrainz/Cover Art Archive
 export async function fetchAlbumCover(artist: string, album: string): Promise<string | null> {
-  const searchStrategies = [
-    `${artist} ${album}`,
-    `${artist} ${album.replace(/vol\.\d+/i, '').trim()}`,
-    artist,
-  ];
+  // Step 1: Try MusicBrainz + Cover Art Archive (best for rare/classic music)
+  try {
+    const mbQuery = encodeURIComponent(`artist:${artist} AND release:${album}`);
+    const mbResponse = await fetch(
+      `https://musicbrainz.org/ws/2/release?query=${mbQuery}&fmt=json&limit=3`,
+      { headers: { 'User-Agent': 'RareGrooves/1.0 (https://raregrooves.app)' } }
+    );
 
-  for (const query of searchStrategies) {
-    try {
-      const url = `https://itunes.apple.com/search?term=${encodeURIComponent(query)}&media=music&entity=album&limit=1`;
+    if (mbResponse.ok) {
+      const mbData = await mbResponse.json();
       
-      const response = await fetch(url);
-      
-      if (!response.ok) {
-        continue;
+      if (mbData.releases && mbData.releases.length > 0) {
+        const releaseId = mbData.releases[0].id;
+        
+        // Try Cover Art Archive
+        const coverResponse = await fetch(
+          `https://coverartarchive.org/release/${releaseId}/front-250`,
+          { redirect: 'follow' }
+        );
+        
+        if (coverResponse.ok) {
+          console.log('[v0] MusicBrainz cover found for:', artist, '-', album);
+          return coverResponse.url;
+        }
       }
-      
+    }
+  } catch (err) {
+    // Silent fail
+  }
+
+  // Step 2: Try iTunes
+  try {
+    const query = `${artist} ${album}`;
+    const url = `https://itunes.apple.com/search?term=${encodeURIComponent(query)}&media=music&entity=album&limit=1`;
+    
+    const response = await fetch(url);
+    
+    if (response.ok) {
       const data: iTunesSearchResult = await response.json();
       
       if (data.results && data.results.length > 0) {
         let artworkUrl = data.results[0].artworkUrl100;
         
-        if (!artworkUrl || typeof artworkUrl !== 'string') {
-          continue;
-        }
-        
-        // Try to upgrade to high-res version
-        if (artworkUrl.includes('100x100bb')) {
-          artworkUrl = artworkUrl.replace('100x100bb', '600x600bb');
-        } else if (artworkUrl.includes('100x100')) {
-          artworkUrl = artworkUrl.replace('100x100', '600x600');
-        }
-        
-        console.log('[v0] iTunes cover found for:', artist, '-', album);
-        return artworkUrl;
-      }
-    } catch (err) {
-      continue;
-    }
-  }
-  
-  // Fallback: Try Cover Art Archive (MusicBrainz)
-  try {
-    const mbUrl = `https://musicbrainz.org/ws/2/release-group?query=${encodeURIComponent(artist)}%20${encodeURIComponent(album)}&fmt=json&limit=1`;
-    const mbResponse = await fetch(mbUrl, {
-      headers: { 'User-Agent': 'RareGrooves/1.0 (contact@example.com)' }
-    });
-    
-    if (mbResponse.ok) {
-      const mbData = await mbResponse.json();
-      if (mbData['release-groups'] && mbData['release-groups'].length > 0) {
-        const releaseId = mbData['release-groups'][0].id;
-        const coverUrl = `https://coverartarchive.org/release/${releaseId}/front-250`;
-        // Check if cover exists
-        const coverCheck = await fetch(coverUrl, { method: 'HEAD' });
-        if (coverCheck.ok) {
-          console.log('[v0] Cover Art Archive cover found for:', artist, '-', album);
-          return coverUrl;
+        if (artworkUrl && typeof artworkUrl === 'string') {
+          if (artworkUrl.includes('100x100bb')) {
+            artworkUrl = artworkUrl.replace('100x100bb', '600x600bb');
+          } else if (artworkUrl.includes('100x100')) {
+            artworkUrl = artworkUrl.replace('100x100', '600x600');
+          }
+          
+          console.log('[v0] iTunes cover found for:', artist, '-', album);
+          return artworkUrl;
         }
       }
     }
