@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Track } from '@/lib/types';
-import { rareTracks, loadRealAudioFromDeezer, loadAudioForTracks, getTracksWithRealArt } from '@/lib/tracks-data';
+import { rareTracks, loadRealAudioFromDeezer, loadAudioForTracks } from '@/lib/tracks-data';
 import { TrackCard } from '@/components/track-card';
 import { AudioPlayer } from '@/components/audio-player';
 import { FavoritesSidebar } from '@/components/favorites-sidebar';
@@ -13,6 +13,7 @@ import { Search, Disc3, Heart, Sparkles, X, ChevronDown, Play, SkipForward, Cale
 import { DiscoveryButton, DiscoveryPanel } from '@/components/discovery';
 import { useToast } from '@/hooks/use-toast';
 import { ErrorBoundary } from '@/components/error-boundary';
+import { ClientOnly } from '@/components/client-only';
 import { PAGINATION, DEBOUNCE } from '@/lib/constants';
 
 const ITEMS_PER_PAGE = PAGINATION.ITEMS_PER_PAGE;
@@ -65,38 +66,13 @@ export default function Home() {
     }
   }, [selectedTrack]);
 
-  // Load real audio on mount - check cache first
+  // Load real audio on mount (client-side only)
   useEffect(() => {
     const loadTracks = async () => {
       console.log('[v0] Loading tracks...');
       
       try {
-        // Check localStorage cache first
-        let tracksWithRealAudio: Track[] | null = null;
-        
-        try {
-          const cached = localStorage.getItem('rare-grooves-tracks');
-          if (cached) {
-            const parsed = JSON.parse(cached);
-            if (parsed.timestamp && Date.now() - parsed.timestamp < 24 * 60 * 60 * 1000) {
-              console.log('[v0] Using cached track data');
-              tracksWithRealAudio = parsed.tracks;
-            }
-          }
-        } catch (e) {
-          // Ignore cache errors
-        }
-        
-        // If no cache, fetch fresh data
-        if (!tracksWithRealAudio) {
-          tracksWithRealAudio = await loadRealAudioFromDeezer(rareTracks);
-          
-          // Cache for 24 hours
-          localStorage.setItem('rare-grooves-tracks', JSON.stringify({
-            tracks: tracksWithRealAudio,
-            timestamp: Date.now()
-          }));
-        }
+        const tracksWithRealAudio = await loadRealAudioFromDeezer(rareTracks);
         
         setTracksWithCovers(tracksWithRealAudio);
         setDisplayedTracks(
@@ -534,6 +510,21 @@ export default function Home() {
         </div>
 
         {/* Section Header */}
+        <ClientOnly
+          fallback={
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+              {Array.from({ length: ITEMS_PER_PAGE }).map((_, i) => (
+                <div key={i} className="glass-card overflow-hidden animate-pulse">
+                  <div className="aspect-square bg-white/10" />
+                  <div className="p-4 space-y-2">
+                    <div className="h-4 w-3/4 bg-white/10 rounded" />
+                    <div className="h-3 w-1/2 bg-white/10 rounded" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          }
+        >
         <div className="mb-6 flex items-center justify-between">
           <div>
             <h3 className="text-xl font-bold text-white">{getSectionTitle()}</h3>
@@ -604,6 +595,7 @@ export default function Home() {
             </p>
           </div>
         )}
+        </ClientOnly>
         </main>
       </ErrorBoundary>
 
