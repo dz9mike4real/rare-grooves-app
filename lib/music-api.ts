@@ -1,4 +1,5 @@
 import type { Track } from './types';
+import { searchTheAudioDB } from './audiodb-api';
 
 interface iTunesSearchResult {
   resultCount: number;
@@ -20,7 +21,7 @@ interface iTunesSearchResult {
   }>;
 }
 
-// Fetch album artwork - prioritize Deezer/iTunes
+// Fetch album artwork - prioritize Deezer/iTunes/TheAudioDB
 export async function fetchAlbumCover(artist: string, album: string): Promise<string | null> {
   // Step 1: Try Deezer
   try {
@@ -68,6 +69,17 @@ export async function fetchAlbumCover(artist: string, album: string): Promise<st
           return artworkUrl;
         }
       }
+    }
+  } catch (err) {
+    // Silent fail
+  }
+
+  // Step 3: Try TheAudioDB (great for classic/rare music)
+  try {
+    const audiodbData = await searchTheAudioDB(artist, album);
+    if (audiodbData && audiodbData.albumArt) {
+      console.log('[v0] TheAudioDB cover found for:', artist, '-', album);
+      return audiodbData.albumArt;
     }
   } catch (err) {
     // Silent fail

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { checkRateLimit, getClientIp, validateTrackParams } from '@/lib/rate-limit';
+import { searchTheAudioDB } from '@/lib/audiodb-api';
 import { INPUT } from '@/lib/constants';
 
 export async function GET(request: NextRequest) {
@@ -114,7 +115,27 @@ export async function GET(request: NextRequest) {
     console.error('[v0] iTunes API error:', error);
   }
 
-  // Step 3: Try Last.fm for covers only
+  // Step 3: Try TheAudioDB (good for classic/rare music)
+  try {
+    const audiodbData = await searchTheAudioDB(sanitizedArtist, sanitizedTitle);
+    
+    if (audiodbData && audiodbData.albumArt) {
+      return NextResponse.json({
+        previewUrl: null,
+        albumCover: audiodbData.albumArt,
+        artist: sanitizedArtist,
+        title: sanitizedTitle,
+        album: '',
+        year: audiodbData.year || '',
+        genre: audiodbData.genre || '',
+        source: 'audiodb'
+      });
+    }
+  } catch (error) {
+    console.error('[v0] TheAudioDB API error:', error);
+  }
+
+  // Step 4: Try Last.fm for covers only
   try {
     const lastFmResponse = await fetch(
       `http://ws.audioscrobbler.com/2.0/?method=track.getinfo&artist=${encodeURIComponent(sanitizedArtist)}&track=${encodeURIComponent(sanitizedTitle)}&api_key=demo&format=json`
