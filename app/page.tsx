@@ -84,13 +84,7 @@ export default function Home() {
         
         const loaded = tracksWithRealAudio.filter(t => t.audioUrl.startsWith('http')).length;
         setLoadedCount(loaded);
-        if (loaded === 0) {
-          toast({
-            title: 'Using demo audio',
-            description: 'Could not load real previews. Using generated audio instead.',
-            variant: 'default'
-          });
-        }
+        // Don't show toast - it's expected that rare tracks won't have previews
       } catch (error) {
         console.error('[v0] Failed to load tracks:', error);
         toast({
