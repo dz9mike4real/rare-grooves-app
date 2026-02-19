@@ -20,17 +20,21 @@ const ITEMS_PER_PAGE = PAGINATION.ITEMS_PER_PAGE;
 export default function Home() {
   const { toast } = useToast();
   const [selectedTrack, setSelectedTrack] = useState<Track | null>(null);
-  const [displayedTracks, setDisplayedTracks] = useState<Track[]>([]);
-  const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
-  const [totalFilteredCount, setTotalFilteredCount] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedGenre, setSelectedGenre] = useState<string>('all');
   const [selectedYear, setSelectedYear] = useState<string>('all');
-  const [isLoadingCovers, setIsLoadingCovers] = useState(true);
+  const [isLoadingAudio, setIsLoadingAudio] = useState(false);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [tracksWithCovers, setTracksWithCovers] = useState<Track[]>(rareTracks);
+  const [displayedTracks, setDisplayedTracks] = useState<Track[]>(() => 
+    [...rareTracks].sort((a, b) => b.rarity - a.rarity).slice(0, ITEMS_PER_PAGE)
+  );
+  const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
+  const [totalFilteredCount, setTotalFilteredCount] = useState(rareTracks.length);
   const [isFavoritesOpen, setIsFavoritesOpen] = useState(false);
-  const [queue, setQueue] = useState<Track[]>([]);
+  const [queue, setQueue] = useState<Track[]>(() => 
+    [...rareTracks].sort((a, b) => b.rarity - a.rarity)
+  );
   const [queueIndex, setQueueIndex] = useState(-1);
   const [isDiscoveryOpen, setIsDiscoveryOpen] = useState(false);
   const [discoveredTracks, setDiscoveredTracks] = useState<Track[]>([]);
@@ -61,11 +65,11 @@ export default function Home() {
     }
   }, [selectedTrack]);
 
-  // Load tracks on mount
+  // Load real audio in background on mount
   useEffect(() => {
     const loadTracks = async () => {
       console.log('[v0] Loading tracks with real audio from Deezer...');
-      setIsLoadingCovers(true);
+      setIsLoadingAudio(true);
       
       try {
         const tracksWithRealAudio = await loadRealAudioFromDeezer(rareTracks);
@@ -79,7 +83,7 @@ export default function Home() {
         
         const loaded = tracksWithRealAudio.filter(t => t.audioUrl.startsWith('http')).length;
         setLoadedCount(loaded);
-        if (loadedCount === 0) {
+        if (loaded === 0) {
           toast({
             title: 'Using demo audio',
             description: 'Could not load real previews. Using generated audio instead.',
@@ -93,10 +97,8 @@ export default function Home() {
           description: 'Some tracks may not have preview audio.',
           variant: 'destructive'
         });
-        setTracksWithCovers(rareTracks);
-        setDisplayedTracks(rareTracks.slice(0, ITEMS_PER_PAGE));
       } finally {
-        setIsLoadingCovers(false);
+        setIsLoadingAudio(false);
         hasInitialized.current = true;
       }
     };
@@ -161,14 +163,14 @@ export default function Home() {
 
   // Apply filters when they change
   useEffect(() => {
-    if (!isLoadingCovers && tracksWithCovers.length > 0) {
+    if (!isLoadingAudio && tracksWithCovers.length > 0) {
       applyFilters(tracksWithCovers);
     }
-  }, [selectedGenre, selectedYear, searchQuery, isLoadingCovers, tracksWithCovers, applyFilters]);
+  }, [selectedGenre, selectedYear, searchQuery, isLoadingAudio, tracksWithCovers, applyFilters]);
 
   // Infinite scroll observer
   useEffect(() => {
-    if (isLoadingCovers || isLoadingMore) return;
+    if (isLoadingAudio || isLoadingMore) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -184,7 +186,7 @@ export default function Home() {
     }
 
     return () => observer.disconnect();
-  }, [visibleCount, totalFilteredCount, isLoadingCovers, isLoadingMore]);
+  }, [visibleCount, totalFilteredCount, isLoadingAudio, isLoadingMore]);
 
   const loadMore = async () => {
     setIsLoadingMore(true);
@@ -513,53 +515,37 @@ export default function Home() {
             <p className="text-sm text-white/50">
               {totalFilteredCount} {totalFilteredCount === 1 ? 'track' : 'tracks'}
               {visibleCount < totalFilteredCount && ` (showing ${visibleCount})`}
-              {isLoadingCovers && loadedCount > 0 && ` • ${loadedCount} with real audio`}
+              {isLoadingAudio && (
+                <span className="text-[#0a4d7f]"> • Loading real audio...</span>
+              )}
+              {!isLoadingAudio && loadedCount > 0 && ` • ${loadedCount} with real audio`}
             </p>
           </div>
         </div>
 
-        {/* Loading Skeletons */}
-        {isLoadingCovers && (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-            {Array.from({ length: 10 }).map((_, i) => (
-              <div key={i} className="glass-card overflow-hidden">
-                <Skeleton className="aspect-square bg-white/10" />
-                <div className="p-4 space-y-2">
-                  <Skeleton className="h-4 w-3/4 bg-white/10" />
-                  <Skeleton className="h-3 w-1/2 bg-white/10" />
-                </div>
-              </div>
-            ))}
+        {/* Tracks Grid - Always show tracks, even while loading audio */}
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+          {displayedTracks.slice(0, visibleCount).map((track) => (
+            <TrackCard
+              key={track.id}
+              track={track}
+              onPlay={handleTrackSelect}
+              isPlaying={selectedTrack?.id === track.id}
+              onFavoriteToggle={() => setIsFavoritesOpen(true)}
+            />
+          ))}
+        </div>
+
+        {/* Load More Trigger - Infinite Scroll Only */}
+        {visibleCount < totalFilteredCount && !isLoadingAudio && (
+          <div ref={loadMoreRef} className="flex justify-center py-8">
+            <p className="text-white/40 text-sm">
+              Scroll for more ({totalFilteredCount - visibleCount} remaining)
+            </p>
           </div>
         )}
 
-        {/* Tracks Grid */}
-        {!isLoadingCovers && (
-          <>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-              {displayedTracks.slice(0, visibleCount).map((track) => (
-                <TrackCard
-                  key={track.id}
-                  track={track}
-                  onPlay={handleTrackSelect}
-                  isPlaying={selectedTrack?.id === track.id}
-                  onFavoriteToggle={() => setIsFavoritesOpen(true)}
-                />
-              ))}
-            </div>
-
-            {/* Load More Trigger - Infinite Scroll Only */}
-            {visibleCount < totalFilteredCount && !isLoadingCovers && (
-              <div ref={loadMoreRef} className="flex justify-center py-8">
-                <p className="text-white/40 text-sm">
-                  Scroll for more ({totalFilteredCount - visibleCount} remaining)
-                </p>
-              </div>
-            )}
-          </>
-        )}
-
-        {displayedTracks.length === 0 && !isLoadingCovers && (
+        {displayedTracks.length === 0 && (
           <div className="flex flex-col items-center justify-center py-20 text-center">
             <div className="glass-card p-8 rounded-full mb-6">
               <Disc3 className="h-16 w-16 text-white/30" />
