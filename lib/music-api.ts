@@ -20,31 +20,23 @@ interface iTunesSearchResult {
   }>;
 }
 
-// Fetch album artwork - prioritize MusicBrainz/Cover Art Archive
+// Fetch album artwork - prioritize Deezer/iTunes
 export async function fetchAlbumCover(artist: string, album: string): Promise<string | null> {
-  // Step 1: Try MusicBrainz + Cover Art Archive (best for rare/classic music)
+  // Step 1: Try Deezer
   try {
-    const mbQuery = encodeURIComponent(`artist:${artist} AND release:${album}`);
-    const mbResponse = await fetch(
-      `https://musicbrainz.org/ws/2/release?query=${mbQuery}&fmt=json&limit=3`,
-      { headers: { 'User-Agent': 'RareGrooves/1.0 (https://raregrooves.app)' } }
-    );
-
-    if (mbResponse.ok) {
-      const mbData = await mbResponse.json();
+    const query = `${artist} ${album}`;
+    const url = `https://api.deezer.com/search?q=${encodeURIComponent(query)}&limit=3`;
+    
+    const response = await fetch(url);
+    
+    if (response.ok) {
+      const data = await response.json();
       
-      if (mbData.releases && mbData.releases.length > 0) {
-        const releaseId = mbData.releases[0].id;
-        
-        // Try Cover Art Archive
-        const coverResponse = await fetch(
-          `https://coverartarchive.org/release/${releaseId}/front-250`,
-          { redirect: 'follow' }
-        );
-        
-        if (coverResponse.ok) {
-          console.log('[v0] MusicBrainz cover found for:', artist, '-', album);
-          return coverResponse.url;
+      if (data.data && data.data.length > 0) {
+        const cover = data.data[0].album?.cover_xl || data.data[0].album?.cover_big;
+        if (cover) {
+          console.log('[v0] Deezer cover found for:', artist, '-', album);
+          return cover;
         }
       }
     }

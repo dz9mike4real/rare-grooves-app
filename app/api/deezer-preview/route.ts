@@ -27,117 +27,123 @@ export async function GET(request: NextRequest) {
   const sanitizedArtist = artist?.slice(0, INPUT.MAX_LENGTH) || '';
   const sanitizedTitle = title?.slice(0, INPUT.MAX_LENGTH) || '';
 
-  // Step 1: Get release info from MusicBrainz
-  let releaseId: string | null = null;
-  let albumName = '';
-  
+  let albumCover: string | null = null;
+  let previewUrl: string | null = null;
+
+  // Step 1: Try Deezer first (best for music previews and covers)
   try {
-    const mbQuery = encodeURIComponent(`artist:${sanitizedArtist} AND recording:${sanitizedTitle}`);
-    const mbResponse = await fetch(
-      `https://musicbrainz.org/ws/2/recording?query=${mbQuery}&fmt=json&limit=3`,
-      { headers: { 'User-Agent': 'RareGrooves/1.0 (https://raregrooves.app)' } }
+    const deezerQuery = encodeURIComponent(`${sanitizedArtist} ${sanitizedTitle}`);
+    const deezerResponse = await fetch(
+      `https://api.deezer.com/search?q=${deezerQuery}&limit=5`
     );
 
-    if (mbResponse.ok) {
-      const mbData = await mbResponse.json();
+    if (deezerResponse.ok) {
+      const deezerData = await deezerResponse.json();
       
-      if (mbData.recordings && mbData.recordings.length > 0) {
+      if (deezerData.data && deezerData.data.length > 0) {
         // Find best match
-        const match = mbData.recordings.find((r: any) => 
-          r.releases && r.releases.length > 0
-        ) || mbData.recordings[0];
+        const bestMatch = deezerData.data.find((t: any) => {
+          const searchTitle = sanitizedTitle.toLowerCase().split('(')[0].trim();
+          const trackTitle = t.title_short?.toLowerCase() || t.title?.toLowerCase() || '';
+          return trackTitle.includes(searchTitle) || searchTitle.includes(trackTitle);
+        }) || deezerData.data[0];
         
-        if (match.releases && match.releases.length > 0) {
-          releaseId = match.releases[0].id;
-          albumName = match.releases[0].title;
+        if (bestMatch) {
+          // Get album cover (prefer xl, then big, then medium)
+          albumCover = bestMatch.album?.cover_xl || bestMatch.album?.cover_big || bestMatch.album?.cover_medium || null;
+          // Get audio preview
+          previewUrl = bestMatch.preview || null;
+          
+          if (albumCover || previewUrl) {
+            return NextResponse.json({
+              previewUrl,
+              albumCover,
+              artist: bestMatch.artist?.name || sanitizedArtist,
+              title: bestMatch.title || sanitizedTitle,
+              album: bestMatch.album?.title || '',
+              source: 'deezer'
+            });
+          }
         }
       }
     }
   } catch (error) {
-    console.error('[v0] MusicBrainz error:', error);
+    console.error('[v0] Deezer API error:', error);
   }
 
-  // Step 2: Get cover art from Cover Art Archive
-  let albumCover: string | null = null;
-  
-  if (releaseId) {
-    try {
-      const coverResponse = await fetch(
-        `https://coverartarchive.org/release/${releaseId}/front-250`,
-        { redirect: 'follow' }
-      );
+  // Step 2: Try iTunes (good for mainstream music)
+  try {
+    const itunesQuery = encodeURIComponent(`${sanitizedArtist} ${sanitizedTitle}`);
+    const itunesResponse = await fetch(
+      `https://itunes.apple.com/search?term=${itunesQuery}&entity=song&limit=5`
+    );
+
+    if (itunesResponse.ok) {
+      const itunesData = await itunesResponse.json();
       
-      if (coverResponse.ok) {
-        albumCover = coverResponse.url;
-      }
-    } catch (error) {
-      console.error('[v0] Cover Art Archive error:', error);
-    }
-  }
-
-  // Step 3: Try to get audio preview from Deezer (fallback if no cover)
-  let previewUrl: string | null = null;
-  
-  if (!albumCover) {
-    try {
-      const deezerQuery = encodeURIComponent(`${sanitizedArtist} ${sanitizedTitle}`);
-      const deezerResponse = await fetch(
-        `https://api.deezer.com/search?q=${deezerQuery}&limit=3`
-      );
-
-      if (deezerResponse.ok) {
-        const deezerData = await deezerResponse.json();
+      if (itunesData.results && itunesData.results.length > 0) {
+        // Find best match
+        const bestMatch = itunesData.results.find((t: any) => {
+          const searchTitle = sanitizedTitle.toLowerCase().split('(')[0].trim();
+          const trackTitle = t.trackName?.toLowerCase() || '';
+          return trackTitle.includes(searchTitle) || searchTitle.includes(trackTitle);
+        }) || itunesData.results[0];
         
-        if (deezerData.data && deezerData.data.length > 0) {
-          const bestMatch = deezerData.data.find((t: any) => 
-            t.title.toLowerCase().includes(sanitizedTitle.toLowerCase().split('(')[0].trim())
-          ) || deezerData.data[0];
+        if (bestMatch) {
+          // Get album cover
+          if (bestMatch.artworkUrl100) {
+            albumCover = bestMatch.artworkUrl100.replace('100x100', '600x600');
+          }
+          // Get audio preview
+          previewUrl = bestMatch.previewUrl || null;
           
-          if (bestMatch.preview) {
-            previewUrl = bestMatch.preview;
-          }
-          if (bestMatch.album?.cover_xl || bestMatch.album?.cover_big) {
-            albumCover = bestMatch.album.cover_xl || bestMatch.album.cover_big;
-          }
-        }
-      }
-    } catch (error) {
-      console.error('[v0] Deezer fallback error:', error);
-    }
-  }
-
-  // If still no cover, try iTunes
-  if (!albumCover) {
-    try {
-      const itunesQuery = encodeURIComponent(`${sanitizedArtist} ${sanitizedTitle}`);
-      const itunesResponse = await fetch(
-        `https://itunes.apple.com/search?term=${itunesQuery}&entity=song&limit=1`
-      );
-
-      if (itunesResponse.ok) {
-        const itunesData = await itunesResponse.json();
-        
-        if (itunesData.results && itunesData.results.length > 0) {
-          const result = itunesData.results[0];
-          if (result.artworkUrl100) {
-            albumCover = result.artworkUrl100.replace('100x100', '600x600');
-          }
-          if (result.previewUrl) {
-            previewUrl = result.previewUrl;
+          if (albumCover || previewUrl) {
+            return NextResponse.json({
+              previewUrl,
+              albumCover,
+              artist: bestMatch.artistName || sanitizedArtist,
+              title: bestMatch.trackName || sanitizedTitle,
+              album: bestMatch.collectionName || '',
+              source: 'itunes'
+            });
           }
         }
       }
-    } catch (error) {
-      console.error('[v0] iTunes fallback error:', error);
     }
+  } catch (error) {
+    console.error('[v0] iTunes API error:', error);
   }
 
-  return NextResponse.json({
-    previewUrl,
-    albumCover,
-    artist: sanitizedArtist,
-    title: sanitizedTitle,
-    album: albumName,
-    source: albumCover ? 'musicbrainz' : 'fallback'
+  // Step 3: Try Last.fm for covers only
+  try {
+    const lastFmResponse = await fetch(
+      `http://ws.audioscrobbler.com/2.0/?method=track.getinfo&artist=${encodeURIComponent(sanitizedArtist)}&track=${encodeURIComponent(sanitizedTitle)}&api_key=demo&format=json`
+    );
+
+    if (lastFmResponse.ok) {
+      const lastFmData = await lastFmResponse.json();
+      if (lastFmData.track?.album?.image) {
+        const images = lastFmData.track.album.image;
+        const largestImage = images[images.length - 1]?.['#text'];
+        if (largestImage) {
+          return NextResponse.json({
+            previewUrl: null,
+            albumCover: largestImage,
+            artist: sanitizedArtist,
+            title: sanitizedTitle,
+            album: lastFmData.track.album?.title || '',
+            source: 'lastfm'
+          });
+        }
+      }
+    }
+  } catch (error) {
+    console.error('[v0] Last.fm API error:', error);
+  }
+
+  return NextResponse.json({ 
+    previewUrl: null, 
+    albumCover: null,
+    source: 'none'
   });
 }
