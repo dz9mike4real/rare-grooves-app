@@ -17,48 +17,9 @@ import { PAGINATION, DEBOUNCE } from '@/lib/constants';
 
 const ITEMS_PER_PAGE = PAGINATION.ITEMS_PER_PAGE;
 
-// Helper to get cached tracks for initial render
-function getInitialTracks(): { tracks: Track[]; displayed: Track[]; queue: Track[]; count: number; loading: boolean } {
-  if (typeof window === 'undefined') {
-    return { 
-      tracks: rareTracks, 
-      displayed: [...rareTracks].sort((a, b) => b.rarity - a.rarity).slice(0, ITEMS_PER_PAGE),
-      queue: [...rareTracks].sort((a, b) => b.rarity - a.rarity),
-      count: rareTracks.length,
-      loading: true 
-    };
-  }
-  
-  try {
-    const cached = localStorage.getItem('rare-grooves-tracks');
-    if (cached) {
-      const parsed = JSON.parse(cached);
-      if (parsed.timestamp && Date.now() - parsed.timestamp < 24 * 60 * 60 * 1000) {
-        const tracks = parsed.tracks as Track[];
-        const sorted = tracks.sort((a, b) => b.rarity - a.rarity);
-        return {
-          tracks,
-          displayed: sorted.slice(0, ITEMS_PER_PAGE),
-          queue: sorted,
-          count: tracks.length,
-          loading: false
-        };
-      }
-    }
-  } catch (e) {
-    // Invalid cache
-  }
-  
-  return { 
-    tracks: rareTracks, 
-    displayed: [...rareTracks].sort((a, b) => b.rarity - a.rarity).slice(0, ITEMS_PER_PAGE),
-    queue: [...rareTracks].sort((a, b) => b.rarity - a.rarity),
-    count: rareTracks.length,
-    loading: true 
-  };
-}
-
-const initialState = getInitialTracks();
+// Default initial state (same for server and client)
+const defaultTracks = rareTracks;
+const defaultSorted = [...defaultTracks].sort((a, b) => b.rarity - a.rarity);
 
 export default function Home() {
   const { toast } = useToast();
@@ -66,24 +27,19 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedGenre, setSelectedGenre] = useState<string>('all');
   const [selectedYear, setSelectedYear] = useState<string>('all');
-  const [isLoadingAudio, setIsLoadingAudio] = useState(initialState.loading);
+  const [isLoadingAudio, setIsLoadingAudio] = useState(true);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
-  const [tracksWithCovers, setTracksWithCovers] = useState<Track[]>(initialState.tracks);
-  const [displayedTracks, setDisplayedTracks] = useState<Track[]>(initialState.displayed);
+  const [tracksWithCovers, setTracksWithCovers] = useState<Track[]>(defaultTracks);
+  const [displayedTracks, setDisplayedTracks] = useState<Track[]>(() => defaultSorted.slice(0, ITEMS_PER_PAGE));
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
-  const [totalFilteredCount, setTotalFilteredCount] = useState(initialState.count);
+  const [totalFilteredCount, setTotalFilteredCount] = useState(defaultTracks.length);
   const [isFavoritesOpen, setIsFavoritesOpen] = useState(false);
-  const [queue, setQueue] = useState<Track[]>(initialState.queue);
+  const [queue, setQueue] = useState<Track[]>(defaultSorted);
   const [queueIndex, setQueueIndex] = useState(-1);
   const [isDiscoveryOpen, setIsDiscoveryOpen] = useState(false);
   const [discoveredTracks, setDiscoveredTracks] = useState<Track[]>([]);
   const [sortBy, setSortBy] = useState<'rarity' | 'year-desc' | 'year-asc' | 'title' | 'artist'>('rarity');
-  const [loadedCount, setLoadedCount] = useState(() => {
-    if (!initialState.loading) {
-      return initialState.tracks.filter(t => t.audioUrl?.startsWith('http')).length;
-    }
-    return 0;
-  });
+  const [loadedCount, setLoadedCount] = useState(0);
   const hasInitialized = useRef(false);
   const loadMoreRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
@@ -109,22 +65,33 @@ export default function Home() {
     }
   }, [selectedTrack]);
 
-  // Load real audio in background on mount
+  // Load real audio on mount - check cache first
   useEffect(() => {
-    // Skip if we already have cached data
-    if (!initialState.loading) {
-      hasInitialized.current = true;
-      return;
-    }
-    
     const loadTracks = async () => {
       console.log('[v0] Loading tracks...');
       
       try {
-        const tracksWithRealAudio = await loadRealAudioFromDeezer(rareTracks);
+        // Check localStorage cache first
+        let tracksWithRealAudio: Track[] | null = null;
         
-        // Cache for 24 hours
-        if (typeof window !== 'undefined') {
+        try {
+          const cached = localStorage.getItem('rare-grooves-tracks');
+          if (cached) {
+            const parsed = JSON.parse(cached);
+            if (parsed.timestamp && Date.now() - parsed.timestamp < 24 * 60 * 60 * 1000) {
+              console.log('[v0] Using cached track data');
+              tracksWithRealAudio = parsed.tracks;
+            }
+          }
+        } catch (e) {
+          // Ignore cache errors
+        }
+        
+        // If no cache, fetch fresh data
+        if (!tracksWithRealAudio) {
+          tracksWithRealAudio = await loadRealAudioFromDeezer(rareTracks);
+          
+          // Cache for 24 hours
           localStorage.setItem('rare-grooves-tracks', JSON.stringify({
             tracks: tracksWithRealAudio,
             timestamp: Date.now()
@@ -137,6 +104,7 @@ export default function Home() {
             .sort((a, b) => b.rarity - a.rarity)
             .slice(0, ITEMS_PER_PAGE)
         );
+        setQueue(tracksWithRealAudio.sort((a, b) => b.rarity - a.rarity));
         
         const loaded = tracksWithRealAudio.filter(t => t.audioUrl.startsWith('http')).length;
         setLoadedCount(loaded);
