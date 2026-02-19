@@ -20,6 +20,7 @@ interface TrackCardProps {
 
 export const TrackCard = memo(function TrackCard({ track, onPlay, isPlaying, onFavoriteToggle }: TrackCardProps) {
   const [isFav, setIsFav] = useState(false);
+  const hasRealAudio = track.audioUrl?.startsWith('http');
 
   useEffect(() => {
     setIsFav(isFavorite(track.id));
@@ -51,11 +52,20 @@ export const TrackCard = memo(function TrackCard({ track, onPlay, isPlaying, onF
         isPlaying ? 'playing-glow border-[#0a4d7f]/50' : ''
       }`}
       onClick={() => onPlay(track)}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onPlay(track);
+        }
+      }}
+      aria-label={`${track.title} by ${track.artist}${isPlaying ? ', currently playing' : ''}. Press Enter to play`}
     >
       <div className="relative aspect-square overflow-hidden rounded-t-xl">
         <Image
           src={track.albumArt || "/placeholder.svg"}
-          alt={`${track.album} by ${track.artist}`}
+          alt={`Album art for ${track.album} by ${track.artist}`}
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-110"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
@@ -76,6 +86,7 @@ export const TrackCard = memo(function TrackCard({ track, onPlay, isPlaying, onF
                 e.stopPropagation();
                 onPlay(track);
               }}
+              aria-label={isPlaying ? `Pause ${track.title}` : `Play ${track.title}`}
             >
               {isPlaying ? (
                 <Pause className="h-7 w-7 text-white" />
@@ -94,8 +105,23 @@ export const TrackCard = memo(function TrackCard({ track, onPlay, isPlaying, onF
                 ? 'bg-gradient-to-r from-[#0a4d7f] to-[#0d6efd] text-white border-0' 
                 : 'bg-[#1db954] text-white border-0'
             } font-semibold text-xs shadow-lg`}
+            aria-label={`Rarity: ${track.rarity >= 9 ? 'Ultra Rare' : 'Rare'}`}
           >
             {track.rarity >= 9 ? 'Ultra Rare' : 'Rare'}
+          </Badge>
+        </div>
+
+        {/* Audio Source Badge */}
+        <div className="absolute bottom-3 right-3">
+          <Badge 
+            className={`text-xs font-medium ${
+              hasRealAudio 
+                ? 'bg-[#1db954]/80 text-white border-0' 
+                : 'bg-white/20 text-white/80 border-0'
+            }`}
+            aria-label={hasRealAudio ? 'Real audio preview available' : 'Demo audio'}
+          >
+            {hasRealAudio ? 'Real' : 'Demo'}
           </Badge>
         </div>
 
@@ -109,6 +135,8 @@ export const TrackCard = memo(function TrackCard({ track, onPlay, isPlaying, onF
               : 'bg-black/40 hover:bg-black/60 opacity-100'
           }`}
           onClick={handleFavoriteToggle}
+          aria-label={isFav ? `Remove ${track.title} from favorites` : `Add ${track.title} to favorites`}
+          aria-pressed={isFav}
         >
           <Heart
             className={`h-4 w-4 transition-colors ${
@@ -121,7 +149,7 @@ export const TrackCard = memo(function TrackCard({ track, onPlay, isPlaying, onF
 
         {/* Playing Indicator */}
         {isPlaying && (
-          <div className="absolute bottom-3 left-3 flex items-center gap-1">
+          <div className="absolute bottom-3 left-3 flex items-center gap-1" role="status" aria-label="Now playing">
             <div className="flex items-end gap-0.5 h-4">
               <span className="w-1 h-1 bg-[#0a4d7f] rounded-full animate-pulse" style={{ animationDelay: '0ms' }} />
               <span className="w-1 h-2 bg-[#0a4d7f] rounded-full animate-pulse" style={{ animationDelay: '150ms' }} />
@@ -139,7 +167,7 @@ export const TrackCard = memo(function TrackCard({ track, onPlay, isPlaying, onF
         
         <div className="flex items-center justify-between text-xs text-white/40 pt-2 border-t border-white/10">
           <span className="capitalize flex items-center gap-1">
-            <Disc className="h-3 w-3" />
+            <Disc className="h-3 w-3" aria-hidden="true" />
             {track.genre}
           </span>
           <span>{track.year}</span>
@@ -153,7 +181,7 @@ export const TrackCard = memo(function TrackCard({ track, onPlay, isPlaying, onF
         )}
         
         <div className="flex items-center gap-1 text-xs text-white/40">
-          <Clock className="h-3 w-3" />
+          <Clock className="h-3 w-3" aria-hidden="true" />
           {formatDuration(track.duration)}
         </div>
       </div>

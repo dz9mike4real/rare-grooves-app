@@ -1,6 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { checkRateLimit, getClientIp } from '@/lib/rate-limit';
 
 export async function POST(request: NextRequest) {
+  const clientIp = getClientIp(request);
+  
+  if (!checkRateLimit(clientIp)) {
+    return NextResponse.json(
+      { error: 'Too many requests. Please try again later.' },
+      { status: 429 }
+    );
+  }
+  
   try {
     const { genre, mood, bpmRange, favorites, recentlyPlayed } = await request.json();
 

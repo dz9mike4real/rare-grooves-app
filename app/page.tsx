@@ -2,19 +2,23 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Track } from '@/lib/types';
-import { rareTracks, loadRealAudioFromDeezer } from '@/lib/tracks-data';
+import { rareTracks, loadRealAudioFromDeezer, loadAudioForTracks } from '@/lib/tracks-data';
 import { TrackCard } from '@/components/track-card';
 import { AudioPlayer } from '@/components/audio-player';
 import { FavoritesSidebar } from '@/components/favorites-sidebar';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Search, Disc3, Heart, Sparkles, X, ChevronDown, Play, SkipForward, Calendar, Loader2 } from 'lucide-react';
+import { Search, Disc3, Heart, Sparkles, X, ChevronDown, Play, SkipForward, Calendar, Loader2, ArrowUpDown } from 'lucide-react';
 import { DiscoveryButton, DiscoveryPanel } from '@/components/discovery';
+import { useToast } from '@/hooks/use-toast';
+import { ErrorBoundary } from '@/components/error-boundary';
+import { PAGINATION, DEBOUNCE } from '@/lib/constants';
 
-const ITEMS_PER_PAGE = 40;
+const ITEMS_PER_PAGE = PAGINATION.ITEMS_PER_PAGE;
 
 export default function Home() {
+  const { toast } = useToast();
   const [selectedTrack, setSelectedTrack] = useState<Track | null>(null);
   const [displayedTracks, setDisplayedTracks] = useState<Track[]>([]);
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
@@ -30,8 +34,32 @@ export default function Home() {
   const [queueIndex, setQueueIndex] = useState(-1);
   const [isDiscoveryOpen, setIsDiscoveryOpen] = useState(false);
   const [discoveredTracks, setDiscoveredTracks] = useState<Track[]>([]);
+  const [sortBy, setSortBy] = useState<'rarity' | 'year-desc' | 'year-asc' | 'title' | 'artist'>('rarity');
+  const [loadedCount, setLoadedCount] = useState(0);
   const hasInitialized = useRef(false);
   const loadMoreRef = useRef<HTMLDivElement>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
+  // Keyboard shortcut for search (/)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === '/' && !['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement).tagName)) {
+        e.preventDefault();
+        searchInputRef.current?.focus();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  // Update tab title with now playing
+  useEffect(() => {
+    if (selectedTrack) {
+      document.title = `${selectedTrack.title} - ${selectedTrack.artist} | Rare Grooves`;
+    } else {
+      document.title = 'Rare Grooves | Discover Rare Musical Gems';
+    }
+  }, [selectedTrack]);
 
   // Load tracks on mount
   useEffect(() => {
@@ -39,18 +67,38 @@ export default function Home() {
       console.log('[v0] Loading tracks with real audio from Deezer...');
       setIsLoadingCovers(true);
       
-      const tracksWithRealAudio = await loadRealAudioFromDeezer(rareTracks);
-      
-      setTracksWithCovers(tracksWithRealAudio);
-      setDisplayedTracks(
-        tracksWithRealAudio
-          .sort((a, b) => b.rarity - a.rarity)
-          .slice(0, ITEMS_PER_PAGE)
-      );
-      
-      setIsLoadingCovers(false);
-      hasInitialized.current = true;
-      console.log('[v0] Loaded', tracksWithRealAudio.length, 'tracks with real audio previews');
+      try {
+        const tracksWithRealAudio = await loadRealAudioFromDeezer(rareTracks);
+        
+        setTracksWithCovers(tracksWithRealAudio);
+        setDisplayedTracks(
+          tracksWithRealAudio
+            .sort((a, b) => b.rarity - a.rarity)
+            .slice(0, ITEMS_PER_PAGE)
+        );
+        
+        const loaded = tracksWithRealAudio.filter(t => t.audioUrl.startsWith('http')).length;
+        setLoadedCount(loaded);
+        if (loadedCount === 0) {
+          toast({
+            title: 'Using demo audio',
+            description: 'Could not load real previews. Using generated audio instead.',
+            variant: 'default'
+          });
+        }
+      } catch (error) {
+        console.error('[v0] Failed to load tracks:', error);
+        toast({
+          title: 'Loading issue',
+          description: 'Some tracks may not have preview audio.',
+          variant: 'destructive'
+        });
+        setTracksWithCovers(rareTracks);
+        setDisplayedTracks(rareTracks.slice(0, ITEMS_PER_PAGE));
+      } finally {
+        setIsLoadingCovers(false);
+        hasInitialized.current = true;
+      }
     };
     
     loadTracks();
@@ -85,9 +133,23 @@ export default function Home() {
       );
     }
 
-    // Sort by rarity if no search
-    if (!searchQuery && selectedGenre === 'all' && selectedYear === 'all') {
-      filtered = filtered.sort((a, b) => b.rarity - a.rarity);
+    // Sort tracks
+    switch (sortBy) {
+      case 'rarity':
+        filtered = filtered.sort((a, b) => b.rarity - a.rarity);
+        break;
+      case 'year-desc':
+        filtered = filtered.sort((a, b) => b.year - a.year);
+        break;
+      case 'year-asc':
+        filtered = filtered.sort((a, b) => a.year - b.year);
+        break;
+      case 'title':
+        filtered = filtered.sort((a, b) => a.title.localeCompare(b.title));
+        break;
+      case 'artist':
+        filtered = filtered.sort((a, b) => a.artist.localeCompare(b.artist));
+        break;
     }
 
     setTotalFilteredCount(filtered.length);
@@ -95,7 +157,7 @@ export default function Home() {
     setVisibleCount(resetVisible ? ITEMS_PER_PAGE : filtered.length);
     setQueue(filtered);
     setQueueIndex(selectedTrack ? filtered.findIndex(t => t.id === selectedTrack.id) : -1);
-  }, [selectedGenre, selectedYear, searchQuery, selectedTrack]);
+  }, [selectedGenre, selectedYear, searchQuery, selectedTrack, sortBy]);
 
   // Apply filters when they change
   useEffect(() => {
@@ -110,7 +172,7 @@ export default function Home() {
 
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting && visibleCount < displayedTracks.length) {
+        if (entries[0].isIntersecting && visibleCount < totalFilteredCount) {
           loadMore();
         }
       },
@@ -122,10 +184,24 @@ export default function Home() {
     }
 
     return () => observer.disconnect();
-  }, [visibleCount, displayedTracks.length, isLoadingCovers, isLoadingMore]);
+  }, [visibleCount, totalFilteredCount, isLoadingCovers, isLoadingMore]);
 
-  const loadMore = () => {
+  const loadMore = async () => {
     setIsLoadingMore(true);
+    
+    // Lazy load audio for newly visible tracks
+    const tracksNeedingAudio = tracksWithCovers
+      .filter(t => !t.audioUrl.startsWith('http'))
+      .slice(0, 20);
+    
+    if (tracksNeedingAudio.length > 0) {
+      const updatedTracks = await loadAudioForTracks(tracksNeedingAudio);
+      setTracksWithCovers(prev => {
+        const updatedMap = new Map(updatedTracks.map(t => [t.id, t]));
+        return prev.map(t => updatedMap.get(t.id) || t);
+      });
+    }
+    
     setTimeout(() => {
       // Get all filtered tracks
       let allFiltered = [...tracksWithCovers];
@@ -161,7 +237,7 @@ export default function Home() {
       setDisplayedTracks(allFiltered.slice(0, newVisibleCount));
       setVisibleCount(newVisibleCount);
       setIsLoadingMore(false);
-    }, 300);
+    }, DEBOUNCE.SEARCH_DELAY_MS);
   };
 
   const handleGenreChange = (genre: string) => {
@@ -177,16 +253,33 @@ export default function Home() {
     setSearchQuery(query);
   };
 
-  const handleTrackSelect = (track: Track) => {
-    setSelectedTrack(track);
+  const handleTrackSelect = async (track: Track) => {
+    // Lazy load audio if not loaded yet
+    if (!track.audioUrl.startsWith('http')) {
+      const updated = await loadAudioForTracks([track]);
+      const updatedTrack = updated[0];
+      setTracksWithCovers(prev => prev.map(t => t.id === track.id ? updatedTrack : t));
+      setSelectedTrack(updatedTrack);
+    } else {
+      setSelectedTrack(track);
+    }
+    
     const idx = queue.findIndex(t => t.id === track.id);
     if (idx !== -1) {
       setQueueIndex(idx);
     }
   };
 
-  const handlePlayTrack = (track: Track) => {
-    setSelectedTrack(track);
+  const handlePlayTrack = async (track: Track) => {
+    // Lazy load audio if not loaded yet
+    if (!track.audioUrl.startsWith('http')) {
+      const updated = await loadAudioForTracks([track]);
+      const updatedTrack = updated[0];
+      setTracksWithCovers(prev => prev.map(t => t.id === track.id ? updatedTrack : t));
+      setSelectedTrack(updatedTrack);
+    } else {
+      setSelectedTrack(track);
+    }
     setIsFavoritesOpen(false);
   };
 
@@ -234,6 +327,22 @@ export default function Home() {
     { value: '2010-2024', label: '2010s+' },
   ];
 
+  const sortOptions = [
+    { value: 'rarity', label: 'Rarest First' },
+    { value: 'year-desc', label: 'Newest First' },
+    { value: 'year-asc', label: 'Oldest First' },
+    { value: 'title', label: 'Title A-Z' },
+    { value: 'artist', label: 'Artist A-Z' },
+  ];
+
+  const hasActiveFilters = searchQuery || selectedGenre !== 'all' || selectedYear !== 'all';
+
+  const clearFilters = () => {
+    setSearchQuery('');
+    setSelectedGenre('all');
+    setSelectedYear('all');
+  };
+
   const getSectionTitle = () => {
     if (searchQuery) return `Results for "${searchQuery}"`;
     if (selectedYear !== 'all') return `${selectedYear.replace('-', 's')} Tracks`;
@@ -264,7 +373,8 @@ export default function Home() {
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/40" />
                 <Input
-                  placeholder="Search tracks, artists, albums..."
+                  ref={searchInputRef}
+                  placeholder="Search tracks, artists, albums... (press /)"
                   value={searchQuery}
                   onChange={(e) => handleSearch(e.target.value)}
                   className="pl-9 pr-8 py-2 bg-white/5 border-white/10 text-white placeholder:text-white/40 rounded-full focus:ring-1 focus:ring-[#0a4d7f] focus:border-[#0a4d7f]"
@@ -293,7 +403,8 @@ export default function Home() {
       </header>
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 pb-40 pt-8">
+      <ErrorBoundary>
+        <main className="container mx-auto px-4 pb-40 pt-8">
         {!searchQuery && !selectedYear && (
           <div className="mb-12">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
@@ -343,6 +454,35 @@ export default function Home() {
             </select>
           </div>
 
+          {/* Sort Dropdown */}
+          <div className="flex items-center gap-2">
+            <ArrowUpDown className="h-4 w-4 text-white/40" />
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value as typeof sortBy)}
+              className="bg-white/5 border border-white/10 text-white/60 rounded-full px-3 py-2 text-sm focus:ring-1 focus:ring-[#0a4d7f]"
+            >
+              {sortOptions.map((option) => (
+                <option key={option.value} value={option.value} className="bg-[#181818]">
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Clear Filters Button */}
+          {hasActiveFilters && (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={clearFilters}
+              className="text-white/60 hover:text-white hover:bg-white/10"
+            >
+              <X className="h-4 w-4 mr-1" />
+              Clear
+            </Button>
+          )}
+
           {/* Play All Button */}
           {displayedTracks.length > 0 && (
             <>
@@ -373,6 +513,7 @@ export default function Home() {
             <p className="text-sm text-white/50">
               {totalFilteredCount} {totalFilteredCount === 1 ? 'track' : 'tracks'}
               {visibleCount < totalFilteredCount && ` (showing ${visibleCount})`}
+              {isLoadingCovers && loadedCount > 0 && ` • ${loadedCount} with real audio`}
             </p>
           </div>
         </div>
@@ -407,27 +548,12 @@ export default function Home() {
               ))}
             </div>
 
-            {/* Load More Trigger */}
+            {/* Load More Trigger - Infinite Scroll Only */}
             {visibleCount < totalFilteredCount && !isLoadingCovers && (
               <div ref={loadMoreRef} className="flex justify-center py-8">
-                <Button
-                  variant="outline"
-                  onClick={loadMore}
-                  disabled={isLoadingMore}
-                  className="bg-transparent border-white/20 text-white/60 hover:text-white hover:bg-white/5"
-                >
-                  {isLoadingMore ? (
-                    <>
-                      <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                      Loading...
-                    </>
-                  ) : (
-                    <>
-                      <SkipForward className="h-4 w-4 mr-2" />
-                      Load More ({totalFilteredCount - visibleCount} remaining)
-                    </>
-                  )}
-                </Button>
+                <p className="text-white/40 text-sm">
+                  Scroll for more ({totalFilteredCount - visibleCount} remaining)
+                </p>
               </div>
             )}
           </>
@@ -447,7 +573,8 @@ export default function Home() {
             </p>
           </div>
         )}
-      </main>
+        </main>
+      </ErrorBoundary>
 
       {/* Favorites Sidebar */}
       <FavoritesSidebar

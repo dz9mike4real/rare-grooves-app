@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Track } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { Sparkles, X, Loader2, RefreshCw } from 'lucide-react';
+import { DISCOVERY } from '@/lib/constants';
 
 interface DiscoveryButtonProps {
   tracks: Track[];
@@ -53,12 +54,12 @@ export function DiscoveryButton({ tracks, onDiscover, currentTrack }: DiscoveryB
       {isDiscovering ? (
         <>
           <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-          Discovering...
+          Finding similar...
         </>
       ) : (
         <>
           <Sparkles className="h-4 w-4 mr-2" />
-          AI Discovery
+          Discover Similar
         </>
       )}
     </Button>
@@ -70,9 +71,9 @@ function discoverSimilarTracks(allTracks: Track[], currentTrack: Track | null): 
   // If no current track, find random rare tracks
   if (!currentTrack) {
     return allTracks
-      .filter(t => t.rarity >= 8)
+      .filter(t => t.rarity >= DISCOVERY.MIN_RARITY)
       .sort(() => Math.random() - 0.5)
-      .slice(0, 8);
+      .slice(0, DISCOVERY.MAX_RESULTS);
   }
 
   // Score each track based on similarity
@@ -82,31 +83,31 @@ function discoverSimilarTracks(allTracks: Track[], currentTrack: Track | null): 
       let score = 0;
 
       // Same genre: +30 points
-      if (track.genre === currentTrack.genre) score += 30;
+      if (track.genre === currentTrack.genre) score += DISCOVERY.SCORE_SAME_GENRE;
 
       // Similar year (within 5 years): +20 points
-      if (Math.abs(track.year - currentTrack.year) <= 5) score += 20;
+      if (Math.abs(track.year - currentTrack.year) <= DISCOVERY.YEAR_THRESHOLD) score += DISCOVERY.SCORE_SIMILAR_YEAR;
 
       // Similar BPM (±10): +15 points
       if (track.bpm && currentTrack.bpm) {
-        if (Math.abs(track.bpm - currentTrack.bpm) <= 10) score += 15;
+        if (Math.abs(track.bpm - currentTrack.bpm) <= DISCOVERY.BPM_THRESHOLD) score += DISCOVERY.SCORE_SIMILAR_BPM;
       }
 
       // Same key (relative major/minor): +10 points
       if (track.key && currentTrack.key) {
-        if (track.key === currentTrack.key) score += 10;
+        if (track.key === currentTrack.key) score += DISCOVERY.SCORE_SAME_KEY;
       }
 
       // Higher rarity: +10 points (we want rare!)
-      if (track.rarity >= currentTrack.rarity) score += 10;
+      if (track.rarity >= currentTrack.rarity) score += DISCOVERY.SCORE_HIGHER_RARITY;
 
       // Random factor for discovery: +15 points
-      score += Math.random() * 15;
+      score += Math.random() * DISCOVERY.SCORE_RANDOM_FACTOR;
 
       return { track, score };
     })
     .sort((a, b) => b.score - a.score)
-    .slice(0, 8)
+    .slice(0, DISCOVERY.MAX_RESULTS)
     .map(item => item.track);
 
   return scored;
@@ -128,18 +129,30 @@ export function DiscoveryPanel({ isOpen, onClose, discoveredTracks, onPlayTrack 
       <div 
         className="fixed inset-0 bg-black/60 z-40"
         onClick={onClose}
+        onKeyDown={(e) => {
+          if (e.key === 'Escape') onClose();
+        }}
+        role="button"
+        tabIndex={-1}
+        aria-label="Close discovery panel"
       />
       
       {/* Panel */}
-      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl glass-card z-50 p-6 rounded-2xl">
+      <div 
+        className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl glass-card z-50 p-6 rounded-2xl"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="discovery-title"
+        aria-describedby="discovery-description"
+      >
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg gradient-bg">
+            <div className="p-2 rounded-lg gradient-bg" aria-hidden="true">
               <Sparkles className="h-5 w-5 text-white" />
             </div>
             <div>
-              <h3 className="text-xl font-bold text-white">AI Discovery</h3>
-              <p className="text-sm text-white/50">Tracks selected just for you</p>
+              <h3 id="discovery-title" className="text-xl font-bold text-white">AI Discovery</h3>
+              <p id="discovery-description" className="text-sm text-white/50">Tracks selected just for you</p>
             </div>
           </div>
           <Button
@@ -147,26 +160,37 @@ export function DiscoveryPanel({ isOpen, onClose, discoveredTracks, onPlayTrack 
             size="icon"
             onClick={onClose}
             className="text-white/60 hover:text-white"
+            aria-label="Close discovery panel"
           >
             <X className="h-5 w-5" />
           </Button>
         </div>
 
         {discoveredTracks.length > 0 ? (
-          <div className="space-y-3 max-h-96 overflow-y-auto">
+          <div className="space-y-3 max-h-96 overflow-y-auto" role="listbox" aria-label="Discovered tracks">
             {discoveredTracks.map((track, index) => (
               <div
                 key={track.id}
+                role="option"
+                aria-selected="false"
                 className="flex items-center gap-4 p-3 rounded-xl hover:bg-white/5 cursor-pointer transition-colors"
                 onClick={() => {
                   onPlayTrack(track);
                   onClose();
                 }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    onPlayTrack(track);
+                    onClose();
+                  }
+                }}
+                tabIndex={0}
               >
-                <span className="text-2xl font-bold text-white/20 w-8">
+                <span className="text-2xl font-bold text-white/20 w-8" aria-hidden="true">
                   {String(index + 1).padStart(2, '0')}
                 </span>
-                <div className="w-12 h-12 rounded-lg bg-white/10 flex-shrink-0" />
+                <div className="w-12 h-12 rounded-lg bg-white/10 flex-shrink-0" aria-hidden="true" />
                 <div className="flex-1 min-w-0">
                   <p className="font-medium text-white truncate">{track.title}</p>
                   <p className="text-sm text-white/60 truncate">{track.artist}</p>
@@ -179,9 +203,9 @@ export function DiscoveryPanel({ isOpen, onClose, discoveredTracks, onPlayTrack 
             ))}
           </div>
         ) : (
-          <div className="text-center py-8 text-white/60">
-            <Sparkles className="h-12 w-12 mx-auto mb-4 opacity-50" />
-            <p>Click &quot;AI Discovery&quot; to find new tracks</p>
+          <div className="text-center py-8 text-white/60" role="status">
+            <Sparkles className="h-12 w-12 mx-auto mb-4 opacity-50" aria-hidden="true" />
+            <p>Click "AI Discovery" to find new tracks</p>
           </div>
         )}
 

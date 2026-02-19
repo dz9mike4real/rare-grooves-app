@@ -3067,15 +3067,19 @@ export const loadRealTracksFromJamendo = async (): Promise<Track[]> => {
 };
 
 // Fetch real audio previews and album covers from Deezer/iTunes
-export const loadRealAudioFromDeezer = async (tracks: Track[]): Promise<Track[]> => {
+// Optimized for faster initial load - only loads first batch
+export const loadRealAudioFromDeezer = async (tracks: Track[], maxInitial = 40): Promise<Track[]> => {
   console.log('[v0] Fetching real audio and album covers...');
   
-  const BATCH_SIZE = 5;
-  const DELAY_MS = 200;
+  const BATCH_SIZE = 10;
+  const DELAY_MS = 50;
   const results: Track[] = [];
   
-  for (let i = 0; i < tracks.length; i += BATCH_SIZE) {
-    const batch = tracks.slice(i, i + BATCH_SIZE);
+  const tracksToLoad = Math.min(tracks.length, maxInitial);
+  const remainingTracks = tracks.slice(tracksToLoad);
+  
+  for (let i = 0; i < tracksToLoad.length; i += BATCH_SIZE) {
+    const batch = tracksToLoad.slice(i, i + BATCH_SIZE);
     
     const batchResults = await Promise.all(
       batch.map(async (track) => {
@@ -3096,19 +3100,50 @@ export const loadRealAudioFromDeezer = async (tracks: Track[]): Promise<Track[]>
     
     results.push(...batchResults);
     
-    // Progress update
-    const progress = Math.min(i + BATCH_SIZE, tracks.length);
-    console.log(`[v0] Progress: ${progress}/${tracks.length} tracks`);
-    
-    // Small delay to avoid rate limiting
-    if (i + BATCH_SIZE < tracks.length) {
+    if (i + BATCH_SIZE < tracksToLoad.length) {
       await new Promise(resolve => setTimeout(resolve, DELAY_MS));
     }
   }
   
+  // Add remaining tracks without loading audio (lazy load later)
+  results.push(...remainingTracks.map(track => ({ ...track })));
+  
   const audioCount = results.filter(t => t.audioUrl.startsWith('http')).length;
-  const coverCount = results.filter(t => t.albumArt.startsWith('http') && !t.albumArt.includes('unsplash')).length;
-  console.log('[v0] Loaded', audioCount, 'audio previews and', coverCount, 'album covers');
+  console.log('[v0] Loaded', audioCount, 'audio previews (lazy loading rest)');
+  
+  return results;
+};
+
+// Load audio for additional tracks (for lazy loading)
+export const loadAudioForTracks = async (tracks: Track[]): Promise<Track[]> => {
+  const BATCH_SIZE = 10;
+  const DELAY_MS = 30;
+  const results: Track[] = [...tracks];
+  
+  for (let i = 0; i < tracks.length; i += BATCH_SIZE) {
+    const batch = tracks.slice(i, i + BATCH_SIZE);
+    
+    await Promise.all(
+      batch.map(async (track, idx) => {
+        if (results[i + idx] && !results[i + idx].audioUrl.startsWith('http')) {
+          try {
+            const deezerData = await searchDeezerTrack(track.artist, track.title);
+            results[i + idx] = {
+              ...results[i + idx]!,
+              audioUrl: deezerData.previewUrl || results[i + idx]!.audioUrl,
+              albumArt: deezerData.albumCover || results[i + idx]!.albumArt
+            };
+          } catch (error) {
+            // Silent fail for lazy loading
+          }
+        }
+      })
+    );
+    
+    if (i + BATCH_SIZE < tracks.length) {
+      await new Promise(resolve => setTimeout(resolve, DELAY_MS));
+    }
+  }
   
   return results;
 };
