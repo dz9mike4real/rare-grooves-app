@@ -1,5 +1,6 @@
 import type { Track } from './types';
 import { searchTheAudioDB } from './audiodb-api';
+import { searchDiscogs } from './discogs-api';
 
 interface iTunesSearchResult {
   resultCount: number;
@@ -74,7 +75,18 @@ export async function fetchAlbumCover(artist: string, album: string): Promise<st
     // Silent fail
   }
 
-  // Step 3: Try TheAudioDB (great for classic/rare music)
+  // Step 3: Try Discogs (great for rare vinyls)
+  try {
+    const discogsData = await searchDiscogs(artist, album);
+    if (discogsData && discogsData.albumArt) {
+      console.log('[v0] Discogs cover found for:', artist, '-', album);
+      return discogsData.albumArt;
+    }
+  } catch (err) {
+    // Silent fail
+  }
+
+  // Step 4: Try TheAudioDB (great for classic/rare music)
   try {
     const audiodbData = await searchTheAudioDB(artist, album);
     if (audiodbData && audiodbData.albumArt) {

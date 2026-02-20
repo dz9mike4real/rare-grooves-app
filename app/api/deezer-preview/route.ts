@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { checkRateLimit, getClientIp, validateTrackParams } from '@/lib/rate-limit';
 import { searchTheAudioDB } from '@/lib/audiodb-api';
+import { searchDiscogs } from '@/lib/discogs-api';
 import { INPUT } from '@/lib/constants';
 
 export async function GET(request: NextRequest) {
@@ -115,7 +116,27 @@ export async function GET(request: NextRequest) {
     console.error('[v0] iTunes API error:', error);
   }
 
-  // Step 3: Try TheAudioDB (good for classic/rare music)
+  // Step 3: Try Discogs (great for rare vinyls)
+  try {
+    const discogsData = await searchDiscogs(sanitizedArtist, sanitizedTitle);
+    
+    if (discogsData && discogsData.albumArt) {
+      return NextResponse.json({
+        previewUrl: null,
+        albumCover: discogsData.albumArt,
+        artist: sanitizedArtist,
+        title: sanitizedTitle,
+        album: '',
+        year: discogsData.year || '',
+        country: discogsData.country || '',
+        source: 'discogs'
+      });
+    }
+  } catch (error) {
+    console.error('[v0] Discogs API error:', error);
+  }
+
+  // Step 4: Try TheAudioDB (good for classic/rare music)
   try {
     const audiodbData = await searchTheAudioDB(sanitizedArtist, sanitizedTitle);
     
@@ -135,7 +156,7 @@ export async function GET(request: NextRequest) {
     console.error('[v0] TheAudioDB API error:', error);
   }
 
-  // Step 4: Try Last.fm for covers only
+  // Step 5: Try Last.fm for covers only
   try {
     const lastFmResponse = await fetch(
       `http://ws.audioscrobbler.com/2.0/?method=track.getinfo&artist=${encodeURIComponent(sanitizedArtist)}&track=${encodeURIComponent(sanitizedTitle)}&api_key=demo&format=json`
