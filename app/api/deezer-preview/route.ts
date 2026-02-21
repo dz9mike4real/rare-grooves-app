@@ -5,32 +5,33 @@ import { searchDiscogs } from '@/lib/discogs-api';
 import { INPUT } from '@/lib/constants';
 
 export async function GET(request: NextRequest) {
-  const clientIp = getClientIp(request);
-  
-  if (!checkRateLimit(clientIp)) {
-    return NextResponse.json(
-      { error: 'Too many requests. Please try again later.' },
-      { status: 429 }
-    );
-  }
-  
-  const searchParams = request.nextUrl.searchParams;
-  const artist = searchParams.get('artist');
-  const title = searchParams.get('title');
-  
-  const validation = validateTrackParams(artist, title);
-  if (!validation.valid) {
-    return NextResponse.json(
-      { error: validation.error },
-      { status: 400 }
-    );
-  }
-  
-  const sanitizedArtist = artist?.slice(0, INPUT.MAX_LENGTH) || '';
-  const sanitizedTitle = title?.slice(0, INPUT.MAX_LENGTH) || '';
+  try {
+    const clientIp = getClientIp(request);
+    
+    if (!checkRateLimit(clientIp)) {
+      return NextResponse.json(
+        { error: 'Too many requests. Please try again later.' },
+        { status: 429 }
+      );
+    }
+    
+    const searchParams = request.nextUrl.searchParams;
+    const artist = searchParams.get('artist');
+    const title = searchParams.get('title');
+    
+    const validation = validateTrackParams(artist, title);
+    if (!validation.valid) {
+      return NextResponse.json(
+        { error: validation.error },
+        { status: 400 }
+      );
+    }
+    
+    const sanitizedArtist = artist?.slice(0, INPUT.MAX_LENGTH) || '';
+    const sanitizedTitle = title?.slice(0, INPUT.MAX_LENGTH) || '';
 
-  let albumCover: string | null = null;
-  let previewUrl: string | null = null;
+    let albumCover: string | null = null;
+    let previewUrl: string | null = null;
 
   // Step 1: Try Deezer first (best for music previews and covers)
   try {
@@ -183,9 +184,16 @@ export async function GET(request: NextRequest) {
     console.error('[v0] Last.fm API error:', error);
   }
 
-  return NextResponse.json({ 
-    previewUrl: null, 
-    albumCover: null,
-    source: 'none'
-  });
+    return NextResponse.json({ 
+      previewUrl: null, 
+      albumCover: null,
+      source: 'none'
+    });
+  } catch (error) {
+    console.error('[v0] Unhandled error in deezer-preview:', error);
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
+  }
 }

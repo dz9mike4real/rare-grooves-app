@@ -6,6 +6,7 @@ import { Favorite } from '@/lib/types';
 import { getFavorites } from '@/lib/storage';
 import { loadRealAudioFromDeezer, rareTracks } from '@/lib/tracks-data';
 import { TrackCard } from '@/components/track-card';
+import { TrackCardErrorBoundary } from '@/components/track-card-error-boundary';
 import { AudioPlayer } from '@/components/audio-player';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Heart, Sparkles } from 'lucide-react';
@@ -139,12 +140,13 @@ export default function FavoritesPage() {
 
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
               {favoriteTracks.map((track) => (
-                <TrackCard
-                  key={track.id}
-                  track={track}
-                  onPlay={handleTrackSelect}
-                  isPlaying={selectedTrack?.id === track.id}
-                />
+                <TrackCardErrorBoundary key={track.id} trackId={track.id}>
+                  <TrackCard
+                    track={track}
+                    onPlay={handleTrackSelect}
+                    isPlaying={selectedTrack?.id === track.id}
+                  />
+                </TrackCardErrorBoundary>
               ))}
             </div>
           </>

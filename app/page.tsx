@@ -4,6 +4,8 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { Track } from '@/lib/types';
 import { rareTracks, loadRealAudioFromDeezer, loadAudioForTracks } from '@/lib/tracks-data';
 import { TrackCard } from '@/components/track-card';
+import { TrackCardErrorBoundary } from '@/components/track-card-error-boundary';
+import { TrackCardSkeleton } from '@/components/track-card-skeleton';
 import { AudioPlayer } from '@/components/audio-player';
 import { FavoritesSidebar } from '@/components/favorites-sidebar';
 import { Button } from '@/components/ui/button';
@@ -554,13 +556,14 @@ export default function Home() {
         {/* Tracks Grid */}
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
           {displayedTracks.slice(0, visibleCount).map((track) => (
-            <TrackCard
-              key={track.id}
-              track={track}
-              onPlay={handleTrackSelect}
-              isPlaying={selectedTrack?.id === track.id}
-              onFavoriteToggle={() => setIsFavoritesOpen(true)}
-            />
+            <TrackCardErrorBoundary key={track.id} trackId={track.id}>
+              <TrackCard
+                track={track}
+                onPlay={handleTrackSelect}
+                isPlaying={selectedTrack?.id === track.id}
+                onFavoriteToggle={() => setIsFavoritesOpen(true)}
+              />
+            </TrackCardErrorBoundary>
           ))}
         </div>
 

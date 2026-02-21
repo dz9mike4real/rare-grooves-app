@@ -39,14 +39,15 @@ interface TrackCardProps {
 
 export const TrackCard = memo(function TrackCard({ track, onPlay, isPlaying, onFavoriteToggle }: TrackCardProps) {
   const [isFav, setIsFav] = useState(false);
+  const [imageError, setImageError] = useState(false);
   const hasRealAudio = track.audioUrl?.startsWith('http');
   
   const albumArt = useMemo(() => {
-    if (!track.albumArt || track.albumArt.includes('unsplash.com')) {
+    if (!track.albumArt || track.albumArt.includes('unsplash.com') || imageError) {
       return getPlaceholderArt(track.artist);
     }
     return track.albumArt;
-  }, [track.albumArt, track.artist]);
+  }, [track.albumArt, track.artist, imageError]);
 
   useEffect(() => {
     setIsFav(isFavorite(track.id));
@@ -89,6 +90,8 @@ export const TrackCard = memo(function TrackCard({ track, onPlay, isPlaying, onF
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-110"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          onError={() => setImageError(true)}
+          priority
         />
         
         {/* Gradient Overlay */}
