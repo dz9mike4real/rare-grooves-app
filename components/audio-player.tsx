@@ -255,11 +255,11 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
         
         {/* Main Player */}
         <div className="glass border-t border-white/10 bg-[#181818]/95 backdrop-blur-xl">
-          <div className="container mx-auto px-4 py-3">
-            <div className="flex items-center gap-4">
+          <div className="container mx-auto px-2 sm:px-4 py-2 sm:py-3">
+            <div className="flex items-center gap-2 sm:gap-4">
               {/* Track Info */}
-              <div className="flex items-center gap-3 flex-shrink-0 w-64">
-                <div className="relative h-14 w-14 flex-shrink-0 rounded-lg overflow-hidden shadow-lg">
+              <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0 w-auto sm:w-48 md:w-64">
+                <div className="relative h-10 w-10 sm:h-14 sm:w-14 flex-shrink-0 rounded-lg overflow-hidden shadow-lg">
                   <Image
                     src={track.albumArt || "/placeholder.svg"}
                     alt={track.album}
@@ -269,34 +269,34 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
                   />
                   {isPlaying && (
                     <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                      <div className="flex items-end gap-0.5 h-4">
-                        <span className="w-1 bg-[#0a4d7f] rounded-full animate-pulse" style={{ animationDelay: '0ms', height: '40%' }} />
-                        <span className="w-1 bg-[#0a4d7f] rounded-full animate-pulse" style={{ animationDelay: '150ms', height: '70%' }} />
-                        <span className="w-1 bg-[#0a4d7f] rounded-full animate-pulse" style={{ animationDelay: '300ms', height: '50%' }} />
-                        <span className="w-1 bg-[#0a4d7f] rounded-full animate-pulse" style={{ animationDelay: '450ms', height: '80%' }} />
+                      <div className="flex items-end gap-0.5 h-3 sm:h-4">
+                        <span className="w-0.5 sm:w-1 bg-[#0a4d7f] rounded-full animate-pulse" style={{ animationDelay: '0ms', height: '40%' }} />
+                        <span className="w-0.5 sm:w-1 bg-[#0a4d7f] rounded-full animate-pulse" style={{ animationDelay: '150ms', height: '70%' }} />
+                        <span className="w-0.5 sm:w-1 bg-[#0a4d7f] rounded-full animate-pulse" style={{ animationDelay: '300ms', height: '50%' }} />
+                        <span className="w-0.5 sm:w-1 bg-[#0a4d7f] rounded-full animate-pulse" style={{ animationDelay: '450ms', height: '80%' }} />
                       </div>
                     </div>
                   )}
                 </div>
-                <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold text-sm text-white line-clamp-1">
+                <div className="flex-1 min-w-0 hidden sm:block">
+                  <h3 className="font-semibold text-xs sm:text-sm text-white line-clamp-1">
                     {track.title}
                   </h3>
-                  <p className="text-sm text-white/60 line-clamp-1">
+                  <p className="text-xs sm:text-sm text-white/60 line-clamp-1">
                     {track.artist}
                   </p>
                 </div>
               </div>
 
               {/* Controls */}
-              <div className="flex-1 flex flex-col items-center gap-2">
-                <div className="flex items-center gap-4">
+              <div className="flex-1 flex flex-col items-center gap-1 sm:gap-2">
+                <div className="flex items-center gap-2 sm:gap-4">
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="h-8 w-8 text-white/60 hover:text-white"
+                    className="h-7 w-7 sm:h-8 sm:w-8 text-white/60 hover:text-white hidden sm:flex"
                   >
-                    <Shuffle className="h-4 w-4" />
+                    <Shuffle className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                   </Button>
                   
                   <Button
@@ -304,21 +304,21 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
                     size="icon"
                     onClick={skipBackward}
                     disabled={!hasPrevious && !onPrevious}
-                    className="h-10 w-10 text-white hover:text-[#0a4d7f] disabled:text-white/20 disabled:hover:text-white/20"
+                    className="h-8 w-8 sm:h-10 sm:w-10 text-white hover:text-[#0a4d7f] disabled:text-white/20 disabled:hover:text-white/20"
                   >
-                    <SkipBack className="h-5 w-5" />
+                    <SkipBack className="h-4 w-4 sm:h-5 sm:w-5" />
                   </Button>
 
                   <Button
                     size="icon"
                     onClick={togglePlayPause}
-                    className="h-12 w-12 rounded-full gradient-bg hover:opacity-90 transition-opacity"
+                    className="h-10 w-10 sm:h-12 sm:w-12 rounded-full gradient-bg hover:opacity-90 transition-opacity"
                     disabled={isLoadingAudio}
                   >
                     {isPlaying ? (
-                      <Pause className="h-6 w-6 text-white" />
+                      <Pause className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
                     ) : (
-                      <Play className="h-6 w-6 text-white ml-1" />
+                      <Play className="h-5 w-5 sm:h-6 sm:w-6 text-white ml-0.5 sm:ml-1" />
                     )}
                   </Button>
 
@@ -327,36 +327,36 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
                     size="icon"
                     onClick={skipForward}
                     disabled={!hasNext && !onNext}
-                    className="h-10 w-10 text-white hover:text-[#0a4d7f] disabled:text-white/20 disabled:hover:text-white/20"
+                    className="h-8 w-8 sm:h-10 sm:w-10 text-white hover:text-[#0a4d7f] disabled:text-white/20 disabled:hover:text-white/20"
                   >
-                    <SkipForward className="h-5 w-5" />
+                    <SkipForward className="h-4 w-4 sm:h-5 sm:w-5" />
                   </Button>
                   
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="h-8 w-8 text-white/60 hover:text-white"
+                    className="h-7 w-7 sm:h-8 sm:w-8 text-white/60 hover:text-white hidden sm:flex"
                   >
-                    <Repeat className="h-4 w-4" />
+                    <Repeat className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                   </Button>
                 </div>
                 
                 {/* Progress Slider */}
-                <div className="w-full max-w-md flex items-center gap-2">
-                  <span className="text-xs text-white/50 w-10 text-right">{formatTime(currentTime)}</span>
+                <div className="w-full max-w-[200px] sm:max-w-md flex items-center gap-1 sm:gap-2">
+                  <span className="text-[10px] sm:text-xs text-white/50 w-8 sm:w-10 text-right">{formatTime(currentTime)}</span>
                   <Slider
                     value={[currentTime]}
                     max={duration || 100}
                     step={0.1}
                     onValueChange={handleSeek}
-                    className="flex-1 cursor-pointer [&_[role=slider]]:bg-[#0a4d7f] [&_[role=slider]]:border-[#0a4d7f]"
+                    className="flex-1 cursor-pointer [&_[role=slider]]:bg-[#0a4d7f] [&_[role=slider]]:border-[#0a4d7f] [&_[role=slider]]:w-2 sm:[&_[role=slider]]:w-3 [&_[role=slider]]:h-2 sm:[&_[role=slider]]:h-3"
                   />
-                  <span className="text-xs text-white/50 w-10">{formatTime(duration)}</span>
+                  <span className="text-[10px] sm:text-xs text-white/50 w-8 sm:w-10">{formatTime(duration)}</span>
                 </div>
               </div>
 
               {/* Volume & Actions */}
-              <div className="flex items-center gap-2 w-64 justify-end">
+              <div className="flex items-center gap-1 sm:gap-2 w-auto sm:w-48 md:w-64 justify-end">
                 <div className="hidden md:flex items-center gap-2 w-32">
                   <Button
                     variant="ghost"
