@@ -506,7 +506,7 @@ export default function Home() {
         {/* Section Header */}
         <ClientOnly
           fallback={
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
               {Array.from({ length: ITEMS_PER_PAGE }).map((_, i) => (
                 <div key={i} className="glass-card overflow-hidden animate-pulse">
                   <div className="aspect-square bg-white/10" />
@@ -538,7 +538,7 @@ export default function Home() {
 
         {/* Loading Skeletons */}
         {isLoadingAudio ? (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
             {Array.from({ length: ITEMS_PER_PAGE }).map((_, i) => (
               <div key={i} className="glass-card overflow-hidden animate-pulse">
                 <div className="aspect-square bg-white/10" />
@@ -552,7 +552,7 @@ export default function Home() {
         ) : (
           <>
         {/* Tracks Grid */}
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
           {displayedTracks.slice(0, visibleCount).map((track) => (
             <TrackCard
               key={track.id}

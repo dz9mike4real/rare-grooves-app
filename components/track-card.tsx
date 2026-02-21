@@ -100,12 +100,12 @@ export const TrackCard = memo(function TrackCard({ track, onPlay, isPlaying, onF
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         
-        {/* Play Button Overlay */}
+          {/* Play Button Overlay */}
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
           <div className={`transform scale-0 group-hover:scale-100 transition-transform duration-300 ${isPlaying ? 'scale-100' : ''}`}>
             <Button
               size="icon"
-              className={`h-14 w-14 rounded-full shadow-2xl ${
+              className={`h-12 w-12 rounded-full shadow-2xl ${
                 isPlaying ? 'gradient-bg' : 'bg-[#0a4d7f] hover:bg-[#1a7dbf]'
               }`}
               onClick={(e) => {
@@ -115,9 +115,9 @@ export const TrackCard = memo(function TrackCard({ track, onPlay, isPlaying, onF
               aria-label={isPlaying ? `Pause ${track.title}` : `Play ${track.title}`}
             >
               {isPlaying ? (
-                <Pause className="h-7 w-7 text-white" />
+                <Pause className="h-6 w-6 text-white" />
               ) : (
-                <Play className="h-7 w-7 text-white ml-1" />
+                <Play className="h-6 w-6 text-white ml-1" />
               )}
             </Button>
           </div>
@@ -187,9 +187,9 @@ export const TrackCard = memo(function TrackCard({ track, onPlay, isPlaying, onF
       </div>
 
       {/* Track Info */}
-      <div className="p-4 space-y-2">
-        <h3 className="font-semibold text-white line-clamp-1 text-base">{track.title}</h3>
-        <p className="text-white/60 line-clamp-1 text-sm">{track.artist}</p>
+      <div className="p-3 space-y-1">
+        <h3 className="font-semibold text-white line-clamp-1 text-sm">{track.title}</h3>
+        <p className="text-white/60 line-clamp-1 text-xs">{track.artist}</p>
         
         <div className="flex items-center justify-between text-xs text-white/40 pt-2 border-t border-white/10">
           <span className="capitalize flex items-center gap-1">
