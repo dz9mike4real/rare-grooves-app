@@ -431,14 +431,14 @@ export default function Home() {
           </div>
 
           {/* Year & Sort Filters */}
-          <div className="flex items-center gap-2 flex-wrap">
+          <div className="flex items-center gap-2">
             {/* Year Filter */}
             <div className="flex items-center gap-2">
               <Calendar className="h-4 w-4 text-muted-foreground" />
               <select
                 value={selectedYear}
                 onChange={(e) => handleYearChange(e.target.value)}
-                className="bg-background/80 border border-border text-foreground rounded-full px-2 py-1.5 sm:px-3 sm:py-2 text-xs sm:text-sm focus:ring-1 focus:ring-primary w-24 sm:w-auto"
+                className="bg-background/80 border border-border text-foreground rounded-full px-2 py-1.5 sm:px-3 sm:py-2 text-xs sm:text-sm focus:ring-1 focus:ring-primary w-20 sm:w-auto"
               >
                 {years.map((year) => (
                   <option key={year.value} value={year.value}>
@@ -449,7 +449,7 @@ export default function Home() {
             </div>
 
             {/* Sort Dropdown */}
-            <div className="flex items-center gap-2">
+            <div className="hidden sm:flex items-center gap-2">
               <ArrowUpDown className="h-4 w-4 text-muted-foreground" />
               <select
                 value={sortBy}
@@ -463,9 +463,6 @@ export default function Home() {
                 ))}
               </select>
             </div>
-
-            {/* Theme Toggle */}
-            <ThemeToggle />
           </div>
 
           {/* Clear Filters Button */}
