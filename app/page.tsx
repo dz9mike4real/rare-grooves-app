@@ -390,6 +390,8 @@ export default function Home() {
         >
           <Heart className="h-5 w-5 text-foreground" />
         </Button>
+
+        <ThemeToggle />
           </div>
         </div>
       </header>
