@@ -6,7 +6,7 @@ import { Track } from '@/lib/types';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Play, Pause, Heart, Clock, Disc } from 'lucide-react';
+import { Play, Pause, Heart } from 'lucide-react';
 import { useState, useEffect, useMemo } from 'react';
 import { isFavorite, addFavorite, removeFavorite } from '@/lib/storage';
 import Image from 'next/image';
@@ -66,12 +66,6 @@ export const TrackCard = memo(function TrackCard({ track, onPlay, isPlaying, onF
     }
   };
 
-  const formatDuration = (seconds: number) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, '0')}`;
-  };
-
   return (
     <Card 
       className={`group glass-card overflow-hidden hover-lift cursor-pointer transition-all duration-300 ${
@@ -123,93 +117,47 @@ export const TrackCard = memo(function TrackCard({ track, onPlay, isPlaying, onF
           </div>
         </div>
 
-        {/* Rarity Badge */}
-        <div className="absolute top-3 left-3">
-          <Badge 
-            className={`${
-              track.rarity >= 9 
-                ? 'bg-gradient-to-r from-[#0a4d7f] to-[#0d6efd] text-white border-0' 
-                : 'bg-[#1db954] text-white border-0'
-            } font-semibold text-xs shadow-lg`}
-            aria-label={`Rarity: ${track.rarity >= 9 ? 'Ultra Rare' : 'Rare'}`}
+        {/* Favorite Button - Only show when favorited */}
+        {isFav && (
+          <Button
+            variant="ghost"
+            size="icon"
+            className="absolute top-2 right-2 h-7 w-7 backdrop-blur-sm rounded-full bg-[#0d6efd]/80 hover:bg-[#0d6efd] transition-all duration-300"
+            onClick={handleFavoriteToggle}
+            aria-label={`Remove ${track.title} from favorites`}
+            aria-pressed={true}
           >
-            {track.rarity >= 9 ? 'Ultra Rare' : 'Rare'}
-          </Badge>
-        </div>
+            <Heart className="h-3.5 w-3.5 fill-white text-white" />
+          </Button>
+        )}
 
-        {/* Audio Source Badge */}
-        <div className="absolute bottom-3 right-3">
-          <Badge 
-            className={`text-xs font-medium ${
-              hasRealAudio 
-                ? 'bg-[#1db954]/80 text-white border-0' 
-                : 'bg-white/20 text-white/80 border-0'
-            }`}
-            aria-label={hasRealAudio ? 'Real audio preview available' : 'Demo audio'}
-          >
-            {hasRealAudio ? 'Real' : 'Demo'}
-          </Badge>
-        </div>
-
-        {/* Favorite Button - Always visible */}
-        <Button
-          variant="ghost"
-          size="icon"
-          className={`absolute top-3 right-3 h-9 w-9 backdrop-blur-sm rounded-full transition-all duration-300 ${
-            isFav 
-              ? 'bg-[#0d6efd]/80 hover:bg-[#0d6efd]' 
-              : 'bg-black/40 hover:bg-black/60 opacity-100'
-          }`}
-          onClick={handleFavoriteToggle}
-          aria-label={isFav ? `Remove ${track.title} from favorites` : `Add ${track.title} to favorites`}
-          aria-pressed={isFav}
-        >
-          <Heart
-            className={`h-4 w-4 transition-colors ${
-              isFav 
-                ? 'fill-white text-white' 
-                : 'text-white'
-            }`}
-          />
-        </Button>
-
-        {/* Playing Indicator */}
-        {isPlaying && (
-          <div className="absolute bottom-3 left-3 flex items-center gap-1" role="status" aria-label="Now playing">
-            <div className="flex items-end gap-0.5 h-4">
-              <span className="w-1 h-1 bg-[#0a4d7f] rounded-full animate-pulse" style={{ animationDelay: '0ms' }} />
-              <span className="w-1 h-2 bg-[#0a4d7f] rounded-full animate-pulse" style={{ animationDelay: '150ms' }} />
-              <span className="w-1 h-3 bg-[#0a4d7f] rounded-full animate-pulse" style={{ animationDelay: '300ms' }} />
-              <span className="w-1 h-2 bg-[#0a4d7f] rounded-full animate-pulse" style={{ animationDelay: '450ms' }} />
-            </div>
+        {/* Audio Source Badge - Only show if real */}
+        {hasRealAudio && (
+          <div className="absolute bottom-2 left-2">
+            <Badge className="text-[10px] font-medium bg-[#1db954]/80 text-white border-0 px-1.5 py-0">
+              Real
+            </Badge>
           </div>
         )}
+
       </div>
 
       {/* Track Info */}
-      <div className="p-3 space-y-1">
-        <h3 className="font-semibold text-white line-clamp-1 text-sm">{track.title}</h3>
-        <p className="text-white/60 line-clamp-1 text-xs">{track.artist}</p>
+      <div className="p-2">
+        <h3 className="font-semibold text-white truncate text-sm leading-tight">{track.title}</h3>
+        <p className="text-white/60 truncate text-xs mb-1.5">{track.artist}</p>
         
-        <div className="flex items-center justify-between text-xs text-white/40 pt-2 border-t border-white/10">
-          <span className="capitalize flex items-center gap-1">
-            <Disc className="h-3 w-3" aria-hidden="true" />
-            {track.genre}
-          </span>
+        <div className="flex items-center justify-between text-[10px] text-white/40">
+          <span className="capitalize truncate max-w-[60%]">{track.genre}</span>
           <span>{track.year}</span>
         </div>
         
         {track.bpm && track.key && (
-          <div className="flex items-center justify-between text-xs text-white/40">
+          <div className="flex items-center justify-between text-[10px] text-white/40">
             <span>{track.bpm} BPM</span>
             <span>{track.key}</span>
           </div>
         )}
-        
-        <div className="flex items-center gap-1 text-xs text-white/40">
-          <Clock className="h-3 w-3" aria-hidden="true" />
-          {formatDuration(track.duration)}
-        </div>
       </div>
     </Card>
   );
