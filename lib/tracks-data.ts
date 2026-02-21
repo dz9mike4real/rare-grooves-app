@@ -3066,8 +3066,56 @@ export const loadRealTracksFromJamendo = async (): Promise<Track[]> => {
   return allTracks;
 };
 
+// Cache configuration
+const CACHE_KEY = 'rare-grooves-audio-cache';
+const CACHE_EXPIRY_DAYS = 7;
+
+interface CachedTrack {
+  id: string;
+  audioUrl: string;
+  albumArt: string;
+  timestamp: number;
+}
+
+// Load cache from localStorage
+const loadCache = (): Map<string, CachedTrack> => {
+  if (typeof window === 'undefined') return new Map();
+  
+  try {
+    const cached = localStorage.getItem(CACHE_KEY);
+    if (cached) {
+      const parsed = JSON.parse(cached);
+      const now = Date.now();
+      const expiryTime = CACHE_EXPIRY_DAYS * 24 * 60 * 60 * 1000;
+      
+      // Filter out expired entries
+      const validEntries = Object.entries(parsed).filter(([_, data]: [string, any]) => {
+        return now - data.timestamp < expiryTime;
+      });
+      
+      return new Map(validEntries as [string, CachedTrack][]);
+    }
+  } catch (e) {
+    console.error('[v0] Failed to load cache:', e);
+  }
+  
+  return new Map();
+};
+
+// Save cache to localStorage
+const saveCache = (cache: Map<string, CachedTrack>) => {
+  if (typeof window === 'undefined') return;
+  
+  try {
+    const obj = Object.fromEntries(cache);
+    localStorage.setItem(CACHE_KEY, JSON.stringify(obj));
+  } catch (e) {
+    console.error('[v0] Failed to save cache:', e);
+  }
+};
+
 // Fetch real audio previews and album covers from Deezer/iTunes
-// Optimized for faster initial load - only loads first batch
+// Optimized with localStorage caching
 export const loadRealAudioFromDeezer = async (
   tracks: Track[], 
   maxInitial = 40,
@@ -3075,9 +3123,12 @@ export const loadRealAudioFromDeezer = async (
 ): Promise<Track[]> => {
   console.log('[v0] Fetching real audio and album covers...');
   
+  const cache = loadCache();
   const BATCH_SIZE = 10;
   const DELAY_MS = 50;
   const results: Track[] = [];
+  let cacheHits = 0;
+  let apiCalls = 0;
   
   const tracksToLoad = tracks.slice(0, maxInitial);
   const remainingTracks = tracks.slice(maxInitial);
@@ -3087,8 +3138,31 @@ export const loadRealAudioFromDeezer = async (
     
     const batchResults = await Promise.all(
       batch.map(async (track) => {
+        // Check cache first
+        const cached = cache.get(track.id);
+        if (cached && cached.audioUrl.startsWith('http')) {
+          cacheHits++;
+          return {
+            ...track,
+            audioUrl: cached.audioUrl,
+            albumArt: cached.albumArt || track.albumArt
+          };
+        }
+        
+        // Fetch from API if not cached
         try {
+          apiCalls++;
           const deezerData = await searchDeezerTrack(track.artist, track.title);
+          
+          // Update cache
+          if (deezerData.previewUrl || deezerData.albumCover) {
+            cache.set(track.id, {
+              id: track.id,
+              audioUrl: deezerData.previewUrl || track.audioUrl,
+              albumArt: deezerData.albumCover || track.albumArt,
+              timestamp: Date.now()
+            });
+          }
           
           return {
             ...track,
@@ -3114,6 +3188,9 @@ export const loadRealAudioFromDeezer = async (
     }
   }
   
+  // Save updated cache
+  saveCache(cache);
+  
   // Add remaining tracks without loading audio (lazy load later)
   results.push(...remainingTracks.map(track => ({ ...track })));
   
@@ -3123,16 +3200,18 @@ export const loadRealAudioFromDeezer = async (
   }
   
   const audioCount = results.filter(t => t.audioUrl.startsWith('http')).length;
-  console.log('[v0] Loaded', audioCount, 'audio previews (lazy loading rest)');
+  console.log(`[v0] Loaded ${audioCount} audio previews (${cacheHits} from cache, ${apiCalls} API calls)`);
   
   return results;
 };
 
-// Load audio for additional tracks (for lazy loading)
+// Load audio for additional tracks (for lazy loading) with cache
 export const loadAudioForTracks = async (tracks: Track[]): Promise<Track[]> => {
   const BATCH_SIZE = 10;
   const DELAY_MS = 30;
   const results: Track[] = [...tracks];
+  const cache = loadCache();
+  let cacheUpdated = false;
   
   for (let i = 0; i < tracks.length; i += BATCH_SIZE) {
     const batch = tracks.slice(i, i + BATCH_SIZE);
@@ -3140,8 +3219,32 @@ export const loadAudioForTracks = async (tracks: Track[]): Promise<Track[]> => {
     await Promise.all(
       batch.map(async (track, idx) => {
         if (results[i + idx] && !results[i + idx].audioUrl.startsWith('http')) {
+          // Check cache first
+          const cached = cache.get(track.id);
+          if (cached && cached.audioUrl.startsWith('http')) {
+            results[i + idx] = {
+              ...results[i + idx]!,
+              audioUrl: cached.audioUrl,
+              albumArt: cached.albumArt || results[i + idx]!.albumArt
+            };
+            return;
+          }
+          
+          // Fetch from API
           try {
             const deezerData = await searchDeezerTrack(track.artist, track.title);
+            
+            // Update cache
+            if (deezerData.previewUrl || deezerData.albumCover) {
+              cache.set(track.id, {
+                id: track.id,
+                audioUrl: deezerData.previewUrl || results[i + idx]!.audioUrl,
+                albumArt: deezerData.albumCover || results[i + idx]!.albumArt,
+                timestamp: Date.now()
+              });
+              cacheUpdated = true;
+            }
+            
             results[i + idx] = {
               ...results[i + idx]!,
               audioUrl: deezerData.previewUrl || results[i + idx]!.audioUrl,
@@ -3157,6 +3260,11 @@ export const loadAudioForTracks = async (tracks: Track[]): Promise<Track[]> => {
     if (i + BATCH_SIZE < tracks.length) {
       await new Promise(resolve => setTimeout(resolve, DELAY_MS));
     }
+  }
+  
+  // Save cache if updated
+  if (cacheUpdated) {
+    saveCache(cache);
   }
   
   return results;
