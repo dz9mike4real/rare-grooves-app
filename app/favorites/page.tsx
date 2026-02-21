@@ -85,7 +85,7 @@ export default function FavoritesPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#121212]">
+    <div className="min-h-screen bg-background text-foreground">
       {/* Background Effects */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#17a2b8]/5 rounded-full blur-3xl" />
@@ -100,16 +100,16 @@ export default function FavoritesPage() {
               <Button 
                 variant="ghost" 
                 size="icon"
-                className="hover:bg-white/10"
+                className="hover:bg-secondary"
               >
-                <ArrowLeft className="h-5 w-5 text-white" />
+                <ArrowLeft className="h-5 w-5 text-foreground" />
               </Button>
             </Link>
             <div className="flex items-center gap-3">
-              <div className="p-2 rounded-xl bg-gradient-to-br from-[#17a2b8] to-[#0a4d7f]">
+              <div className="p-2 rounded-xl gradient-bg">
                 <Heart className="h-5 w-5 text-white fill-white" />
               </div>
-              <h1 className="text-2xl font-bold text-white">My Favorites</h1>
+              <h1 className="text-2xl font-bold text-foreground">My Favorites</h1>
             </div>
           </div>
         </div>
@@ -124,7 +124,7 @@ export default function FavoritesPage() {
                 <div className="absolute inset-0 bg-gradient-to-r from-[#17a2b8] to-[#0a4d7f] opacity-30 blur-2xl rounded-full" />
                 <Heart className="h-16 w-16 text-[#17a2b8] mx-auto animate-pulse" />
               </div>
-              <p className="text-white/60">Loading your favorites...</p>
+              <p className="text-muted-foreground">Loading your favorites...</p>
             </div>
           </div>
         ) : favoriteTracks.length > 0 ? (
@@ -132,7 +132,7 @@ export default function FavoritesPage() {
             <div className="mb-8">
               <div className="flex items-center gap-3 mb-2">
                 <Sparkles className="h-5 w-5 text-[#ffcc00]" />
-                <p className="text-white/60">
+                <p className="text-muted-foreground">
                   {favoriteTracks.length} {favoriteTracks.length === 1 ? 'track' : 'tracks'} saved
                 </p>
               </div>
@@ -153,10 +153,10 @@ export default function FavoritesPage() {
         ) : (
           <div className="flex flex-col items-center justify-center py-20 text-center">
             <div className="glass-card p-12 rounded-full mb-6">
-              <Heart className="h-20 w-20 text-white/20" />
+              <Heart className="h-20 w-20 text-muted-foreground" />
             </div>
-            <h2 className="text-2xl font-bold text-white mb-3">No favorites yet</h2>
-            <p className="text-white/50 max-w-md mb-8">
+            <h2 className="text-2xl font-bold text-foreground mb-3">No favorites yet</h2>
+            <p className="text-muted-foreground max-w-md mb-8">
               Start discovering rare grooves and save your favorite tracks here by clicking the heart icon.
             </p>
             <Link href="/">
