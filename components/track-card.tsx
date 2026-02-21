@@ -61,7 +61,7 @@ export const TrackCard = memo(function TrackCard({ track, onPlay, isPlaying, onF
       }}
       aria-label={`${track.title} by ${track.artist}${isPlaying ? ', currently playing' : ''}. Press Enter to play`}
     >
-      <div className="relative aspect-square overflow-hidden rounded-t-xl">
+      <div className="relative aspect-square overflow-hidden rounded-t-none">
         <OptimizedTrackImage
           src={track.albumArt || ''}
           alt={`Album art for ${track.album} by ${track.artist}`}
