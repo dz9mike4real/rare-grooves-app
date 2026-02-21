@@ -2,6 +2,7 @@ import { Track } from './types';
 import { fetchAlbumCover } from './music-api';
 import { searchJamendoByGenre, convertJamendoTrack } from './jamendo-api';
 import { searchDeezerTrack, getDeezerAlbumCover } from './deezer-api';
+import { hasRealAudioUrl } from './utils';
 
 // Initial placeholder tracks - will be enriched with real audio from Deezer
 export let rareTracks: Track[] = [
@@ -3140,7 +3141,7 @@ export const loadRealAudioFromDeezer = async (
       batch.map(async (track) => {
         // Check cache first
         const cached = cache.get(track.id);
-        if (cached && cached.audioUrl.startsWith('http')) {
+        if (cached && hasRealAudioUrl(cached.audioUrl)) {
           cacheHits++;
           return {
             ...track,
@@ -3199,7 +3200,7 @@ export const loadRealAudioFromDeezer = async (
     onProgress(tracks.length, tracks.length);
   }
   
-  const audioCount = results.filter(t => t.audioUrl.startsWith('http')).length;
+  const audioCount = results.filter(t => hasRealAudioUrl(t.audioUrl)).length;
   console.log(`[v0] Loaded ${audioCount} audio previews (${cacheHits} from cache, ${apiCalls} API calls)`);
   
   return results;
@@ -3218,10 +3219,10 @@ export const loadAudioForTracks = async (tracks: Track[]): Promise<Track[]> => {
     
     await Promise.all(
       batch.map(async (track, idx) => {
-        if (results[i + idx] && !results[i + idx].audioUrl.startsWith('http')) {
+        if (results[i + idx] && !hasRealAudioUrl(results[i + idx].audioUrl)) {
           // Check cache first
           const cached = cache.get(track.id);
-          if (cached && cached.audioUrl.startsWith('http')) {
+          if (cached && hasRealAudioUrl(cached.audioUrl)) {
             results[i + idx] = {
               ...results[i + idx]!,
               audioUrl: cached.audioUrl,

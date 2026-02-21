@@ -20,6 +20,7 @@ import { useToast } from '@/hooks/use-toast';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { ClientOnly } from '@/components/client-only';
 import { PAGINATION, DEBOUNCE } from '@/lib/constants';
+import { hasRealAudioUrl } from '@/lib/utils';
 
 const ITEMS_PER_PAGE = PAGINATION.ITEMS_PER_PAGE;
 
@@ -92,7 +93,7 @@ export default function Home() {
         );
         setQueue(tracksWithRealAudio.sort((a, b) => b.rarity - a.rarity));
         
-        const loaded = tracksWithRealAudio.filter(t => t.audioUrl.startsWith('http')).length;
+        const loaded = tracksWithRealAudio.filter(t => hasRealAudioUrl(t.audioUrl)).length;
         setLoadedCount(loaded);
         // Don't show toast - it's expected that rare tracks won't have previews
       } catch (error) {
@@ -187,7 +188,7 @@ export default function Home() {
 
   const handleTrackSelect = async (track: Track) => {
     // Lazy load audio if not loaded yet
-    if (!track.audioUrl.startsWith('http')) {
+    if (!hasRealAudioUrl(track.audioUrl)) {
       const updated = await loadAudioForTracks([track]);
       const updatedTrack = updated[0];
       setTracksWithCovers(prev => prev.map(t => t.id === track.id ? updatedTrack : t));
@@ -206,7 +207,7 @@ export default function Home() {
 
   const handlePlayTrack = async (track: Track) => {
     // Lazy load audio if not loaded yet
-    if (!track.audioUrl.startsWith('http')) {
+    if (!hasRealAudioUrl(track.audioUrl)) {
       const updated = await loadAudioForTracks([track]);
       const updatedTrack = updated[0];
       setTracksWithCovers(prev => prev.map(t => t.id === track.id ? updatedTrack : t));

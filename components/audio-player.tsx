@@ -25,6 +25,7 @@ import { isFavorite, addFavorite, removeFavorite } from '@/lib/storage';
 import { SampleCreator } from './sample-creator';
 import { ShareDialog } from './share-dialog';
 import { getCachedOrGenerateAudio } from '@/lib/audio-generator';
+import { hasRealAudioUrl } from '@/lib/utils';
 
 interface AudioPlayerProps {
   track: Track;
@@ -54,7 +55,7 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
 
   useEffect(() => {
     const loadAudio = async () => {
-      if (track.audioUrl && track.audioUrl.startsWith('http')) {
+      if (hasRealAudioUrl(track.audioUrl)) {
         console.log('[v0] Using real audio preview from Deezer for:', track.title);
         setAudioUrl(track.audioUrl);
         setIsLoadingAudio(false);
