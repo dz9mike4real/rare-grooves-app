@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { Track } from '@/lib/types';
-import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
 import { 

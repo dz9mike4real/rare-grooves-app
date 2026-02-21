@@ -5,7 +5,7 @@ import { Track } from '@/lib/types';
 import { Favorite } from '@/lib/types';
 import { getFavorites, removeFavorite } from '@/lib/storage';
 import { Button } from '@/components/ui/button';
-import { X, Play, Trash2, Heart, ChevronRight } from 'lucide-react';
+import { X, Play, Trash2, Heart } from 'lucide-react';
 import Image from 'next/image';
 
 interface FavoritesSidebarProps {

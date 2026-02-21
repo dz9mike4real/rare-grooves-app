@@ -68,9 +68,9 @@ export function ShareDialog({ track, onClose }: ShareDialogProps) {
           text: shareText,
           url: shareUrl,
         });
-      } catch (err) {
+    } catch {
         // User cancelled or share failed
-        console.log('[v0] Share cancelled or failed', err);
+        console.log('[v0] Share cancelled or failed');
       }
     } else {
       toast({

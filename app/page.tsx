@@ -13,13 +13,13 @@ import { StaggerContainer, StaggerItem } from '@/components/stagger-grid';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Search, Disc3, Heart, Sparkles, X, ChevronDown, Play, Calendar, ArrowUpDown } from 'lucide-react';
+import { Search, Disc3, Heart, Sparkles, X, Play, Calendar, ArrowUpDown } from 'lucide-react';
 import { DiscoveryButton, DiscoveryPanel } from '@/components/discovery';
 import { SurpriseMeButton, RecentlyPlayed, useRecentlyPlayed } from '@/components/discovery-enhanced';
 import { useToast } from '@/hooks/use-toast';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { ClientOnly } from '@/components/client-only';
-import { PAGINATION, DEBOUNCE } from '@/lib/constants';
+import { PAGINATION } from '@/lib/constants';
 import { hasRealAudioUrl } from '@/lib/utils';
 
 const ITEMS_PER_PAGE = PAGINATION.ITEMS_PER_PAGE;
@@ -81,7 +81,7 @@ export default function Home() {
         const tracksWithRealAudio = await loadRealAudioFromDeezer(
           rareTracks,
           40,
-          (loaded, total) => {
+          (loaded) => {
             setLoadedCount(loaded);
           }
         );
@@ -113,7 +113,7 @@ export default function Home() {
   }, []);
 
   // Apply filters
-  const applyFilters = useCallback((tracks: Track[], resetVisible = true) => {
+  const applyFilters = useCallback((tracks: Track[]) => {
     let filtered = [...tracks];
 
     // Filter by genre

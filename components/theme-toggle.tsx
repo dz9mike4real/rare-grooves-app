@@ -48,7 +48,7 @@ export function ThemeToggle() {
 }
 
 export function ThemeSelector() {
-  const { theme, setTheme, resolvedTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
