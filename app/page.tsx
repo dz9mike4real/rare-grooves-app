@@ -6,6 +6,7 @@ import { rareTracks, loadRealAudioFromDeezer, loadAudioForTracks } from '@/lib/t
 import { TrackCard } from '@/components/track-card';
 import { TrackCardErrorBoundary } from '@/components/track-card-error-boundary';
 import { TrackCardSkeleton } from '@/components/track-card-skeleton';
+import { VirtualizedTrackGrid } from '@/components/virtualized-track-grid';
 import { AudioPlayer } from '@/components/audio-player';
 import { FavoritesSidebar } from '@/components/favorites-sidebar';
 import { Button } from '@/components/ui/button';
@@ -31,10 +32,8 @@ export default function Home() {
   const [selectedGenre, setSelectedGenre] = useState<string>('all');
   const [selectedYear, setSelectedYear] = useState<string>('all');
   const [isLoadingAudio, setIsLoadingAudio] = useState(true);
-  const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [tracksWithCovers, setTracksWithCovers] = useState<Track[]>(defaultTracks);
-  const [displayedTracks, setDisplayedTracks] = useState<Track[]>(() => defaultSorted.slice(0, ITEMS_PER_PAGE));
-  const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
+  const [displayedTracks, setDisplayedTracks] = useState<Track[]>(defaultSorted);
   const [totalFilteredCount, setTotalFilteredCount] = useState(defaultTracks.length);
   const [isFavoritesOpen, setIsFavoritesOpen] = useState(false);
   const [queue, setQueue] = useState<Track[]>(defaultSorted);
@@ -44,7 +43,6 @@ export default function Home() {
   const [sortBy, setSortBy] = useState<'rarity' | 'year-desc' | 'year-asc' | 'title' | 'artist'>('rarity');
   const [loadedCount, setLoadedCount] = useState(0);
   const hasInitialized = useRef(false);
-  const loadMoreRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   // Keyboard shortcut for search (/)
@@ -80,7 +78,6 @@ export default function Home() {
         setDisplayedTracks(
           tracksWithRealAudio
             .sort((a, b) => b.rarity - a.rarity)
-            .slice(0, ITEMS_PER_PAGE)
         );
         setQueue(tracksWithRealAudio.sort((a, b) => b.rarity - a.rarity));
         
@@ -152,8 +149,7 @@ export default function Home() {
     }
 
     setTotalFilteredCount(filtered.length);
-    setDisplayedTracks(resetVisible ? filtered.slice(0, ITEMS_PER_PAGE) : filtered);
-    setVisibleCount(resetVisible ? ITEMS_PER_PAGE : filtered.length);
+    setDisplayedTracks(filtered);
     setQueue(filtered);
     setQueueIndex(selectedTrack ? filtered.findIndex(t => t.id === selectedTrack.id) : -1);
   }, [selectedGenre, selectedYear, searchQuery, selectedTrack, sortBy]);
@@ -164,80 +160,6 @@ export default function Home() {
       applyFilters(tracksWithCovers);
     }
   }, [selectedGenre, selectedYear, searchQuery, isLoadingAudio, tracksWithCovers, applyFilters]);
-
-  // Infinite scroll observer
-  useEffect(() => {
-    if (isLoadingAudio || isLoadingMore) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && visibleCount < totalFilteredCount) {
-          loadMore();
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (loadMoreRef.current) {
-      observer.observe(loadMoreRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, [visibleCount, totalFilteredCount, isLoadingAudio, isLoadingMore]);
-
-  const loadMore = async () => {
-    setIsLoadingMore(true);
-    
-    // Lazy load audio for newly visible tracks
-    const tracksNeedingAudio = tracksWithCovers
-      .filter(t => !t.audioUrl.startsWith('http'))
-      .slice(0, 20);
-    
-    if (tracksNeedingAudio.length > 0) {
-      const updatedTracks = await loadAudioForTracks(tracksNeedingAudio);
-      setTracksWithCovers(prev => {
-        const updatedMap = new Map(updatedTracks.map(t => [t.id, t]));
-        return prev.map(t => updatedMap.get(t.id) || t);
-      });
-    }
-    
-    setTimeout(() => {
-      // Get all filtered tracks
-      let allFiltered = [...tracksWithCovers];
-      
-      if (selectedGenre !== 'all') {
-        allFiltered = allFiltered.filter(t => t.genre === selectedGenre);
-      }
-      
-      if (selectedYear !== 'all') {
-        const yearRange = selectedYear.split('-');
-        if (yearRange.length === 2) {
-          const startYear = parseInt(yearRange[0]);
-          const endYear = parseInt(yearRange[1]);
-          allFiltered = allFiltered.filter(t => t.year >= startYear && t.year <= endYear);
-        }
-      }
-      
-      if (searchQuery.trim()) {
-        const query = searchQuery.toLowerCase();
-        allFiltered = allFiltered.filter(track =>
-          track.title.toLowerCase().includes(query) ||
-          track.artist.toLowerCase().includes(query) ||
-          track.album.toLowerCase().includes(query)
-        );
-      }
-      
-      if (!searchQuery && selectedGenre === 'all' && selectedYear === 'all') {
-        allFiltered = allFiltered.sort((a, b) => b.rarity - a.rarity);
-      }
-      
-      setTotalFilteredCount(allFiltered.length);
-      const newVisibleCount = Math.min(visibleCount + ITEMS_PER_PAGE, allFiltered.length);
-      setDisplayedTracks(allFiltered.slice(0, newVisibleCount));
-      setVisibleCount(newVisibleCount);
-      setIsLoadingMore(false);
-    }, DEBOUNCE.SEARCH_DELAY_MS);
-  };
 
   const handleGenreChange = (genre: string) => {
     setSelectedGenre(genre);
@@ -530,7 +452,6 @@ export default function Home() {
               ) : (
                 <>
                   {totalFilteredCount} {totalFilteredCount === 1 ? 'track' : 'tracks'}
-                  {visibleCount < totalFilteredCount && ` (showing ${visibleCount})`}
                   {loadedCount > 0 && ` • ${loadedCount} with real audio`}
                 </>
               )}
@@ -553,28 +474,13 @@ export default function Home() {
           </div>
         ) : (
           <>
-        {/* Tracks Grid */}
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-          {displayedTracks.slice(0, visibleCount).map((track) => (
-            <TrackCardErrorBoundary key={track.id} trackId={track.id}>
-              <TrackCard
-                track={track}
-                onPlay={handleTrackSelect}
-                isPlaying={selectedTrack?.id === track.id}
-                onFavoriteToggle={() => setIsFavoritesOpen(true)}
-              />
-            </TrackCardErrorBoundary>
-          ))}
-        </div>
-
-        {/* Load More Trigger - Infinite Scroll Only */}
-        {visibleCount < totalFilteredCount && !isLoadingAudio && (
-          <div ref={loadMoreRef} className="flex justify-center py-8">
-            <p className="text-white/40 text-sm">
-              Scroll for more ({totalFilteredCount - visibleCount} remaining)
-            </p>
-          </div>
-        )}
+            {/* Virtualized Tracks Grid */}
+            <VirtualizedTrackGrid
+              tracks={displayedTracks}
+              onPlay={handleTrackSelect}
+              selectedTrack={selectedTrack}
+              onFavoriteToggle={() => setIsFavoritesOpen(true)}
+            />
           </>
         )}
 
