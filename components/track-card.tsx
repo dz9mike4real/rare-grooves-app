@@ -103,8 +103,8 @@ export const TrackCard = memo(function TrackCard({ track, onPlay, isPlaying, onF
           size="icon"
           className={`absolute top-2 right-2 h-7 w-7 backdrop-blur-sm rounded-full transition-all duration-300 opacity-0 group-hover:opacity-100 ${
             isFav 
-              ? 'bg-[#0d6efd]/80 hover:bg-[#0d6efd]' 
-              : 'bg-black/40 hover:bg-[#0d6efd]/80'
+              ? 'bg-primary/80 hover:bg-primary' 
+              : 'bg-black/40 dark:bg-black/40 hover:bg-primary/80'
           }`}
           onClick={handleFavoriteToggle}
           aria-label={isFav ? `Remove ${track.title} from favorites` : `Add ${track.title} to favorites`}
@@ -116,7 +116,7 @@ export const TrackCard = memo(function TrackCard({ track, onPlay, isPlaying, onF
         {/* Audio Source Badge - Only show if real */}
         {hasRealAudio && (
           <div className="absolute bottom-2 left-2">
-            <Badge className="text-[10px] font-medium bg-[#1db954]/80 text-white border-0 px-1.5 py-0">
+            <Badge className="text-[10px] font-medium bg-green-600 text-white border-0 px-1.5 py-0">
               Real
             </Badge>
           </div>
@@ -126,16 +126,16 @@ export const TrackCard = memo(function TrackCard({ track, onPlay, isPlaying, onF
 
       {/* Track Info */}
       <div className="p-2">
-        <h3 className="font-semibold text-white truncate text-sm leading-tight">{track.title}</h3>
-        <p className="text-white/60 truncate text-xs mb-1.5">{track.artist}</p>
+        <h3 className="font-semibold text-foreground truncate text-sm leading-tight">{track.title}</h3>
+        <p className="text-muted-foreground truncate text-xs mb-1.5">{track.artist}</p>
         
-        <div className="flex items-center justify-between text-[10px] text-white/40">
+        <div className="flex items-center justify-between text-[10px] text-muted-foreground/60">
           <span className="capitalize truncate max-w-[60%]">{track.genre}</span>
           <span>{track.year}</span>
         </div>
         
         {track.bpm && track.key && (
-          <div className="flex items-center justify-between text-[10px] text-white/40">
+          <div className="flex items-center justify-between text-[10px] text-muted-foreground/60">
             <span>{track.bpm} BPM</span>
             <span>{track.key}</span>
           </div>

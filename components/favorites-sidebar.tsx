@@ -58,24 +58,24 @@ export function FavoritesSidebar({ isOpen, onClose, tracks, onPlayTrack, current
       
       {/* Sidebar */}
       <div 
-        className={`fixed top-0 right-0 h-full w-80 bg-[#181818]/95 backdrop-blur-xl border-l border-white/10 z-50 transform transition-transform duration-300 ease-out ${
+        className={`fixed top-0 right-0 h-full w-80 glass dark:bg-[#181818]/95 border-l border-border z-50 transform transition-transform duration-300 ease-out ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-white/10">
+        <div className="flex items-center justify-between p-4 border-b border-border">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-gradient-to-br from-[#0d6efd] to-[#0a4d7f]">
+            <div className="p-2 rounded-lg gradient-bg">
               <Heart className="h-4 w-4 text-white fill-white" />
             </div>
-            <h2 className="text-lg font-bold text-white">Favorites</h2>
-            <span className="text-sm text-white/50">({favoriteTracks.length})</span>
+            <h2 className="text-lg font-bold text-foreground">Favorites</h2>
+            <span className="text-sm text-muted-foreground">({favoriteTracks.length})</span>
           </div>
           <Button
             variant="ghost"
             size="icon"
             onClick={onClose}
-            className="h-8 w-8 text-white/60 hover:text-white hover:bg-white/10"
+            className="h-8 w-8 text-muted-foreground hover:text-foreground hover:bg-secondary"
           >
             <X className="h-4 w-4" />
           </Button>
@@ -85,9 +85,9 @@ export function FavoritesSidebar({ isOpen, onClose, tracks, onPlayTrack, current
         <div className="overflow-y-auto h-[calc(100%-140px)]">
           {favoriteTracks.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-64 text-center p-4">
-              <Heart className="h-12 w-12 text-white/20 mb-3" />
-              <p className="text-white/60 text-sm">No favorites yet</p>
-              <p className="text-white/40 text-xs mt-1">
+              <Heart className="h-12 w-12 text-muted-foreground/30 mb-3" />
+              <p className="text-muted-foreground text-sm">No favorites yet</p>
+              <p className="text-muted-foreground/60 text-xs mt-1">
                 Tap the heart on any track to add it here
               </p>
             </div>
@@ -96,8 +96,8 @@ export function FavoritesSidebar({ isOpen, onClose, tracks, onPlayTrack, current
               {favoriteTracks.map((track) => (
                 <div
                   key={track.id}
-                  className={`group flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 cursor-pointer transition-colors ${
-                    currentlyPlayingId === track.id ? 'bg-[#0a4d7f]/20' : ''
+                  className={`group flex items-center gap-3 p-2 rounded-lg hover:bg-secondary cursor-pointer transition-colors ${
+                    currentlyPlayingId === track.id ? 'bg-primary/10' : ''
                   }`}
                   onClick={() => onPlayTrack(track)}
                 >
@@ -123,18 +123,18 @@ export function FavoritesSidebar({ isOpen, onClose, tracks, onPlayTrack, current
                   
                   <div className="flex-1 min-w-0">
                     <p className={`text-sm font-medium truncate ${
-                      currentlyPlayingId === track.id ? 'text-[#0a4d7f]' : 'text-white'
+                      currentlyPlayingId === track.id ? 'text-primary' : 'text-foreground'
                     }`}>
                       {track.title}
                     </p>
-                    <p className="text-xs text-white/50 truncate">{track.artist}</p>
+                    <p className="text-xs text-muted-foreground truncate">{track.artist}</p>
                   </div>
                   
                   <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="h-7 w-7 text-white/60 hover:text-[#0d6efd]"
+                      className="h-7 w-7 text-muted-foreground hover:text-destructive"
                       onClick={(e) => handleRemoveFavorite(track.id, e)}
                     >
                       <Trash2 className="h-3.5 w-3.5" />
@@ -142,7 +142,7 @@ export function FavoritesSidebar({ isOpen, onClose, tracks, onPlayTrack, current
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="h-7 w-7 text-white/60 hover:text-white"
+                      className="h-7 w-7 text-muted-foreground hover:text-foreground"
                     >
                       <Play className="h-3.5 w-3.5 ml-0.5" />
                     </Button>
@@ -155,7 +155,7 @@ export function FavoritesSidebar({ isOpen, onClose, tracks, onPlayTrack, current
 
         {/* Footer */}
         {favoriteTracks.length > 0 && (
-          <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-white/10 bg-[#181818]/80">
+          <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-border bg-background/80 dark:bg-[#181818]/80">
             <Button
               className="w-full gradient-bg hover:opacity-90"
               onClick={() => {

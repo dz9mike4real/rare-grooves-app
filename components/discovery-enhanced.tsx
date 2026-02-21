@@ -37,7 +37,7 @@ export function SurpriseMeButton({ tracks, onPlayTrack }: DiscoveryButtonsProps)
       onClick={handleSurpriseMe}
       variant="outline"
       size="sm"
-      className="border-white/20 text-white/80 hover:text-white hover:bg-white/10"
+      className="border-border text-muted-foreground hover:text-foreground hover:bg-secondary"
     >
       <Dice5 className="h-4 w-4 mr-2" />
       Surprise Me
@@ -96,35 +96,35 @@ export function RecentlyPlayed({ recentTracks, onPlayTrack, onClear }: RecentlyP
   return (
     <div className="mb-8">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-          <History className="h-5 w-5 text-white/60" />
+        <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
+          <History className="h-5 w-5 text-muted-foreground" />
           Recently Played
         </h3>
         <Button
           variant="ghost"
           size="sm"
           onClick={onClear}
-          className="text-white/40 hover:text-white/60"
+          className="text-muted-foreground/60 hover:text-muted-foreground"
         >
           Clear
         </Button>
       </div>
-      <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
+      <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-muted scrollbar-track-transparent">
         {recentTracks.map((track) => (
           <button
             key={track.id}
             onClick={() => onPlayTrack(track)}
             className="flex-shrink-0 w-32 text-left group"
           >
-            <div className="aspect-square rounded-lg bg-white/5 overflow-hidden mb-2 group-hover:ring-2 group-hover:ring-[#0a4d7f]/50 transition-all">
+            <div className="aspect-square rounded-lg bg-muted overflow-hidden mb-2 group-hover:ring-2 group-hover:ring-primary/50 transition-all">
               <img
                 src={track.albumArt || '/placeholder.svg'}
                 alt={track.album}
                 className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
               />
             </div>
-            <p className="text-sm text-white truncate">{track.title}</p>
-            <p className="text-xs text-white/50 truncate">{track.artist}</p>
+            <p className="text-sm text-foreground truncate">{track.title}</p>
+            <p className="text-xs text-muted-foreground truncate">{track.artist}</p>
           </button>
         ))}
       </div>

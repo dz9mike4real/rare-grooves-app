@@ -257,7 +257,7 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
         </div>
         
         {/* Main Player */}
-        <div className="glass border-t border-white/10 bg-[#181818]/95 backdrop-blur-xl">
+        <div className="glass border-t border-border/50 bg-background/95 dark:bg-[#181818]/95 backdrop-blur-xl">
           <div className="container mx-auto px-2 sm:px-4 py-2 sm:py-3">
             <div className="flex items-center gap-2 sm:gap-4">
               {/* Track Info */}
@@ -282,10 +282,10 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
                   )}
                 </div>
                 <div className="flex-1 min-w-0 hidden sm:block">
-                  <h3 className="font-semibold text-xs sm:text-sm text-white line-clamp-1">
+                  <h3 className="font-semibold text-xs sm:text-sm text-foreground line-clamp-1">
                     {track.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-white/60 line-clamp-1">
+                  <p className="text-xs sm:text-sm text-muted-foreground line-clamp-1">
                     {track.artist}
                   </p>
                 </div>
@@ -297,7 +297,7 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="h-7 w-7 sm:h-8 sm:w-8 text-white/60 hover:text-white hidden sm:flex"
+                    className="h-7 w-7 sm:h-8 sm:w-8 text-muted-foreground hover:text-foreground hidden sm:flex"
                   >
                     <Shuffle className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                   </Button>
@@ -307,7 +307,7 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
                     size="icon"
                     onClick={skipBackward}
                     disabled={!hasPrevious && !onPrevious}
-                    className="h-8 w-8 sm:h-10 sm:w-10 text-white hover:text-[#0a4d7f] disabled:text-white/20 disabled:hover:text-white/20"
+                    className="h-8 w-8 sm:h-10 sm:w-10 text-foreground hover:text-primary disabled:text-muted-foreground/30 disabled:hover:text-muted-foreground/30"
                   >
                     <SkipBack className="h-4 w-4 sm:h-5 sm:w-5" />
                   </Button>
@@ -332,7 +332,7 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
                     size="icon"
                     onClick={skipForward}
                     disabled={!hasNext && !onNext}
-                    className="h-8 w-8 sm:h-10 sm:w-10 text-white hover:text-[#0a4d7f] disabled:text-white/20 disabled:hover:text-white/20"
+                    className="h-8 w-8 sm:h-10 sm:w-10 text-foreground hover:text-primary disabled:text-muted-foreground/30 disabled:hover:text-muted-foreground/30"
                   >
                     <SkipForward className="h-4 w-4 sm:h-5 sm:w-5" />
                   </Button>
@@ -340,7 +340,7 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="h-7 w-7 sm:h-8 sm:w-8 text-white/60 hover:text-white hidden sm:flex"
+                    className="h-7 w-7 sm:h-8 sm:w-8 text-muted-foreground hover:text-foreground hidden sm:flex"
                   >
                     <Repeat className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                   </Button>
@@ -348,15 +348,15 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
                 
                 {/* Progress Slider */}
                 <div className="w-full max-w-[200px] sm:max-w-md flex items-center gap-1 sm:gap-2">
-                  <span className="text-[10px] sm:text-xs text-white/50 w-8 sm:w-10 text-right">{formatTime(currentTime)}</span>
+                  <span className="text-[10px] sm:text-xs text-muted-foreground/60 w-8 sm:w-10 text-right">{formatTime(currentTime)}</span>
                   <Slider
                     value={[currentTime]}
                     max={duration || 100}
                     step={0.1}
                     onValueChange={handleSeek}
-                    className="flex-1 cursor-pointer [&_[role=slider]]:bg-[#0a4d7f] [&_[role=slider]]:border-[#0a4d7f] [&_[role=slider]]:w-2 sm:[&_[role=slider]]:w-3 [&_[role=slider]]:h-2 sm:[&_[role=slider]]:h-3"
+                    className="flex-1 cursor-pointer [&_[role=slider]]:bg-primary [&_[role=slider]]:border-primary [&_[role=slider]]:w-2 sm:[&_[role=slider]]:w-3 [&_[role=slider]]:h-2 sm:[&_[role=slider]]:h-3"
                   />
-                  <span className="text-[10px] sm:text-xs text-white/50 w-8 sm:w-10">{formatTime(duration)}</span>
+                  <span className="text-[10px] sm:text-xs text-muted-foreground/60 w-8 sm:w-10">{formatTime(duration)}</span>
                 </div>
               </div>
 
@@ -367,7 +367,7 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
                     variant="ghost"
                     size="icon"
                     onClick={toggleMute}
-                    className="h-8 w-8 text-white/60 hover:text-white"
+                    className="h-8 w-8 text-muted-foreground hover:text-foreground"
                   >
                     {isMuted || volume === 0 ? (
                       <VolumeX className="h-4 w-4" />
@@ -380,7 +380,7 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
                     max={1}
                     step={0.01}
                     onValueChange={handleVolumeChange}
-                    className="flex-1 [&_[role=slider]]:bg-white/30 [&_[role=slider]]:border-white/30 [&_[role=slider]]:w-3 [&_[role=slider]]:h-3"
+                    className="flex-1 [&_[role=slider]]:bg-muted-foreground/30 [&_[role=slider]]:border-muted-foreground/30 [&_[role=slider]]:w-3 [&_[role=slider]]:h-3"
                   />
                 </div>
 
@@ -388,16 +388,16 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
                   variant="ghost"
                   size="icon"
                   onClick={handleFavoriteToggle}
-                  className={`h-9 w-9 ${isFav ? 'text-[#0d6efd]' : 'text-white/60 hover:text-white'}`}
+                  className={`h-9 w-9 ${isFav ? 'text-primary' : 'text-muted-foreground hover:text-foreground'}`}
                 >
-                  <Heart className={`h-4 w-4 ${isFav ? 'fill-[#0d6efd]' : ''}`} />
+                  <Heart className={`h-4 w-4 ${isFav ? 'fill-primary' : ''}`} />
                 </Button>
 
                 <Button
                   variant="ghost"
                   size="icon"
                   onClick={() => setShowSampleCreator(true)}
-                  className="h-9 w-9 text-white/60 hover:text-[#1db954]"
+                  className="h-9 w-9 text-muted-foreground hover:text-green-500"
                 >
                   <Scissors className="h-4 w-4" />
                 </Button>
@@ -406,7 +406,7 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
                   variant="ghost"
                   size="icon"
                   onClick={() => setShowShareDialog(true)}
-                  className="h-9 w-9 text-white/60 hover:text-white"
+                  className="h-9 w-9 text-muted-foreground hover:text-foreground"
                 >
                   <Share2 className="h-4 w-4" />
                 </Button>
@@ -415,7 +415,7 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
                   variant="ghost"
                   size="icon"
                   asChild
-                  className="h-9 w-9 text-white/60 hover:text-[#FF0000]"
+                  className="h-9 w-9 text-muted-foreground hover:text-red-500"
                 >
                   <a
                     href={`https://www.youtube.com/results?search_query=${encodeURIComponent(`${track.artist} ${track.title}`)}`}
@@ -430,7 +430,7 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
                   variant="ghost"
                   size="icon"
                   onClick={() => setShowKeyboardHelp(!showKeyboardHelp)}
-                  className="h-9 w-9 text-white/40 hover:text-white"
+                  className="h-9 w-9 text-muted-foreground/60 hover:text-foreground"
                   aria-label="Keyboard shortcuts"
                 >
                   <Keyboard className="h-4 w-4" />
@@ -440,7 +440,7 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
                   variant="ghost"
                   size="icon"
                   onClick={onClose}
-                  className="h-9 w-9 text-white/40 hover:text-white"
+                  className="h-9 w-9 text-muted-foreground/60 hover:text-foreground"
                 >
                   <X className="h-4 w-4" />
                 </Button>
@@ -452,15 +452,15 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
         {/* Keyboard Shortcuts Help */}
         {showKeyboardHelp && (
           <div className="absolute bottom-full right-0 mb-2 p-4 glass rounded-lg shadow-xl w-64">
-            <h4 className="text-sm font-semibold text-white mb-2">Keyboard Shortcuts</h4>
-            <ul className="text-xs text-white/70 space-y-1">
-              <li><kbd className="bg-white/10 px-1.5 py-0.5 rounded">Space</kbd> Play/Pause</li>
-              <li><kbd className="bg-white/10 px-1.5 py-0.5 rounded">←</kbd> / <kbd className="bg-white/10 px-1.5 py-0.5 rounded">→</kbd> Seek ±10s</li>
-              <li><kbd className="bg-white/10 px-1.5 py-0.5 rounded">Shift</kbd>+<kbd className="bg-white/10 px-1.5 py-0.5 rounded">→</kbd> Next track</li>
-              <li><kbd className="bg-white/10 px-1.5 py-0.5 rounded">Shift</kbd>+<kbd className="bg-white/10 px-1.5 py-0.5 rounded">←</kbd> Previous</li>
-              <li><kbd className="bg-white/10 px-1.5 py-0.5 rounded">↑</kbd> / <kbd className="bg-white/10 px-1.5 py-0.5 rounded">↓</kbd> Volume</li>
-              <li><kbd className="bg-white/10 px-1.5 py-0.5 rounded">M</kbd> Mute</li>
-              <li><kbd className="bg-white/10 px-1.5 py-0.5 rounded">Esc</kbd> Close player</li>
+            <h4 className="text-sm font-semibold text-foreground mb-2">Keyboard Shortcuts</h4>
+            <ul className="text-xs text-muted-foreground space-y-1">
+              <li><kbd className="bg-muted px-1.5 py-0.5 rounded">Space</kbd> Play/Pause</li>
+              <li><kbd className="bg-muted px-1.5 py-0.5 rounded">←</kbd> / <kbd className="bg-muted px-1.5 py-0.5 rounded">→</kbd> Seek ±10s</li>
+              <li><kbd className="bg-muted px-1.5 py-0.5 rounded">Shift</kbd>+<kbd className="bg-muted px-1.5 py-0.5 rounded">→</kbd> Next track</li>
+              <li><kbd className="bg-muted px-1.5 py-0.5 rounded">Shift</kbd>+<kbd className="bg-muted px-1.5 py-0.5 rounded">←</kbd> Previous</li>
+              <li><kbd className="bg-muted px-1.5 py-0.5 rounded">↑</kbd> / <kbd className="bg-muted px-1.5 py-0.5 rounded">↓</kbd> Volume</li>
+              <li><kbd className="bg-muted px-1.5 py-0.5 rounded">M</kbd> Mute</li>
+              <li><kbd className="bg-muted px-1.5 py-0.5 rounded">Esc</kbd> Close player</li>
             </ul>
           </div>
         )}

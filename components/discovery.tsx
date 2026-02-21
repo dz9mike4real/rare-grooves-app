@@ -151,15 +151,15 @@ export function DiscoveryPanel({ isOpen, onClose, discoveredTracks, onPlayTrack 
               <Sparkles className="h-5 w-5 text-white" />
             </div>
             <div>
-              <h3 id="discovery-title" className="text-xl font-bold text-white">AI Discovery</h3>
-              <p id="discovery-description" className="text-sm text-white/50">Tracks selected just for you</p>
+              <h3 id="discovery-title" className="text-xl font-bold text-foreground">AI Discovery</h3>
+              <p id="discovery-description" className="text-sm text-muted-foreground">Tracks selected just for you</p>
             </div>
           </div>
           <Button
             variant="ghost"
             size="icon"
             onClick={onClose}
-            className="text-white/60 hover:text-white"
+            className="text-muted-foreground hover:text-foreground"
             aria-label="Close discovery panel"
           >
             <X className="h-5 w-5" />
@@ -173,7 +173,7 @@ export function DiscoveryPanel({ isOpen, onClose, discoveredTracks, onPlayTrack 
                 key={track.id}
                 role="option"
                 aria-selected="false"
-                className="flex items-center gap-4 p-3 rounded-xl hover:bg-white/5 cursor-pointer transition-colors"
+                className="flex items-center gap-4 p-3 rounded-xl hover:bg-secondary cursor-pointer transition-colors"
                 onClick={() => {
                   onPlayTrack(track);
                   onClose();
@@ -187,29 +187,29 @@ export function DiscoveryPanel({ isOpen, onClose, discoveredTracks, onPlayTrack 
                 }}
                 tabIndex={0}
               >
-                <span className="text-2xl font-bold text-white/20 w-8" aria-hidden="true">
+                <span className="text-2xl font-bold text-muted-foreground/30 w-8" aria-hidden="true">
                   {String(index + 1).padStart(2, '0')}
                 </span>
-                <div className="w-12 h-12 rounded-lg bg-white/10 flex-shrink-0" aria-hidden="true" />
+                <div className="w-12 h-12 rounded-lg bg-muted flex-shrink-0" aria-hidden="true" />
                 <div className="flex-1 min-w-0">
-                  <p className="font-medium text-white truncate">{track.title}</p>
-                  <p className="text-sm text-white/60 truncate">{track.artist}</p>
+                  <p className="font-medium text-foreground truncate">{track.title}</p>
+                  <p className="text-sm text-muted-foreground truncate">{track.artist}</p>
                 </div>
                 <div className="text-right flex-shrink-0">
-                  <p className="text-xs text-white/40 capitalize">{track.genre}</p>
-                  <p className="text-xs text-white/40">{track.year}</p>
+                  <p className="text-xs text-muted-foreground/60 capitalize">{track.genre}</p>
+                  <p className="text-xs text-muted-foreground/60">{track.year}</p>
                 </div>
               </div>
             ))}
           </div>
         ) : (
-          <div className="text-center py-8 text-white/60" role="status">
+          <div className="text-center py-8 text-muted-foreground" role="status">
             <Sparkles className="h-12 w-12 mx-auto mb-4 opacity-50" aria-hidden="true" />
             <p>Click "AI Discovery" to find new tracks</p>
           </div>
         )}
 
-        <div className="mt-6 pt-4 border-t border-white/10 flex justify-between">
+        <div className="mt-6 pt-4 border-t border-border flex justify-between">
           <Button
             variant="outline"
             size="sm"
@@ -218,7 +218,7 @@ export function DiscoveryPanel({ isOpen, onClose, discoveredTracks, onPlayTrack 
               onPlayTrack(shuffled[0]);
             }}
             disabled={discoveredTracks.length === 0}
-            className="border-white/20 text-white/60 hover:text-white"
+            className="border-border text-muted-foreground hover:text-foreground"
           >
             <RefreshCw className="h-4 w-4 mr-2" />
             Shuffle
