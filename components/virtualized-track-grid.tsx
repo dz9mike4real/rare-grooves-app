@@ -1,6 +1,6 @@
 'use client';
 
-import { memo, useEffect, useState, CSSProperties } from 'react';
+import { memo } from 'react';
 import { Grid, CellComponentProps } from 'react-window';
 import { AutoSizer } from 'react-virtualized-auto-sizer';
 import { Track } from '@/lib/types';
@@ -73,26 +73,6 @@ export const VirtualizedTrackGrid = memo(function VirtualizedTrackGrid({
   selectedTrack,
   onFavoriteToggle,
 }: VirtualizedTrackGridProps) {
-  const [columnCount, setColumnCount] = useState(5);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setColumnCount(getColumnCount(window.innerWidth));
-    };
-
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  const cellData: CellData = {
-    tracks,
-    columnCount,
-    onPlay,
-    selectedTrack,
-    onFavoriteToggle,
-  };
-
   return (
     <div className="w-full" style={{ height: 'calc(100vh - 300px)' }}>
       <AutoSizer>
@@ -100,6 +80,14 @@ export const VirtualizedTrackGrid = memo(function VirtualizedTrackGrid({
           const cols = getColumnCount(width);
           const itemWidth = (width - (cols - 1) * GAP) / cols;
           const itemHeight = itemWidth * 1.35; // Aspect ratio for cards
+
+          const cellData: CellData = {
+            tracks,
+            columnCount: cols,
+            onPlay,
+            selectedTrack,
+            onFavoriteToggle,
+          };
 
           return (
             <Grid
