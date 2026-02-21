@@ -9,6 +9,8 @@ import { AudioPlayer } from '@/components/audio-player';
 import { FavoritesSidebar } from '@/components/favorites-sidebar';
 import { LoadingProgress } from '@/components/loading-progress';
 import { TrackGridSkeleton } from '@/components/loading-skeletons';
+import { StaggerContainer, StaggerItem } from '@/components/stagger-grid';
+import { ThemeToggle } from '@/components/theme-toggle';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Search, Disc3, Heart, Sparkles, X, ChevronDown, Play, Calendar, ArrowUpDown } from 'lucide-react';
@@ -409,6 +411,9 @@ export default function Home() {
             </Button>
           )}
 
+          {/* Theme Toggle */}
+          <ThemeToggle />
+
           {/* Play All Button */}
           {displayedTracks.length > 0 && (
             <>
@@ -476,19 +481,24 @@ export default function Home() {
           </div>
         ) : (
           <>
-            {/* Tracks Grid */}
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+            {/* Tracks Grid with Stagger Animation */}
+            <StaggerContainer 
+              key={`${selectedGenre}-${selectedYear}-${searchQuery}-${sortBy}`}
+              staggerDelay={0.03}
+            >
               {displayedTracks.map((track) => (
-                <TrackCardErrorBoundary key={track.id} trackId={track.id}>
-                  <TrackCard
-                    track={track}
-                    onPlay={handleTrackSelect}
-                    isPlaying={selectedTrack?.id === track.id}
-                    onFavoriteToggle={() => setIsFavoritesOpen(true)}
-                  />
-                </TrackCardErrorBoundary>
+                <StaggerItem key={track.id}>
+                  <TrackCardErrorBoundary trackId={track.id}>
+                    <TrackCard
+                      track={track}
+                      onPlay={handleTrackSelect}
+                      isPlaying={selectedTrack?.id === track.id}
+                      onFavoriteToggle={() => setIsFavoritesOpen(true)}
+                    />
+                  </TrackCardErrorBoundary>
+                </StaggerItem>
               ))}
-            </div>
+            </StaggerContainer>
           </>
         )}
 

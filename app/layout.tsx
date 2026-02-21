@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { Poppins, Open_Sans } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { Toaster } from '@/components/ui/toaster'
+import { ThemeProvider } from '@/components/theme-provider'
 import './globals.css'
 
 const poppins = Poppins({
@@ -48,11 +49,13 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body className={`${poppins.variable} ${openSans.variable} font-sans antialiased min-h-screen bg-[#121212]`}>
-        {children}
-        <Toaster />
-        <Analytics />
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${poppins.variable} ${openSans.variable} font-sans antialiased min-h-screen bg-background text-foreground`}>
+        <ThemeProvider>
+          {children}
+          <Toaster />
+          <Analytics />
+        </ThemeProvider>
       </body>
     </html>
   )
