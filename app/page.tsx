@@ -413,18 +413,18 @@ export default function Home() {
         {/* Filters Row */}
         <div className="mb-6 flex flex-col sm:flex-row sm:items-center gap-4">
           {/* Genre Pills */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 sm:pb-0 w-full sm:w-auto">
+          <div className="flex items-center gap-1 sm:gap-2 overflow-x-auto pb-2 sm:pb-0 w-full sm:w-auto">
             {genres.map((genre) => (
               <button
                 key={genre.value}
                 onClick={() => handleGenreChange(genre.value)}
-                className={`flex-shrink-0 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all ${
+                className={`flex-shrink-0 px-2 py-1 sm:px-4 sm:py-2 rounded-full text-[10px] sm:text-sm font-medium transition-all ${
                   selectedGenre === genre.value
                     ? 'gradient-bg text-white'
                     : 'bg-muted text-muted-foreground hover:bg-secondary hover:text-foreground'
                 }`}
               >
-                {genre.value === 'all' && <Sparkles className="h-3.5 w-3.5 inline mr-1.5" />}
+                {genre.value === 'all' && <Sparkles className="h-3 w-3 sm:h-3.5 sm:w-3.5 inline mr-1 sm:mr-1.5" />}
                 {genre.label}
               </button>
             ))}
