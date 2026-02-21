@@ -47,9 +47,9 @@ export const TrackCard = memo(function TrackCard({ track, onPlay, isPlaying, onF
 
   return (
     <Card 
-      className={`group glass-card overflow-hidden hover-lift cursor-pointer transition-all duration-300 ${
-        isPlaying ? 'playing-glow border-[#0a4d7f]/50' : ''
-      } ${isFocused ? 'ring-2 ring-[#0a4d7f] ring-offset-2 ring-offset-[#121212]' : ''}`}
+      className={`group glass-card overflow-hidden hover-lift cursor-pointer transition-all duration-300 h-[440px] ${
+        isPlaying ? 'playing-glow border-primary/50' : ''
+      } ${isFocused ? 'ring-2 ring-primary ring-offset-2 ring-offset-background' : ''}`}
       onClick={() => onPlay(track)}
       role="button"
       tabIndex={0}
