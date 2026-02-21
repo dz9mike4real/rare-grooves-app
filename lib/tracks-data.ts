@@ -3068,15 +3068,19 @@ export const loadRealTracksFromJamendo = async (): Promise<Track[]> => {
 
 // Fetch real audio previews and album covers from Deezer/iTunes
 // Optimized for faster initial load - only loads first batch
-export const loadRealAudioFromDeezer = async (tracks: Track[], maxInitial = 40): Promise<Track[]> => {
+export const loadRealAudioFromDeezer = async (
+  tracks: Track[], 
+  maxInitial = 40,
+  onProgress?: (loaded: number, total: number) => void
+): Promise<Track[]> => {
   console.log('[v0] Fetching real audio and album covers...');
   
   const BATCH_SIZE = 10;
   const DELAY_MS = 50;
   const results: Track[] = [];
   
-  const tracksToLoad = Math.min(tracks.length, maxInitial);
-  const remainingTracks = tracks.slice(tracksToLoad);
+  const tracksToLoad = tracks.slice(0, maxInitial);
+  const remainingTracks = tracks.slice(maxInitial);
   
   for (let i = 0; i < tracksToLoad.length; i += BATCH_SIZE) {
     const batch = tracksToLoad.slice(i, i + BATCH_SIZE);
@@ -3100,6 +3104,11 @@ export const loadRealAudioFromDeezer = async (tracks: Track[], maxInitial = 40):
     
     results.push(...batchResults);
     
+    // Report progress
+    if (onProgress) {
+      onProgress(results.length, tracks.length);
+    }
+    
     if (i + BATCH_SIZE < tracksToLoad.length) {
       await new Promise(resolve => setTimeout(resolve, DELAY_MS));
     }
@@ -3107,6 +3116,11 @@ export const loadRealAudioFromDeezer = async (tracks: Track[], maxInitial = 40):
   
   // Add remaining tracks without loading audio (lazy load later)
   results.push(...remainingTracks.map(track => ({ ...track })));
+  
+  // Final progress update
+  if (onProgress) {
+    onProgress(tracks.length, tracks.length);
+  }
   
   const audioCount = results.filter(t => t.audioUrl.startsWith('http')).length;
   console.log('[v0] Loaded', audioCount, 'audio previews (lazy loading rest)');

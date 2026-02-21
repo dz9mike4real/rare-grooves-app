@@ -7,10 +7,11 @@ import { TrackCard } from '@/components/track-card';
 import { TrackCardErrorBoundary } from '@/components/track-card-error-boundary';
 import { AudioPlayer } from '@/components/audio-player';
 import { FavoritesSidebar } from '@/components/favorites-sidebar';
+import { LoadingProgress } from '@/components/loading-progress';
+import { TrackGridSkeleton } from '@/components/loading-skeletons';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Skeleton } from '@/components/ui/skeleton';
-import { Search, Disc3, Heart, Sparkles, X, ChevronDown, Play, SkipForward, Calendar, Loader2, ArrowUpDown } from 'lucide-react';
+import { Search, Disc3, Heart, Sparkles, X, ChevronDown, Play, Calendar, ArrowUpDown } from 'lucide-react';
 import { DiscoveryButton, DiscoveryPanel } from '@/components/discovery';
 import { useToast } from '@/hooks/use-toast';
 import { ErrorBoundary } from '@/components/error-boundary';
@@ -70,7 +71,13 @@ export default function Home() {
       console.log('[v0] Loading tracks...');
       
       try {
-        const tracksWithRealAudio = await loadRealAudioFromDeezer(rareTracks);
+        const tracksWithRealAudio = await loadRealAudioFromDeezer(
+          rareTracks,
+          40,
+          (loaded, total) => {
+            setLoadedCount(loaded);
+          }
+        );
         
         setTracksWithCovers(tracksWithRealAudio);
         setDisplayedTracks(
@@ -457,18 +464,15 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Loading Skeletons */}
+        {/* Loading State */}
         {isLoadingAudio ? (
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-            {Array.from({ length: ITEMS_PER_PAGE }).map((_, i) => (
-              <div key={i} className="glass-card overflow-hidden animate-pulse">
-                <div className="aspect-square bg-white/10" />
-                <div className="p-4 space-y-2">
-                  <div className="h-4 w-3/4 bg-white/10 rounded" />
-                  <div className="h-3 w-1/2 bg-white/10 rounded" />
-                </div>
-              </div>
-            ))}
+          <div className="space-y-8">
+            <LoadingProgress 
+              total={rareTracks.length} 
+              loaded={loadedCount} 
+              label="Loading album art & audio..."
+            />
+            <TrackGridSkeleton count={ITEMS_PER_PAGE} />
           </div>
         ) : (
           <>

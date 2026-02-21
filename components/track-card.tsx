@@ -88,10 +88,12 @@ export const TrackCard = memo(function TrackCard({ track, onPlay, isPlaying, onF
           src={albumArt}
           alt={`Album art for ${track.album} by ${track.artist}`}
           fill
-          className="object-cover transition-transform duration-500 group-hover:scale-110"
+          className="object-cover transition-all duration-500 group-hover:scale-110"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           onError={() => setImageError(true)}
           priority
+          placeholder="blur"
+          blurDataURL={`data:image/svg+xml;base64,${btoa(`<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><rect width="40" height="40" fill="hsl(${Math.abs(track.artist.charCodeAt(0) % 360)},70%,30%)"/></svg>`)}`}
         />
         
         {/* Gradient Overlay */}
