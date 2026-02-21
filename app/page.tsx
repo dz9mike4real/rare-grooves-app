@@ -514,7 +514,7 @@ export default function Home() {
               key={`${selectedGenre}-${selectedYear}-${searchQuery}-${sortBy}`}
               staggerDelay={0.03}
             >
-              {displayedTracks.map((track) => (
+              {displayedTracks.map((track, index) => (
                 <StaggerItem key={track.id}>
                   <TrackCardErrorBoundary trackId={track.id}>
                     <TrackCard
@@ -522,6 +522,7 @@ export default function Home() {
                       onPlay={handleTrackSelect}
                       isPlaying={selectedTrack?.id === track.id}
                       onFavoriteToggle={() => setIsFavoritesOpen(true)}
+                      index={index}
                     />
                   </TrackCardErrorBoundary>
                 </StaggerItem>

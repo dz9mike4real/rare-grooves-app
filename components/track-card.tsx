@@ -9,45 +9,22 @@ import { Badge } from '@/components/ui/badge';
 import { Play, Pause, Heart } from 'lucide-react';
 import { useState, useEffect, useMemo } from 'react';
 import { isFavorite, addFavorite, removeFavorite } from '@/lib/storage';
-import Image from 'next/image';
-
-function getPlaceholderArt(artist: string): string {
-  let hash = 0;
-  for (let i = 0; i < artist.length; i++) {
-    hash = artist.charCodeAt(i) + ((hash << 5) - hash);
-  }
-  const hue = Math.abs(hash % 360);
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400">
-    <defs>
-      <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stop-color="hsl(${hue},70%,45%)"/>
-        <stop offset="100%" stop-color="hsl(${(hue+60)%360},60%,30%)"/>
-      </linearGradient>
-    </defs>
-    <rect width="400" height="400" fill="url(#g)"/>
-    <text x="50%" y="50%" font-family="Arial" font-size="100" fill="white" text-anchor="middle" dy=".35em" opacity="0.4">${artist.substring(0,2).toUpperCase()}</text>
-  </svg>`;
-  return `data:image/svg+xml;base64,${btoa(svg)}`;
-}
+import { OptimizedTrackImage } from './optimized-image';
 
 interface TrackCardProps {
   track: Track;
   onPlay: (track: Track) => void;
   isPlaying: boolean;
   onFavoriteToggle?: () => void;
+  index?: number; // For priority loading
 }
 
-export const TrackCard = memo(function TrackCard({ track, onPlay, isPlaying, onFavoriteToggle }: TrackCardProps) {
+export const TrackCard = memo(function TrackCard({ track, onPlay, isPlaying, onFavoriteToggle, index }: TrackCardProps) {
   const [isFav, setIsFav] = useState(false);
-  const [imageError, setImageError] = useState(false);
   const hasRealAudio = track.audioUrl?.startsWith('http');
   
-  const albumArt = useMemo(() => {
-    if (!track.albumArt || track.albumArt.includes('unsplash.com') || imageError) {
-      return getPlaceholderArt(track.artist);
-    }
-    return track.albumArt;
-  }, [track.albumArt, track.artist, imageError]);
+  // Only prioritize first 8 visible images
+  const isPriority = index !== undefined && index < 8;
 
   useEffect(() => {
     setIsFav(isFavorite(track.id));
@@ -84,16 +61,13 @@ export const TrackCard = memo(function TrackCard({ track, onPlay, isPlaying, onF
       aria-label={`${track.title} by ${track.artist}${isPlaying ? ', currently playing' : ''}. Press Enter to play`}
     >
       <div className="relative aspect-square overflow-hidden rounded-t-xl">
-        <Image
-          src={albumArt}
+        <OptimizedTrackImage
+          src={track.albumArt || ''}
           alt={`Album art for ${track.album} by ${track.artist}`}
+          artist={track.artist}
           fill
-          className="object-cover transition-all duration-500 group-hover:scale-110"
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-          onError={() => setImageError(true)}
-          priority
-          placeholder="blur"
-          blurDataURL={`data:image/svg+xml;base64,${btoa(`<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><rect width="40" height="40" fill="hsl(${Math.abs(track.artist.charCodeAt(0) % 360)},70%,30%)"/></svg>`)}`}
+          className="object-cover group-hover:scale-110"
+          priority={isPriority}
         />
         
         {/* Gradient Overlay */}
