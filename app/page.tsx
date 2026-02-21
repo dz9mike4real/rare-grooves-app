@@ -431,7 +431,7 @@ export default function Home() {
           </div>
 
           {/* Year & Sort Filters */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
             {/* Year Filter */}
             <div className="flex items-center gap-2">
               <Calendar className="h-4 w-4 text-muted-foreground" />
@@ -463,6 +463,9 @@ export default function Home() {
                 ))}
               </select>
             </div>
+
+            {/* Theme Toggle */}
+            <ThemeToggle />
           </div>
 
           {/* Clear Filters Button */}
@@ -477,9 +480,6 @@ export default function Home() {
               Clear
             </Button>
           )}
-
-          {/* Theme Toggle */}
-          <ThemeToggle />
 
           {/* Surprise Me Button */}
           <SurpriseMeButton
