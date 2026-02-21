@@ -10,6 +10,7 @@ import { FavoritesSidebar } from '@/components/favorites-sidebar';
 import { LoadingProgress } from '@/components/loading-progress';
 import { TrackGridSkeleton } from '@/components/loading-skeletons';
 import { StaggerContainer, StaggerItem } from '@/components/stagger-grid';
+import { motion } from 'framer-motion';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -23,6 +24,7 @@ import { PAGINATION } from '@/lib/constants';
 import { hasRealAudioUrl } from '@/lib/utils';
 
 const ITEMS_PER_PAGE = PAGINATION.ITEMS_PER_PAGE;
+const SEARCH_DEBOUNCE_MS = 300;
 
 // Default initial state (same for server and client)
 const defaultTracks = rareTracks;
@@ -45,23 +47,77 @@ export default function Home() {
   const [discoveredTracks, setDiscoveredTracks] = useState<Track[]>([]);
   const [sortBy, setSortBy] = useState<'rarity' | 'year-desc' | 'year-asc' | 'title' | 'artist'>('rarity');
   const [loadedCount, setLoadedCount] = useState(0);
+  const [focusedTrackIndex, setFocusedTrackIndex] = useState(-1);
   const hasInitialized = useRef(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
   
   // Recently played hook
   const { recentTracks, addToRecentlyPlayed, clearRecentlyPlayed } = useRecentlyPlayed();
+  
+  // Keyboard navigation for track grid
+  // (state defined above)
 
   // Keyboard shortcut for search (/)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      // Don't handle if typing in input
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
+        return;
+      }
+      
       if (e.key === '/' && !['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement).tagName)) {
         e.preventDefault();
         searchInputRef.current?.focus();
+        return;
+      }
+      
+      // Arrow key navigation for tracks
+      if (displayedTracks.length === 0) return;
+      
+      const gridCols = window.innerWidth >= 1280 ? 5 : window.innerWidth >= 1024 ? 4 : window.innerWidth >= 768 ? 3 : 2;
+      
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        setFocusedTrackIndex(prev => {
+          const next = prev + gridCols;
+          return next < displayedTracks.length ? next : prev;
+        });
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        setFocusedTrackIndex(prev => {
+          const next = prev - gridCols;
+          return next >= 0 ? next : prev;
+        });
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        setFocusedTrackIndex(prev => {
+          const next = prev + 1;
+          return next < displayedTracks.length ? next : prev;
+        });
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        setFocusedTrackIndex(prev => {
+          const next = prev - 1;
+          return next >= 0 ? next : prev;
+        });
+      } else if (e.key === 'Enter' && focusedTrackIndex >= 0) {
+        e.preventDefault();
+        handleTrackSelect(displayedTracks[focusedTrackIndex]);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [displayedTracks, focusedTrackIndex]);
+
+  // Debounced search
+  const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(searchQuery);
+  
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearchQuery(searchQuery);
+    }, SEARCH_DEBOUNCE_MS);
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
 
   // Update tab title with now playing
   useEffect(() => {
@@ -132,8 +188,8 @@ export default function Home() {
     }
 
     // Filter by search
-    if (searchQuery.trim()) {
-      const query = searchQuery.toLowerCase();
+    if (debouncedSearchQuery.trim()) {
+      const query = debouncedSearchQuery.toLowerCase();
       filtered = filtered.filter(track =>
         track.title.toLowerCase().includes(query) ||
         track.artist.toLowerCase().includes(query) ||
@@ -164,14 +220,14 @@ export default function Home() {
     setDisplayedTracks(filtered);
     setQueue(filtered);
     setQueueIndex(selectedTrack ? filtered.findIndex(t => t.id === selectedTrack.id) : -1);
-  }, [selectedGenre, selectedYear, searchQuery, selectedTrack, sortBy]);
+  }, [selectedGenre, selectedYear, debouncedSearchQuery, selectedTrack, sortBy]);
 
   // Apply filters when they change
   useEffect(() => {
     if (!isLoadingAudio && tracksWithCovers.length > 0) {
       applyFilters(tracksWithCovers);
     }
-  }, [selectedGenre, selectedYear, searchQuery, isLoadingAudio, tracksWithCovers, applyFilters]);
+  }, [selectedGenre, selectedYear, debouncedSearchQuery, isLoadingAudio, tracksWithCovers, applyFilters]);
 
   const handleGenreChange = (genre: string) => {
     setSelectedGenre(genre);
@@ -524,6 +580,7 @@ export default function Home() {
                       isPlaying={selectedTrack?.id === track.id}
                       onFavoriteToggle={() => setIsFavoritesOpen(true)}
                       index={index}
+                      isFocused={focusedTrackIndex === index}
                     />
                   </TrackCardErrorBoundary>
                 </StaggerItem>
@@ -533,7 +590,12 @@ export default function Home() {
         )}
 
         {displayedTracks.length === 0 && !isLoadingAudio && (
-          <div className="flex flex-col items-center justify-center py-20 text-center">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className="flex flex-col items-center justify-center py-20 text-center"
+          >
             <div className="glass-card p-8 rounded-full mb-6">
               <Disc3 className="h-16 w-16 text-white/30" />
             </div>
@@ -544,7 +606,7 @@ export default function Home() {
                 : 'Try adjusting your filters to discover rare grooves.'
               }
             </p>
-          </div>
+          </motion.div>
         )}
         </ClientOnly>
         </main>

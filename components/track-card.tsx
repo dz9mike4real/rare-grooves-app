@@ -16,10 +16,11 @@ interface TrackCardProps {
   onPlay: (track: Track) => void;
   isPlaying: boolean;
   onFavoriteToggle?: () => void;
-  index?: number; // For priority loading
+  index?: number;
+  isFocused?: boolean;
 }
 
-export const TrackCard = memo(function TrackCard({ track, onPlay, isPlaying, onFavoriteToggle, index }: TrackCardProps) {
+export const TrackCard = memo(function TrackCard({ track, onPlay, isPlaying, onFavoriteToggle, index, isFocused }: TrackCardProps) {
   const [isFav, setIsFav] = useState(false);
   const hasRealAudio = track.audioUrl?.startsWith('http');
   
@@ -48,7 +49,7 @@ export const TrackCard = memo(function TrackCard({ track, onPlay, isPlaying, onF
     <Card 
       className={`group glass-card overflow-hidden hover-lift cursor-pointer transition-all duration-300 ${
         isPlaying ? 'playing-glow border-[#0a4d7f]/50' : ''
-      }`}
+      } ${isFocused ? 'ring-2 ring-[#0a4d7f] ring-offset-2 ring-offset-[#121212]' : ''}`}
       onClick={() => onPlay(track)}
       role="button"
       tabIndex={0}
@@ -96,19 +97,21 @@ export const TrackCard = memo(function TrackCard({ track, onPlay, isPlaying, onF
           </div>
         </div>
 
-        {/* Favorite Button - Only show when favorited */}
-        {isFav && (
-          <Button
-            variant="ghost"
-            size="icon"
-            className="absolute top-2 right-2 h-7 w-7 backdrop-blur-sm rounded-full bg-[#0d6efd]/80 hover:bg-[#0d6efd] transition-all duration-300"
-            onClick={handleFavoriteToggle}
-            aria-label={`Remove ${track.title} from favorites`}
-            aria-pressed={true}
-          >
-            <Heart className="h-3.5 w-3.5 fill-white text-white" />
-          </Button>
-        )}
+        {/* Favorite Button - Always visible on hover */}
+        <Button
+          variant="ghost"
+          size="icon"
+          className={`absolute top-2 right-2 h-7 w-7 backdrop-blur-sm rounded-full transition-all duration-300 opacity-0 group-hover:opacity-100 ${
+            isFav 
+              ? 'bg-[#0d6efd]/80 hover:bg-[#0d6efd]' 
+              : 'bg-black/40 hover:bg-[#0d6efd]/80'
+          }`}
+          onClick={handleFavoriteToggle}
+          aria-label={isFav ? `Remove ${track.title} from favorites` : `Add ${track.title} to favorites`}
+          aria-pressed={isFav}
+        >
+          <Heart className={`h-3.5 w-3.5 ${isFav ? 'fill-white text-white' : 'text-white/70'}`} />
+        </Button>
 
         {/* Audio Source Badge - Only show if real */}
         {hasRealAudio && (

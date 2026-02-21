@@ -17,7 +17,9 @@ import {
   Share2,
   Shuffle,
   Repeat,
-  Youtube
+  Youtube,
+  Loader2,
+  Keyboard
 } from 'lucide-react';
 import Image from 'next/image';
 import { isFavorite, addFavorite, removeFavorite } from '@/lib/storage';
@@ -45,6 +47,7 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
   const [isFav, setIsFav] = useState(false);
   const [showSampleCreator, setShowSampleCreator] = useState(false);
   const [showShareDialog, setShowShareDialog] = useState(false);
+  const [showKeyboardHelp, setShowKeyboardHelp] = useState(false);
   const [isLoadingAudio, setIsLoadingAudio] = useState(true);
   const [audioUrl, setAudioUrl] = useState<string>('');
 
@@ -315,7 +318,9 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
                     className="h-10 w-10 sm:h-12 sm:w-12 rounded-full gradient-bg hover:opacity-90 transition-opacity"
                     disabled={isLoadingAudio}
                   >
-                    {isPlaying ? (
+                    {isLoadingAudio ? (
+                      <Loader2 className="h-5 w-5 sm:h-6 sm:w-6 text-white animate-spin" />
+                    ) : isPlaying ? (
                       <Pause className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
                     ) : (
                       <Play className="h-5 w-5 sm:h-6 sm:w-6 text-white ml-0.5 sm:ml-1" />
@@ -424,6 +429,16 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
                 <Button
                   variant="ghost"
                   size="icon"
+                  onClick={() => setShowKeyboardHelp(!showKeyboardHelp)}
+                  className="h-9 w-9 text-white/40 hover:text-white"
+                  aria-label="Keyboard shortcuts"
+                >
+                  <Keyboard className="h-4 w-4" />
+                </Button>
+
+                <Button
+                  variant="ghost"
+                  size="icon"
                   onClick={onClose}
                   className="h-9 w-9 text-white/40 hover:text-white"
                 >
@@ -433,6 +448,22 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
             </div>
           </div>
         </div>
+
+        {/* Keyboard Shortcuts Help */}
+        {showKeyboardHelp && (
+          <div className="absolute bottom-full right-0 mb-2 p-4 glass rounded-lg shadow-xl w-64">
+            <h4 className="text-sm font-semibold text-white mb-2">Keyboard Shortcuts</h4>
+            <ul className="text-xs text-white/70 space-y-1">
+              <li><kbd className="bg-white/10 px-1.5 py-0.5 rounded">Space</kbd> Play/Pause</li>
+              <li><kbd className="bg-white/10 px-1.5 py-0.5 rounded">←</kbd> / <kbd className="bg-white/10 px-1.5 py-0.5 rounded">→</kbd> Seek ±10s</li>
+              <li><kbd className="bg-white/10 px-1.5 py-0.5 rounded">Shift</kbd>+<kbd className="bg-white/10 px-1.5 py-0.5 rounded">→</kbd> Next track</li>
+              <li><kbd className="bg-white/10 px-1.5 py-0.5 rounded">Shift</kbd>+<kbd className="bg-white/10 px-1.5 py-0.5 rounded">←</kbd> Previous</li>
+              <li><kbd className="bg-white/10 px-1.5 py-0.5 rounded">↑</kbd> / <kbd className="bg-white/10 px-1.5 py-0.5 rounded">↓</kbd> Volume</li>
+              <li><kbd className="bg-white/10 px-1.5 py-0.5 rounded">M</kbd> Mute</li>
+              <li><kbd className="bg-white/10 px-1.5 py-0.5 rounded">Esc</kbd> Close player</li>
+            </ul>
+          </div>
+        )}
 
         {/* Hidden Audio Element */}
         <audio ref={audioRef} src={audioUrl || undefined} preload="metadata" />

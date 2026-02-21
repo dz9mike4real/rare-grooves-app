@@ -1,9 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { RATE_LIMIT, INPUT } from './constants';
 
-// Simple in-memory rate limiter
+// Simple in-memory rate limiter with cleanup
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
 const WINDOW_MS = RATE_LIMIT.WINDOW_MS;
+const CLEANUP_INTERVAL = 60 * 60 * 1000; // Clean up every hour
+
+// Periodic cleanup of expired rate limit entries
+if (typeof setInterval !== 'undefined') {
+  setInterval(() => {
+    const now = Date.now();
+    for (const [ip, record] of rateLimitMap.entries()) {
+      if (now > record.resetTime) {
+        rateLimitMap.delete(ip);
+      }
+    }
+  }, CLEANUP_INTERVAL);
+}
 
 export function checkRateLimit(ip: string): boolean {
   const now = Date.now();

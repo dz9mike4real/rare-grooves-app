@@ -26,7 +26,7 @@ export function SurpriseMeButton({ tracks, onPlayTrack }: DiscoveryButtonsProps)
     onPlayTrack(randomTrack);
     
     toast({
-      title: '🎲 Surprise!',
+      title: 'Surprise!',
       description: `Playing ${randomTrack.title} by ${randomTrack.artist}`,
       duration: 2000,
     });
