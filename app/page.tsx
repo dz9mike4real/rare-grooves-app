@@ -414,22 +414,19 @@ export default function Home() {
 
         {/* Filters Row */}
         <div className="mb-6 flex flex-col sm:flex-row sm:items-center gap-4">
-          {/* Genre Pills */}
-          <div className="flex items-center gap-1 sm:gap-2 overflow-x-auto pb-2 sm:pb-0 w-full sm:w-auto">
-            {genres.map((genre) => (
-              <button
-                key={genre.value}
-                onClick={() => handleGenreChange(genre.value)}
-                className={`flex-shrink-0 px-2 py-1 sm:px-4 sm:py-2 rounded-full text-[10px] sm:text-sm font-medium transition-all ${
-                  selectedGenre === genre.value
-                    ? 'gradient-bg text-white'
-                    : 'bg-muted text-muted-foreground hover:bg-secondary hover:text-foreground'
-                }`}
-              >
-                {genre.value === 'all' && <Sparkles className="h-3 w-3 sm:h-3.5 sm:w-3.5 inline mr-1 sm:mr-1.5" />}
-                {genre.label}
-              </button>
-            ))}
+          {/* Genre Dropdown */}
+          <div className="flex items-center gap-2">
+            <select
+              value={selectedGenre}
+              onChange={(e) => handleGenreChange(e.target.value)}
+              className="bg-background/80 border border-border text-foreground rounded-full px-3 py-2 text-sm focus:ring-1 focus:ring-primary"
+            >
+              {genres.map((genre) => (
+                <option key={genre.value} value={genre.value}>
+                  {genre.label}
+                </option>
+              ))}
+            </select>
           </div>
 
           {/* Year & Sort Filters */}
