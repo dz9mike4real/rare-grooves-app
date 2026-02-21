@@ -411,14 +411,14 @@ export default function Home() {
         )}
 
         {/* Filters Row */}
-        <div className="mb-6 flex flex-wrap items-center gap-4">
+        <div className="mb-6 flex flex-col sm:flex-row sm:items-center gap-4">
           {/* Genre Pills */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 flex-1">
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 sm:pb-0 w-full sm:w-auto">
             {genres.map((genre) => (
               <button
                 key={genre.value}
                 onClick={() => handleGenreChange(genre.value)}
-                className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                className={`flex-shrink-0 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all ${
                   selectedGenre === genre.value
                     ? 'gradient-bg text-white'
                     : 'bg-muted text-muted-foreground hover:bg-secondary hover:text-foreground'
@@ -436,7 +436,7 @@ export default function Home() {
             <select
               value={selectedYear}
               onChange={(e) => handleYearChange(e.target.value)}
-              className="bg-background/80 border border-border text-foreground rounded-full px-3 py-2 text-sm focus:ring-1 focus:ring-[#0a4d7f]"
+              className="bg-background/80 border border-border text-foreground rounded-full px-2 py-1.5 sm:px-3 sm:py-2 text-xs sm:text-sm focus:ring-1 focus:ring-primary w-24 sm:w-auto"
             >
               {years.map((year) => (
                 <option key={year.value} value={year.value}>
@@ -452,7 +452,7 @@ export default function Home() {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as typeof sortBy)}
-              className="bg-background/80 border border-border text-foreground rounded-full px-3 py-2 text-sm focus:ring-1 focus:ring-[#0a4d7f]"
+              className="bg-background/80 border border-border text-foreground rounded-full px-2 py-1.5 sm:px-3 sm:py-2 text-xs sm:text-sm focus:ring-1 focus:ring-primary w-24 sm:w-auto"
             >
               {sortOptions.map((option) => (
                 <option key={option.value} value={option.value}>
