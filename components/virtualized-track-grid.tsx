@@ -73,13 +73,29 @@ export const VirtualizedTrackGrid = memo(function VirtualizedTrackGrid({
   selectedTrack,
   onFavoriteToggle,
 }: VirtualizedTrackGridProps) {
+  console.log('[VirtualizedTrackGrid] Received tracks:', tracks.length);
+  
+  if (!tracks || tracks.length === 0) {
+    console.log('[VirtualizedTrackGrid] No tracks to display');
+    return <div className="text-white/60 text-center py-20">No tracks available</div>;
+  }
+
   return (
     <div className="w-full" style={{ height: 'calc(100vh - 300px)' }}>
       <AutoSizer>
         {({ height, width }: { height: number; width: number }) => {
+          console.log('[VirtualizedTrackGrid] Container size:', { height, width });
           const cols = getColumnCount(width);
           const itemWidth = (width - (cols - 1) * GAP) / cols;
           const itemHeight = itemWidth * 1.35; // Aspect ratio for cards
+
+          console.log('[VirtualizedTrackGrid] Grid config:', { 
+            cols, 
+            itemWidth, 
+            itemHeight, 
+            rowCount: Math.ceil(tracks.length / cols),
+            totalTracks: tracks.length 
+          });
 
           const cellData: CellData = {
             tracks,
