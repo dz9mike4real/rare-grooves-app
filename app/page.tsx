@@ -15,6 +15,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Search, Disc3, Heart, Sparkles, X, ChevronDown, Play, Calendar, ArrowUpDown } from 'lucide-react';
 import { DiscoveryButton, DiscoveryPanel } from '@/components/discovery';
+import { SurpriseMeButton, RecentlyPlayed, useRecentlyPlayed } from '@/components/discovery-enhanced';
 import { useToast } from '@/hooks/use-toast';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { ClientOnly } from '@/components/client-only';
@@ -45,6 +46,9 @@ export default function Home() {
   const [loadedCount, setLoadedCount] = useState(0);
   const hasInitialized = useRef(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
+  
+  // Recently played hook
+  const { recentTracks, addToRecentlyPlayed, clearRecentlyPlayed } = useRecentlyPlayed();
 
   // Keyboard shortcut for search (/)
   useEffect(() => {
@@ -188,8 +192,10 @@ export default function Home() {
       const updatedTrack = updated[0];
       setTracksWithCovers(prev => prev.map(t => t.id === track.id ? updatedTrack : t));
       setSelectedTrack(updatedTrack);
+      addToRecentlyPlayed(updatedTrack);
     } else {
       setSelectedTrack(track);
+      addToRecentlyPlayed(track);
     }
     
     const idx = queue.findIndex(t => t.id === track.id);
@@ -414,6 +420,16 @@ export default function Home() {
           {/* Theme Toggle */}
           <ThemeToggle />
 
+          {/* Surprise Me Button */}
+          <SurpriseMeButton
+            tracks={tracksWithCovers}
+            onPlayTrack={(track) => {
+              handleTrackSelect(track);
+              addToRecentlyPlayed(track);
+            }}
+            selectedTrack={selectedTrack}
+          />
+
           {/* Play All Button */}
           {displayedTracks.length > 0 && (
             <>
@@ -468,6 +484,18 @@ export default function Home() {
             </p>
           </div>
         </div>
+
+        {/* Recently Played Section */}
+        {!isLoadingAudio && recentTracks.length > 0 && (
+          <RecentlyPlayed
+            recentTracks={recentTracks}
+            onPlayTrack={(track) => {
+              handleTrackSelect(track);
+              addToRecentlyPlayed(track);
+            }}
+            onClear={clearRecentlyPlayed}
+          />
+        )}
 
         {/* Loading State */}
         {isLoadingAudio ? (
