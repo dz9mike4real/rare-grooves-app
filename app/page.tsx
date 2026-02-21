@@ -353,45 +353,48 @@ export default function Home() {
       <header className="sticky top-0 z-40 glass">
         <div className="container mx-auto px-4 py-3">
           <div className="flex items-center justify-between gap-4">
+            {/* Logo */}
             <div className="flex items-center gap-3 flex-shrink-0">
               <div className="gradient-bg p-2 rounded-xl">
-            <Disc3 className="h-5 w-5 text-foreground" />
-          </div>
-          
-          <h1 className="text-xl font-bold gradient-text hidden sm:block">Rare Grooves</h1>
-        </div>
-        
-        <div className="flex-1 max-w-md">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input
-              ref={searchInputRef}
-              placeholder="Search tracks, artists, albums... (press /)"
-              value={searchQuery}
-              onChange={(e) => handleSearch(e.target.value)}
-              className="pl-9 pr-8 py-2 bg-muted border-border text-foreground placeholder:text-muted-foreground rounded-full focus:ring-1 focus:ring-[#0a4d7f] focus:border-[#0a4d7f]"
-            />
-            {searchQuery && (
-              <button
-                onClick={() => handleSearch('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                <Disc3 className="h-5 w-5 text-foreground" />
+              </div>
+              <h1 className="text-xl font-bold gradient-text hidden sm:block">Rare Grooves</h1>
+            </div>
+            
+            {/* Search */}
+            <div className="flex-1 max-w-md mx-4">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input
+                  ref={searchInputRef}
+                  placeholder="Search tracks, artists, albums... (press /)"
+                  value={searchQuery}
+                  onChange={(e) => handleSearch(e.target.value)}
+                  className="pl-9 pr-8 py-2 bg-muted border-border text-foreground placeholder:text-muted-foreground rounded-full focus:ring-1 focus:ring-primary"
+                />
+                {searchQuery && (
+                  <button
+                    onClick={() => handleSearch('')}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                )}
+              </div>
+            </div>
+            
+            {/* Right side buttons */}
+            <div className="flex items-center gap-2 flex-shrink-0">
+              <ThemeToggle />
+              <Button 
+                variant="ghost" 
+                size="icon"
+                onClick={() => setIsFavoritesOpen(true)}
+                className="relative hover:bg-secondary"
               >
-                <X className="h-4 w-4" />
-              </button>
-            )}
-          </div>
-        </div>
-
-        <Button 
-          variant="ghost" 
-          size="icon"
-          onClick={() => setIsFavoritesOpen(true)}
-          className="relative hover:bg-secondary flex-shrink-0"
-        >
-          <Heart className="h-5 w-5 text-foreground" />
-        </Button>
-
-        <ThemeToggle />
+                <Heart className="h-5 w-5 text-foreground" />
+              </Button>
+            </div>
           </div>
         </div>
       </header>
