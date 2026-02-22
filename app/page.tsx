@@ -349,8 +349,8 @@ export default function Home() {
         <div className="absolute top-20 right-1/4 w-72 h-72 bg-[#0d6efd]/10 rounded-full blur-3xl" />
       </div>
 
-      {/* Glass Header */}
-      <header className="sticky top-0 z-40 glass">
+      {/* Header */}
+      <header className="z-40 glass">
         <div className="container mx-auto px-4 py-3">
           <div className="flex items-center justify-between gap-4">
             {/* Logo */}
