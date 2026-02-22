@@ -58,10 +58,11 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
   useEffect(() => {
     const loadAudio = async () => {
       if (hasRealAudioUrl(track.audioUrl)) {
+        console.log('[v0] Using real audio URL:', track.audioUrl);
         setAudioUrl(track.audioUrl);
         setIsLoadingAudio(false);
       } else {
-        console.log('[v0] Generating fallback demo audio for:', track.title);
+        console.log('[v0] Generating demo audio for:', track.title, 'genre:', track.genre);
         setIsLoadingAudio(true);
         const url = await getCachedOrGenerateAudio(
           track.id,
@@ -69,6 +70,7 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
           track.bpm || 120,
           track.duration
         );
+        console.log('[v0] Generated audio URL:', url);
         setAudioUrl(url);
         setIsLoadingAudio(false);
       }
@@ -99,10 +101,16 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
   // Handle play/pause
   useEffect(() => {
     const audio = audioRef.current;
-    if (!audio || !audioUrl || isLoadingAudio) return;
+    if (!audio || !audioUrl || isLoadingAudio) {
+      console.log('[v0] Play blocked:', { hasAudio: !!audio, audioUrl: !!audioUrl, isLoadingAudio });
+      return;
+    }
 
+    console.log('[v0] Attempting to play, isPlaying:', isPlaying);
     if (isPlaying) {
-      audio.play().catch((error) => {
+      audio.play().then(() => {
+        console.log('[v0] Audio playing successfully');
+      }).catch((error) => {
         console.log('[v0] Audio play error:', error);
       });
     } else {
