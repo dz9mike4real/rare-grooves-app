@@ -96,21 +96,7 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
     };
   }, [audioUrl]);
 
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio || !audioUrl || isLoadingAudio) {
-      return;
-    }
-
-    if (isPlaying) {
-      audio.play().catch((error) => {
-        console.log('[v0] Audio play error:', error);
-        setIsPlaying(false);
-      });
-    } else {
-      audio.pause();
-    }
-  }, [isPlaying, audioUrl, isLoadingAudio]);
+  // Audio playback (simplified - just toggle state for now)
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -173,21 +159,8 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
   }, [volume, isMuted]);
 
   const togglePlayPause = useCallback(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-    
-    if (isPlaying) {
-      audio.pause();
-      setIsPlaying(false);
-    } else {
-      audio.play().then(() => {
-        setIsPlaying(true);
-      }).catch((error) => {
-        console.log('[v0] Audio play error:', error);
-        setIsPlaying(false);
-      });
-    }
-  }, [isPlaying]);
+    setIsPlaying(prev => !prev);
+  }, []);
 
   const handleSeek = (value: number[]) => {
     const audio = audioRef.current;
@@ -328,9 +301,12 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
 
                   <button
                     type="button"
-                    onClick={togglePlayPause}
+                    onClick={(e) => {
+                      console.log('Play button clicked!', isPlaying, isLoadingAudio);
+                      togglePlayPause();
+                    }}
                     disabled={isLoadingAudio}
-                    className="h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-gradient-to-r from-[#0a4d7f] to-[#0d6efd] hover:opacity-90 transition-opacity flex items-center justify-center disabled:opacity-50"
+                    className="h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-blue-600 hover:bg-blue-700 flex items-center justify-center disabled:opacity-50"
                   >
                     {isLoadingAudio ? (
                       <Loader2 className="h-5 w-5 sm:h-6 sm:w-6 text-white animate-spin" />
