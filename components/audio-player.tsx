@@ -70,7 +70,7 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
           track.bpm || 120,
           track.duration
         );
-        console.log('[v0] Generated audio URL:', url);
+        console.log('[v0] Generated URL:', url ? 'blob URL success' : 'FAILED');
         setAudioUrl(url);
         setIsLoadingAudio(false);
       }
@@ -101,10 +101,11 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
   // Handle play/pause
   useEffect(() => {
     const audio = audioRef.current;
+    console.log('[v0] Play effect:', { isPlaying, hasAudio: !!audio, hasUrl: !!audioUrl, loading: isLoadingAudio });
     if (!audio || !audioUrl || isLoadingAudio) return;
 
     if (isPlaying) {
-      audio.play().catch(() => {});
+      audio.play().then(() => console.log('[v0] play() success')).catch(e => console.log('[v0] play() failed:', e));
     } else {
       audio.pause();
     }
