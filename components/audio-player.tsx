@@ -98,7 +98,18 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
     };
   }, [audioUrl]);
 
-  // Handle play/pause (toggle state only - audio playback needs fix)
+  // Handle play/pause
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio || !audioUrl || isLoadingAudio) return;
+
+    if (isPlaying) {
+      audio.play().catch(() => {});
+    } else {
+      audio.pause();
+    }
+  }, [isPlaying, audioUrl, isLoadingAudio]);
+
   const togglePlayPause = useCallback(() => {
     setIsPlaying(prev => !prev);
   }, []);
