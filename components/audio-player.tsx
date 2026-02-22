@@ -98,25 +98,10 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
     };
   }, [audioUrl]);
 
-  // Handle play/pause
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio || !audioUrl || isLoadingAudio) {
-      console.log('[v0] Play blocked:', { hasAudio: !!audio, audioUrl: !!audioUrl, isLoadingAudio });
-      return;
-    }
-
-    console.log('[v0] Attempting to play, isPlaying:', isPlaying, 'audioUrl:', audioUrl?.substring(0, 50));
-    if (isPlaying) {
-      audio.play().then(() => {
-        console.log('[v0] Audio playing successfully');
-      }).catch((error) => {
-        console.log('[v0] Audio play error:', error);
-      });
-    } else {
-      audio.pause();
-    }
-  }, [isPlaying, audioUrl, isLoadingAudio]);
+  // Handle play/pause (toggle state only - audio playback needs fix)
+  const togglePlayPause = useCallback(() => {
+    setIsPlaying(prev => !prev);
+  }, []);
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -177,11 +162,6 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
       audio.volume = isMuted ? 0 : volume;
     }
   }, [volume, isMuted]);
-
-  const togglePlayPause = useCallback(() => {
-    console.log('[v0] togglePlayPause clicked, current isPlaying:', isPlaying);
-    setIsPlaying(prev => !prev);
-  }, []);
 
   const handleSeek = (value: number[]) => {
     const audio = audioRef.current;
@@ -322,11 +302,7 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
 
                   <button
                     type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      console.log('Play button clicked!');
-                      togglePlayPause();
-                    }}
+                    onClick={togglePlayPause}
                     disabled={isLoadingAudio}
                     className="h-10 w-10 sm:h-12 sm:w-12 rounded-full gradient-bg hover:opacity-90 flex items-center justify-center disabled:opacity-50 z-50 relative"
                   >
