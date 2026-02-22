@@ -106,7 +106,7 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
       return;
     }
 
-    console.log('[v0] Attempting to play, isPlaying:', isPlaying);
+    console.log('[v0] Attempting to play, isPlaying:', isPlaying, 'audioUrl:', audioUrl?.substring(0, 50));
     if (isPlaying) {
       audio.play().then(() => {
         console.log('[v0] Audio playing successfully');
