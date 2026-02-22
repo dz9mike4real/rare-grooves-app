@@ -96,7 +96,19 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
     };
   }, [audioUrl]);
 
-  // Audio playback (simplified - just toggle state for now)
+  // Handle play/pause
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio || !audioUrl || isLoadingAudio) return;
+
+    if (isPlaying) {
+      audio.play().catch((error) => {
+        console.log('[v0] Audio play error:', error);
+      });
+    } else {
+      audio.pause();
+    }
+  }, [isPlaying, audioUrl, isLoadingAudio]);
 
   // Keyboard shortcuts
   useEffect(() => {
