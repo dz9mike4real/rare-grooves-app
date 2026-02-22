@@ -25,8 +25,6 @@ import Image from 'next/image';
 import { isFavorite, addFavorite, removeFavorite } from '@/lib/storage';
 import { SampleCreator } from './sample-creator';
 import { ShareDialog } from './share-dialog';
-import { getCachedOrGenerateAudio } from '@/lib/audio-generator';
-import { hasRealAudioUrl } from '@/lib/utils';
 
 interface AudioPlayerProps {
   track: Track;
@@ -57,26 +55,9 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
   }, [track.id]);
 
   useEffect(() => {
-    const loadAudio = async () => {
-      if (hasRealAudioUrl(track.audioUrl)) {
-        setAudioUrl(track.audioUrl);
-        setAudioUrl(track.audioUrl);
-        setIsLoadingAudio(false);
-      } else {
-        setIsLoadingAudio(true);
-        const url = await getCachedOrGenerateAudio(
-          track.id,
-          track.genre,
-          track.bpm || 120,
-          track.duration
-        );
-        setAudioUrl(url);
-        setIsLoadingAudio(false);
-      }
-    };
-    
-    loadAudio();
-  }, [track.id, track.genre, track.bpm, track.duration, track.title, track.audioUrl]);
+    setAudioUrl(track.audioUrl);
+    setIsLoadingAudio(false);
+  }, [track.audioUrl]);
 
   // Load audio when URL changes
   useEffect(() => {

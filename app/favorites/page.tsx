@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { Track } from '@/lib/types';
 import { Favorite } from '@/lib/types';
 import { getFavorites } from '@/lib/storage';
-import { loadRealAudioFromDeezer, rareTracks } from '@/lib/tracks-data';
+import { getLocalTracks } from '@/lib/tracks-data';
 import { TrackCard } from '@/components/track-card';
 import { TrackCardErrorBoundary } from '@/components/track-card-error-boundary';
 import { AudioPlayer } from '@/components/audio-player';
@@ -15,15 +15,13 @@ import Link from 'next/link';
 export default function FavoritesPage() {
   const [selectedTrack, setSelectedTrack] = useState<Track | null>(null);
   const [favoriteTracks, setFavoriteTracks] = useState<Track[]>([]);
-  const [tracksWithCovers, setTracksWithCovers] = useState<Track[]>(rareTracks);
+  const [tracksWithCovers, setTracksWithCovers] = useState<Track[]>([]);
   const [isLoadingCovers, setIsLoadingCovers] = useState(true);
 
   useEffect(() => {
-    const loadTracks = async () => {
-      const tracksToUse = rareTracks;
-      
-      const tracksWithRealAudio = await loadRealAudioFromDeezer(tracksToUse);
-      setTracksWithCovers(tracksWithRealAudio);
+    const loadTracks = () => {
+      const tracks = getLocalTracks();
+      setTracksWithCovers(tracks);
       setIsLoadingCovers(false);
     };
     loadTracks();

@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Track } from '@/lib/types';
-import { rareTracks, loadRealAudioFromDeezer, loadAudioForTracks, getLocalTracks } from '@/lib/tracks-data';
+import { rareTracks, getLocalTracks } from '@/lib/tracks-data';
 import { TrackCard } from '@/components/track-card';
 import { TrackCardErrorBoundary } from '@/components/track-card-error-boundary';
 import { AudioPlayer } from '@/components/audio-player';
@@ -21,7 +21,6 @@ import { useToast } from '@/hooks/use-toast';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { ClientOnly } from '@/components/client-only';
 import { PAGINATION } from '@/lib/constants';
-import { hasRealAudioUrl } from '@/lib/utils';
 
 const ITEMS_PER_PAGE = PAGINATION.ITEMS_PER_PAGE;
 const SEARCH_DEBOUNCE_MS = 300;
@@ -236,18 +235,9 @@ export default function Home() {
     setSearchQuery(query);
   };
 
-  const handleTrackSelect = async (track: Track) => {
-    // Lazy load audio if not loaded yet
-    if (!hasRealAudioUrl(track.audioUrl)) {
-      const updated = await loadAudioForTracks([track]);
-      const updatedTrack = updated[0];
-      setTracksWithCovers(prev => prev.map(t => t.id === track.id ? updatedTrack : t));
-      setSelectedTrack(updatedTrack);
-      addToRecentlyPlayed(updatedTrack);
-    } else {
-      setSelectedTrack(track);
-      addToRecentlyPlayed(track);
-    }
+  const handleTrackSelect = (track: Track) => {
+    setSelectedTrack(track);
+    addToRecentlyPlayed(track);
     
     const idx = queue.findIndex(t => t.id === track.id);
     if (idx !== -1) {
@@ -255,16 +245,8 @@ export default function Home() {
     }
   };
 
-  const handlePlayTrack = async (track: Track) => {
-    // Lazy load audio if not loaded yet
-    if (!hasRealAudioUrl(track.audioUrl)) {
-      const updated = await loadAudioForTracks([track]);
-      const updatedTrack = updated[0];
-      setTracksWithCovers(prev => prev.map(t => t.id === track.id ? updatedTrack : t));
-      setSelectedTrack(updatedTrack);
-    } else {
-      setSelectedTrack(track);
-    }
+  const handlePlayTrack = (track: Track) => {
+    setSelectedTrack(track);
     setIsFavoritesOpen(false);
   };
 
