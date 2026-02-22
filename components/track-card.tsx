@@ -72,14 +72,14 @@ export const TrackCard = memo(function TrackCard({ track, onPlay, isPlaying, onF
         />
         
         {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
         
           {/* Play Button Overlay */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 z-20">
           <div className={`transform scale-0 group-hover:scale-100 transition-transform duration-300 ${isPlaying ? 'scale-100' : ''}`}>
             <Button
               size="icon"
-              className="h-12 w-12 rounded-full shadow-2xl gradient-bg"
+              className="h-12 w-12 rounded-full shadow-2xl gradient-bg z-30"
               onClick={() => onPlay(track)}
               aria-label={isPlaying ? `Pause ${track.title}` : `Play ${track.title}`}
             >
@@ -96,7 +96,7 @@ export const TrackCard = memo(function TrackCard({ track, onPlay, isPlaying, onF
         <Button
           variant="ghost"
           size="icon"
-          className={`absolute top-2 right-2 h-7 w-7 backdrop-blur-sm rounded-full transition-all duration-300 opacity-0 group-hover:opacity-100 ${
+          className={`absolute top-2 right-2 h-7 w-7 backdrop-blur-sm rounded-full transition-all duration-300 opacity-0 group-hover:opacity-100 z-20 ${
             isFav 
               ? 'bg-primary/80 hover:bg-primary' 
               : 'bg-black/40 dark:bg-black/40 hover:bg-primary/80'
