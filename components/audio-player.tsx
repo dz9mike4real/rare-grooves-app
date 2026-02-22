@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { Track } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
@@ -171,9 +171,9 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
     }
   }, [volume, isMuted]);
 
-  const togglePlayPause = () => {
-    setIsPlaying(!isPlaying);
-  };
+  const togglePlayPause = useCallback(() => {
+    setIsPlaying(prev => !prev);
+  }, []);
 
   const handleSeek = (value: number[]) => {
     const audio = audioRef.current;
