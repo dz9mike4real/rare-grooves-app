@@ -313,9 +313,8 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
                   </Button>
 
                   <Button
-                    size="icon"
                     onClick={togglePlayPause}
-                    className="h-10 w-10 sm:h-12 sm:w-12 rounded-full gradient-bg hover:opacity-90 transition-opacity"
+                    className="h-10 w-10 sm:h-12 sm:w-12 rounded-full !bg-gradient-to-r !from-[#0a4d7f] !to-[#0d6efd] hover:opacity-90 transition-opacity"
                     disabled={isLoadingAudio}
                   >
                     {isLoadingAudio ? (
