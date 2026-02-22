@@ -179,6 +179,7 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
   }, [volume, isMuted]);
 
   const togglePlayPause = useCallback(() => {
+    console.log('[v0] togglePlayPause clicked, current isPlaying:', isPlaying);
     setIsPlaying(prev => !prev);
   }, []);
 
@@ -322,11 +323,12 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
                   <button
                     type="button"
                     onClick={(e) => {
-                      console.log('Play button clicked!', isPlaying, isLoadingAudio);
+                      e.stopPropagation();
+                      console.log('Play button clicked!');
                       togglePlayPause();
                     }}
                     disabled={isLoadingAudio}
-                    className="h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-blue-600 hover:bg-blue-700 flex items-center justify-center disabled:opacity-50"
+                    className="h-10 w-10 sm:h-12 sm:w-12 rounded-full gradient-bg hover:opacity-90 flex items-center justify-center disabled:opacity-50 z-50 relative"
                   >
                     {isLoadingAudio ? (
                       <Loader2 className="h-5 w-5 sm:h-6 sm:w-6 text-white animate-spin" />
