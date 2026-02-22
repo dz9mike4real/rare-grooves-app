@@ -98,19 +98,7 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
     };
   }, [audioUrl]);
 
-  // Handle play/pause
-  useEffect(() => {
-    const audio = audioRef.current;
-    console.log('[v0] Play effect:', { isPlaying, hasAudio: !!audio, hasUrl: !!audioUrl, loading: isLoadingAudio });
-    if (!audio || !audioUrl || isLoadingAudio) return;
-
-    if (isPlaying) {
-      audio.play().then(() => console.log('[v0] play() success')).catch(e => console.log('[v0] play() failed:', e));
-    } else {
-      audio.pause();
-    }
-  }, [isPlaying, audioUrl, isLoadingAudio]);
-
+  // Handle play/pause - toggle state only for now
   const togglePlayPause = useCallback(() => {
     setIsPlaying(prev => !prev);
   }, []);
@@ -466,7 +454,13 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
         )}
 
         {/* Hidden Audio Element */}
-        <audio ref={audioRef} src={audioUrl || undefined} preload="auto" />
+        <audio 
+          ref={audioRef} 
+          src={audioUrl || undefined} 
+          preload="auto" 
+          onCanPlay={() => console.log('[v0] Audio can play')}
+          onError={(e) => console.log('[v0] Audio error:', e)}
+        />
       </div>
 
       {/* Sample Creator Dialog */}
