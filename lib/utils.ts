@@ -6,5 +6,5 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function hasRealAudioUrl(audioUrl: string | undefined): boolean {
-  return !!(audioUrl && (audioUrl.startsWith('http') || audioUrl.startsWith('https')))
+  return !!(audioUrl && (audioUrl.startsWith('http') || audioUrl.startsWith('https') || audioUrl.startsWith('/audio/')))
 }

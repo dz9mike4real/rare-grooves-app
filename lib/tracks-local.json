@@ -1,0 +1,3312 @@
+[
+  {
+    "localFilename": "sample-001.mp3",
+    "title": "So What (feat. John Coltrane, Cannonball Adderley & Bill Evans)",
+    "artist": "Miles Davis",
+    "album": "Kind Of Blue (Legacy Edition)",
+    "genre": "jazz",
+    "year": null,
+    "duration": 562,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/fb9fbd93db667e24d4f5dee781e83f7d/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-002.mp3",
+    "title": "A Love Supreme, Pt. II - Resolution",
+    "artist": "John Coltrane",
+    "album": "A Love Supreme",
+    "genre": "jazz",
+    "year": null,
+    "duration": 437,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/41ae651a2f190e6f8dff4669367e710e/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-003.mp3",
+    "title": "Cantaloupe Island (Remastered 1999/Rudy Van Gelder Edition)",
+    "artist": "Herbie Hancock",
+    "album": "Empyrean Isles (Expanded Edition)",
+    "genre": "jazz",
+    "year": null,
+    "duration": 330,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/c01af6d8d58f3721a6cfd4be42e18f1f/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-004.mp3",
+    "title": "'Round Midnight",
+    "artist": "Thelonious Monk",
+    "album": "The Very Best",
+    "genre": "jazz",
+    "year": null,
+    "duration": 193,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/bf5a6c3d63da6e3622fca062513f4e5b/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-005.mp3",
+    "title": "Take Five",
+    "artist": "Dave Brubeck",
+    "album": "Dave Brubeck's Greatest Hits",
+    "genre": "jazz",
+    "year": null,
+    "duration": 324,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/858c3cd5f5829a7f7328b6516b3ef7a5/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-006.mp3",
+    "title": "Get Up I Feel Like Being Like A Sex Machine, Pts. 1 & 2",
+    "artist": "James Brown",
+    "album": "Greatest Breakbeats",
+    "genre": "funk",
+    "year": null,
+    "duration": 313,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/288158ac6ae4e4ad3b6c017345380843/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-007.mp3",
+    "title": "Flash Light",
+    "artist": "Parliament",
+    "album": "The Best Of Parliament: Give Up The Funk",
+    "genre": "funk",
+    "year": null,
+    "duration": 346,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/6f7e9413a7825875747a25b019936d51/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-008.mp3",
+    "title": "Bootzilla",
+    "artist": "Bootsy Collins",
+    "album": "Bootsy? Player Of The Year",
+    "genre": "funk",
+    "year": null,
+    "duration": 339,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/1a13cc991fa1b769f32ee80812045265/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-009.mp3",
+    "title": "Soul Power '92 (Live)",
+    "artist": "Maceo Parker",
+    "album": "Life on Planet Groove (Bonus Track Edition)",
+    "genre": "funk",
+    "year": null,
+    "duration": 852,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/9e53ab8237a314f5a5f30205bfe783c0/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-010.mp3",
+    "title": "Cissy Strut",
+    "artist": "The Meters",
+    "album": "The Meters",
+    "genre": "funk",
+    "year": null,
+    "duration": 186,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/190356fbc200f93bc921ed7fec4e8cc7/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-011.mp3",
+    "title": "What's Going On",
+    "artist": "Marvin Gaye",
+    "album": "What's Going On",
+    "genre": "soul",
+    "year": null,
+    "duration": 231,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/dd5e37f720256949a07a7e1a91754550/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-012.mp3",
+    "title": "Move on Up (Extended Version)",
+    "artist": "Curtis Mayfield",
+    "album": "Curtis (Expanded Edition)",
+    "genre": "soul",
+    "year": null,
+    "duration": 535,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/9ce399fb0bf7249d453964334f8811c7/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-013.mp3",
+    "title": "Respect",
+    "artist": "Aretha Franklin",
+    "album": "I Never Loved a Man the Way I Love You",
+    "genre": "soul",
+    "year": null,
+    "duration": 147,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/9e9ba9115d0fb62879d1bb672ee67c07/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-014.mp3",
+    "title": "(Sittin' On) the Dock of the Bay",
+    "artist": "Otis Redding",
+    "album": "Dock of the Bay Sessions",
+    "genre": "soul",
+    "year": null,
+    "duration": 160,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/539e2e0041a338e69e2aa4b3469470f7/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-015.mp3",
+    "title": "A Change Is Gonna Come",
+    "artist": "Sam Cooke",
+    "album": "A Change Is Gonna Come",
+    "genre": "soul",
+    "year": null,
+    "duration": 191,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/321c131171d5f26b4ebbfe8e25c3702c/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-016.mp3",
+    "title": "A Song for You",
+    "artist": "Donny Hathaway",
+    "album": "Donny Hathaway",
+    "genre": "r&b",
+    "year": null,
+    "duration": 325,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/c86669455dbe3ff75a7564efcc0ed5da/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-017.mp3",
+    "title": "Let's Stay Together",
+    "artist": "Al Green",
+    "album": "Let's Stay Together",
+    "genre": "r&b",
+    "year": null,
+    "duration": 199,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/636b12f33731e3c4415c5e02a149237b/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-018.mp3",
+    "title": "Superstition",
+    "artist": "Stevie Wonder",
+    "album": "Number 1's",
+    "genre": "r&b",
+    "year": null,
+    "duration": 241,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/dc11aaf0240dbaf1548639e1c5df8db8/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-019.mp3",
+    "title": "Killing Me Softly With His Song",
+    "artist": "Roberta Flack",
+    "album": "Killing Me Softly",
+    "genre": "r&b",
+    "year": null,
+    "duration": 286,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/b3aea69c618129b66d846163f2623a0a/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-020.mp3",
+    "title": "Smooth Operator (2011 Remastered)",
+    "artist": "Sade",
+    "album": "The Ultimate Collection",
+    "genre": "r&b",
+    "year": null,
+    "duration": 259,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/e2fd836cedf9336dc5c725dc3c4df5e0/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-026.mp3",
+    "title": "Zombie",
+    "artist": "Fela Kuti",
+    "album": "Zombie",
+    "genre": "afrobeat",
+    "year": null,
+    "duration": 745,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/ad77ca4027c3ed3cce15baf63ceb7257/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-027.mp3",
+    "title": "Water No Get Enemy",
+    "artist": "Fela Kuti",
+    "album": "Expensive Shit",
+    "genre": "afrobeat",
+    "year": null,
+    "duration": 660,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/d6227b6bb81aaf56421047976d9eda3e/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-028.mp3",
+    "title": "Fantastic Man",
+    "artist": "William Onyeabor",
+    "album": "World Psychedelic Classics 5: Who Is William Onyeabor?",
+    "genre": "afrobeat",
+    "year": null,
+    "duration": 386,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/27bdbfc93a87c7357848c9ffe0bdce50/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-029.mp3",
+    "title": "Soul Makossa",
+    "artist": "Manu Dibango",
+    "album": "Manu Dibango Anthology",
+    "genre": "afrobeat",
+    "year": null,
+    "duration": 264,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/ab6f3df911d87f7cde27f517c5265a21/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-031.mp3",
+    "title": "Expansions",
+    "artist": "Lonnie Liston Smith",
+    "album": "Expansions",
+    "genre": "jazz",
+    "year": null,
+    "duration": 366,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/ae2b4d2e1b7c2400f4c78343777934ec/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-032.mp3",
+    "title": "Vibrations",
+    "artist": "Roy Ayers",
+    "album": "Vibrations",
+    "genre": "jazz",
+    "year": null,
+    "duration": 182,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/4158a2d8a3983a97c815d072d43644d1/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-033.mp3",
+    "title": "Nautilus",
+    "artist": "Bob James",
+    "album": "One",
+    "genre": "jazz",
+    "year": null,
+    "duration": 399,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/57b1dc7dd260fd1917c677fd812c0bbd/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-034.mp3",
+    "title": "Search For The New Land (Remastered 2000/Rudy Van Gelder Edition)",
+    "artist": "Lee Morgan",
+    "album": "Search For The New Land (Rudy Van Gelder Edition/2000 Remastered)",
+    "genre": "jazz",
+    "year": null,
+    "duration": 944,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/8293b9121dc98b33c31f47d1ce3c6ce7/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-038.mp3",
+    "title": "Cold Sweat",
+    "artist": "James Brown",
+    "album": "Cold Sweat & Other Soul Classics: James Brown",
+    "genre": "funk",
+    "year": null,
+    "duration": 173,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/d3cffc9b309bd1b91fd9cc9e751c253e/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-039.mp3",
+    "title": "Papa's Got A Brand New Bag (Pt. 1)",
+    "artist": "James Brown",
+    "album": "Best Of",
+    "genre": "funk",
+    "year": null,
+    "duration": 126,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/70818e9d64c922a0c87702b4738d8930/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-040.mp3",
+    "title": "I Got You (I Feel Good)",
+    "artist": "James Brown",
+    "album": "20th Century Masters: The Millennium Collection: The Best of James Brown",
+    "genre": "funk",
+    "year": null,
+    "duration": 164,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/c2973815468d00266af1252d5c137b22/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-042.mp3",
+    "title": "Mothership Connection (Star Child)",
+    "artist": "Parliament",
+    "album": "Mothership Connection",
+    "genre": "funk",
+    "year": null,
+    "duration": 372,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/df255a66bf63665d2e9569b5a29274f6/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-043.mp3",
+    "title": "Aquaboogie (A Psychoalphadiscobetabioaquadoloop)",
+    "artist": "Parliament",
+    "album": "Motor-Booty Affair",
+    "genre": "funk",
+    "year": null,
+    "duration": 401,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/92666d7224b8fbeb7a10906e577e338e/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-045.mp3",
+    "title": "Ahh...The Name Is Bootsy, Baby",
+    "artist": "Bootsy Collins",
+    "album": "Ahh...The Name Is Bootsy, Baby!",
+    "genre": "funk",
+    "year": null,
+    "duration": 412,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/45980cf2391d0b86e7788eae922ff9dd/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-048.mp3",
+    "title": "Africa",
+    "artist": "The Meters",
+    "album": "Rejuvenation",
+    "genre": "funk",
+    "year": null,
+    "duration": 241,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/e59faf5127d0e7bdd7f5d10d1d4c90d8/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-049.mp3",
+    "title": "Pass The Peas",
+    "artist": "The J.B.'s",
+    "album": "Food For Thought",
+    "genre": "funk",
+    "year": null,
+    "duration": 208,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/85e2b7fed84c7375ebd30c917402b854/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-050.mp3",
+    "title": "Introduction To The JB's / Doing It To Death",
+    "artist": "The J.B.'s",
+    "album": "Funky Good Time: The Anthology",
+    "genre": "funk",
+    "year": null,
+    "duration": 754,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/f665b01ab9efb886be3173a211365e4f/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-051.mp3",
+    "title": "House Party",
+    "artist": "Fred Wesley",
+    "album": "House Party",
+    "genre": "funk",
+    "year": null,
+    "duration": 254,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/b9bc664b0e300e28df53b979b6da50ee/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-052.mp3",
+    "title": "Soul Finger '96",
+    "artist": "Bar-Kays",
+    "album": "Best Of Bar-Kays",
+    "genre": "funk",
+    "year": null,
+    "duration": 283,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/8abd309c9869a1124539b4ee672e26f0/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-053.mp3",
+    "title": "Fire",
+    "artist": "Ohio Players",
+    "album": "Funk On Fire - The Mercury Anthology",
+    "genre": "funk",
+    "year": null,
+    "duration": 273,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/16beacdfdd6be8faadbfbebbc436391f/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-054.mp3",
+    "title": "Love Rollercoaster",
+    "artist": "Ohio Players",
+    "album": "20th Century Masters: The Millennium Collection: Best Of Ohio Players",
+    "genre": "funk",
+    "year": null,
+    "duration": 283,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/ab83c924e809c9e908dff9da92bba67e/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-055.mp3",
+    "title": "Jungle Boogie",
+    "artist": "Kool & The Gang",
+    "album": "Pulp Fiction (Music From The Motion Picture)",
+    "genre": "funk",
+    "year": null,
+    "duration": 186,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/f3d66e855e15ac75c9e3a085aa6697b6/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-056.mp3",
+    "title": "Ladies Night (Single Version)",
+    "artist": "Kool & The Gang",
+    "album": "Best Of",
+    "genre": "funk",
+    "year": null,
+    "duration": 208,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/f5ba3fb1a744ce3f4ae72e087882eef0/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-057.mp3",
+    "title": "September",
+    "artist": "Earth, Wind & Fire",
+    "album": "September",
+    "genre": "funk",
+    "year": null,
+    "duration": 215,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/18f41ecd3781fb96bffa2b0b49955db5/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-058.mp3",
+    "title": "Boogie Wonderland (with The Emotions)",
+    "artist": "Earth, Wind & Fire",
+    "album": "I Am",
+    "genre": "funk",
+    "year": null,
+    "duration": 288,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/e192f4eaf270f9f36ccc59264fb05c7c/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-060.mp3",
+    "title": "Word Up",
+    "artist": "Cameo",
+    "album": "Word Up",
+    "genre": "funk",
+    "year": null,
+    "duration": 255,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/9c142fb4e95eee8e074d9c5b23e17ac0/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-061.mp3",
+    "title": "Super Freak",
+    "artist": "Rick James",
+    "album": "Street Songs (Expanded Edition)",
+    "genre": "funk",
+    "year": null,
+    "duration": 205,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/04ed0232c2d1fce855b28fe75ba9b306/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-062.mp3",
+    "title": "The Bird (Live)",
+    "artist": "Morris Day",
+    "album": "It's About Time",
+    "genre": "funk",
+    "year": null,
+    "duration": 252,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/7e5c7b5ad86eea5fb0419690681e9cff/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-063.mp3",
+    "title": "More Bounce to the Ounce",
+    "artist": "Zapp",
+    "album": "Zapp",
+    "genre": "funk",
+    "year": null,
+    "duration": 311,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/6f19f7cec47cf9f0d296decd6d7ff052/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-064.mp3",
+    "title": "Everyday People",
+    "artist": "Sly & The Family Stone",
+    "album": "Stand",
+    "genre": "funk",
+    "year": null,
+    "duration": 141,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/87e07a0cb9181e9a6902099230b5f6fa/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-065.mp3",
+    "title": "Thank You (Falettinme Be Mice Elf Agin) (Single Version)",
+    "artist": "Sly & The Family Stone",
+    "album": "The Essential Sly & The Family Stone",
+    "genre": "funk",
+    "year": null,
+    "duration": 287,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/fae07034531ea50dba40db33c200e1da/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-066.mp3",
+    "title": "What Is Hip?",
+    "artist": "Tower Of Power",
+    "album": "Tower Of Power",
+    "genre": "funk",
+    "year": null,
+    "duration": 304,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/e50c68341332f891fee5f4e973058bea/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-067.mp3",
+    "title": "Pick Up the Pieces",
+    "artist": "Average White Band",
+    "album": "AWB",
+    "genre": "funk",
+    "year": null,
+    "duration": 239,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/3e1b6a7c78deb904a59d88123020af7c/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-068.mp3",
+    "title": "Low Rider",
+    "artist": "War",
+    "album": "Anthology 1970-1974",
+    "genre": "funk",
+    "year": null,
+    "duration": 190,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/8b553c0e67fa4f104932da6bdb6586aa/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-069.mp3",
+    "title": "Strawberry Letter 23",
+    "artist": "The Brothers Johnson",
+    "album": "Right On Time",
+    "genre": "funk",
+    "year": null,
+    "duration": 299,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/d4e570a71a200c73362c346619156480/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-071.mp3",
+    "title": "(Every Time I Turn Around) Back In Love Again",
+    "artist": "L.T.D.",
+    "album": "Something To Love",
+    "genre": "funk",
+    "year": null,
+    "duration": 284,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/d190071c8edc1ee3c3048ba747355ad7/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-073.mp3",
+    "title": "Sexual Healing",
+    "artist": "Marvin Gaye",
+    "album": "Midnight Love",
+    "genre": "soul",
+    "year": null,
+    "duration": 239,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/295fc7b07a69b60e4b95315940d4336b/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-074.mp3",
+    "title": "Let's Get It On",
+    "artist": "Marvin Gaye",
+    "album": "Let's Get It On",
+    "genre": "soul",
+    "year": null,
+    "duration": 293,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/e8bf5369b0d4a9211e209952ff903265/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-076.mp3",
+    "title": "Superfly",
+    "artist": "Curtis Mayfield",
+    "album": "The Essentials",
+    "genre": "soul",
+    "year": null,
+    "duration": 233,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/8fc0384938d4f1396114d7d3e5f6a1c3/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-078.mp3",
+    "title": "Think",
+    "artist": "Aretha Franklin",
+    "album": "Aretha Now",
+    "genre": "soul",
+    "year": null,
+    "duration": 139,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/2de9f9db75478828f0baf710c7b2fdf2/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-080.mp3",
+    "title": "Try a Little Tenderness",
+    "artist": "Otis Redding",
+    "album": "The Very Best of Otis Redding",
+    "genre": "soul",
+    "year": null,
+    "duration": 201,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/ac17de35627fc356ae1330c9971d2540/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-082.mp3",
+    "title": "You Send Me",
+    "artist": "Sam Cooke",
+    "album": "The Man Who Invented Soul",
+    "genre": "soul",
+    "year": null,
+    "duration": 162,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/ff49cb14af96192a67210e2f93164356/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-083.mp3",
+    "title": "Please, Please, Please",
+    "artist": "James Brown",
+    "album": "Please, Please, Please",
+    "genre": "soul",
+    "year": null,
+    "duration": 162,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/f72ecc57422e67fa61879eff6940de9e/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-085.mp3",
+    "title": "Tired of Being Alone",
+    "artist": "Al Green",
+    "album": "Tired of Being Alone",
+    "genre": "soul",
+    "year": null,
+    "duration": 172,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/13a09d8e645b51b80934d4a495f9cdde/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-086.mp3",
+    "title": "My Girl",
+    "artist": "The Temptations",
+    "album": "The Temptations Sing Smokey",
+    "genre": "soul",
+    "year": null,
+    "duration": 160,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/cf1e8f2557ef4c71da1e3203e841891b/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-087.mp3",
+    "title": "Papa Was A Rollin' Stone",
+    "artist": "The Temptations",
+    "album": "All Directions",
+    "genre": "soul",
+    "year": null,
+    "duration": 706,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/0c515999a11efa407067f5da10f04090/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-089.mp3",
+    "title": "Sir Duke",
+    "artist": "Stevie Wonder",
+    "album": "The Definitive Collection (Deluxe Edition)",
+    "genre": "soul",
+    "year": null,
+    "duration": 233,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/36aaf615fe6f66a6778bad4b501be11f/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-090.mp3",
+    "title": "Living For The City",
+    "artist": "Stevie Wonder",
+    "album": "Innervisions",
+    "genre": "soul",
+    "year": null,
+    "duration": 443,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/1cf2b7972e30a477b82f03302ec5453d/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-092.mp3",
+    "title": "The Ghetto",
+    "artist": "Donny Hathaway",
+    "album": "Everything Is Everything",
+    "genre": "soul",
+    "year": null,
+    "duration": 408,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/cbf0b3dcf6a64290913c12b3b07a68fe/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-094.mp3",
+    "title": "The Closer I Get to You (Single)",
+    "artist": "Roberta Flack",
+    "album": "A Donny Hathaway Collection",
+    "genre": "soul",
+    "year": null,
+    "duration": 280,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/2f2197431af48e239fb4b9e448957a64/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-095.mp3",
+    "title": "Ain't No Sunshine",
+    "artist": "Bill Withers",
+    "album": "Just As I Am",
+    "genre": "soul",
+    "year": null,
+    "duration": 125,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/0a582ace7dda823714f8eaaa74ab9505/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-096.mp3",
+    "title": "Lean on Me",
+    "artist": "Bill Withers",
+    "album": "Lean on Me: The Best of Bill Withers",
+    "genre": "soul",
+    "year": null,
+    "duration": 258,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/50be86c54073b0f6550eecb273780f9c/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-097.mp3",
+    "title": "Freddie's Dead",
+    "artist": "Curtis Mayfield",
+    "album": "Superfly",
+    "genre": "soul",
+    "year": null,
+    "duration": 328,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/b4e4f807faaeb21b3f9723d9ca82ff33/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-098.mp3",
+    "title": "You Are Everything",
+    "artist": "The Stylistics",
+    "album": "The Original Debut Album",
+    "genre": "soul",
+    "year": null,
+    "duration": 175,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/0b899e5098e62ba2539eac963f7e7f05/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-099.mp3",
+    "title": "In The Rain",
+    "artist": "The Dramatics",
+    "album": "Whatcha See Is Whatcha Get [Stax Remasters]",
+    "genre": "soul",
+    "year": null,
+    "duration": 311,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/077b9732c3afecd21eb3c522e8c73cf3/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-100.mp3",
+    "title": "Wake Up Everybody (feat. Teddy Pendergrass)",
+    "artist": "Harold Melvin & The Blue Notes",
+    "album": "Wake Up Everybody (feat. Teddy Pendergrass)",
+    "genre": "soul",
+    "year": null,
+    "duration": 444,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/97d876d0b062d6cfc2bdd2e2f6d69c88/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-101.mp3",
+    "title": "I'll Be Around",
+    "artist": "The Spinners",
+    "album": "Spinners",
+    "genre": "soul",
+    "year": null,
+    "duration": 188,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/d9458e1217fe236bd3ec5277ad8876ea/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-102.mp3",
+    "title": "Midnight Train to Georgia",
+    "artist": "Gladys Knight & The Pips",
+    "album": "The Essential Gladys Knight & The Pips",
+    "genre": "soul",
+    "year": null,
+    "duration": 284,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/cc56d2521372f776337f1b697d48ae02/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-103.mp3",
+    "title": "Upside Down",
+    "artist": "Diana Ross",
+    "album": "Diana",
+    "genre": "soul",
+    "year": null,
+    "duration": 244,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/b7694952d41739a995da2e56eec6ee46/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-104.mp3",
+    "title": "Don't Stop 'Til You Get Enough",
+    "artist": "Michael Jackson",
+    "album": "Off the Wall",
+    "genre": "soul",
+    "year": null,
+    "duration": 352,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/baf09a24b48b82e3af270efba101d07b/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-106.mp3",
+    "title": "What You Won't Do for Love",
+    "artist": "Bobby Caldwell",
+    "album": "What You Won't Do for Love",
+    "genre": "r&b",
+    "year": null,
+    "duration": 286,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/0218fd347b94d34935dd025cdd7a7e09/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-107.mp3",
+    "title": "Back Stabbers",
+    "artist": "The O'Jays",
+    "album": "Back Stabbers",
+    "genre": "r&b",
+    "year": null,
+    "duration": 186,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/ed3703f61b7dfebe9123e6d822b1ef45/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-108.mp3",
+    "title": "Love Train",
+    "artist": "The O'Jays",
+    "album": "Back Stabbers",
+    "genre": "r&b",
+    "year": null,
+    "duration": 178,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/ed3703f61b7dfebe9123e6d822b1ef45/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-110.mp3",
+    "title": "No Ordinary Love",
+    "artist": "Sade",
+    "album": "The Best of Sade",
+    "genre": "r&b",
+    "year": null,
+    "duration": 440,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/336e00b554c028d58b7c432c38581997/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-111.mp3",
+    "title": "Never Too Much",
+    "artist": "Luther Vandross",
+    "album": "Never Too Much",
+    "genre": "r&b",
+    "year": null,
+    "duration": 230,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/126ed17264d4e4109e00291744b20dbf/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-112.mp3",
+    "title": "Any Love",
+    "artist": "Luther Vandross",
+    "album": "Any Love",
+    "genre": "r&b",
+    "year": null,
+    "duration": 301,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/e58e5f5f125f5809c55a7744f8631145/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-113.mp3",
+    "title": "Songbird",
+    "artist": "Kenny G",
+    "album": "Greatest Hits",
+    "genre": "r&b",
+    "year": null,
+    "duration": 239,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/ccbf052435293370e26ed3940b6a75ce/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-116.mp3",
+    "title": "Candy Girl",
+    "artist": "New Edition",
+    "album": "Candy Girl",
+    "genre": "r&b",
+    "year": null,
+    "duration": 235,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/8859e760a300db94157b66180e20e967/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-117.mp3",
+    "title": "P.Y.T. (Pretty Young Thing)",
+    "artist": "Michael Jackson",
+    "album": "Thriller 25 Super Deluxe Edition",
+    "genre": "r&b",
+    "year": null,
+    "duration": 239,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/92a024220a9532489c75c9d994835697/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-118.mp3",
+    "title": "1999 (2019 Remaster)",
+    "artist": "Prince",
+    "album": "1999",
+    "genre": "r&b",
+    "year": null,
+    "duration": 373,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/d61e5268787f31afe9b2f0fc3e1955ff/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-119.mp3",
+    "title": "Kiss",
+    "artist": "Prince",
+    "album": "Parade - Music from the Motion Picture Under the Cherry Moon",
+    "genre": "r&b",
+    "year": null,
+    "duration": 226,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/6488e3e2ba3121f6e5c0b06a82c4effe/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-120.mp3",
+    "title": "Raspberry Beret",
+    "artist": "Prince",
+    "album": "Around The World In A Day",
+    "genre": "r&b",
+    "year": null,
+    "duration": 211,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/4bfc93d9801ae3db710e603a9fa10b02/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-121.mp3",
+    "title": "Virtual Insanity (Remastered 2006)",
+    "artist": "Jamiroquai",
+    "album": "High Times: Singles 1992-2006",
+    "genre": "r&b",
+    "year": null,
+    "duration": 229,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/9591ccd45408a86dfa6e753733bb55e5/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-122.mp3",
+    "title": "Next Lifetime",
+    "artist": "Erykah Badu",
+    "album": "Baduizm",
+    "genre": "r&b",
+    "year": null,
+    "duration": 386,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/7f673442e11d2cc1fca831b64a88d328/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-123.mp3",
+    "title": "Brown Sugar",
+    "artist": "D'Angelo",
+    "album": "Brown Sugar",
+    "genre": "r&b",
+    "year": null,
+    "duration": 262,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/1e627aca5ceb452dbc527f06c333e1c7/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-124.mp3",
+    "title": "Doo Wop (That Thing)",
+    "artist": "Lauryn Hill",
+    "album": "The Miseducation of Lauryn Hill",
+    "genre": "r&b",
+    "year": null,
+    "duration": 241,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/1322b9d5248a55034f098802072cfac4/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-126.mp3",
+    "title": "Video",
+    "artist": "India.Arie",
+    "album": "Acoustic Soul",
+    "genre": "r&b",
+    "year": null,
+    "duration": 249,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/60123178130932082a1247adec20803e/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-128.mp3",
+    "title": "He Loves Me (Lyzel in E Flat)",
+    "artist": "Jill Scott",
+    "album": "By Popular Demand",
+    "genre": "r&b",
+    "year": null,
+    "duration": 285,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/caea156165dab87b077fac5367156037/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-129.mp3",
+    "title": "Bring Me To Life",
+    "artist": "Evanescence",
+    "album": "Fallen",
+    "genre": "r&b",
+    "year": null,
+    "duration": 235,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/56c02d3764f5a078ceecd27b64b7d789/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-130.mp3",
+    "title": "Rehab",
+    "artist": "Amy Winehouse",
+    "album": "Back To Black",
+    "genre": "r&b",
+    "year": null,
+    "duration": 212,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/3ce985e6653c350c6e6fed077ab7d0d4/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-131.mp3",
+    "title": "Rolling in the Deep",
+    "artist": "Adele",
+    "album": "21",
+    "genre": "r&b",
+    "year": null,
+    "duration": 228,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/dc1ce848d830ecc93521be5a78350364/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-132.mp3",
+    "title": "Lost",
+    "artist": "Frank Ocean",
+    "album": "channel ORANGE",
+    "genre": "r&b",
+    "year": null,
+    "duration": 234,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/519400e29d268f449cf00af879e71af6/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-133.mp3",
+    "title": "Often",
+    "artist": "The Weeknd",
+    "album": "Beauty Behind The Madness",
+    "genre": "r&b",
+    "year": null,
+    "duration": 250,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/eea9f7fc913300e40307a0ff70dc73cf/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-134.mp3",
+    "title": "Just the Way You Are",
+    "artist": "Bruno Mars",
+    "album": "Doo-Wops & Hooligans",
+    "genre": "r&b",
+    "year": null,
+    "duration": 220,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/5b59dc18e109515420f8237719bd2186/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-135.mp3",
+    "title": "U Don't Have to Call",
+    "artist": "USHER",
+    "album": "8701",
+    "genre": "r&b",
+    "year": null,
+    "duration": 269,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/b1243a7f89bec5d034b82fec489f7221/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-172.mp3",
+    "title": "Gentleman",
+    "artist": "Fela Kuti",
+    "album": "Gentleman",
+    "genre": "afrobeat",
+    "year": null,
+    "duration": 881,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/74e25f14eb8a6ed1787879f62f791755/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-173.mp3",
+    "title": "Sorrow Tears and Blood",
+    "artist": "Fela Kuti",
+    "album": "Sorrow Tears and Blood",
+    "genre": "afrobeat",
+    "year": null,
+    "duration": 615,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/981443802ed4cd29beb6e82a98d8b0b6/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-174.mp3",
+    "title": "Coffin For Head Of State",
+    "artist": "Fela Kuti",
+    "album": "The Best of The Black President",
+    "genre": "afrobeat",
+    "year": null,
+    "duration": 804,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/82d80574dcf4eeb1fba250c062403e23/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-175.mp3",
+    "title": "Expensive Shit",
+    "artist": "Fela Kuti",
+    "album": "The Best of the Black President 2",
+    "genre": "afrobeat",
+    "year": null,
+    "duration": 791,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/a8239b130c38e02b915f7bf1bdbe2dd3/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-176.mp3",
+    "title": "Roforofo Fight",
+    "artist": "Fela Kuti",
+    "album": "Roforofo Fight",
+    "genre": "afrobeat",
+    "year": null,
+    "duration": 941,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/de34733b2570730cdfc3fbcc76219275/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-177.mp3",
+    "title": "Kalakuta Show",
+    "artist": "Fela Kuti",
+    "album": "Kalakuta Show",
+    "genre": "afrobeat",
+    "year": null,
+    "duration": 871,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/a93d67a1fea168c176f5d11607b5e7d7/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-178.mp3",
+    "title": "Hot Pants",
+    "artist": "Bola Johnson",
+    "album": "Black Man’s Cry: The Influence and Inspiration of Fela Kuti",
+    "genre": "afrobeat",
+    "year": null,
+    "duration": 168,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/2447123b7e04c1ccd3632af1b5386252/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-179.mp3",
+    "title": "Shakara",
+    "artist": "Fela Kuti",
+    "album": "Shakara (Edit)",
+    "genre": "afrobeat",
+    "year": null,
+    "duration": 806,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/5963d36b29aafb62856f3a54c22d9937/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-181.mp3",
+    "title": "Asiko (In a Silent Mix) (Motor City Drum Ensemble Remix) (Motor City Drum Ensemble)",
+    "artist": "Tony Allen",
+    "album": "Dekmantel 10 Years 10.2",
+    "genre": "afrobeat",
+    "year": null,
+    "duration": 443,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/041543e2cf13ca326f8dcd2d2971124d/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-182.mp3",
+    "title": "Moyege",
+    "artist": "Tony Allen",
+    "album": "Lagos No Shaking",
+    "genre": "afrobeat",
+    "year": null,
+    "duration": 368,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/7d9763a44512e0be080a3dc27ede4b5f/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-184.mp3",
+    "title": "Ye Ye (Remix of When the Going Is Smooth and Good)",
+    "artist": "William Onyeabor",
+    "album": "What?!",
+    "genre": "afrobeat",
+    "year": null,
+    "duration": 364,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/9863280a5cf17a47b8d033cfb959fd3d/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-187.mp3",
+    "title": "African Pop Session",
+    "artist": "Manu Dibango",
+    "album": "African Voodoo",
+    "genre": "afrobeat",
+    "year": null,
+    "duration": 172,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/564839e39354d1903a060274575ea6af/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-189.mp3",
+    "title": "Lean On",
+    "artist": "Major Lazer",
+    "album": "Teen Spirit (Original Motion Picture Soundtrack)",
+    "genre": "afrobeat",
+    "year": null,
+    "duration": 178,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/ea67c81a9d8dfe544c9ec050a4c899e0/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-190.mp3",
+    "title": "Bloodshed",
+    "artist": "Black Uhuru",
+    "album": "Iron Storm",
+    "genre": "afrobeat",
+    "year": null,
+    "duration": 236,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/a6929e91581aa00901d7a4037334ce7a/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-191.mp3",
+    "title": "We Are Not Good People",
+    "artist": "Bloc Party",
+    "album": "FOUR (Deluxe Version)",
+    "genre": "afrobeat",
+    "year": null,
+    "duration": 200,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/6bd8eb3a2dc55bb04e14208cb850d236/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-193.mp3",
+    "title": "Love and Death",
+    "artist": "Ebo Taylor",
+    "album": "Love & Death",
+    "genre": "afrobeat",
+    "year": null,
+    "duration": 415,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/8a0b39fda2852ac025f5838b222fa8b6/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-195.mp3",
+    "title": "Efoye So (taken from Super Afro Soul)",
+    "artist": "Orlando Julius",
+    "album": "Strut Afro-Beats",
+    "genre": "afrobeat",
+    "year": null,
+    "duration": 198,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/2b253c838ebbb00e793da9b7425321e1/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-196.mp3",
+    "title": "Colonial Mentality",
+    "artist": "Fela Kuti",
+    "album": "The Best of the Black President 2",
+    "genre": "afrobeat",
+    "year": null,
+    "duration": 821,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/a8239b130c38e02b915f7bf1bdbe2dd3/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-197.mp3",
+    "title": "Mr. Follow Follow",
+    "artist": "Fela Kuti",
+    "album": "Zombie",
+    "genre": "afrobeat",
+    "year": null,
+    "duration": 777,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/ad77ca4027c3ed3cce15baf63ceb7257/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-198.mp3",
+    "title": "Relâchement",
+    "artist": "Musique Relaxation",
+    "album": "Hypnose & Sophrologie",
+    "genre": "afrobeat",
+    "year": null,
+    "duration": 145,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/6fd15b15c669fc82b6a97f85033d1313/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-202.mp3",
+    "title": "Ye",
+    "artist": "Burna Boy",
+    "album": "Outside",
+    "genre": "afrobeat",
+    "year": null,
+    "duration": 231,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/1f49c7a7cd5431637e083b8d7b738f0c/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-203.mp3",
+    "title": "Essence (feat. Tems)",
+    "artist": "Wizkid",
+    "album": "Made In Lagos",
+    "genre": "afrobeat",
+    "year": null,
+    "duration": 249,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/ee712ec0084d50159ae6564de833ce12/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-204.mp3",
+    "title": "If",
+    "artist": "Davido",
+    "album": "If",
+    "genre": "afrobeat",
+    "year": null,
+    "duration": 238,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/7de07d81ce22dcf5be4caa2b2b9faace/500x500-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-179.mp3",
+    "title": "BOOKER T",
+    "artist": "Bad Bunny",
+    "album": "EL ÚLTIMO TOUR DEL MUNDO",
+    "genre": "funk",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/6ea80078f0df08737a7471f3c4cf2afa/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-180.mp3",
+    "title": "Stylo (feat. Mos Def and Bobby Womack)",
+    "artist": "Gorillaz",
+    "album": "Plastic Beach",
+    "genre": "soul",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/4ddf15e6d4fa3cf61fdc8271cdec4815/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-181.mp3",
+    "title": "Computer Love",
+    "artist": "Zapp & Roger",
+    "album": "All the Greatest Hits",
+    "genre": "funk",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/a54f9378267dd62e1308edaa5da385ee/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-183.mp3",
+    "title": "Vielleicht Vielleicht (Holy Priest & elMefti Remix)",
+    "artist": "MilleniumKid",
+    "album": "Vielleicht Vielleicht (Holy Priest & elMefti Remix)",
+    "genre": "funk",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/0e2038ae4d8a2d068a6ad35a023cda56/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-184.mp3",
+    "title": "Samba/ E Falaba Lewe",
+    "artist": "King Sunny Ade",
+    "album": "Juju Music",
+    "genre": "afrobeat",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/8816bf1c7b00865592818d1584dc5673/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-185.mp3",
+    "title": "It Takes 2",
+    "artist": "Rob Base",
+    "album": "Twice As Nice - Sexy & Stylish",
+    "genre": "funk",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/86bb31ed560a80dfc704ed4affd651bf/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-186.mp3",
+    "title": "Goodbye Pork Pie Hat",
+    "artist": "Charles Mingus",
+    "album": "AH UM - 50th Anniversary (Legacy Edition)",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/ddf51d345ef48f64407888420312c5ef/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-187.mp3",
+    "title": "Debo",
+    "artist": "Djanii Alfa",
+    "album": "Rêves d’Afrik",
+    "genre": "afrobeat",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/fffea52e45ca50af5908d3c7955f4b5a/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-188.mp3",
+    "title": "Cross The Track",
+    "artist": "Maceo Parker",
+    "album": "Soul Food: Cooking With Maceo",
+    "genre": "funk",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/681d42aa62a12c022484a9dc9a131204/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-189.mp3",
+    "title": "Philly Mignon (Remastered 2006/Rudy Van Gelder Edition)",
+    "artist": "Freddie Hubbard",
+    "album": "Here To Stay",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/61ba0b8ef7d26e6e407219bff932bbd2/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-190.mp3",
+    "title": "Candy",
+    "artist": "Cameo",
+    "album": "Word Up",
+    "genre": "funk",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/9c142fb4e95eee8e074d9c5b23e17ac0/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-191.mp3",
+    "title": "My Funny Valentine",
+    "artist": "Chet Baker",
+    "album": "Let's Get Lost: The Best Of Chet Baker Sings",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/63f24d377c90dc7fadaf8f5868b650fd/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-193.mp3",
+    "title": "Ohue (Frankie Francis & Simbad Edit)",
+    "artist": "Victor Uwaifo",
+    "album": "Sofrito: Tropical Discotheque",
+    "genre": "afrobeat",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/1a547ca20c0f39ab8c168a144d7b680f/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-194.mp3",
+    "title": "Can You Stand The Rain",
+    "artist": "New Edition",
+    "album": "Love Songs",
+    "genre": "r&b",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/97129c9df740e0416843960fd83ecaab/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-198.mp3",
+    "title": "Skating In Central Park",
+    "artist": "Bill Evans",
+    "album": "Undercurrent",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/e95a5290e16691d7390e61677d373abb/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-199.mp3",
+    "title": "Sur les traces de Fela (feat. Seun Kuti & Egypt 80)",
+    "artist": "Mokobé",
+    "album": "Mon Afrique",
+    "genre": "afrobeat",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/312fc326d74c91875f5c740275963760/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-200.mp3",
+    "title": "Köln, January 24, 1975, Part I (Live)",
+    "artist": "Keith Jarrett",
+    "album": "The Köln Concert",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/e436ce479d7467ae27249a070eaef556/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-201.mp3",
+    "title": "I'll Take You There",
+    "artist": "The Staple Singers",
+    "album": "Stax Profiles: The Staple Singers",
+    "genre": "soul",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/e4fe5400b4a5deb0b4ed52f79106d3e2/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-203.mp3",
+    "title": "Freek'n You",
+    "artist": "Jodeci",
+    "album": "The Show, The After Party, The Hotel",
+    "genre": "r&b",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/6b99bd86773b4a83d8f5d1d40ddad959/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-207.mp3",
+    "title": "Witch Hunt (Remastered1998/Rudy Van Gelder Edition)",
+    "artist": "Wayne Shorter",
+    "album": "Speak No Evil (The Rudy Van Gelder Edition)",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/c8c5617ff96b0f978a4a0be89ce1b7ff/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-208.mp3",
+    "title": "If I Ever Fall In Love",
+    "artist": "Shai",
+    "album": "If I Ever Fall In Love",
+    "genre": "r&b",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/c58f7a4c0680c808a5c244edb60c405b/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-209.mp3",
+    "title": "Get Down On It",
+    "artist": "Kool & The Gang",
+    "album": "Something Special",
+    "genre": "funk",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/432ebc60ba4d20887d67ef6b3cece11e/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-210.mp3",
+    "title": "Poison",
+    "artist": "Bell Biv DeVoe",
+    "album": "Poison (Expanded Edition)",
+    "genre": "r&b",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/9b13732b4372ea0d63801c910d993992/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-211.mp3",
+    "title": "Diary (feat. Tony! Toni! Tone! & Jermaine Paul)",
+    "artist": "Alicia Keys",
+    "album": "The Diary Of Alicia Keys",
+    "genre": "r&b",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/cef30c1c2a5a63c773d26d56049c81e5/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-212.mp3",
+    "title": "Dream A Little Dream Of Me",
+    "artist": "Louis Armstrong",
+    "album": "Dreaming, The Nightime Collection",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/118e91f09fb57a677b9f02c1d7ababfe/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-216.mp3",
+    "title": "That Old Feeling",
+    "artist": "Louis Armstrong",
+    "album": "Pops Is Tops: The Verve Studio Albums",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/9bc2ef490e7f8440e6eff335b20d8af2/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-217.mp3",
+    "title": "Kpede Do Gbe Houenou",
+    "artist": "Orchestre Poly-Rythmo",
+    "album": "Kpede Do Gbe Houenou / Ma Wa Mon Nou Mi O",
+    "genre": "afrobeat",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/c063a239596088bf49e5f0659e672d81/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-218.mp3",
+    "title": "Ready Or Not",
+    "artist": "After 7",
+    "album": "The Very Best Of After 7",
+    "genre": "r&b",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/c12c28d85fedc4cfa31df526ca78f279/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-221.mp3",
+    "title": "Cro-Magnon Nights (Alternate Take)",
+    "artist": "Herbie Nichols",
+    "album": "The Complete Blue Note Recordings Of Herbie Nichols",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/15cc2d298d20ab3243803ba3001702bc/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-222.mp3",
+    "title": "Hit the Road Jack",
+    "artist": "Ray Charles",
+    "album": "True Genius",
+    "genre": "r&b",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/8e0e1e3f2854791bb4915ea74ea64b0a/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-224.mp3",
+    "title": "Jasper (Rudy Van Gelder/24Bit Digital Remaster/2002)",
+    "artist": "Bobby Hutcherson",
+    "album": "Dialogue",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/a45cb75dc25840ef1f9009f1cbf2a0e7/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-225.mp3",
+    "title": "Give Up The Funk (Tear The Roof Off The Sucker)",
+    "artist": "Parliament",
+    "album": "Mothership Connection",
+    "genre": "funk",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/df255a66bf63665d2e9569b5a29274f6/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-226.mp3",
+    "title": "Escape",
+    "artist": "Antibalas",
+    "album": "Hourglass",
+    "genre": "afrobeat",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/94254c3c0b8691ca457272ba7a22d407/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-227.mp3",
+    "title": "Tenderly",
+    "artist": "Sarah Vaughan",
+    "album": "An Introduction To Sarah Vaughan",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/7a458ad744c436cd766814c6a846ea0e/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-228.mp3",
+    "title": "Theme From Shaft",
+    "artist": "Isaac Hayes",
+    "album": "Stax Classics",
+    "genre": "funk",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/47e4503a1f037f1b844f999f4acfa6d4/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-229.mp3",
+    "title": "There U Go",
+    "artist": "Johnny Gill",
+    "album": "Boomerang",
+    "genre": "r&b",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/3770eaebb05581025463fb0bc7cb1bfc/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-230.mp3",
+    "title": "My Prerogative",
+    "artist": "Bobby Brown",
+    "album": "Don't Be Cruel (Expanded Edition)",
+    "genre": "r&b",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/d59ea3d4045200b81567669146b62d7d/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-232.mp3",
+    "title": "Ball Square",
+    "artist": "Andrew Hill",
+    "album": "Dusk",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/c21f41cee737cabe12f962e353ab8c18/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-233.mp3",
+    "title": "Cry to Me",
+    "artist": "Solomon Burke",
+    "album": "The Very Best of Solomon Burke",
+    "genre": "soul",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/1215a388c7c35454d33d08bd4b1eddc3/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-235.mp3",
+    "title": "Autumn Leaves",
+    "artist": "Cannonball Adderley",
+    "album": "Somethin' Else (Rudy Van Gelder Edition)",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/714f9f8c5403f02a2dd2b1fd65485381/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-237.mp3",
+    "title": "Don't Let Go (Love)",
+    "artist": "En Vogue",
+    "album": "The Very Best of En Vogue",
+    "genre": "r&b",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/018e2df9c23554f76c6e611f1fbf6bc4/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-243.mp3",
+    "title": "Ya Ya - Original",
+    "artist": "Lee Dorsey",
+    "album": "Lee Dorsey Selected Hits",
+    "genre": "funk",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/9dcf912c54a2df32aa3157317ed241c3/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-245.mp3",
+    "title": "Pusherman",
+    "artist": "Curtis Mayfield",
+    "album": "Superfly",
+    "genre": "soul",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/b4e4f807faaeb21b3f9723d9ca82ff33/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-246.mp3",
+    "title": "Hold What You've Got",
+    "artist": "Joe Tex",
+    "album": "The Very Best of, Volume 1",
+    "genre": "soul",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/d20c32202daaa0297876c2c729ee0a64/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-247.mp3",
+    "title": "Girlfriend",
+    "artist": "Avril Lavigne",
+    "album": "Girlfriend EP",
+    "genre": "r&b",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/00a46b9642435935f18df29c937eb0e2/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-248.mp3",
+    "title": "Too Hot To Stop (Part 1) (Rerecorded)",
+    "artist": "The Bar-Kays",
+    "album": "The Bar-Kays: All-Time Greatest Hits (Rerecorded Version)",
+    "genre": "funk",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/722dcce8c47efdceb6a23d6cd151ace8/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-249.mp3",
+    "title": "When Sunny Gets Blue",
+    "artist": "McCoy Tyner",
+    "album": "Today And Tomorrow",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/989c51dc37e26741e9fc0ede1cd4aeb4/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-250.mp3",
+    "title": "Marie",
+    "artist": "Johnny Hallyday",
+    "album": "A La Vie A La Mort",
+    "genre": "soul",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/b452acf0c09e317cdefeff45cd1d2e63/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-227.mp3",
+    "title": "Billie Jean",
+    "artist": "Michael Jackson",
+    "album": "Michael Jackson's This Is It",
+    "genre": "r&b",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/a0ad67d1beb761f2cb9f8b60e5bcf07a/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-229.mp3",
+    "title": "I Put A Spell On You",
+    "artist": "Nina Simone",
+    "album": "I Put A Spell On You",
+    "genre": "soul",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/500185991bdc8910511f9381d0731f0a/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-240.mp3",
+    "title": "Purple Rain (2015 Paisley Park Remaster)",
+    "artist": "Prince",
+    "album": "Purple Rain (Deluxe Expanded Edition)",
+    "genre": "r&b",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/8cc37398de3ee92bd31d286f30e7972d/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-247.mp3",
+    "title": "Pata pata",
+    "artist": "Miriam Makeba",
+    "album": "Golden voices of Africa",
+    "genre": "afrobeat",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/a0fa4bcd8589e20fc51ffc4651c395fc/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-248.mp3",
+    "title": "Float (feat. Seun Kuti & Egypt 80)",
+    "artist": "Janelle Monáe",
+    "album": "The Age of Pleasure",
+    "genre": "afrobeat",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/0335cd286bdfd0c51f4bc6fc47f4eb4d/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-233.mp3",
+    "title": "Samba de Orfeu",
+    "artist": "Luiz Bonfá",
+    "album": "The Brasil Project Vol. II",
+    "genre": "afrobeat",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/6de335fbda0fdfe700d5165f95490829/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-234.mp3",
+    "title": "With You (feat. Omah Lay)",
+    "artist": "Davido",
+    "album": "5ive",
+    "genre": "afrobeat",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/08304eb172098540c635de98530d4929/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-235.mp3",
+    "title": "Sweet Baby",
+    "artist": "Stanley Clarke",
+    "album": "Jazz Moods - 'Round Midnight",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/2bddba5c31c0abc9e6834d9201bd4c00/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-238.mp3",
+    "title": "Shotgun",
+    "artist": "George Ezra",
+    "album": "Staying at Tamara's",
+    "genre": "funk",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/34b2fe66c53c7d4fc1b79a8dcb5eb797/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-239.mp3",
+    "title": "Soul Eyes (Live At Jazzhus Montmartre, Copenhagen / March 5th 1991)",
+    "artist": "Stan Getz",
+    "album": "The Very Best Of Stan Getz",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/612d9382929c47680a86fd93e4d6f9fa/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-240.mp3",
+    "title": "No Moon At All",
+    "artist": "Diana Krall",
+    "album": "Turn Up The Quiet",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/f5c3b0a6bf8c4eb5ee2351f034c59531/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-241.mp3",
+    "title": "Give Me the Night",
+    "artist": "George Benson",
+    "album": "Give Me the Night",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/f5ba2db8882ce303eccd3407620a82f1/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-242.mp3",
+    "title": "End Of The Road",
+    "artist": "Boyz II Men",
+    "album": "Legacy - The Greatest Hits Collection",
+    "genre": "r&b",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/5b0ff3a0b5738c0c163758e2829f9f54/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-243.mp3",
+    "title": "Where or When",
+    "artist": "Wynton Marsalis",
+    "album": "Popular Songs: The Best Of Wynton Marsalis",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/6c201b810bf1657b35fddbad1f86bab8/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-244.mp3",
+    "title": "Be Great (feat. Trombone Shorty)",
+    "artist": "Jill Scott",
+    "album": "To Whom This May Concern",
+    "genre": "r&b",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/cb1fbe3d8d7a3c4832150333091190e8/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-245.mp3",
+    "title": "We're in This Love Together",
+    "artist": "Al Jarreau",
+    "album": "Love Songs",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/5e8519b2ff5a3a6ff041c1133b2cf933/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-246.mp3",
+    "title": "Outstanding (Original 12\" Mix)",
+    "artist": "The Gap Band",
+    "album": "The Best Of The Gap Band",
+    "genre": "funk",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/3c56b9f0195cdf3ded6b8b852d1cfe8d/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-247.mp3",
+    "title": "I Gotta Be",
+    "artist": "Jagged Edge",
+    "album": "A Jagged Era",
+    "genre": "r&b",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/ae8023fc21420aa0cd4c874953694f5a/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-248.mp3",
+    "title": "Jaiye Jaiye",
+    "artist": "Wizkid",
+    "album": "Jaiye Jaiye",
+    "genre": "afrobeat",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/022426a926bc2f38da080d86e690b6be/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-249.mp3",
+    "title": "Don't Know Why",
+    "artist": "Norah Jones",
+    "album": "Don't Know Why",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/d4cb6f8663af84d1db08a41a019065a0/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-250.mp3",
+    "title": "Bye Bye Blackbird",
+    "artist": "Ron Carter",
+    "album": "The Ultimate Headphone & Hi-Fi Album",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/91fd7c5c3c3f2651203968c813dfe8c1/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-207.mp3",
+    "title": "Attitudes",
+    "artist": "Bar-Kays",
+    "album": "Ballad Collection",
+    "genre": "funk",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/e6ce992c923eed8ab64bb11af65754d1/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-208.mp3",
+    "title": "I Swear",
+    "artist": "All-4-One",
+    "album": "All-4-One",
+    "genre": "r&b",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/79c6390d2e52b150fb5e68031f5495fd/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-210.mp3",
+    "title": "Let's Do It Again!",
+    "artist": "The Last Dinner Party",
+    "album": "Let's Do It Again!",
+    "genre": "funk",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/ee987bc5ae84a3e3d6143db84e91c0de/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-211.mp3",
+    "title": "wgft (feat. Burna Boy)",
+    "artist": "Gunna",
+    "album": "The Last Wun",
+    "genre": "afrobeat",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/332d8393d5c9e2d7c5345b8e5fd2a049/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-212.mp3",
+    "title": "Blue Bossa (Remastered)",
+    "artist": "Joe Henderson",
+    "album": "Page One",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/231a9e27866b5f9c90c114d6737e3102/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-213.mp3",
+    "title": "Love Ballad",
+    "artist": "L.T.D.",
+    "album": "Classics Volume 27",
+    "genre": "funk",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/82ab9c5765c1ecfac52259b4c7efc24b/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-214.mp3",
+    "title": "BABA COMMANDANT",
+    "artist": "Mama le succès",
+    "album": "CHANGEMENT",
+    "genre": "afrobeat",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/32acd0ec02cf0964dc1963bc71f01552/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-215.mp3",
+    "title": "Undertow",
+    "artist": "Joshua Redman",
+    "album": "RoundAgain",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/d456de0b79a4a1e4e069fe36edcf15f1/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-216.mp3",
+    "title": "I Miss You (feat. Teddy Pendergrass)",
+    "artist": "Harold Melvin & The Blue Notes",
+    "album": "I Miss You (Expanded Edition) (feat. Teddy Pendergrass)",
+    "genre": "soul",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/42468e81b7f3b3a92bd6b6352db10b49/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-217.mp3",
+    "title": "Spain",
+    "artist": "Chick Corea",
+    "album": "Verve Jazz Masters 3: Chick Corea",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/c017a1497088a7697fe3b2d8420443ed/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-218.mp3",
+    "title": "The Villest",
+    "artist": "J. Cole",
+    "album": "The Fall-Off",
+    "genre": "r&b",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/ba58221a878715b6d99912ce63ea63d5/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-219.mp3",
+    "title": "One In A Million",
+    "artist": "Aaliyah",
+    "album": "One In A Million",
+    "genre": "r&b",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/250509ad1011a469bfd366f758f2f665/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-220.mp3",
+    "title": "Sensitivity",
+    "artist": "Ralph Tresvant",
+    "album": "A Gentleman's Nature",
+    "genre": "r&b",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/af2cc8c7e7b5e8bf15569dfed5514fd8/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-221.mp3",
+    "title": "After The Storm",
+    "artist": "Kali Uchis",
+    "album": "After The Storm",
+    "genre": "funk",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/61b09123f6a89985c5c18f1feb41a2b3/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-222.mp3",
+    "title": "Birdland",
+    "artist": "Weather Report",
+    "album": "Heavy Weather (Expanded Edition)",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/f8349e0c4204dd74cf97841309ebbfbf/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-223.mp3",
+    "title": "Cloud Land",
+    "artist": "Stereolab",
+    "album": "Cloud Land / Flashes In The Afternoon",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/35455a6f8a628c775aeafcf23505c38a/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-224.mp3",
+    "title": "2 Many DJs (Original)",
+    "artist": "Dj Lion",
+    "album": "Mania",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/63543bd0f362a30ca67768a46669ae1b/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-225.mp3",
+    "title": "Funk Soul Brother (GENESI Edit)",
+    "artist": "VLTRA (IT)",
+    "album": "Funk Soul Brother (GENESI Edit)",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/883b8d7b421d704161249fdb14b39b10/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-226.mp3",
+    "title": "The Sensual Woman",
+    "artist": "The Herbaliser",
+    "album": "Very Mercenary",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/62560bd666d04e4df8ace9985350329a/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-227.mp3",
+    "title": "Love Will Keep Us Together",
+    "artist": "The James Taylor Quartet",
+    "album": "A1! The Best Of Acid Jazz",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/0e66a9f5dea638faad9603b699a14a4c/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-228.mp3",
+    "title": "The Revolution Will Not Be Televised",
+    "artist": "Gil Scott-Heron",
+    "album": "Pieces of a Man",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/548cba316ac198ed0dbc68856b2a9a42/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-229.mp3",
+    "title": "Where Is My Mind? (Piano Rendition)",
+    "artist": "The Blue Notes",
+    "album": "Piano Pop Covers, Vol. 1",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/39f3322605f8970921731b5fb914e859/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-230.mp3",
+    "title": "The Mighty Riders",
+    "artist": "Mighty Ryeders",
+    "album": "Help Us Spread The Message",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/0888fdd88df0435edd554830e3cc43c9/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-231.mp3",
+    "title": "Rock Wit'cha",
+    "artist": "Bobby Brown",
+    "album": "Don't Be Cruel (Expanded Edition)",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/d59ea3d4045200b81567669146b62d7d/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-232.mp3",
+    "title": "I Found A Love (Single Version)",
+    "artist": "The Falcons",
+    "album": "The Definitive Wilson Pickett",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/c66fd3145393de61582fffce96662af3/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-233.mp3",
+    "title": "Help Yourself to My Love (Extended Version)",
+    "artist": "Kashif",
+    "album": "The Definitive Collection",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/b542755f0fa130a117ed6aa0da068a70/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-234.mp3",
+    "title": "Two Occasions",
+    "artist": "The Deele",
+    "album": "The Deele: Greatest Hits",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/c3df807297c56b9bab3c4976b5788beb/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-235.mp3",
+    "title": "Curious",
+    "artist": "Midnight Star",
+    "album": "Planetary Invasion",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/f3c8cd06228d48f3da9f4d2acf6b2f88/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-236.mp3",
+    "title": "Brand New Second Hand",
+    "artist": "Peter Tosh",
+    "album": "Legalize It (Legacy Edition)",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/a14c45a510d40de372dbe6e0b0afc6a5/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-237.mp3",
+    "title": "To Build A Home",
+    "artist": "The Cinematic Orchestra",
+    "album": "Ma Fleur",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/d9a09f517999f55c1a7e3be963161cf3/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-238.mp3",
+    "title": "Love Come Down",
+    "artist": "Evelyn \"Champagne\" King",
+    "album": "Get Loose",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/71dbb7cc14d3cd8b572011a8a624426b/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-239.mp3",
+    "title": "Ain't Gonna Bump No More (With No Big Fat Woman)",
+    "artist": "Joe Tex",
+    "album": "The Hits",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/96a48d9f68a13012c587dc2ba58b9be1/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-240.mp3",
+    "title": "Where Is the Love",
+    "artist": "Roberta Flack",
+    "album": "A Donny Hathaway Collection",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/2f2197431af48e239fb4b9e448957a64/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-241.mp3",
+    "title": "Kingdom Come",
+    "artist": "The Souljazz Orchestra",
+    "album": "Inner Fire",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/028cadc863a7de2eb12ae8c158673a94/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-242.mp3",
+    "title": "Hold On, I'm Comin'",
+    "artist": "Sam & Dave",
+    "album": "The Best of Sam & Dave",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/fa713a57d76f38ce226cec614678893e/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-243.mp3",
+    "title": "Cheri Cheri Lady",
+    "artist": "Modern Talking",
+    "album": "Dieter - the hits",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/f5ab7814eda8bdbab33e9bb6941655f3/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-244.mp3",
+    "title": "Express Yourself (Remastered Version)",
+    "artist": "Charles Wright & The Watts 103rd. Street Rhythm Band",
+    "album": "Express Yourself (Remastered & Expanded)",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/fc86794e0e58f98b01ca8eb0a9f8112b/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-245.mp3",
+    "title": "It's All Right",
+    "artist": "The Impressions",
+    "album": "People Get Ready: The Best Of Curtis Mayfield's Impressions",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/13c0a6ee03f2f1ac403e0471aefaeae3/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-246.mp3",
+    "title": "Call Jesus",
+    "artist": "Troy Ramey",
+    "album": "Call Jesus (Live)",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/d0df1d53885d3d1eef7d7869c8f14fd0/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-247.mp3",
+    "title": "Just Kissed My Baby",
+    "artist": "The Meters",
+    "album": "Rejuvenation",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/e59faf5127d0e7bdd7f5d10d1d4c90d8/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-248.mp3",
+    "title": "Drowning in the Sea of Love",
+    "artist": "Joe Simon",
+    "album": "Greatest Hits: The Spring Years",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/200b6d4b77e6c06dabd5f4ca77551a3c/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-249.mp3",
+    "title": "Stomp! (Single Version)",
+    "artist": "The Brothers Johnson",
+    "album": "Strawberry Letter 23: The Very Best Of The Brothers Johnson",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/51bfdebc5312f2eac25113a63a2a0c22/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-250.mp3",
+    "title": "Let's Do It Again",
+    "artist": "The Staple Singers",
+    "album": "Let's Do It Again Original Sound Track",
+    "genre": "jazz",
+    "year": null,
+    "duration": 30,
+    "albumArt": "https://cdn-images.dzcdn.net/images/cover/0e898ecc0f504f6bfb21d2a66363d767/250x250-000000-80-0-0.jpg"
+  },
+  {
+    "localFilename": "sample-251.mp3",
+    "title": "If You Think You're Lonely Now",
+    "artist": "Bobby Womack",
+    "album": "The Poet",
+    "genre": "soul",
+    "year": "1981",
+    "duration": 333,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/37/d3/b4/37d3b4ca-0bec-1cfb-36e7-a3751e070506/21OPLAY00016.rgb.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-252.mp3",
+    "title": "(You Make Me Feel Like) A Natural Woman",
+    "artist": "Aretha Franklin",
+    "album": "30 Greatest Hits",
+    "genre": "soul",
+    "year": "1967",
+    "duration": 164,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/7b/60/02/7b6002d3-9b40-9852-4186-02cbe3cdb32d/603497895960.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-253.mp3",
+    "title": "Rock The Boat",
+    "artist": "Aaliyah",
+    "album": "Aaliyah",
+    "genre": "r&b",
+    "year": "2001",
+    "duration": 275,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/9d/f3/55/9df35530-e066-5df9-2212-fe5ed7cf9b14/5034644712819.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-254.mp3",
+    "title": "The Girl from Ipanema (feat. Astrud Gilberto & Antônio Carlos Jobim) [Single Version]",
+    "artist": "Stan Getz & João Gilberto",
+    "album": "Getz/Gilberto (Expanded Edition)",
+    "genre": "jazz",
+    "year": "1964",
+    "duration": 168,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/14/c5/97/14c597a3-22c8-d2a9-dc49-0f8b1496f776/14UMGIM16822.rgb.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-255.mp3",
+    "title": "The Sidewinder",
+    "artist": "Lee Morgan",
+    "album": "The Sidewinder (The Rudy Van Gelder Edition Remastered)",
+    "genre": "jazz",
+    "year": "1963",
+    "duration": 625,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/be/0b/f4/be0bf4c3-b69c-370b-2ade-d12a5a10ce77/00724349533257.rgb.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-256.mp3",
+    "title": "Halfcrazy",
+    "artist": "Musiq Soulchild",
+    "album": "Juslisen",
+    "genre": "r&b",
+    "year": "2002",
+    "duration": 254,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/b9/4d/0e/b94d0e35-d0d2-c988-7031-a38926fffa3a/06UMGIM21432.rgb.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-257.mp3",
+    "title": "Hit and Run",
+    "artist": "The Bar-Kays",
+    "album": "Funk Essentials: The Best of the Bar-Kays",
+    "genre": "funk",
+    "year": "1993",
+    "duration": 231,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/e2/2d/f3/e22df381-ccc4-92a3-8816-4d55e71f5ba6/00731451482328.rgb.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-258.mp3",
+    "title": "Forever Mine",
+    "artist": "The O'Jays",
+    "album": "Identify Yourself",
+    "genre": "soul",
+    "year": "1979",
+    "duration": 366,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music/f0/63/4a/mzi.svynffdc.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-259.mp3",
+    "title": "People Get Up and Drive Your Funky Soul (Remix)",
+    "artist": "James Brown, Fred Wesley & The J.B.'s",
+    "album": "Motherlode",
+    "genre": "funk",
+    "year": "1988",
+    "duration": 545,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/cd/be/62/cdbe6287-c096-560b-5051-7e67d165ad6e/00602577173646.rgb.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-260.mp3",
+    "title": "Morning Scapes (feat. Bembe Segue)",
+    "artist": "Jazzanova",
+    "album": "Of All the Things",
+    "genre": "afrobeat",
+    "year": "2008",
+    "duration": 251,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/f5/8d/59/f58d5943-8542-908f-fa94-9c91f2a61217/0821730036080_3000.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-261.mp3",
+    "title": "I Want to Be Free",
+    "artist": "Ohio Players",
+    "album": "20th Century Masters - The Millennium Collection: The Best of Ohio Players",
+    "genre": "funk",
+    "year": "2000",
+    "duration": 413,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/dc/c3/bf/dcc3bf3a-7d89-2027-4252-b58450324f2a/00602567825326.rgb.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-262.mp3",
+    "title": "Distant Lover",
+    "artist": "Marvin Gaye",
+    "album": "Let's Get It On (Deluxe Edition)",
+    "genre": "soul",
+    "year": "1973",
+    "duration": 257,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/e5/65/db/e565db27-c3fd-e972-4010-1bfa2d918f10/23UMGIM49775.rgb.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-263.mp3",
+    "title": "Mónaco",
+    "artist": "LAGOS & Danny Ocean",
+    "album": "Clásicos",
+    "genre": "afrobeat",
+    "year": "2021",
+    "duration": 192,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/80/88/8a/80888a31-e5eb-3d05-52b6-dfd59dfa1e54/190296666001.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-264.mp3",
+    "title": "Bouyel",
+    "artist": "Baaba Maal",
+    "album": "Mother Afrika",
+    "genre": "afrobeat",
+    "year": "1991",
+    "duration": 254,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music18/v4/14/92/49/14924970-3a64-7d49-70ee-80c4ccaa5eb6/cover.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-265.mp3",
+    "title": "I'll Remember April",
+    "artist": "Freddie Redd",
+    "album": "50s Jazz",
+    "genre": "jazz",
+    "year": "1957",
+    "duration": 267,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/0b/fd/45/0bfd4517-7dea-c2b3-e771-bf89a5cd50d3/084247966275.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-266.mp3",
+    "title": "Misty",
+    "artist": "Sarah Vaughan",
+    "album": "Vaughan And Violins",
+    "genre": "jazz",
+    "year": "1958",
+    "duration": 183,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/0f/a2/4a/0fa24ac5-304f-1518-6178-0ed88fc5e22b/18UMGIM54390.rgb.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-267.mp3",
+    "title": "If It Isn't Love",
+    "artist": "New Edition",
+    "album": "Heart Break",
+    "genre": "r&b",
+    "year": "1988",
+    "duration": 310,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/0c/c1/be/0cc1beb9-be76-8de3-9f77-2b47da565e70/06UMGIM02085.rgb.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-268.mp3",
+    "title": "Walk On By (Remastered 1991)",
+    "artist": "Isaac Hayes",
+    "album": "Greatest Hits Singles (Remastered 1991)",
+    "genre": "funk",
+    "year": "1969",
+    "duration": 273,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/28/8e/b2/288eb2e0-842d-76f7-e1f0-5a0e87f8df16/00025218851527.rgb.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-269.mp3",
+    "title": "Let's Groove",
+    "artist": "Earth, Wind & Fire",
+    "album": "Greatest Hits",
+    "genre": "funk",
+    "year": "1981",
+    "duration": 335,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/4a/f4/6e/4af46e98-d5ef-bfb9-e671-9b64311577c0/886447618448.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-270.mp3",
+    "title": "Stomp!",
+    "artist": "The Brothers Johnson",
+    "album": "Light Up The Night",
+    "genre": "funk",
+    "year": "1980",
+    "duration": 380,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/4b/47/4b/4b474be6-2f77-d01d-f8cd-bf3052c7878d/00602567833277.rgb.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-271.mp3",
+    "title": "Fall",
+    "artist": "Davido",
+    "album": "Fall - Single",
+    "genre": "afrobeat",
+    "year": "2017",
+    "duration": 240,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/e8/25/10/e825104f-95ac-5638-38bf-a3a3563ac24b/886446558943.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-272.mp3",
+    "title": "Just My Imagination (Running Away With Me)",
+    "artist": "The Temptations",
+    "album": "Sky's the Limit",
+    "genre": "soul",
+    "year": "1971",
+    "duration": 230,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/e5/43/ed/e543edd7-788e-bff7-d3b0-5e7473eed0f0/06UMGIM58102.rgb.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-273.mp3",
+    "title": "Love Ballad (feat. Jeffrey Osborne)",
+    "artist": "L.T.D.",
+    "album": "Love to the World",
+    "genre": "funk",
+    "year": "1976",
+    "duration": 275,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/0c/0a/7d/0c0a7d49-79eb-11ba-93df-4e61ad9054a7/00075021314627.rgb.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-274.mp3",
+    "title": "When Will I See You Smile Again?",
+    "artist": "Bell Biv DeVoe",
+    "album": "20th Century Masters - The Millennium Collection: The Best of Bel Biv DeVoe",
+    "genre": "r&b",
+    "year": "1990",
+    "duration": 307,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/75/e9/2c/75e92cf2-a877-61d2-e13e-b2a4b0ee2533/06UMGIM21441.rgb.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-275.mp3",
+    "title": "Lovely Day",
+    "artist": "Bill Withers",
+    "album": "The Best Of Bill Withers: Lean On Me",
+    "genre": "soul",
+    "year": "1977",
+    "duration": 255,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/3a/93/40/3a9340a1-73f7-5bbb-86a2-15a4ba20acea/884977735840.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-276.mp3",
+    "title": "Mercy, Mercy, Mercy",
+    "artist": "Cannonball Adderley",
+    "album": "The Best of Cannonball Adderley - The Capitol Years",
+    "genre": "jazz",
+    "year": "1991",
+    "duration": 309,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music4/v4/b9/7b/68/b97b68e6-886e-82d0-7eb7-981599d7df33/00077779548255.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-277.mp3",
+    "title": "A Long Walk",
+    "artist": "Jill Scott",
+    "album": "By Popular Demand",
+    "genre": "r&b",
+    "year": "2000",
+    "duration": 285,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/17/b8/c3/17b8c39e-aecf-8b74-ed50-828ef494d02c/00897352002772.rgb.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-278.mp3",
+    "title": "We'll Be Together Again",
+    "artist": "McCoy Tyner",
+    "album": "Night of Ballads and Blues",
+    "genre": "jazz",
+    "year": "1963",
+    "duration": 220,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/36/50/a3/3650a3c5-e88c-1a62-4e77-5d7b8dfc0b51/06UMGIM05131.rgb.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-279.mp3",
+    "title": "Soul Makossa (Mixed)",
+    "artist": "Manu Dibango",
+    "album": "Beats In Space 060: Tim Sweeney (DJ Mix)",
+    "genre": "afrobeat",
+    "year": "2023",
+    "duration": 259,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/3f/81/a6/3f81a665-827b-5fa7-9a3d-c2e0f1992a9d/dj.gtxhjurn.png/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-280.mp3",
+    "title": "M'Mory",
+    "artist": "Putumayo, Yapa & Baba Commandant",
+    "album": "Global Café by Putumayo",
+    "genre": "afrobeat",
+    "year": "2023",
+    "duration": 201,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/22/5a/04/225a0457-e416-2e00-9cbe-71209f856b8a/34703f34-b655-4100-bab8-1786ebc2b6ed.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-281.mp3",
+    "title": "It's a Vanity",
+    "artist": "Gabo Brown & Orchestre Poly-rythmo",
+    "album": "African Scream Contest: Raw & Psychedelic Afro Sounds From Benin & Togo '70s",
+    "genre": "afrobeat",
+    "year": "2008",
+    "duration": 263,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/77/c6/5f/77c65f10-31f6-c18c-ebb8-c2785b00f59a/4260126060630.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-282.mp3",
+    "title": "Samba",
+    "artist": "Gloria Estefan",
+    "album": "BRAZIL305",
+    "genre": "afrobeat",
+    "year": "2020",
+    "duration": 221,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/5a/c5/4a/5ac54aff-2bf7-343f-a615-a11ea12c3afb/886446118604.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-283.mp3",
+    "title": "Isn't She Lovely",
+    "artist": "Stevie Wonder",
+    "album": "Songs in the Key of Life",
+    "genre": "r&b",
+    "year": "1976",
+    "duration": 394,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/eb/1f/12/eb1f12ec-474c-63aa-43af-09282f423b9d/00602537004737.rgb.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-284.mp3",
+    "title": "The Cantaloupe Woman",
+    "artist": "Grant Green",
+    "album": "His Majesty King Funk",
+    "genre": "jazz",
+    "year": "1965",
+    "duration": 295,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/31/29/8c/31298c41-6c26-7113-4766-c8255074707d/00602577106545.rgb.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-285.mp3",
+    "title": "Midnight Train to Georgia (Single Version)",
+    "artist": "Gladys Knight & The Pips",
+    "album": "Imagination (Expanded Edition)",
+    "genre": "soul",
+    "year": "1973",
+    "duration": 237,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/fc/da/25/fcda258b-dc69-fe7b-e8cc-45be76475ed2/886444339773.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-286.mp3",
+    "title": "The Payback",
+    "artist": "James Brown",
+    "album": "The Payback",
+    "genre": "funk",
+    "year": "1973",
+    "duration": 460,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/43/8c/69/438c690f-fe4a-8a0d-4b46-2c1800f47754/06UMGIM02758.rgb.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-287.mp3",
+    "title": "I'm Coming Out",
+    "artist": "Diana Ross",
+    "album": "Diana",
+    "genre": "soul",
+    "year": "1980",
+    "duration": 324,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/aa/87/1c/aa871c20-95be-38bd-97e3-ecfeb8ec404b/15UMGIM06551.rgb.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-288.mp3",
+    "title": "Blue Bossa",
+    "artist": "Joe Henderson",
+    "album": "Page One",
+    "genre": "jazz",
+    "year": "1963",
+    "duration": 483,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/a8/1d/3b/a81d3b00-0875-46d2-d5e2-208f075eddbb/13UMGIM23427.rgb.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-289.mp3",
+    "title": "Untitled (How Does It Feel)",
+    "artist": "D'Angelo",
+    "album": "Voodoo",
+    "genre": "r&b",
+    "year": "2000",
+    "duration": 435,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/fd/be/cd/fdbecdf2-5bf5-09fc-8fab-6e93250ebda4/13ULAIM54464.rgb.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-290.mp3",
+    "title": "Brahms Lullaby",
+    "artist": "Dave Brubeck",
+    "album": "Lullabies",
+    "genre": "jazz",
+    "year": "2020",
+    "duration": 191,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/8c/9d/b8/8c9db811-57d5-b703-4ba5-fb6e9d3a747c/20UMGIM72619.rgb.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-291.mp3",
+    "title": "These Arms of Mine",
+    "artist": "Otis Redding",
+    "album": "The Very Best of Otis Redding",
+    "genre": "soul",
+    "year": "1962",
+    "duration": 155,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/92/3e/f6/923ef641-d13b-c0ac-1271-332f74b17956/603497887217.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-292.mp3",
+    "title": "Whatcha See Is Whatcha Get",
+    "artist": "The Dramatics",
+    "album": "Whatcha See Is Whatcha Get",
+    "genre": "soul",
+    "year": "1971",
+    "duration": 240,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/50/3d/ed/503ded78-9aca-1f83-a03f-36986e30d3f9/00888072332577.rgb.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-293.mp3",
+    "title": "A Night In Tunisia",
+    "artist": "Art Blakey",
+    "album": "A Night in Tunisia (The Rudy Van Gelder Edition)",
+    "genre": "jazz",
+    "year": "1960",
+    "duration": 676,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music6/v4/24/77/e6/2477e646-8823-0322-2258-afcaefe88cc6/00724386447456.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-294.mp3",
+    "title": "Many Things",
+    "artist": "Seun Kuti",
+    "album": "Many Things",
+    "genre": "afrobeat",
+    "year": "2008",
+    "duration": 483,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/5e/32/34/5e323426-9bf6-7317-725c-ff9cfacf91ea/cover.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-295.mp3",
+    "title": "Brilliant Corners",
+    "artist": "Thelonious Monk",
+    "album": "Brilliant Corners (Remastered)",
+    "genre": "jazz",
+    "year": "1957",
+    "duration": 464,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/e4/68/9b/e4689b77-3e49-7ade-acb8-876d753db716/06UMGIM35191.rgb.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-296.mp3",
+    "title": "Uptown Up",
+    "artist": "Maceo Parker",
+    "album": "Funk Overload",
+    "genre": "funk",
+    "year": "1998",
+    "duration": 257,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/99/a5/f2/99a5f2ea-2a78-808a-11cb-9a3c1004c040/744626003228_cover.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-297.mp3",
+    "title": "If Only for One Night",
+    "artist": "Luther Vandross",
+    "album": "The Night I Fell In Love",
+    "genre": "r&b",
+    "year": "1985",
+    "duration": 256,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Features124/v4/dc/05/a5/dc05a500-07ca-e0b1-364b-40985eccafb0/dj.llupprdq.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-298.mp3",
+    "title": "If Only You Knew",
+    "artist": "Patti LaBelle",
+    "album": "I'm in Love Again",
+    "genre": "soul",
+    "year": "1983",
+    "duration": 285,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/f7/48/10/f748104b-5e47-6221-b9eb-a9af93c70eee/mzi.wlkwlnyh.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-299.mp3",
+    "title": "Forever In Love",
+    "artist": "Kenny G",
+    "album": "Breathless",
+    "genre": "r&b",
+    "year": "1992",
+    "duration": 299,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Features125/v4/ae/3f/53/ae3f5331-c080-7dc8-73b0-efef90bc6f1c/dj.asipxkna.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-300.mp3",
+    "title": "The Truth",
+    "artist": "India.Arie",
+    "album": "Voyage to India (Special Edition)",
+    "genre": "r&b",
+    "year": "2002",
+    "duration": 210,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/6a/86/24/6a8624c6-49ad-2f0f-a6fd-6c245c757f68/00602527385624.rgb.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-291.mp3",
+    "title": "Better Must Come",
+    "artist": "Delroy Wilson",
+    "album": "Delroy Wilson Anthology",
+    "genre": "reggae",
+    "year": "1971",
+    "duration": 164,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/5d/f4/3d/5df43ded-932e-24a3-f6cb-e4c39944eabe/1769.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-292.mp3",
+    "title": "Welcome to Jamrock",
+    "artist": "Damian \"Jr. Gong\" Marley",
+    "album": "Welcome to Jamrock",
+    "genre": "reggae",
+    "year": "2005",
+    "duration": 213,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/78/1f/7e/781f7e4d-d4ce-4a3d-3154-70ca864b811c/06UMGIM25409.rgb.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-293.mp3",
+    "title": "Everything I Own (7'' Mix)",
+    "artist": "Ken Boothe",
+    "album": "Everything I Own",
+    "genre": "reggae",
+    "year": "1972",
+    "duration": 225,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/46/44/c1/4644c1cf-a6ce-7f7c-d291-3e26528c6807/5414939922442.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-294.mp3",
+    "title": "Benz and Bimma",
+    "artist": "Bounty Killer",
+    "album": "My Xperience",
+    "genre": "reggae",
+    "year": "1996",
+    "duration": 191,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music3/v4/78/20/c5/7820c55d-48fc-bd58-ba38-262c180444d6/884385175542.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-295.mp3",
+    "title": "Here I Come",
+    "artist": "Dennis Brown",
+    "album": "Love & Hate: The Best of Dennis Brown",
+    "genre": "reggae",
+    "year": "1996",
+    "duration": 266,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/5c/2b/e3/5c2be37c-02d7-d68c-73db-4fbf1abf5dd0/mzi.vwwououi.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-296.mp3",
+    "title": "Bam Bam",
+    "artist": "Sister Nancy",
+    "album": "Dancehall 101, Vol. 2",
+    "genre": "reggae",
+    "year": "1982",
+    "duration": 196,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/05/35/6b/05356b8f-730f-bc36-7ca5-3a139d95dd2b/mzi.eqjkwcds.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-297.mp3",
+    "title": "Soul Rebel",
+    "artist": "Lee \"Scratch\" Perry",
+    "album": "Gold Collection (feat. Bob Marley)",
+    "genre": "reggae",
+    "year": "1970",
+    "duration": 202,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music/72/a6/f2/mzi.crzsilou.tif/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-298.mp3",
+    "title": "Police In Helicopter",
+    "artist": "John Holt",
+    "album": "Police In Helicopter",
+    "genre": "reggae",
+    "year": "1983",
+    "duration": 219,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/71/12/dd/7112dd4a-b9ad-43a3-d826-947dd969d6ff/601811005866.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-299.mp3",
+    "title": "So Special",
+    "artist": "Mavado",
+    "album": "Mr. Brooks...A Better Tomorrow",
+    "genre": "reggae",
+    "year": "2009",
+    "duration": 179,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/c9/71/95/c97195bb-aa8f-99af-c910-05e16d2bd458/054645184267.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-300.mp3",
+    "title": "Sweat (A La La La La Long)",
+    "artist": "Inner Circle",
+    "album": "Blazzin' Fire",
+    "genre": "reggae",
+    "year": "1992",
+    "duration": 227,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/0d/79/7c/0d797c4e-bed7-b98d-1660-e73a0a268ccb/881034653161.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-301.mp3",
+    "title": "I Can See Clearly Now",
+    "artist": "Jimmy Cliff",
+    "album": "We All Are One: The Best of Jimmy Cliff",
+    "genre": "reggae",
+    "year": "1972",
+    "duration": 196,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/5b/2b/95/5b2b95ba-276e-b57f-8f2c-45059c281fb0/mzi.khdhtdfc.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-302.mp3",
+    "title": "Night Nurse",
+    "artist": "Gregory Isaacs",
+    "album": "Night Nurse (Bonus Tracks Edition)",
+    "genre": "reggae",
+    "year": "1982",
+    "duration": 247,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/78/ea/40/78ea405a-0fc8-5564-6d06-f5de8c027172/06UMGIM13272.rgb.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-303.mp3",
+    "title": "Toast",
+    "artist": "Original Koffee",
+    "album": "Rapture - EP",
+    "genre": "reggae",
+    "year": "2018",
+    "duration": 192,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/b7/0d/6b/b70d6b59-b509-eef7-0238-d7bafdcb7187/886447522134_Cover.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-304.mp3",
+    "title": "Happy Birthday",
+    "artist": "Busy Signal",
+    "album": "Happy Birthday - Single",
+    "genre": "reggae",
+    "year": "2024",
+    "duration": 184,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/45/dd/0e/45dd0e6a-8383-7370-6686-a861703cee38/0.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-305.mp3",
+    "title": "Dream Land",
+    "artist": "Bunny Wailer",
+    "album": "Blackheart Man",
+    "genre": "reggae",
+    "year": "1976",
+    "duration": 167,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/9e/8e/51/9e8e51c0-fc63-4593-8e70-85da659f706b/00602567826491.rgb.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-306.mp3",
+    "title": "Skankin' Sweet",
+    "artist": "Chronixx",
+    "album": "Chronology",
+    "genre": "reggae",
+    "year": "2017",
+    "duration": 252,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/38/cd/8e/38cd8e4f-3cfb-b805-a21e-75926417a7be/816216027935.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-307.mp3",
+    "title": "Back to the Island",
+    "artist": "Toots Hibbert",
+    "album": "The Best of the Vineyard Sound",
+    "genre": "reggae",
+    "year": "1975",
+    "duration": 353,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/8f/61/0b/8f610b4e-70ce-bada-23a4-3307f04e4609/mzi.ippxbjxm.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-308.mp3",
+    "title": "If I Was a Carpenter",
+    "artist": "John Holt",
+    "album": "Sons of Jamaica",
+    "genre": "reggae",
+    "year": "1987",
+    "duration": 212,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music/f0/36/5d/mzi.vbteekxu.tif/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-309.mp3",
+    "title": "Natty Rebel",
+    "artist": "U-Roy",
+    "album": "Original DJ",
+    "genre": "reggae",
+    "year": "1976",
+    "duration": 205,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music4/v4/02/a3/89/02a38913-479e-e0f5-0e1a-1fc932feffeb/00724384024550.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-310.mp3",
+    "title": "Legalize It",
+    "artist": "Peter Tosh",
+    "album": "Legalize It (Legacy Edition)",
+    "genre": "reggae",
+    "year": "1976",
+    "duration": 279,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/51/5b/3e/515b3ebc-4d33-a96c-efc8-eda551e9a991/mzi.ottovwts.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-311.mp3",
+    "title": "54-46 Was My Number",
+    "artist": "Toots & The Maytals",
+    "album": "In the Dark",
+    "genre": "reggae",
+    "year": "1973",
+    "duration": 204,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/24/25/f5/2425f576-cd78-3a23-bdbb-1fe1fce9490f/00602547758644.rgb.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-312.mp3",
+    "title": "God Is The Greatest",
+    "artist": "Vybz Kartel",
+    "album": "Viking (Vybz Is King) : 10th Year Anniversary",
+    "genre": "reggae",
+    "year": "2025",
+    "duration": 180,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/7d/90/3a/7d903a1e-85d0-6bb9-4184-10994e0081d3/199066530603.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-313.mp3",
+    "title": "Chase The Devil",
+    "artist": "Max Romeo & The Upsetters",
+    "album": "War Ina Babylon (Expanded Edition)",
+    "genre": "reggae",
+    "year": "1976",
+    "duration": 206,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/bc/5b/1e/bc5b1e9f-675c-cc43-ff3c-e4b30aa9c452/15UMGIM78300.rgb.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-314.mp3",
+    "title": "Here I Come",
+    "artist": "Barrington Levy",
+    "album": "Here I Come",
+    "genre": "reggae",
+    "year": "1985",
+    "duration": 226,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/da/ae/67/daae6794-a804-b965-355e-f0680f622a60/5055283432937.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-315.mp3",
+    "title": "Book of Rules",
+    "artist": "The Heptones",
+    "album": "Cool Rasta (Bonus Track Edition)",
+    "genre": "reggae",
+    "year": "1976",
+    "duration": 180,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/97/40/83/9740831f-dc76-8660-1c6a-91346ba229b4/5050159901326.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-316.mp3",
+    "title": "Big Ship",
+    "artist": "Freddie McGregor",
+    "album": "Big Ship",
+    "genre": "reggae",
+    "year": "1982",
+    "duration": 199,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/c4/43/e5/c443e55a-f211-b0c9-eede-3793ff30ced5/601811003961.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-317.mp3",
+    "title": "Solide comme le fer (feat. Soldat Jahman & Mojo)",
+    "artist": "Donkichoc",
+    "album": "Marseille Underground",
+    "genre": "reggae",
+    "year": "2007",
+    "duration": 222,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music6/v4/0d/0a/66/0d0a66c7-e26d-daf5-c3d9-11d0b9080019/cover.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-318.mp3",
+    "title": "Hey Baby (feat. Mos Def)",
+    "artist": "Stephen Marley featuring Mos Def",
+    "album": "Mind Control (Bonus Track Version)",
+    "genre": "reggae",
+    "year": "2007",
+    "duration": 295,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/c4/2a/6c/c42a6c7d-9ce0-2d26-89f8-0046cd58d2e8/00602517303645.rgb.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-319.mp3",
+    "title": "Talk About Love",
+    "artist": "Pat Kelly",
+    "album": "Jamaican Soul",
+    "genre": "reggae",
+    "year": "2013",
+    "duration": 179,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music6/v4/65/96/db/6596db04-fd3c-e4b1-d296-80be3631d038/cover.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-320.mp3",
+    "title": "Who Knows",
+    "artist": "Protoje & Chronixx",
+    "album": "Ancient Future",
+    "genre": "reggae",
+    "year": "2014",
+    "duration": 208,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/89/fc/cc/89fcccf8-f4fd-4b59-0021-27ac63ad9d58/199257636688_cover.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-321.mp3",
+    "title": "Temperature",
+    "artist": "Sean Paul",
+    "album": "The Trinity",
+    "genre": "reggae",
+    "year": "2005",
+    "duration": 216,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Features125/v4/6b/a9/89/6ba9895c-5aff-8be1-4ff9-9f88369077b1/dj.decwpjor.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-322.mp3",
+    "title": "Who Knows Where the Time Goes",
+    "artist": "Sandy Denny & Strawbs",
+    "album": "I've Always Kept a Unicorn - The Acoustic Sandy Denny",
+    "genre": "reggae",
+    "year": "2005",
+    "duration": 255,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/83/7e/4c/837e4c0c-f6af-068b-36af-7717d2fd3597/00600753673539.rgb.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-323.mp3",
+    "title": "It Wasn't Me (feat. Ricardo Ducent)",
+    "artist": "Shaggy",
+    "album": "Hot Shot",
+    "genre": "reggae",
+    "year": "2000",
+    "duration": 228,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/5b/78/c0/5b78c053-c5d5-5414-6d95-2a9ab3d3c7a6/06UMGIM55575.rgb.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-324.mp3",
+    "title": "007 (Shanty Town)",
+    "artist": "Desmond Dekker & The Aces",
+    "album": "Israelites: The Best of Desmond Dekker",
+    "genre": "reggae",
+    "year": "1966",
+    "duration": 153,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/b3/e6/65/b3e6654c-a8c7-4278-fb2c-dd25ea6eb097/5414939535277.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-325.mp3",
+    "title": "Ting-A-Ling",
+    "artist": "Shabba Ranks",
+    "album": "Greatest Hits",
+    "genre": "reggae",
+    "year": "1992",
+    "duration": 232,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/7f/c9/8b/7fc98b5d-3b27-1a32-b5e1-0a756fa40859/mzi.uofeefzu.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-326.mp3",
+    "title": "Three Little Birds",
+    "artist": "Bob Marley & The Wailers",
+    "album": "Legend – The Best Of Bob Marley & The Wailers",
+    "genre": "reggae",
+    "year": "1984",
+    "duration": 181,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/3c/c2/0d/3cc20dcc-8f4e-f060-36dd-7de52a7ec8fe/12UMGIM14712.rgb.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-327.mp3",
+    "title": "Rastaman Vibration (Live)",
+    "artist": "Ziggy Marley",
+    "album": "Love Is My Religion 20 Live",
+    "genre": "reggae",
+    "year": "2006",
+    "duration": 387,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/15/13/ff/1513ff33-7925-4e92-c878-225ca055a0c1/ZM_LIMR_20_LIVE_COVER.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-328.mp3",
+    "title": "Fire Burning",
+    "artist": "Bob Andy",
+    "album": "Pied Piper - The Best of Bob & Marcia",
+    "genre": "reggae",
+    "year": "1995",
+    "duration": 212,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/28/39/6e/28396eae-ad43-c630-1b38-cbbbe7231bf2/5414939535772.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-329.mp3",
+    "title": "Satta Massagana",
+    "artist": "The Abyssinians",
+    "album": "Satta Massagana",
+    "genre": "reggae",
+    "year": "1976",
+    "duration": 212,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/a5/a7/65/a5a76515-5009-1545-273b-303c9cbde7a8/s03.lcdgdayy.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-330.mp3",
+    "title": "Guess Who's Coming to Dinner",
+    "artist": "Black Uhuru",
+    "album": "Guess Who's Coming to Dinner",
+    "genre": "reggae",
+    "year": "1981",
+    "duration": 381,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music/v4/8b/1b/f1/8b1bf1b3-91e1-18e9-9a5a-8e2f8f3d5c95/Black_Uhuru-Guess_Who_s_Coming_To_Dinner.jpg/500x500bb.jpg"
+  },
+  {
+    "localFilename": "sample-331.mp3",
+    "title": "Marcus Garvey",
+    "artist": "Burning Spear",
+    "album": "Marcus Garvey",
+    "genre": "reggae",
+    "year": "1975",
+    "duration": 207,
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/ae/70/c7/ae70c72d-6ec0-ae67-9eeb-efabdb3a46bd/00602577085888.rgb.jpg/500x500bb.jpg"
+  }
+]

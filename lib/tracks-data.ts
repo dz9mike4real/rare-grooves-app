@@ -1,7 +1,7 @@
 import { Track } from './types';
 import { fetchAlbumCover } from './music-api';
 import { searchJamendoByGenre, convertJamendoTrack } from './jamendo-api';
-import { searchDeezerTrack, getDeezerAlbumCover } from './deezer-api';
+import { searchDeezerTrack } from './deezer-api';
 import { hasRealAudioUrl } from './utils';
 
 // Initial placeholder tracks - will be enriched with real audio from Deezer
@@ -16,7 +16,7 @@ export let rareTracks: Track[] = [
     duration: 423,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample1.mp3',
+    audioUrl: '',
     label: 'Atlantic Records',
     bpm: 124,
     key: 'F Minor'
@@ -31,7 +31,7 @@ export let rareTracks: Track[] = [
     duration: 596,
     rarity: 10,
     albumArt: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample2.mp3',
+    audioUrl: '',
     label: 'Polydor',
     bpm: 101,
     key: 'G Major'
@@ -46,7 +46,7 @@ export let rareTracks: Track[] = [
     duration: 323,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample3.mp3',
+    audioUrl: '',
     label: 'Tamla',
     bpm: 92,
     key: 'E Minor'
@@ -61,7 +61,7 @@ export let rareTracks: Track[] = [
     duration: 732,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample4.mp3',
+    audioUrl: '',
     label: 'Coconut Records',
     bpm: 118,
     key: 'D Minor'
@@ -76,7 +76,7 @@ export let rareTracks: Track[] = [
     duration: 387,
     rarity: 7,
     albumArt: 'https://images.unsplash.com/photo-1458560871784-56d23406c091?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample5.mp3',
+    audioUrl: '',
     label: 'Polydor',
     bpm: 110,
     key: 'A Minor'
@@ -91,7 +91,7 @@ export let rareTracks: Track[] = [
     duration: 335,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample6.mp3',
+    audioUrl: '',
     label: 'Island Records',
     bpm: 78,
     key: 'C Major'
@@ -106,7 +106,7 @@ export let rareTracks: Track[] = [
     duration: 285,
     rarity: 7,
     albumArt: 'https://images.unsplash.com/photo-1497911270199-1c552ee64aa4?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample7.mp3',
+    audioUrl: '',
     label: 'Columbia',
     bpm: 88,
     key: 'E♭ Major'
@@ -121,7 +121,7 @@ export let rareTracks: Track[] = [
     duration: 412,
     rarity: 10,
     albumArt: 'https://images.unsplash.com/photo-1415201364774-f6f0bb35f28f?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample8.mp3',
+    audioUrl: '',
     label: 'ABC Records',
     bpm: 115,
     key: 'F♯ Minor'
@@ -136,7 +136,7 @@ export let rareTracks: Track[] = [
     duration: 191,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample9.mp3',
+    audioUrl: '',
     label: 'RCA Victor',
     bpm: 72,
     key: 'B♭ Major'
@@ -151,7 +151,7 @@ export let rareTracks: Track[] = [
     duration: 687,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1494232410401-ad00d5433cfa?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample10.mp3',
+    audioUrl: '',
     label: 'EMI Nigeria',
     bpm: 105,
     key: 'G Minor'
@@ -166,7 +166,7 @@ export let rareTracks: Track[] = [
     duration: 206,
     rarity: 10,
     albumArt: 'https://images.unsplash.com/photo-1471478331149-c72f17e33c73?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample11.mp3',
+    audioUrl: '',
     label: 'Clocktower Records',
     bpm: 85,
     key: 'D Major'
@@ -181,7 +181,7 @@ export let rareTracks: Track[] = [
     duration: 427,
     rarity: 7,
     albumArt: 'https://images.unsplash.com/photo-1446057032654-9d8885db76c6?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample12.mp3',
+    audioUrl: '',
     label: 'Tamla',
     bpm: 96,
     key: 'C♯ Minor'
@@ -196,7 +196,7 @@ export let rareTracks: Track[] = [
     duration: 732,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample13.mp3',
+    audioUrl: '',
     label: 'CTI Records',
     bpm: 132,
     key: 'E♭ Minor'
@@ -211,7 +211,7 @@ export let rareTracks: Track[] = [
     duration: 195,
     rarity: 10,
     albumArt: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample14.mp3',
+    audioUrl: '',
     label: 'Josie Records',
     bpm: 95,
     key: 'C Minor'
@@ -226,7 +226,7 @@ export let rareTracks: Track[] = [
     duration: 473,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample15.mp3',
+    audioUrl: '',
     label: 'Atco',
     bpm: 88,
     key: 'B♭ Minor'
@@ -241,7 +241,7 @@ export let rareTracks: Track[] = [
     duration: 848,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample16.mp3',
+    audioUrl: '',
     label: 'EMI Nigeria',
     bpm: 112,
     key: 'A Minor'
@@ -256,7 +256,7 @@ export let rareTracks: Track[] = [
     duration: 189,
     rarity: 10,
     albumArt: 'https://images.unsplash.com/photo-1458560871784-56d23406c091?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample17.mp3',
+    audioUrl: '',
     label: 'Flying Dutchman',
     bpm: 98,
     key: 'G Minor'
@@ -271,7 +271,7 @@ export let rareTracks: Track[] = [
     duration: 246,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample18.mp3',
+    audioUrl: '',
     label: 'Clinch Records',
     bpm: 72,
     key: 'E Minor'
@@ -286,7 +286,7 @@ export let rareTracks: Track[] = [
     duration: 212,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1415201364774-f6f0bb35f28f?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample19.mp3',
+    audioUrl: '',
     label: 'Fantasy Records',
     bpm: 108,
     key: 'F Major'
@@ -301,7 +301,7 @@ export let rareTracks: Track[] = [
     duration: 320,
     rarity: 7,
     albumArt: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample20.mp3',
+    audioUrl: '',
     label: 'Hi Records',
     bpm: 115,
     key: 'D Major'
@@ -316,7 +316,7 @@ export let rareTracks: Track[] = [
     duration: 524,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample21.mp3',
+    audioUrl: '',
     label: 'Flying Dutchman',
     bpm: 104,
     key: 'F♯ Minor'
@@ -331,7 +331,7 @@ export let rareTracks: Track[] = [
     duration: 456,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1494232410401-ad00d5433cfa?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample22.mp3',
+    audioUrl: '',
     label: 'Cographique',
     bpm: 122,
     key: 'C Minor'
@@ -346,7 +346,7 @@ export let rareTracks: Track[] = [
     duration: 234,
     rarity: 10,
     albumArt: 'https://images.unsplash.com/photo-1471478331149-c72f17e33c73?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample23.mp3',
+    audioUrl: '',
     label: 'Joe Gibbs Records',
     bpm: 76,
     key: 'A Minor'
@@ -361,7 +361,7 @@ export let rareTracks: Track[] = [
     duration: 189,
     rarity: 7,
     albumArt: 'https://images.unsplash.com/photo-1497911270199-1c552ee64aa4?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample24.mp3',
+    audioUrl: '',
     label: 'Avco',
     bpm: 70,
     key: 'B♭ Major'
@@ -376,7 +376,7 @@ export let rareTracks: Track[] = [
     duration: 332,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1458560871784-56d23406c091?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample25.mp3',
+    audioUrl: '',
     label: 'Blue Note',
     bpm: 126,
     key: 'F Minor'
@@ -391,7 +391,7 @@ export let rareTracks: Track[] = [
     duration: 180,
     rarity: 10,
     albumArt: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample26.mp3',
+    audioUrl: '',
     label: 'People Records',
     bpm: 120,
     key: 'E♭ Major'
@@ -406,7 +406,7 @@ export let rareTracks: Track[] = [
     duration: 198,
     rarity: 7,
     albumArt: 'https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample27.mp3',
+    audioUrl: '',
     label: 'Atlantic',
     bpm: 94,
     key: 'G Major'
@@ -421,7 +421,7 @@ export let rareTracks: Track[] = [
     duration: 788,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample28.mp3',
+    audioUrl: '',
     label: 'EMI Nigeria',
     bpm: 116,
     key: 'D Minor'
@@ -436,7 +436,7 @@ export let rareTracks: Track[] = [
     duration: 276,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample29.mp3',
+    audioUrl: '',
     label: 'Island Records',
     bpm: 74,
     key: 'F♯ Minor'
@@ -451,7 +451,7 @@ export let rareTracks: Track[] = [
     duration: 186,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1446057032654-9d8885db76c6?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample30.mp3',
+    audioUrl: '',
     label: 'Philadelphia International',
     bpm: 104,
     key: 'A♭ Major'
@@ -466,7 +466,7 @@ export let rareTracks: Track[] = [
     duration: 512,
     rarity: 10,
     albumArt: 'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample31.mp3',
+    audioUrl: '',
     label: 'Riverside',
     bpm: 140,
     key: 'B♭ Major'
@@ -481,7 +481,7 @@ export let rareTracks: Track[] = [
     duration: 348,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1415201364774-f6f0bb35f28f?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample32.mp3',
+    audioUrl: '',
     label: 'Westbound',
     bpm: 118,
     key: 'E Minor'
@@ -496,7 +496,7 @@ export let rareTracks: Track[] = [
     duration: 295,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample33.mp3',
+    audioUrl: '',
     label: 'Atlantic',
     bpm: 86,
     key: 'C Major'
@@ -511,7 +511,7 @@ export let rareTracks: Track[] = [
     duration: 188,
     rarity: 7,
     albumArt: 'https://images.unsplash.com/photo-1471478331149-c72f17e33c73?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample34.mp3',
+    audioUrl: '',
     label: 'Lightning Records',
     bpm: 82,
     key: 'G Major'
@@ -526,7 +526,7 @@ export let rareTracks: Track[] = [
     duration: 267,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1497911270199-1c552ee64aa4?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample35.mp3',
+    audioUrl: '',
     label: 'Atco',
     bpm: 78,
     key: 'D Minor'
@@ -541,7 +541,7 @@ export let rareTracks: Track[] = [
     duration: 432,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1494232410401-ad00d5433cfa?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample36.mp3',
+    audioUrl: '',
     label: 'MCA Records',
     bpm: 110,
     key: 'F Major'
@@ -557,7 +557,7 @@ export let rareTracks: Track[] = [
     duration: 512,
     rarity: 10,
     albumArt: 'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample37.mp3',
+    audioUrl: '',
     label: 'Impulse!',
     bpm: 138,
     key: 'C Major'
@@ -572,7 +572,7 @@ export let rareTracks: Track[] = [
     duration: 563,
     rarity: 10,
     albumArt: 'https://images.unsplash.com/photo-1458560871784-56d23406c091?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample38.mp3',
+    audioUrl: '',
     label: 'Columbia',
     bpm: 140,
     key: 'D Dorian'
@@ -587,7 +587,7 @@ export let rareTracks: Track[] = [
     duration: 412,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample39.mp3',
+    audioUrl: '',
     label: 'Blue Note',
     bpm: 128,
     key: 'F Minor'
@@ -602,7 +602,7 @@ export let rareTracks: Track[] = [
     duration: 442,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1458560871784-56d23406c091?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample40.mp3',
+    audioUrl: '',
     label: 'Blue Note',
     bpm: 134,
     key: 'F Minor'
@@ -617,7 +617,7 @@ export let rareTracks: Track[] = [
     duration: 528,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample41.mp3',
+    audioUrl: '',
     label: 'Blue Note',
     bpm: 136,
     key: 'D♭ Major'
@@ -632,7 +632,7 @@ export let rareTracks: Track[] = [
     duration: 610,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1458560871784-56d23406c091?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample42.mp3',
+    audioUrl: '',
     label: 'Blue Note',
     bpm: 142,
     key: 'E♭ Minor'
@@ -647,7 +647,7 @@ export let rareTracks: Track[] = [
     duration: 324,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample43.mp3',
+    audioUrl: '',
     label: 'Columbia',
     bpm: 174,
     key: 'E♭ Minor'
@@ -662,7 +662,7 @@ export let rareTracks: Track[] = [
     duration: 540,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1458560871784-56d23406c091?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample44.mp3',
+    audioUrl: '',
     label: 'Blue Note',
     bpm: 144,
     key: 'F Minor'
@@ -677,7 +677,7 @@ export let rareTracks: Track[] = [
     duration: 582,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample45.mp3',
+    audioUrl: '',
     label: 'Blue Note',
     bpm: 132,
     key: 'C Minor'
@@ -692,7 +692,7 @@ export let rareTracks: Track[] = [
     duration: 642,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1458560871784-56d23406c091?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample46.mp3',
+    audioUrl: '',
     label: 'Blue Note',
     bpm: 136,
     key: 'E♭ Major'
@@ -707,7 +707,7 @@ export let rareTracks: Track[] = [
     duration: 504,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample47.mp3',
+    audioUrl: '',
     label: 'Capitol',
     bpm: 124,
     key: 'B♭ Major'
@@ -722,7 +722,7 @@ export let rareTracks: Track[] = [
     duration: 492,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1458560871784-56d23406c091?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample48.mp3',
+    audioUrl: '',
     label: 'Atlantic',
     bpm: 116,
     key: 'G Minor'
@@ -737,7 +737,7 @@ export let rareTracks: Track[] = [
     duration: 588,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample49.mp3',
+    audioUrl: '',
     label: 'Polydor',
     bpm: 138,
     key: 'B Minor'
@@ -752,7 +752,7 @@ export let rareTracks: Track[] = [
     duration: 354,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1458560871784-56d23406c091?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample50.mp3',
+    audioUrl: '',
     label: 'Columbia',
     bpm: 128,
     key: 'C Minor'
@@ -767,7 +767,7 @@ export let rareTracks: Track[] = [
     duration: 458,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1458560871784-56d23406c091?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample51.mp3',
+    audioUrl: '',
     label: 'Blue Note',
     bpm: 142,
     key: 'B♭ Minor'
@@ -782,7 +782,7 @@ export let rareTracks: Track[] = [
     duration: 284,
     rarity: 10,
     albumArt: 'https://images.unsplash.com/photo-1458560871784-56d23406c091?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample52.mp3',
+    audioUrl: '',
     label: 'Atlantic',
     bpm: 286,
     key: 'B Major'
@@ -797,7 +797,7 @@ export let rareTracks: Track[] = [
     duration: 472,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1458560871784-56d23406c091?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample53.mp3',
+    audioUrl: '',
     label: 'Verve',
     bpm: 152,
     key: 'E♭ Minor'
@@ -812,7 +812,7 @@ export let rareTracks: Track[] = [
     duration: 254,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1458560871784-56d23406c091?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample54.mp3',
+    audioUrl: '',
     label: 'Impulse!',
     bpm: 68,
     key: 'F Major'
@@ -827,7 +827,7 @@ export let rareTracks: Track[] = [
     duration: 525,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1458560871784-56d23406c091?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample55.mp3',
+    audioUrl: '',
     label: 'Columbia',
     bpm: 134,
     key: 'C Minor'
@@ -842,7 +842,7 @@ export let rareTracks: Track[] = [
     duration: 612,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1458560871784-56d23406c091?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample56.mp3',
+    audioUrl: '',
     label: 'Fantasy',
     bpm: 118,
     key: 'E♭ Minor'
@@ -857,7 +857,7 @@ export let rareTracks: Track[] = [
     duration: 388,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1458560871784-56d23406c091?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample57.mp3',
+    audioUrl: '',
     label: 'Blue Note',
     bpm: 126,
     key: 'F Major'
@@ -872,7 +872,7 @@ export let rareTracks: Track[] = [
     duration: 544,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1458560871784-56d23406c091?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample58.mp3',
+    audioUrl: '',
     label: 'Riverside',
     bpm: 132,
     key: 'F Minor'
@@ -888,7 +888,7 @@ export let rareTracks: Track[] = [
     duration: 345,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample59.mp3',
+    audioUrl: '',
     label: 'Casablanca',
     bpm: 108,
     key: 'G♭ Minor'
@@ -903,7 +903,7 @@ export let rareTracks: Track[] = [
     duration: 324,
     rarity: 10,
     albumArt: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample60.mp3',
+    audioUrl: '',
     label: 'Casablanca',
     bpm: 112,
     key: 'C♯ Minor'
@@ -918,7 +918,7 @@ export let rareTracks: Track[] = [
     duration: 237,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1415201364774-f6f0bb35f28f?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample61.mp3',
+    audioUrl: '',
     label: 'Atlantic',
     bpm: 106,
     key: 'E♭ Minor'
@@ -933,7 +933,7 @@ export let rareTracks: Track[] = [
     duration: 182,
     rarity: 10,
     albumArt: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample62.mp3',
+    audioUrl: '',
     label: 'King',
     bpm: 118,
     key: 'G Minor'
@@ -948,7 +948,7 @@ export let rareTracks: Track[] = [
     duration: 328,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample63.mp3',
+    audioUrl: '',
     label: 'King',
     bpm: 114,
     key: 'E Minor'
@@ -963,7 +963,7 @@ export let rareTracks: Track[] = [
     duration: 945,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1415201364774-f6f0bb35f28f?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample64.mp3',
+    audioUrl: '',
     label: 'Columbia',
     bpm: 98,
     key: 'B♭ Minor'
@@ -978,7 +978,7 @@ export let rareTracks: Track[] = [
     duration: 185,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample65.mp3',
+    audioUrl: '',
     label: 'De-Lite',
     bpm: 104,
     key: 'E♭ Minor'
@@ -993,7 +993,7 @@ export let rareTracks: Track[] = [
     duration: 228,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1415201364774-f6f0bb35f28f?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample66.mp3',
+    audioUrl: '',
     label: 'Motown',
     bpm: 108,
     key: 'A Minor'
@@ -1008,7 +1008,7 @@ export let rareTracks: Track[] = [
     duration: 317,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample67.mp3',
+    audioUrl: '',
     label: 'King',
     bpm: 116,
     key: 'D Minor'
@@ -1023,7 +1023,7 @@ export let rareTracks: Track[] = [
     duration: 272,
     rarity: 10,
     albumArt: 'https://images.unsplash.com/photo-1415201364774-f6f0bb35f28f?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample68.mp3',
+    audioUrl: '',
     label: 'Epic',
     bpm: 100,
     key: 'E♭ Minor'
@@ -1038,7 +1038,7 @@ export let rareTracks: Track[] = [
     duration: 580,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample69.mp3',
+    audioUrl: '',
     label: 'People',
     bpm: 112,
     key: 'G Minor'
@@ -1053,7 +1053,7 @@ export let rareTracks: Track[] = [
     duration: 165,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1415201364774-f6f0bb35f28f?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample70.mp3',
+    audioUrl: '',
     label: 'T-Neck',
     bpm: 110,
     key: 'F Minor'
@@ -1068,7 +1068,7 @@ export let rareTracks: Track[] = [
     duration: 588,
     rarity: 10,
     albumArt: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample71.mp3',
+    audioUrl: '',
     label: 'Polydor',
     bpm: 102,
     key: 'G Minor'
@@ -1083,7 +1083,7 @@ export let rareTracks: Track[] = [
     duration: 287,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample72.mp3',
+    audioUrl: '',
     label: 'King',
     bpm: 108,
     key: 'E Minor'
@@ -1098,7 +1098,7 @@ export let rareTracks: Track[] = [
     duration: 298,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1415201364774-f6f0bb35f28f?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample73.mp3',
+    audioUrl: '',
     label: 'MCA',
     bpm: 124,
     key: 'F♯ Minor'
@@ -1113,7 +1113,7 @@ export let rareTracks: Track[] = [
     duration: 304,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample74.mp3',
+    audioUrl: '',
     label: 'Mercury',
     bpm: 106,
     key: 'G Minor'
@@ -1128,7 +1128,7 @@ export let rareTracks: Track[] = [
     duration: 218,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1415201364774-f6f0bb35f28f?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample75.mp3',
+    audioUrl: '',
     label: 'De-Lite',
     bpm: 100,
     key: 'A Minor'
@@ -1143,7 +1143,7 @@ export let rareTracks: Track[] = [
     duration: 132,
     rarity: 10,
     albumArt: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample76.mp3',
+    audioUrl: '',
     label: 'King',
     bpm: 124,
     key: 'D Minor'
@@ -1158,7 +1158,7 @@ export let rareTracks: Track[] = [
     duration: 174,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1415201364774-f6f0bb35f28f?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample77.mp3',
+    audioUrl: '',
     label: 'Columbia',
     bpm: 116,
     key: 'E♭ Major'
@@ -1173,7 +1173,7 @@ export let rareTracks: Track[] = [
     duration: 280,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample78.mp3',
+    audioUrl: '',
     label: 'Mercury',
     bpm: 110,
     key: 'G Minor'
@@ -1188,7 +1188,7 @@ export let rareTracks: Track[] = [
     duration: 337,
     rarity: 7,
     albumArt: 'https://images.unsplash.com/photo-1415201364774-f6f0bb35f28f?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample79.mp3',
+    audioUrl: '',
     label: 'Philadelphia International',
     bpm: 118,
     key: 'F Minor'
@@ -1203,7 +1203,7 @@ export let rareTracks: Track[] = [
     duration: 256,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1415201364774-f6f0bb35f28f?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample80.mp3',
+    audioUrl: '',
     label: 'Tamla',
     bpm: 106,
     key: 'E♭ Minor'
@@ -1218,7 +1218,7 @@ export let rareTracks: Track[] = [
     duration: 156,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample81.mp3',
+    audioUrl: '',
     label: 'Josie',
     bpm: 98,
     key: 'C Minor'
@@ -1234,7 +1234,7 @@ export let rareTracks: Track[] = [
     duration: 148,
     rarity: 10,
     albumArt: 'https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample82.mp3',
+    audioUrl: '',
     label: 'Atlantic',
     bpm: 116,
     key: 'C Major'
@@ -1249,7 +1249,7 @@ export let rareTracks: Track[] = [
     duration: 201,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample83.mp3',
+    audioUrl: '',
     label: 'Volt',
     bpm: 92,
     key: 'A♭ Major'
@@ -1264,7 +1264,7 @@ export let rareTracks: Track[] = [
     duration: 168,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample84.mp3',
+    audioUrl: '',
     label: 'King',
     bpm: 138,
     key: 'D Major'
@@ -1279,7 +1279,7 @@ export let rareTracks: Track[] = [
     duration: 158,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample85.mp3',
+    audioUrl: '',
     label: 'Stax',
     bpm: 126,
     key: 'G Minor'
@@ -1294,7 +1294,7 @@ export let rareTracks: Track[] = [
     duration: 156,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample86.mp3',
+    audioUrl: '',
     label: 'Atlantic',
     bpm: 118,
     key: 'E Major'
@@ -1309,7 +1309,7 @@ export let rareTracks: Track[] = [
     duration: 162,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample87.mp3',
+    audioUrl: '',
     label: 'Atlantic',
     bpm: 72,
     key: 'C Major'
@@ -1324,7 +1324,7 @@ export let rareTracks: Track[] = [
     duration: 144,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample88.mp3',
+    audioUrl: '',
     label: 'Stax',
     bpm: 132,
     key: 'A♭ Major'
@@ -1339,7 +1339,7 @@ export let rareTracks: Track[] = [
     duration: 147,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample89.mp3',
+    audioUrl: '',
     label: 'Atlantic',
     bpm: 108,
     key: 'F Minor'
@@ -1354,7 +1354,7 @@ export let rareTracks: Track[] = [
     duration: 163,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample90.mp3',
+    audioUrl: '',
     label: 'Volt',
     bpm: 103,
     key: 'G Major'
@@ -1369,7 +1369,7 @@ export let rareTracks: Track[] = [
     duration: 690,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample91.mp3',
+    audioUrl: '',
     label: 'Gordy',
     bpm: 98,
     key: 'B♭ Minor'
@@ -1384,7 +1384,7 @@ export let rareTracks: Track[] = [
     duration: 196,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample92.mp3',
+    audioUrl: '',
     label: 'Tamla',
     bpm: 86,
     key: 'E♭ Minor'
@@ -1399,7 +1399,7 @@ export let rareTracks: Track[] = [
     duration: 258,
     rarity: 7,
     albumArt: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample93.mp3',
+    audioUrl: '',
     label: 'Sussex',
     bpm: 76,
     key: 'C Major'
@@ -1414,7 +1414,7 @@ export let rareTracks: Track[] = [
     duration: 232,
     rarity: 10,
     albumArt: 'https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample94.mp3',
+    audioUrl: '',
     label: 'Tamla',
     bpm: 98,
     key: 'E Major'
@@ -1429,7 +1429,7 @@ export let rareTracks: Track[] = [
     duration: 198,
     rarity: 10,
     albumArt: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample95.mp3',
+    audioUrl: '',
     label: 'RCA Victor',
     bpm: 68,
     key: 'B♭ Major'
@@ -1444,7 +1444,7 @@ export let rareTracks: Track[] = [
     duration: 155,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample96.mp3',
+    audioUrl: '',
     label: 'ABC-Paramount',
     bpm: 82,
     key: 'F♯ Major'
@@ -1459,7 +1459,7 @@ export let rareTracks: Track[] = [
     duration: 279,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample97.mp3',
+    audioUrl: '',
     label: 'Buddah',
     bpm: 104,
     key: 'D♭ Major'
@@ -1474,7 +1474,7 @@ export let rareTracks: Track[] = [
     duration: 221,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample98.mp3',
+    audioUrl: '',
     label: 'Sussex',
     bpm: 102,
     key: 'C Minor'
@@ -1489,7 +1489,7 @@ export let rareTracks: Track[] = [
     duration: 175,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample99.mp3',
+    audioUrl: '',
     label: 'Stax',
     bpm: 114,
     key: 'F Minor'
@@ -1504,7 +1504,7 @@ export let rareTracks: Track[] = [
     duration: 211,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample100.mp3',
+    audioUrl: '',
     label: 'Philadelphia International',
     bpm: 94,
     key: 'D♭ Major'
@@ -1519,7 +1519,7 @@ export let rareTracks: Track[] = [
     duration: 162,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample101.mp3',
+    audioUrl: '',
     label: 'Tamla',
     bpm: 122,
     key: 'F Major'
@@ -1534,7 +1534,7 @@ export let rareTracks: Track[] = [
     duration: 164,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample102.mp3',
+    audioUrl: '',
     label: 'Motown',
     bpm: 136,
     key: 'D Major'
@@ -1549,7 +1549,7 @@ export let rareTracks: Track[] = [
     duration: 154,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample103.mp3',
+    audioUrl: '',
     label: 'Gordy',
     bpm: 128,
     key: 'E♭ Major'
@@ -1565,7 +1565,7 @@ export let rareTracks: Track[] = [
     duration: 242,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1446057032654-9d8885db76c6?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample104.mp3',
+    audioUrl: '',
     label: 'Columbia',
     bpm: 94,
     key: 'E♭ Major'
@@ -1580,7 +1580,7 @@ export let rareTracks: Track[] = [
     duration: 442,
     rarity: 7,
     albumArt: 'https://images.unsplash.com/photo-1497911270199-1c552ee64aa4?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample105.mp3',
+    audioUrl: '',
     label: 'Elektra',
     bpm: 96,
     key: 'D♭ Major'
@@ -1595,7 +1595,7 @@ export let rareTracks: Track[] = [
     duration: 234,
     rarity: 7,
     albumArt: 'https://images.unsplash.com/photo-1446057032654-9d8885db76c6?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample106.mp3',
+    audioUrl: '',
     label: 'Epic',
     bpm: 78,
     key: 'A♭ Major'
@@ -1610,7 +1610,7 @@ export let rareTracks: Track[] = [
     duration: 285,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1497911270199-1c552ee64aa4?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample107.mp3',
+    audioUrl: '',
     label: 'Columbia',
     bpm: 72,
     key: 'B♭ Minor'
@@ -1625,7 +1625,7 @@ export let rareTracks: Track[] = [
     duration: 264,
     rarity: 7,
     albumArt: 'https://images.unsplash.com/photo-1446057032654-9d8885db76c6?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample108.mp3',
+    audioUrl: '',
     label: 'Elektra',
     bpm: 88,
     key: 'F Major'
@@ -1640,7 +1640,7 @@ export let rareTracks: Track[] = [
     duration: 506,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1446057032654-9d8885db76c6?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample109.mp3',
+    audioUrl: '',
     label: 'Tamla',
     bpm: 82,
     key: 'C Minor'
@@ -1655,7 +1655,7 @@ export let rareTracks: Track[] = [
     duration: 176,
     rarity: 7,
     albumArt: 'https://images.unsplash.com/photo-1497911270199-1c552ee64aa4?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample110.mp3',
+    audioUrl: '',
     label: 'Tamla',
     bpm: 76,
     key: 'D Major'
@@ -1670,7 +1670,7 @@ export let rareTracks: Track[] = [
     duration: 324,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1446057032654-9d8885db76c6?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample111.mp3',
+    audioUrl: '',
     label: 'Capitol',
     bpm: 114,
     key: 'G Major'
@@ -1685,7 +1685,7 @@ export let rareTracks: Track[] = [
     duration: 189,
     rarity: 7,
     albumArt: 'https://images.unsplash.com/photo-1497911270199-1c552ee64aa4?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample112.mp3',
+    audioUrl: '',
     label: 'RCA',
     bpm: 68,
     key: 'F♯ Major'
@@ -1700,7 +1700,7 @@ export let rareTracks: Track[] = [
     duration: 266,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1446057032654-9d8885db76c6?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample113.mp3',
+    audioUrl: '',
     label: 'Mercury',
     bpm: 104,
     key: 'E♭ Minor'
@@ -1715,7 +1715,7 @@ export let rareTracks: Track[] = [
     duration: 201,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1446057032654-9d8885db76c6?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample114.mp3',
+    audioUrl: '',
     label: 'Atlantic',
     bpm: 98,
     key: 'C Major'
@@ -1730,7 +1730,7 @@ export let rareTracks: Track[] = [
     duration: 295,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1497911270199-1c552ee64aa4?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample115.mp3',
+    audioUrl: '',
     label: 'Philadelphia International',
     bpm: 74,
     key: 'A Minor'
@@ -1745,7 +1745,7 @@ export let rareTracks: Track[] = [
     duration: 242,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1446057032654-9d8885db76c6?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample116.mp3',
+    audioUrl: '',
     label: 'Columbia',
     bpm: 124,
     key: 'D Major'
@@ -1760,7 +1760,7 @@ export let rareTracks: Track[] = [
     duration: 175,
     rarity: 7,
     albumArt: 'https://images.unsplash.com/photo-1497911270199-1c552ee64aa4?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample117.mp3',
+    audioUrl: '',
     label: 'Motown',
     bpm: 132,
     key: 'G Major'
@@ -1775,7 +1775,7 @@ export let rareTracks: Track[] = [
     duration: 266,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1446057032654-9d8885db76c6?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample118.mp3',
+    audioUrl: '',
     label: 'Epic',
     bpm: 108,
     key: 'C♯ Minor'
@@ -1790,7 +1790,7 @@ export let rareTracks: Track[] = [
     duration: 219,
     rarity: 7,
     albumArt: 'https://images.unsplash.com/photo-1497911270199-1c552ee64aa4?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample119.mp3',
+    audioUrl: '',
     label: 'Back Beat',
     bpm: 106,
     key: 'A Major'
@@ -1805,7 +1805,7 @@ export let rareTracks: Track[] = [
     duration: 338,
     rarity: 7,
     albumArt: 'https://images.unsplash.com/photo-1446057032654-9d8885db76c6?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample120.mp3',
+    audioUrl: '',
     label: 'Motown',
     bpm: 68,
     key: 'F Major'
@@ -1820,7 +1820,7 @@ export let rareTracks: Track[] = [
     duration: 301,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1497911270199-1c552ee64aa4?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample121.mp3',
+    audioUrl: '',
     label: 'A&M',
     bpm: 102,
     key: 'F♯ Major'
@@ -1835,7 +1835,7 @@ export let rareTracks: Track[] = [
     duration: 288,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1446057032654-9d8885db76c6?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample122.mp3',
+    audioUrl: '',
     label: 'Warner Bros.',
     bpm: 96,
     key: 'D♭ Major'
@@ -1850,7 +1850,7 @@ export let rareTracks: Track[] = [
     duration: 249,
     rarity: 7,
     albumArt: 'https://images.unsplash.com/photo-1497911270199-1c552ee64aa4?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample123.mp3',
+    audioUrl: '',
     label: 'Atlanta Artists',
     bpm: 110,
     key: 'G Minor'
@@ -1865,7 +1865,7 @@ export let rareTracks: Track[] = [
     duration: 414,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1446057032654-9d8885db76c6?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample124.mp3',
+    audioUrl: '',
     label: 'Warner Bros.',
     bpm: 102,
     key: 'B♭ Minor'
@@ -1880,7 +1880,7 @@ export let rareTracks: Track[] = [
     duration: 245,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1497911270199-1c552ee64aa4?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample125.mp3',
+    audioUrl: '',
     label: 'Elektra',
     bpm: 118,
     key: 'F Minor'
@@ -1896,7 +1896,7 @@ export let rareTracks: Track[] = [
     duration: 237,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample126.mp3',
+    audioUrl: '',
     label: 'Island',
     bpm: 76,
     key: 'C Major'
@@ -1911,7 +1911,7 @@ export let rareTracks: Track[] = [
     duration: 224,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample127.mp3',
+    audioUrl: '',
     label: 'Island',
     bpm: 72,
     key: 'G Major'
@@ -1926,7 +1926,7 @@ export let rareTracks: Track[] = [
     duration: 180,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample128.mp3',
+    audioUrl: '',
     label: 'Island',
     bpm: 76,
     key: 'A Major'
@@ -1941,7 +1941,7 @@ export let rareTracks: Track[] = [
     duration: 236,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample129.mp3',
+    audioUrl: '',
     label: 'Island',
     bpm: 104,
     key: 'D Major'
@@ -1956,7 +1956,7 @@ export let rareTracks: Track[] = [
     duration: 333,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample130.mp3',
+    audioUrl: '',
     label: 'Island',
     bpm: 78,
     key: 'A Major'
@@ -1971,7 +1971,7 @@ export let rareTracks: Track[] = [
     duration: 174,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1471478331149-c72f17e33c73?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample131.mp3',
+    audioUrl: '',
     label: 'Treasure Isle',
     bpm: 72,
     key: 'G Major'
@@ -1986,7 +1986,7 @@ export let rareTracks: Track[] = [
     duration: 337,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample132.mp3',
+    audioUrl: '',
     label: 'Island',
     bpm: 70,
     key: 'E Minor'
@@ -2001,7 +2001,7 @@ export let rareTracks: Track[] = [
     duration: 201,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1471478331149-c72f17e33c73?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample133.mp3',
+    audioUrl: '',
     label: 'Island',
     bpm: 80,
     key: 'E♭ Major'
@@ -2016,7 +2016,7 @@ export let rareTracks: Track[] = [
     duration: 162,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1471478331149-c72f17e33c73?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample134.mp3',
+    audioUrl: '',
     label: 'A&M',
     bpm: 64,
     key: 'A♭ Major'
@@ -2031,7 +2031,7 @@ export let rareTracks: Track[] = [
     duration: 168,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample135.mp3',
+    audioUrl: '',
     label: 'Trojan',
     bpm: 88,
     key: 'E♭ Major'
@@ -2046,7 +2046,7 @@ export let rareTracks: Track[] = [
     duration: 186,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample136.mp3',
+    audioUrl: '',
     label: 'Island',
     bpm: 84,
     key: 'F Major'
@@ -2061,7 +2061,7 @@ export let rareTracks: Track[] = [
     duration: 152,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1471478331149-c72f17e33c73?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample137.mp3',
+    audioUrl: '',
     label: 'Pyramid',
     bpm: 82,
     key: 'C♯ Minor'
@@ -2076,7 +2076,7 @@ export let rareTracks: Track[] = [
     duration: 144,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1471478331149-c72f17e33c73?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample138.mp3',
+    audioUrl: '',
     label: 'Pyramid',
     bpm: 76,
     key: 'G Minor'
@@ -2091,7 +2091,7 @@ export let rareTracks: Track[] = [
     duration: 157,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample139.mp3',
+    audioUrl: '',
     label: 'Trojan',
     bpm: 74,
     key: 'D Minor'
@@ -2106,7 +2106,7 @@ export let rareTracks: Track[] = [
     duration: 274,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample140.mp3',
+    audioUrl: '',
     label: 'Columbia',
     bpm: 78,
     key: 'C Minor'
@@ -2121,7 +2121,7 @@ export let rareTracks: Track[] = [
     duration: 364,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample141.mp3',
+    audioUrl: '',
     label: 'Columbia',
     bpm: 72,
     key: 'A Minor'
@@ -2136,7 +2136,7 @@ export let rareTracks: Track[] = [
     duration: 221,
     rarity: 7,
     albumArt: 'https://images.unsplash.com/photo-1471478331149-c72f17e33c73?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample142.mp3',
+    audioUrl: '',
     label: 'MCA',
     bpm: 94,
     key: 'F♯ Minor'
@@ -2151,7 +2151,7 @@ export let rareTracks: Track[] = [
     duration: 183,
     rarity: 7,
     albumArt: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample143.mp3',
+    audioUrl: '',
     label: 'A&M',
     bpm: 84,
     key: 'D Major'
@@ -2166,7 +2166,7 @@ export let rareTracks: Track[] = [
     duration: 223,
     rarity: 7,
     albumArt: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample144.mp3',
+    audioUrl: '',
     label: 'Mango',
     bpm: 96,
     key: 'G Major'
@@ -2181,7 +2181,7 @@ export let rareTracks: Track[] = [
     duration: 265,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1471478331149-c72f17e33c73?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample145.mp3',
+    audioUrl: '',
     label: 'Island',
     bpm: 74,
     key: 'A♭ Major'
@@ -2196,7 +2196,7 @@ export let rareTracks: Track[] = [
     duration: 198,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample146.mp3',
+    audioUrl: '',
     label: 'Jah Life',
     bpm: 80,
     key: 'B♭ Major'
@@ -2211,7 +2211,7 @@ export let rareTracks: Track[] = [
     duration: 180,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1471478331149-c72f17e33c73?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample147.mp3',
+    audioUrl: '',
     label: 'Techniques',
     bpm: 86,
     key: 'F♯ Minor'
@@ -2227,7 +2227,7 @@ export let rareTracks: Track[] = [
     duration: 678,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample148.mp3',
+    audioUrl: '',
     label: 'Phonogram',
     bpm: 108,
     key: 'E Minor'
@@ -2242,7 +2242,7 @@ export let rareTracks: Track[] = [
     duration: 732,
     rarity: 10,
     albumArt: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample149.mp3',
+    audioUrl: '',
     label: 'Coconut',
     bpm: 114,
     key: 'C Minor'
@@ -2257,7 +2257,7 @@ export let rareTracks: Track[] = [
     duration: 1542,
     rarity: 10,
     albumArt: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample150.mp3',
+    audioUrl: '',
     label: 'Kalakuta',
     bpm: 110,
     key: 'F Minor'
@@ -2272,7 +2272,7 @@ export let rareTracks: Track[] = [
     duration: 834,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample151.mp3',
+    audioUrl: '',
     label: 'Phonogram',
     bpm: 116,
     key: 'A♭ Minor'
@@ -2287,7 +2287,7 @@ export let rareTracks: Track[] = [
     duration: 602,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample152.mp3',
+    audioUrl: '',
     label: 'Kalakuta',
     bpm: 112,
     key: 'D Minor'
@@ -2302,7 +2302,7 @@ export let rareTracks: Track[] = [
     duration: 488,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1494232410401-ad00d5433cfa?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample153.mp3',
+    audioUrl: '',
     label: 'Comet',
     bpm: 104,
     key: 'G Minor'
@@ -2317,7 +2317,7 @@ export let rareTracks: Track[] = [
     duration: 524,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1494232410401-ad00d5433cfa?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample154.mp3',
+    audioUrl: '',
     label: 'Atlantic',
     bpm: 118,
     key: 'B♭ Major'
@@ -2332,7 +2332,7 @@ export let rareTracks: Track[] = [
     duration: 598,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1494232410401-ad00d5433cfa?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample155.mp3',
+    audioUrl: '',
     label: 'Fiesta',
     bpm: 120,
     key: 'F Minor'
@@ -2347,7 +2347,7 @@ export let rareTracks: Track[] = [
     duration: 612,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1494232410401-ad00d5433cfa?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample156.mp3',
+    audioUrl: '',
     label: 'Decca',
     bpm: 114,
     key: 'E Minor'
@@ -2362,7 +2362,7 @@ export let rareTracks: Track[] = [
     duration: 386,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1494232410401-ad00d5433cfa?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample157.mp3',
+    audioUrl: '',
     label: 'Philips West Africa',
     bpm: 128,
     key: 'C Major'
@@ -2377,7 +2377,7 @@ export let rareTracks: Track[] = [
     duration: 456,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1494232410401-ad00d5433cfa?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample158.mp3',
+    audioUrl: '',
     label: 'Essiebons',
     bpm: 106,
     key: 'A Minor'
@@ -2392,7 +2392,7 @@ export let rareTracks: Track[] = [
     duration: 398,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1494232410401-ad00d5433cfa?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample159.mp3',
+    audioUrl: '',
     label: 'Mr. Bongo',
     bpm: 110,
     key: 'D Minor'
@@ -2407,7 +2407,7 @@ export let rareTracks: Track[] = [
     duration: 542,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1494232410401-ad00d5433cfa?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample160.mp3',
+    audioUrl: '',
     label: 'EMI Nigeria',
     bpm: 118,
     key: 'F♯ Minor'
@@ -2422,7 +2422,7 @@ export let rareTracks: Track[] = [
     duration: 468,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1494232410401-ad00d5433cfa?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample161.mp3',
+    audioUrl: '',
     label: 'EMI Nigeria',
     bpm: 112,
     key: 'E♭ Minor'
@@ -2437,7 +2437,7 @@ export let rareTracks: Track[] = [
     duration: 756,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample162.mp3',
+    audioUrl: '',
     label: 'Decca',
     bpm: 108,
     key: 'B♭ Minor'
@@ -2452,7 +2452,7 @@ export let rareTracks: Track[] = [
     duration: 824,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample163.mp3',
+    audioUrl: '',
     label: 'Kalakuta',
     bpm: 110,
     key: 'G Minor'
@@ -2467,7 +2467,7 @@ export let rareTracks: Track[] = [
     duration: 698,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample164.mp3',
+    audioUrl: '',
     label: 'EMI Nigeria',
     bpm: 116,
     key: 'C Minor'
@@ -2482,7 +2482,7 @@ export let rareTracks: Track[] = [
     duration: 512,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1494232410401-ad00d5433cfa?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample165.mp3',
+    audioUrl: '',
     label: 'Wilfilms',
     bpm: 122,
     key: 'A Minor'
@@ -2497,7 +2497,7 @@ export let rareTracks: Track[] = [
     duration: 446,
     rarity: 10,
     albumArt: 'https://images.unsplash.com/photo-1494232410401-ad00d5433cfa?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample166.mp3',
+    audioUrl: '',
     label: 'Wilfilms',
     bpm: 124,
     key: 'F Major'
@@ -2512,7 +2512,7 @@ export let rareTracks: Track[] = [
     duration: 584,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1494232410401-ad00d5433cfa?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample167.mp3',
+    audioUrl: '',
     label: 'Wilfilms',
     bpm: 118,
     key: 'E♭ Major'
@@ -2528,7 +2528,7 @@ export let rareTracks: Track[] = [
     duration: 436,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1415201364774-f6f0bb35f28f?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample168.mp3',
+    audioUrl: '',
     label: 'Warner Bros.',
     bpm: 104,
     key: 'F Minor'
@@ -2543,7 +2543,7 @@ export let rareTracks: Track[] = [
     duration: 318,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1415201364774-f6f0bb35f28f?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample169.mp3',
+    audioUrl: '',
     label: 'Atlantic',
     bpm: 116,
     key: 'E♭ Major'
@@ -2558,7 +2558,7 @@ export let rareTracks: Track[] = [
     duration: 322,
     rarity: 7,
     albumArt: 'https://images.unsplash.com/photo-1415201364774-f6f0bb35f28f?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample170.mp3',
+    audioUrl: '',
     label: 'Atlantic',
     bpm: 124,
     key: 'F Minor'
@@ -2573,7 +2573,7 @@ export let rareTracks: Track[] = [
     duration: 215,
     rarity: 7,
     albumArt: 'https://images.unsplash.com/photo-1415201364774-f6f0bb35f28f?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample171.mp3',
+    audioUrl: '',
     label: 'Warner Bros.',
     bpm: 128,
     key: 'E♭ Minor'
@@ -2588,7 +2588,7 @@ export let rareTracks: Track[] = [
     duration: 332,
     rarity: 7,
     albumArt: 'https://images.unsplash.com/photo-1415201364774-f6f0bb35f28f?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample172.mp3',
+    audioUrl: '',
     label: 'ARC',
     bpm: 128,
     key: 'G Minor'
@@ -2603,7 +2603,7 @@ export let rareTracks: Track[] = [
     duration: 432,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample173.mp3',
+    audioUrl: '',
     label: 'Tamla',
     bpm: 108,
     key: 'F Major'
@@ -2618,7 +2618,7 @@ export let rareTracks: Track[] = [
     duration: 268,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample174.mp3',
+    audioUrl: '',
     label: 'T-Neck',
     bpm: 96,
     key: 'C Minor'
@@ -2634,7 +2634,7 @@ export let rareTracks: Track[] = [
     duration: 172,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample175.mp3',
+    audioUrl: '',
     label: 'Atco',
     bpm: 84,
     key: 'D Major'
@@ -2649,7 +2649,7 @@ export let rareTracks: Track[] = [
     duration: 342,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample176.mp3',
+    audioUrl: '',
     label: 'Volt',
     bpm: 76,
     key: 'E♭ Minor'
@@ -2664,7 +2664,7 @@ export let rareTracks: Track[] = [
     duration: 230,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample177.mp3',
+    audioUrl: '',
     label: 'Avco',
     bpm: 92,
     key: 'C Major'
@@ -2679,7 +2679,7 @@ export let rareTracks: Track[] = [
     duration: 287,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample178.mp3',
+    audioUrl: '',
     label: 'Atlantic',
     bpm: 88,
     key: 'E♭ Major'
@@ -2694,7 +2694,7 @@ export let rareTracks: Track[] = [
     duration: 283,
     rarity: 7,
     albumArt: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample179.mp3',
+    audioUrl: '',
     label: 'Atlantic',
     bpm: 76,
     key: 'F Major'
@@ -2709,7 +2709,7 @@ export let rareTracks: Track[] = [
     duration: 462,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample180.mp3',
+    audioUrl: '',
     label: 'Philadelphia International',
     bpm: 102,
     key: 'G Minor'
@@ -2725,7 +2725,7 @@ export let rareTracks: Track[] = [
     duration: 286,
     rarity: 7,
     albumArt: 'https://images.unsplash.com/photo-1446057032654-9d8885db76c6?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample181.mp3',
+    audioUrl: '',
     label: 'Soul',
     bpm: 96,
     key: 'E♭ Minor'
@@ -2740,7 +2740,7 @@ export let rareTracks: Track[] = [
     duration: 218,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1446057032654-9d8885db76c6?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample182.mp3',
+    audioUrl: '',
     label: 'Philadelphia International',
     bpm: 106,
     key: 'A♭ Major'
@@ -2755,7 +2755,7 @@ export let rareTracks: Track[] = [
     duration: 178,
     rarity: 7,
     albumArt: 'https://images.unsplash.com/photo-1446057032654-9d8885db76c6?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample183.mp3',
+    audioUrl: '',
     label: 'Philadelphia International',
     bpm: 124,
     key: 'G Minor'
@@ -2771,7 +2771,7 @@ export let rareTracks: Track[] = [
     duration: 456,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1458560871784-56d23406c091?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample184.mp3',
+    audioUrl: '',
     label: 'Columbia',
     bpm: 108,
     key: 'F Major'
@@ -2786,7 +2786,7 @@ export let rareTracks: Track[] = [
     duration: 642,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1458560871784-56d23406c091?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample185.mp3',
+    audioUrl: '',
     label: 'Columbia',
     bpm: 88,
     key: 'E♭ Minor'
@@ -2801,7 +2801,7 @@ export let rareTracks: Track[] = [
     duration: 324,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1458560871784-56d23406c091?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample186.mp3',
+    audioUrl: '',
     label: 'Columbia',
     bpm: 86,
     key: 'C Minor'
@@ -2816,7 +2816,7 @@ export let rareTracks: Track[] = [
     duration: 342,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1458560871784-56d23406c091?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample187.mp3',
+    audioUrl: '',
     label: 'Columbia',
     bpm: 68,
     key: 'E♭ Minor'
@@ -2831,7 +2831,7 @@ export let rareTracks: Track[] = [
     duration: 266,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1458560871784-56d23406c091?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample188.mp3',
+    audioUrl: '',
     label: 'Impulse!',
     bpm: 108,
     key: 'E♭ Major'
@@ -2847,7 +2847,7 @@ export let rareTracks: Track[] = [
     duration: 172,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample189.mp3',
+    audioUrl: '',
     label: 'Island',
     bpm: 76,
     key: 'C Major'
@@ -2862,7 +2862,7 @@ export let rareTracks: Track[] = [
     duration: 225,
     rarity: 7,
     albumArt: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample190.mp3',
+    audioUrl: '',
     label: 'Island',
     bpm: 104,
     key: 'D Major'
@@ -2877,7 +2877,7 @@ export let rareTracks: Track[] = [
     duration: 180,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample191.mp3',
+    audioUrl: '',
     label: 'Island',
     bpm: 84,
     key: 'D Minor'
@@ -2892,7 +2892,7 @@ export let rareTracks: Track[] = [
     duration: 242,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample192.mp3',
+    audioUrl: '',
     label: 'Island',
     bpm: 88,
     key: 'E Minor'
@@ -2907,7 +2907,7 @@ export let rareTracks: Track[] = [
     duration: 348,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample193.mp3',
+    audioUrl: '',
     label: 'Columbia',
     bpm: 76,
     key: 'G Major'
@@ -2923,7 +2923,7 @@ export let rareTracks: Track[] = [
     duration: 538,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample194.mp3',
+    audioUrl: '',
     label: 'EMI Nigeria',
     bpm: 116,
     key: 'A Minor'
@@ -2938,7 +2938,7 @@ export let rareTracks: Track[] = [
     duration: 432,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample195.mp3',
+    audioUrl: '',
     label: 'Coconut Records',
     bpm: 112,
     key: 'E Minor'
@@ -2953,7 +2953,7 @@ export let rareTracks: Track[] = [
     duration: 402,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample196.mp3',
+    audioUrl: '',
     label: 'Decca',
     bpm: 108,
     key: 'G Minor'
@@ -2968,7 +2968,7 @@ export let rareTracks: Track[] = [
     duration: 640,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample197.mp3',
+    audioUrl: '',
     label: 'Decca',
     bpm: 124,
     key: 'F Minor'
@@ -2983,7 +2983,7 @@ export let rareTracks: Track[] = [
     duration: 416,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample198.mp3',
+    audioUrl: '',
     label: 'Coconut Records',
     bpm: 114,
     key: 'D Minor'
@@ -2998,7 +2998,7 @@ export let rareTracks: Track[] = [
     duration: 318,
     rarity: 9,
     albumArt: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample199.mp3',
+    audioUrl: '',
     label: 'Decca',
     bpm: 78,
     key: 'E♭ Major'
@@ -3013,7 +3013,7 @@ export let rareTracks: Track[] = [
     duration: 528,
     rarity: 8,
     albumArt: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop',
-    audioUrl: '/audio/sample200.mp3',
+    audioUrl: '',
     label: 'Decca',
     bpm: 108,
     key: 'A♭ Major'
@@ -3090,7 +3090,7 @@ const loadCache = (): Map<string, CachedTrack> => {
       const expiryTime = CACHE_EXPIRY_DAYS * 24 * 60 * 60 * 1000;
       
       // Filter out expired entries
-      const validEntries = Object.entries(parsed).filter(([_, data]: [string, any]) => {
+      const validEntries = Object.entries(parsed as Record<string, CachedTrack>).filter(([, data]) => {
         return now - data.timestamp < expiryTime;
       });
       
@@ -3117,11 +3117,18 @@ const saveCache = (cache: Map<string, CachedTrack>) => {
 
 // Fetch real audio previews and album covers from Deezer/iTunes
 // Optimized with localStorage caching
+export interface LoadTracksResult {
+  tracks: Track[];
+  errorCount: number;
+  cacheHits: number;
+}
+
 export const loadRealAudioFromDeezer = async (
   tracks: Track[], 
   maxInitial = 40,
-  onProgress?: (loaded: number, total: number) => void
-): Promise<Track[]> => {
+  onProgress?: (loaded: number, total: number) => void,
+  onError?: (error: string, trackTitle: string) => void
+): Promise<LoadTracksResult> => {
   console.log('[v0] Fetching real audio and album covers...');
   
   const cache = loadCache();
@@ -3130,6 +3137,7 @@ export const loadRealAudioFromDeezer = async (
   const results: Track[] = [];
   let cacheHits = 0;
   let apiCalls = 0;
+  let errorCount = 0;
   
   const tracksToLoad = tracks.slice(0, maxInitial);
   const remainingTracks = tracks.slice(maxInitial);
@@ -3172,6 +3180,10 @@ export const loadRealAudioFromDeezer = async (
           };
         } catch (error) {
           console.error(`[v0] Failed to load data for ${track.artist} - ${track.title}:`, error);
+          errorCount++;
+          if (onError) {
+            onError(`Failed to load ${track.title}`, `${track.artist}`);
+          }
         }
         return track;
       })
@@ -3201,9 +3213,9 @@ export const loadRealAudioFromDeezer = async (
   }
   
   const audioCount = results.filter(t => hasRealAudioUrl(t.audioUrl)).length;
-  console.log(`[v0] Loaded ${audioCount} audio previews (${cacheHits} from cache, ${apiCalls} API calls)`);
+  console.log(`[v0] Loaded ${audioCount} audio previews (${cacheHits} from cache, ${apiCalls} API calls, ${errorCount} errors)`);
   
-  return results;
+  return { tracks: results, errorCount, cacheHits };
 };
 
 // Load audio for additional tracks (for lazy loading) with cache
@@ -3251,7 +3263,7 @@ export const loadAudioForTracks = async (tracks: Track[]): Promise<Track[]> => {
               audioUrl: deezerData.previewUrl || results[i + idx]!.audioUrl,
               albumArt: deezerData.albumCover || results[i + idx]!.albumArt
             };
-          } catch (error) {
+          } catch {
             // Silent fail for lazy loading
           }
         }
@@ -3299,6 +3311,51 @@ export const getTracksWithRealArt = async (): Promise<Track[]> => {
   }
   
   console.log('[v0] Pre-loading tracks with real album art...');
-  tracksWithRealArt = await loadRealAudioFromDeezer(rareTracks);
+  const result = await loadRealAudioFromDeezer(rareTracks);
+  tracksWithRealArt = result.tracks;
   return tracksWithRealArt;
+};
+
+// Local tracks with downloaded audio
+interface LocalTrackData {
+  localFilename: string;
+  title: string;
+  artist: string;
+  album: string;
+  genre: string;
+  year: number | null;
+  duration: number;
+  albumArt: string;
+}
+
+let localTracks: Track[] | null = null;
+
+export const getLocalTracks = (): Track[] => {
+  if (localTracks) {
+    return localTracks;
+  }
+
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const localData = require('./tracks-local.json') as LocalTrackData[];
+    
+    localTracks = localData.map((track, index) => ({
+      id: `local-${index + 1}`,
+      title: track.title,
+      artist: track.artist,
+      album: track.album,
+      genre: track.genre as Track['genre'],
+      year: track.year || 1970,
+      duration: track.duration,
+      rarity: Math.max(1, 10 - Math.floor(index / 3)), // Rarity 10 for first tracks
+      albumArt: track.albumArt,
+      audioUrl: `/audio/${track.localFilename}`,
+      label: 'Deezer Preview',
+    }));
+    
+    return localTracks;
+  } catch (error) {
+    console.error('[v0] Failed to load local tracks:', error);
+    return [];
+  }
 };

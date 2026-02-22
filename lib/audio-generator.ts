@@ -12,7 +12,15 @@ export const generateDemoAudio = async (
   if (typeof window === 'undefined') return '';
 
   try {
-    const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+    const getAudioContext = () => {
+      if (typeof window === 'undefined') return null;
+      return (window.AudioContext ?? (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext);
+    };
+    const AudioContextClass = getAudioContext();
+    if (!AudioContextClass) {
+      throw new Error('Web Audio API not supported');
+    }
+    const audioContext = new AudioContextClass();
     const sampleRate = audioContext.sampleRate;
     const numChannels = 2;
     const length = Math.min(duration || 30, 30) * sampleRate;

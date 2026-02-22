@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 import { RATE_LIMIT, INPUT } from './constants';
 
 // Simple in-memory rate limiter with cleanup

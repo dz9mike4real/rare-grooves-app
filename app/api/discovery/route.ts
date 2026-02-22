@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
   }
   
   try {
-    const { genre, mood, bpmRange, favorites, recentlyPlayed } = await request.json();
+    const { genre, mood, bpmRange } = await request.json();
 
     // Simulated AI recommendation engine
     // In production, this would call OpenAI or similar AI API

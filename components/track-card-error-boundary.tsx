@@ -1,6 +1,6 @@
 'use client';
 
-import { Component, ReactNode } from 'react';
+import { Component, ReactNode, ErrorInfo } from 'react';
 import { TrackCardSkeleton } from './track-card-skeleton';
 
 interface Props {
@@ -22,7 +22,7 @@ export class TrackCardErrorBoundary extends Component<Props, State> {
     return { hasError: true };
   }
 
-  componentDidCatch(error: Error, errorInfo: any) {
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     console.error(`[v0] Error in track card ${this.props.trackId}:`, error, errorInfo);
   }
 

@@ -23,6 +23,6 @@ describe('hasRealAudioUrl', () => {
   })
 
   it('returns false for null', () => {
-    expect(hasRealAudioUrl(null as any)).toBe(false)
+    expect(hasRealAudioUrl(undefined)).toBe(false)
   })
 })

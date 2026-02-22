@@ -4,6 +4,31 @@ import { searchTheAudioDB } from '@/lib/audiodb-api';
 import { searchDiscogs } from '@/lib/discogs-api';
 import { INPUT } from '@/lib/constants';
 
+interface DeezerTrack {
+  id: number;
+  title: string;
+  title_short: string;
+  preview: string;
+  album: {
+    cover: string;
+    cover_medium: string;
+    cover_big: string;
+    cover_xl: string;
+    title: string;
+  };
+  artist: {
+    name: string;
+  };
+}
+
+interface iTunesTrack {
+  trackName: string;
+  previewUrl: string;
+  artworkUrl100: string;
+  artistName: string;
+  collectionName: string;
+}
+
 export async function GET(request: NextRequest) {
   try {
     const clientIp = getClientIp(request);
@@ -45,7 +70,7 @@ export async function GET(request: NextRequest) {
       
       if (deezerData.data && deezerData.data.length > 0) {
         // Find best match
-        const bestMatch = deezerData.data.find((t: any) => {
+        const bestMatch = deezerData.data.find((t: DeezerTrack) => {
           const searchTitle = sanitizedTitle.toLowerCase().split('(')[0].trim();
           const trackTitle = t.title_short?.toLowerCase() || t.title?.toLowerCase() || '';
           return trackTitle.includes(searchTitle) || searchTitle.includes(trackTitle);
@@ -86,7 +111,7 @@ export async function GET(request: NextRequest) {
       
       if (itunesData.results && itunesData.results.length > 0) {
         // Find best match
-        const bestMatch = itunesData.results.find((t: any) => {
+        const bestMatch = itunesData.results.find((t: iTunesTrack) => {
           const searchTitle = sanitizedTitle.toLowerCase().split('(')[0].trim();
           const trackTitle = t.trackName?.toLowerCase() || '';
           return trackTitle.includes(searchTitle) || searchTitle.includes(trackTitle);

@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Track } from '@/lib/types';
-import { rareTracks, loadRealAudioFromDeezer, loadAudioForTracks } from '@/lib/tracks-data';
+import { rareTracks, loadRealAudioFromDeezer, loadAudioForTracks, getLocalTracks } from '@/lib/tracks-data';
 import { TrackCard } from '@/components/track-card';
 import { TrackCardErrorBoundary } from '@/components/track-card-error-boundary';
 import { AudioPlayer } from '@/components/audio-player';
@@ -14,7 +14,7 @@ import { motion } from 'framer-motion';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Search, Disc3, Heart, Sparkles, X, Play, Calendar, ArrowUpDown } from 'lucide-react';
+import { Search, Disc3, Heart, Sparkles, X, Play, Calendar } from 'lucide-react';
 import { DiscoveryButton, DiscoveryPanel } from '@/components/discovery';
 import { SurpriseMeButton, RecentlyPlayed, useRecentlyPlayed } from '@/components/discovery-enhanced';
 import { useToast } from '@/hooks/use-toast';
@@ -128,37 +128,31 @@ export default function Home() {
     }
   }, [selectedTrack]);
 
-  // Load real audio on mount (client-side only)
+  // Load local tracks on mount
   useEffect(() => {
     const loadTracks = async () => {
       console.log('[v0] Loading tracks...');
       
       try {
-        const tracksWithRealAudio = await loadRealAudioFromDeezer(
-          rareTracks,
-          40,
-          (loaded) => {
-            setLoadedCount(loaded);
-          }
-        );
+        // Use local downloaded tracks (175 tracks with 30-sec previews)
+        const localTracks = getLocalTracks();
+        console.log('[v0] Local tracks:', localTracks.length);
         
-        setTracksWithCovers(tracksWithRealAudio);
-        setDisplayedTracks(
-          tracksWithRealAudio
-            .sort((a, b) => b.rarity - a.rarity)
-        );
-        setQueue(tracksWithRealAudio.sort((a, b) => b.rarity - a.rarity));
-        
-        const loaded = tracksWithRealAudio.filter(t => hasRealAudioUrl(t.audioUrl)).length;
-        setLoadedCount(loaded);
-        // Don't show toast - it's expected that rare tracks won't have previews
+        if (localTracks.length > 0) {
+          const sortedTracks = localTracks.sort((a: Track, b: Track) => b.rarity - a.rarity);
+          
+          setTracksWithCovers(sortedTracks);
+          setDisplayedTracks(sortedTracks);
+          setQueue(sortedTracks);
+          setLoadedCount(sortedTracks.length);
+          
+          toast({
+            title: 'Tracks loaded',
+            description: `Loaded ${sortedTracks.length} tracks with audio`,
+          });
+        }
       } catch (error) {
         console.error('[v0] Failed to load tracks:', error);
-        toast({
-          title: 'Loading issue',
-          description: 'Some tracks may not have preview audio.',
-          variant: 'destructive'
-        });
       } finally {
         setIsLoadingAudio(false);
         hasInitialized.current = true;
@@ -432,27 +426,8 @@ export default function Home() {
             </select>
           </div>
 
-          {/* Year & Sort Filters */}
-          <div className="flex items-center gap-2">
-            {/* Year Filter */}
-            <div className="flex items-center gap-2">
-              <Calendar className="h-4 w-4 text-muted-foreground" />
-              <select
-                value={selectedYear}
-                onChange={(e) => handleYearChange(e.target.value)}
-                className="bg-background/80 border border-border text-foreground rounded-full px-2 py-1.5 sm:px-3 sm:py-2 text-xs sm:text-sm focus:ring-1 focus:ring-primary w-20 sm:w-auto"
-              >
-                {years.map((year) => (
-                  <option key={year.value} value={year.value}>
-                    {year.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            {/* Sort Dropdown */}
-            <div className="hidden sm:flex items-center gap-2">
-              <ArrowUpDown className="h-4 w-4 text-muted-foreground" />
+          {/* Sort Filter */}
+          <div className="hidden sm:flex items-center gap-2">
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as typeof sortBy)}
@@ -465,7 +440,6 @@ export default function Home() {
                 ))}
               </select>
             </div>
-          </div>
 
           {/* Clear Filters Button */}
           {hasActiveFilters && (

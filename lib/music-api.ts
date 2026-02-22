@@ -42,7 +42,7 @@ export async function fetchAlbumCover(artist: string, album: string): Promise<st
         }
       }
     }
-  } catch (err) {
+  } catch {
     // Silent fail
   }
 
@@ -71,7 +71,7 @@ export async function fetchAlbumCover(artist: string, album: string): Promise<st
         }
       }
     }
-  } catch (err) {
+  } catch {
     // Silent fail
   }
 
@@ -82,7 +82,7 @@ export async function fetchAlbumCover(artist: string, album: string): Promise<st
       console.log('[v0] Discogs cover found for:', artist, '-', album);
       return discogsData.albumArt;
     }
-  } catch (err) {
+  } catch {
     // Silent fail
   }
 
@@ -93,7 +93,7 @@ export async function fetchAlbumCover(artist: string, album: string): Promise<st
       console.log('[v0] TheAudioDB cover found for:', artist, '-', album);
       return audiodbData.albumArt;
     }
-  } catch (err) {
+  } catch {
     // Silent fail
   }
   

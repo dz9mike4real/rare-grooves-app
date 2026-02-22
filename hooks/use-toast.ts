@@ -15,37 +15,40 @@ type ToasterToast = ToastProps & {
   action?: ToastActionElement
 }
 
+// actionTypes is used via typeof to create ActionTypes - eslint disable needed because
+// the const value is only used to extract the type, but TS requires the runtime value
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const actionTypes = {
   ADD_TOAST: 'ADD_TOAST',
   UPDATE_TOAST: 'UPDATE_TOAST',
   DISMISS_TOAST: 'DISMISS_TOAST',
   REMOVE_TOAST: 'REMOVE_TOAST',
-} as const
+} as const;
+
+export type ActionTypes = typeof actionTypes;
 
 let count = 0
 
 function genId() {
-  count = (count + 1) % Number.MAX_SAFE_INTEGER
-  return count.toString()
+  count = (count + 1) % Number.MAX_SAFE_INTEGER;
+  return count.toString();
 }
-
-type ActionType = typeof actionTypes
 
 type Action =
   | {
-      type: ActionType['ADD_TOAST']
+      type: ActionTypes['ADD_TOAST']
       toast: ToasterToast
     }
   | {
-      type: ActionType['UPDATE_TOAST']
+      type: ActionTypes['UPDATE_TOAST']
       toast: Partial<ToasterToast>
     }
   | {
-      type: ActionType['DISMISS_TOAST']
+      type: ActionTypes['DISMISS_TOAST']
       toastId?: ToasterToast['id']
     }
   | {
-      type: ActionType['REMOVE_TOAST']
+      type: ActionTypes['REMOVE_TOAST']
       toastId?: ToasterToast['id']
     }
 

@@ -32,7 +32,7 @@ export function ShareDialog({ track, onClose }: ShareDialogProps) {
       });
       
       setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
+    } catch {
       toast({
         title: 'Copy failed',
         description: 'Failed to copy link. Please try again.',

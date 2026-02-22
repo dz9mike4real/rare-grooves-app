@@ -26,6 +26,12 @@ interface DiscogsSearchResponse {
   results: DiscogsRelease[];
 }
 
+interface DiscogsTrack {
+  position: string;
+  title: string;
+  duration: string;
+}
+
 const BASE_URL = 'https://api.discogs.com';
 
 export async function searchDiscogs(
@@ -140,7 +146,7 @@ export async function getDiscogsRelease(releaseId: number): Promise<{
       year: data.year || null,
       country: data.country || null,
       label: data.labels?.[0]?.name || null,
-      tracklist: data.tracklist?.map((t: any) => ({
+      tracklist: data.tracklist?.map((t: DiscogsTrack) => ({
         position: t.position || '',
         title: t.title || '',
         duration: t.duration || ''

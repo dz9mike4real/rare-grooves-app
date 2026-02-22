@@ -1,34 +1,6 @@
 // Deezer API integration for fetching real music previews
 // Deezer provides 30-second preview URLs without authentication
 
-interface DeezerTrack {
-  id: number;
-  title: string;
-  title_short: string;
-  link: string;
-  duration: number;
-  preview: string; // 30-second MP3 preview URL
-  artist: {
-    id: number;
-    name: string;
-    picture: string;
-    picture_medium: string;
-  };
-  album: {
-    id: number;
-    title: string;
-    cover: string;
-    cover_medium: string;
-    cover_big: string;
-    cover_xl: string;
-  };
-}
-
-interface DeezerSearchResponse {
-  data: DeezerTrack[];
-  total: number;
-}
-
 /**
  * Search for a track on Deezer and get both audio and album cover
  * Uses server-side API route to avoid CORS issues

@@ -50,6 +50,7 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
   const [showKeyboardHelp, setShowKeyboardHelp] = useState(false);
   const [isLoadingAudio, setIsLoadingAudio] = useState(true);
   const [audioUrl, setAudioUrl] = useState<string>('');
+  const [audioReady, setAudioReady] = useState(false);
 
   useEffect(() => {
     setIsFav(isFavorite(track.id));
@@ -58,11 +59,10 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
   useEffect(() => {
     const loadAudio = async () => {
       if (hasRealAudioUrl(track.audioUrl)) {
-        console.log('[v0] Using real audio URL:', track.audioUrl);
+        setAudioUrl(track.audioUrl);
         setAudioUrl(track.audioUrl);
         setIsLoadingAudio(false);
       } else {
-        console.log('[v0] Generating demo audio for:', track.title, 'genre:', track.genre);
         setIsLoadingAudio(true);
         const url = await getCachedOrGenerateAudio(
           track.id,
@@ -70,7 +70,6 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
           track.bpm || 120,
           track.duration
         );
-        console.log('[v0] Generated URL:', url ? 'blob URL success' : 'FAILED');
         setAudioUrl(url);
         setIsLoadingAudio(false);
       }
@@ -79,6 +78,15 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
     loadAudio();
   }, [track.id, track.genre, track.bpm, track.duration, track.title, track.audioUrl]);
 
+  // Load audio when URL changes
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio || !audioUrl) return;
+
+    setAudioReady(false);
+    audio.load();
+  }, [audioUrl]);
+
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
@@ -86,15 +94,18 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
     const updateTime = () => setCurrentTime(audio.currentTime);
     const updateDuration = () => setDuration(audio.duration);
     const handleEnded = () => setIsPlaying(false);
+    const handleCanPlay = () => setAudioReady(true);
 
     audio.addEventListener('timeupdate', updateTime);
     audio.addEventListener('loadedmetadata', updateDuration);
     audio.addEventListener('ended', handleEnded);
+    audio.addEventListener('canplay', handleCanPlay);
 
     return () => {
       audio.removeEventListener('timeupdate', updateTime);
       audio.removeEventListener('loadedmetadata', updateDuration);
       audio.removeEventListener('ended', handleEnded);
+      audio.removeEventListener('canplay', handleCanPlay);
     };
   }, [audioUrl]);
 
@@ -162,6 +173,18 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
       audio.volume = isMuted ? 0 : volume;
     }
   }, [volume, isMuted]);
+
+  // Play/pause audio when isPlaying changes
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio || !audioUrl || !audioReady) return;
+
+    if (isPlaying) {
+      audio.play().catch(err => console.error('[v0] Play error:', err));
+    } else {
+      audio.pause();
+    }
+  }, [isPlaying, audioUrl, audioReady]);
 
   const handleSeek = (value: number[]) => {
     const audio = audioRef.current;
@@ -246,11 +269,11 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
         
         {/* Main Player */}
         <div className="glass border-t border-border/50 bg-background/95 dark:bg-[#181818]/95 backdrop-blur-xl">
-          <div className="container mx-auto px-2 sm:px-4 py-2 sm:py-3">
-            <div className="flex items-center gap-2 sm:gap-4">
+          <div className="container mx-auto px-3 sm:px-4 py-2">
+            <div className="flex items-center gap-3 sm:gap-4">
               {/* Track Info */}
-              <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0 w-auto sm:w-48 md:w-64">
-                <div className="relative h-10 w-10 sm:h-14 sm:w-14 flex-shrink-0 rounded-lg overflow-hidden shadow-lg">
+              <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0 w-32 sm:w-48 md:w-56">
+                <div className="relative h-12 w-12 sm:h-14 sm:w-14 flex-shrink-0 rounded-lg overflow-hidden shadow-lg">
                   <Image
                     src={track.albumArt || "/placeholder.svg"}
                     alt={track.album}
@@ -280,14 +303,14 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
               </div>
 
               {/* Controls */}
-              <div className="flex-1 flex flex-col items-center gap-1 sm:gap-2">
-                <div className="flex items-center gap-2 sm:gap-4">
+              <div className="flex-1 flex flex-col items-center gap-1.5 sm:gap-2 max-w-lg mx-auto">
+                <div className="flex items-center gap-3 sm:gap-4">
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="h-7 w-7 sm:h-8 sm:w-8 text-muted-foreground hover:text-foreground hidden sm:flex"
+                    className="h-8 w-8 text-muted-foreground hover:text-foreground hidden sm:flex"
                   >
-                    <Shuffle className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                    <Shuffle className="h-4 w-4" />
                   </Button>
                   
                   <Button
@@ -295,7 +318,7 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
                     size="icon"
                     onClick={skipBackward}
                     disabled={!hasPrevious && !onPrevious}
-                    className="h-8 w-8 sm:h-10 sm:w-10 text-foreground hover:text-primary disabled:text-muted-foreground/30 disabled:hover:text-muted-foreground/30"
+                    className="h-9 w-9 sm:h-10 sm:w-10 text-foreground hover:text-primary disabled:text-muted-foreground/30"
                   >
                     <SkipBack className="h-4 w-4 sm:h-5 sm:w-5" />
                   </Button>
@@ -304,14 +327,14 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
                     type="button"
                     onClick={togglePlayPause}
                     disabled={isLoadingAudio}
-                    className="h-10 w-10 sm:h-12 sm:w-12 rounded-full gradient-bg hover:opacity-90 flex items-center justify-center disabled:opacity-50 z-50 relative"
+                    className="h-11 w-11 sm:h-12 sm:w-12 rounded-full gradient-bg hover:opacity-90 flex items-center justify-center disabled:opacity-50"
                   >
                     {isLoadingAudio ? (
                       <Loader2 className="h-5 w-5 sm:h-6 sm:w-6 text-white animate-spin" />
                     ) : isPlaying ? (
                       <Pause className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
                     ) : (
-                      <Play className="h-5 w-5 sm:h-6 sm:w-6 text-white ml-0.5 sm:ml-1" />
+                      <Play className="h-5 w-5 sm:h-6 sm:w-6 text-white ml-0.5" />
                     )}
                   </button>
 
@@ -320,7 +343,7 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
                     size="icon"
                     onClick={skipForward}
                     disabled={!hasNext && !onNext}
-                    className="h-8 w-8 sm:h-10 sm:w-10 text-foreground hover:text-primary disabled:text-muted-foreground/30 disabled:hover:text-muted-foreground/30"
+                    className="h-9 w-9 sm:h-10 sm:w-10 text-foreground hover:text-primary disabled:text-muted-foreground/30"
                   >
                     <SkipForward className="h-4 w-4 sm:h-5 sm:w-5" />
                   </Button>
@@ -328,29 +351,29 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="h-7 w-7 sm:h-8 sm:w-8 text-muted-foreground hover:text-foreground hidden sm:flex"
+                    className="h-8 w-8 text-muted-foreground hover:text-foreground hidden sm:flex"
                   >
-                    <Repeat className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                    <Repeat className="h-4 w-4" />
                   </Button>
                 </div>
                 
                 {/* Progress Slider */}
-                <div className="w-full max-w-[200px] sm:max-w-md flex items-center gap-1 sm:gap-2">
-                  <span className="text-[10px] sm:text-xs text-muted-foreground/60 w-8 sm:w-10 text-right">{formatTime(currentTime)}</span>
+                <div className="w-full flex items-center gap-2">
+                  <span className="text-xs text-muted-foreground/70 w-10 text-right tabular-nums">{formatTime(currentTime)}</span>
                   <Slider
                     value={[currentTime]}
                     max={duration || 100}
                     step={0.1}
                     onValueChange={handleSeek}
-                    className="flex-1 cursor-pointer [&_[role=slider]]:bg-primary [&_[role=slider]]:border-primary [&_[role=slider]]:w-2 sm:[&_[role=slider]]:w-3 [&_[role=slider]]:h-2 sm:[&_[role=slider]]:h-3"
+                    className="flex-1 cursor-pointer"
                   />
-                  <span className="text-[10px] sm:text-xs text-muted-foreground/60 w-8 sm:w-10">{formatTime(duration)}</span>
+                  <span className="text-xs text-muted-foreground/70 w-10 tabular-nums">{formatTime(duration)}</span>
                 </div>
               </div>
 
               {/* Volume & Actions */}
-              <div className="flex items-center gap-1 sm:gap-2 w-auto sm:w-48 md:w-64 justify-end">
-                <div className="hidden md:flex items-center gap-2 w-32">
+              <div className="flex items-center gap-1 sm:gap-2 w-20 sm:w-28 md:w-36 flex-shrink-0">
+                <div className="hidden md:flex items-center gap-1.5 w-24">
                   <Button
                     variant="ghost"
                     size="icon"
@@ -368,7 +391,7 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
                     max={1}
                     step={0.01}
                     onValueChange={handleVolumeChange}
-                    className="flex-1 [&_[role=slider]]:bg-muted-foreground/30 [&_[role=slider]]:border-muted-foreground/30 [&_[role=slider]]:w-3 [&_[role=slider]]:h-3"
+                    className="flex-1"
                   />
                 </div>
 
@@ -394,7 +417,7 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
                   variant="ghost"
                   size="icon"
                   onClick={() => setShowShareDialog(true)}
-                  className="h-9 w-9 text-muted-foreground hover:text-foreground"
+                  className="h-9 w-9 text-muted-foreground hover:text-foreground hidden sm:flex"
                 >
                   <Share2 className="h-4 w-4" />
                 </Button>
@@ -402,33 +425,8 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
                 <Button
                   variant="ghost"
                   size="icon"
-                  asChild
-                  className="h-9 w-9 text-muted-foreground hover:text-red-500"
-                >
-                  <a
-                    href={`https://www.youtube.com/results?search_query=${encodeURIComponent(`${track.artist} ${track.title}`)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Youtube className="h-4 w-4" />
-                  </a>
-                </Button>
-
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => setShowKeyboardHelp(!showKeyboardHelp)}
-                  className="h-9 w-9 text-muted-foreground/60 hover:text-foreground"
-                  aria-label="Keyboard shortcuts"
-                >
-                  <Keyboard className="h-4 w-4" />
-                </Button>
-
-                <Button
-                  variant="ghost"
-                  size="icon"
                   onClick={onClose}
-                  className="h-9 w-9 text-muted-foreground/60 hover:text-foreground"
+                  className="h-9 w-9 text-muted-foreground hover:text-foreground"
                 >
                   <X className="h-4 w-4" />
                 </Button>

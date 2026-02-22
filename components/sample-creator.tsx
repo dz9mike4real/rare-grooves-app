@@ -139,7 +139,15 @@ export function SampleCreator({ track, currentTime, duration, onClose, audioRef 
       console.log('[v0] Fetched audio blob, size:', audioBlob.size, 'bytes');
       
       // Create AudioContext
-      const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+      const getAudioContext = () => {
+        if (typeof window === 'undefined') return null;
+        return (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext);
+      };
+      const AudioContextClass = getAudioContext();
+      if (!AudioContextClass) {
+        throw new Error('Web Audio API not supported');
+      }
+      const audioContext = new AudioContextClass();
       audioContextRef.current = audioContext;
       
       const arrayBuffer = await audioBlob.arrayBuffer();

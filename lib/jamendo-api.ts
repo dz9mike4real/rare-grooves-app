@@ -1,6 +1,8 @@
 // Jamendo API integration for real, legal music tracks
 // Jamendo provides Creative Commons licensed music with full-length streaming
 
+import { Genre } from './types';
+
 const JAMENDO_CLIENT_ID = '4c8bc5e9'; // Public demo client ID for v0 testing
 
 export interface JamendoTrack {
@@ -94,7 +96,7 @@ export function convertJamendoTrack(jamendoTrack: JamendoTrack, genre: string, r
     title: jamendoTrack.name,
     artist: jamendoTrack.artist_name,
     album: jamendoTrack.album_name,
-    genre: genre as any,
+    genre: genre as Genre,
     year: new Date(jamendoTrack.releasedate).getFullYear(),
     duration: jamendoTrack.duration,
     rarity: rarity,
