@@ -312,10 +312,11 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
                     <SkipBack className="h-4 w-4 sm:h-5 sm:w-5" />
                   </Button>
 
-                  <Button
+                  <button
+                    type="button"
                     onClick={togglePlayPause}
-                    className="h-10 w-10 sm:h-12 sm:w-12 rounded-full !bg-gradient-to-r !from-[#0a4d7f] !to-[#0d6efd] hover:opacity-90 transition-opacity"
                     disabled={isLoadingAudio}
+                    className="h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-gradient-to-r from-[#0a4d7f] to-[#0d6efd] hover:opacity-90 transition-opacity flex items-center justify-center disabled:opacity-50"
                   >
                     {isLoadingAudio ? (
                       <Loader2 className="h-5 w-5 sm:h-6 sm:w-6 text-white animate-spin" />
@@ -324,7 +325,7 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
                     ) : (
                       <Play className="h-5 w-5 sm:h-6 sm:w-6 text-white ml-0.5 sm:ml-1" />
                     )}
-                  </Button>
+                  </button>
 
                   <Button
                     variant="ghost"
