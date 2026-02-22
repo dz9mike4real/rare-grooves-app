@@ -80,10 +80,7 @@ export const TrackCard = memo(function TrackCard({ track, onPlay, isPlaying, onF
             <Button
               size="icon"
               className="h-12 w-12 rounded-full shadow-2xl gradient-bg"
-              onClick={(e) => {
-                e.stopPropagation();
-                onPlay(track);
-              }}
+              onClick={() => onPlay(track)}
               aria-label={isPlaying ? `Pause ${track.title}` : `Play ${track.title}`}
             >
               {isPlaying ? (
