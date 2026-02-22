@@ -79,9 +79,7 @@ export const TrackCard = memo(function TrackCard({ track, onPlay, isPlaying, onF
           <div className={`transform scale-0 group-hover:scale-100 transition-transform duration-300 ${isPlaying ? 'scale-100' : ''}`}>
             <Button
               size="icon"
-              className={`h-12 w-12 rounded-full shadow-2xl ${
-                isPlaying ? 'gradient-bg' : 'bg-[#0a4d7f] hover:bg-[#1a7dbf]'
-              }`}
+              className="h-12 w-12 rounded-full shadow-2xl gradient-bg"
               onClick={(e) => {
                 e.stopPropagation();
                 onPlay(track);
