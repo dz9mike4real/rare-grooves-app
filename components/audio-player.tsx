@@ -58,7 +58,6 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
   useEffect(() => {
     const loadAudio = async () => {
       if (hasRealAudioUrl(track.audioUrl)) {
-        console.log('[v0] Using real audio preview from Deezer for:', track.title);
         setAudioUrl(track.audioUrl);
         setIsLoadingAudio(false);
       } else {
@@ -99,7 +98,9 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
 
   useEffect(() => {
     const audio = audioRef.current;
-    if (!audio || !audioUrl || isLoadingAudio) return;
+    if (!audio || !audioUrl || isLoadingAudio) {
+      return;
+    }
 
     if (isPlaying) {
       audio.play().catch((error) => {
@@ -172,8 +173,21 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
   }, [volume, isMuted]);
 
   const togglePlayPause = useCallback(() => {
-    setIsPlaying(prev => !prev);
-  }, []);
+    const audio = audioRef.current;
+    if (!audio) return;
+    
+    if (isPlaying) {
+      audio.pause();
+      setIsPlaying(false);
+    } else {
+      audio.play().then(() => {
+        setIsPlaying(true);
+      }).catch((error) => {
+        console.log('[v0] Audio play error:', error);
+        setIsPlaying(false);
+      });
+    }
+  }, [isPlaying]);
 
   const handleSeek = (value: number[]) => {
     const audio = audioRef.current;
@@ -466,7 +480,7 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
         )}
 
         {/* Hidden Audio Element */}
-        <audio ref={audioRef} src={audioUrl || undefined} preload="metadata" />
+        <audio ref={audioRef} src={audioUrl || undefined} preload="auto" />
       </div>
 
       {/* Sample Creator Dialog */}
