@@ -30,7 +30,7 @@ interface GenreExplorerProps {
 export function GenreExplorer({ selectedGenre, onGenreChange, isCompact = false }: GenreExplorerProps) {
     return (
         <div className="w-full">
-            <div className="flex items-center gap-2 overflow-x-auto hide-scrollbar pb-2 -mx-4 px-4 sm:mx-0 sm:px-0">
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 pb-2">
                 <AnimatePresence mode="popLayout">
                     {GENRES.map((genre) => {
                         const isSelected = selectedGenre === genre.value;

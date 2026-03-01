@@ -347,8 +347,8 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Right side buttons */}
-              <div className="flex items-center gap-1.5 flex-shrink-0">
+              {/* Right side buttons - Desktop */}
+              <div className="hidden md:flex items-center gap-1.5 flex-shrink-0">
                 {/* Discovery Actions moved closer to other icons */}
                 <SurpriseMeButton
                   tracks={tracksWithCovers}
@@ -572,6 +572,42 @@ export default function Home() {
           hasPrevious={queueIndex > 0}
         />
       )}
+      {/* Mobile Bottom Navigation Bar */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-background/90 backdrop-blur-md border-t-2 border-primary/20 p-3 pb-safe flex justify-center gap-8 sm:gap-12 items-center shadow-[0_-10px_40px_-10px_rgba(0,0,0,0.1)]">
+        <SurpriseMeButton
+          tracks={tracksWithCovers}
+          onPlayTrack={(track) => {
+            handleTrackSelect(track);
+            addToRecentlyPlayed(track);
+          }}
+          selectedTrack={selectedTrack}
+          iconOnly
+        />
+
+        {displayedTracks.length > 0 && (
+          <DiscoveryButton
+            tracks={tracksWithCovers}
+            onDiscover={(discovered) => {
+              setDiscoveredTracks(discovered);
+              setIsDiscoveryOpen(true);
+            }}
+            currentTrack={selectedTrack}
+            iconOnly
+          />
+        )}
+
+        <ThemeToggle />
+        <ActionIcon
+          variant="subtle"
+          size="xl"
+          onClick={() => setIsFavoritesOpen(true)}
+          className="relative hover:bg-white/5 rounded-full"
+          color="gray"
+        >
+          <Heart className="h-6 w-6 text-foreground" />
+        </ActionIcon>
+      </div>
+
     </div>
   );
 }

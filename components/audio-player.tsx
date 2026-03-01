@@ -239,7 +239,7 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
 
   return (
     <>
-      <div className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] group/player transition-all duration-300 ${isCollapsed ? 'w-auto max-w-sm' : 'w-[calc(100%-2rem)] max-w-4xl'}`}>
+      <div className={`fixed bottom-[76px] md:bottom-6 left-1/2 -translate-x-1/2 z-[60] group/player transition-all duration-300 ${isCollapsed ? 'w-[calc(100%-1rem)] max-w-sm' : 'w-[calc(100%-1rem)] max-w-4xl'}`}>
         {isCollapsed ? (
           /* Collapsed Mini Bar */
           <div className="glass-card overflow-hidden transition-all duration-300 border-2 border-primary/20 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.2)] dark:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.8)]" style={{ borderRadius: '5px' }}>
@@ -309,41 +309,66 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
               />
             </div>
 
-            <div className="px-4 sm:px-6 py-3">
-              <div className="flex items-center gap-3 sm:gap-6">
-                {/* Track Info */}
-                <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0 w-32 sm:w-48 md:w-56">
-                  <div className="relative h-12 w-12 sm:h-14 sm:w-14 flex-shrink-0 rounded-[10px] overflow-hidden shadow-lg">
-                    <Image
-                      src={track.albumArt || "/placeholder.svg"}
-                      alt={track.album}
-                      fill
-                      className="object-cover"
-                      sizes="56px"
-                    />
-                    {isPlaying && (
-                      <div className="absolute inset-0 bg-black/40 flex items-center justify-center backdrop-blur-[1px]">
-                        <div className="flex items-end gap-0.5 h-3 sm:h-4">
-                          <span className="w-0.5 sm:w-1 bg-[#0a4d7f] rounded-full animate-pulse" style={{ animationDelay: '0ms', height: '40%' }} />
-                          <span className="w-0.5 sm:w-1 bg-[#0a4d7f] rounded-full animate-pulse" style={{ animationDelay: '150ms', height: '70%' }} />
-                          <span className="w-0.5 sm:w-1 bg-[#0a4d7f] rounded-full animate-pulse" style={{ animationDelay: '300ms', height: '50%' }} />
-                          <span className="w-0.5 sm:w-1 bg-[#0a4d7f] rounded-full animate-pulse" style={{ animationDelay: '450ms', height: '80%' }} />
+            <div className="px-3 sm:px-6 py-2 sm:py-3">
+              <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-6">
+                {/* Track Info & Mobile Header */}
+                <div className="flex items-center justify-between w-full sm:w-48 md:w-56 flex-shrink-0">
+                  <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+                    <div className="relative h-12 w-12 sm:h-14 sm:w-14 flex-shrink-0 rounded-[10px] overflow-hidden shadow-lg">
+                      <Image
+                        src={track.albumArt || "/placeholder.svg"}
+                        alt={track.album}
+                        fill
+                        className="object-cover"
+                        sizes="56px"
+                      />
+                      {isPlaying && (
+                        <div className="absolute inset-0 bg-black/40 flex items-center justify-center backdrop-blur-[1px]">
+                          <div className="flex items-end gap-0.5 h-3 sm:h-4">
+                            <span className="w-0.5 sm:w-1 bg-[#0a4d7f] rounded-full animate-pulse" style={{ animationDelay: '0ms', height: '40%' }} />
+                            <span className="w-0.5 sm:w-1 bg-[#0a4d7f] rounded-full animate-pulse" style={{ animationDelay: '150ms', height: '70%' }} />
+                            <span className="w-0.5 sm:w-1 bg-[#0a4d7f] rounded-full animate-pulse" style={{ animationDelay: '300ms', height: '50%' }} />
+                            <span className="w-0.5 sm:w-1 bg-[#0a4d7f] rounded-full animate-pulse" style={{ animationDelay: '450ms', height: '80%' }} />
+                          </div>
                         </div>
-                      </div>
-                    )}
+                      )}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-semibold text-xs sm:text-sm text-foreground line-clamp-1">
+                        {track.title}
+                      </h3>
+                      <p className="text-[10px] sm:text-xs font-bold text-primary uppercase tracking-wider line-clamp-1">
+                        {track.artist}
+                      </p>
+                    </div>
                   </div>
-                  <div className="flex-1 min-w-0 hidden sm:block">
-                    <h3 className="font-semibold text-xs sm:text-sm text-foreground line-clamp-1">
-                      {track.title}
-                    </h3>
-                    <p className="text-[10px] sm:text-xs font-bold text-primary uppercase tracking-wider line-clamp-1">
-                      {track.artist}
-                    </p>
+
+                  {/* Collapse & Close (Mobile Top Right) */}
+                  <div className="flex sm:hidden items-center flex-shrink-0 ml-2">
+                    <ActionIcon
+                      variant="subtle"
+                      size="lg"
+                      radius="xl"
+                      onClick={() => setIsCollapsed(true)}
+                      className="text-muted-foreground hover:text-foreground h-11 w-11"
+                    >
+                      <ChevronDown className="h-5 w-5" />
+                    </ActionIcon>
+                    <ActionIcon
+                      variant="subtle"
+                      size="lg"
+                      radius="xl"
+                      onClick={onClose}
+                      className="text-muted-foreground hover:text-foreground h-11 w-11"
+                    >
+                      <X className="h-5 w-5" />
+                    </ActionIcon>
                   </div>
                 </div>
 
                 {/* Controls */}
-                <div className="flex-1 flex flex-col items-center gap-1.5 sm:gap-2 max-w-lg mx-auto">
+                {/* Controls */}
+                <div className="flex-1 flex flex-col items-center gap-1.5 sm:gap-2 w-full max-w-lg mx-auto">
                   <div className="flex items-center gap-3 sm:gap-4">
                     <ActionIcon
                       variant="subtle"
@@ -402,7 +427,19 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
                   </div>
 
                   {/* Progress Controls (Hidden for Pill) */}
-                  <div className="w-full hidden items-center gap-2">
+                  <div className="w-full flex sm:hidden items-center gap-2 mt-1">
+                    <Slider
+                      value={currentTime}
+                      max={duration || 100}
+                      step={0.1}
+                      onChange={handleSeek}
+                      className="flex-1 cursor-pointer"
+                      label={null}
+                      color="gray"
+                      size="sm"
+                    />
+                  </div>
+                  <div className="w-full hidden sm:flex items-center gap-2">
                     <span className="text-xs text-muted-foreground w-10 text-right tabular-nums">{formatTime(currentTime)}</span>
                     <Slider
                       value={currentTime}
@@ -419,7 +456,7 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
                 </div>
 
                 {/* Volume & Actions */}
-                <div className="flex items-center gap-1 sm:gap-2 w-auto flex-shrink-0">
+                <div className="flex items-center justify-center sm:justify-end gap-1 sm:gap-2 w-full sm:w-auto flex-shrink-0 mt-2 sm:mt-0">
                   <div className="hidden md:flex items-center gap-1.5 w-24">
                     <ActionIcon
                       variant="subtle"
@@ -476,27 +513,30 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
                     <Share2 className="h-4 w-4" />
                   </ActionIcon>
 
-                  <ActionIcon
-                    variant="subtle"
-                    size="xl"
-                    radius="xl"
-                    onClick={() => setIsCollapsed(true)}
-                    className="text-muted-foreground hover:text-foreground h-11 w-11"
-                    aria-label="Collapse player"
-                  >
-                    <ChevronDown className="h-4 w-4" />
-                  </ActionIcon>
+                  {/* Collapse & Close (Desktop Bottom Right) */}
+                  <div className="hidden sm:flex items-center">
+                    <ActionIcon
+                      variant="subtle"
+                      size="xl"
+                      radius="xl"
+                      onClick={() => setIsCollapsed(true)}
+                      className="text-muted-foreground hover:text-foreground h-11 w-11"
+                      aria-label="Collapse player"
+                    >
+                      <ChevronDown className="h-4 w-4" />
+                    </ActionIcon>
 
-                  <ActionIcon
-                    variant="subtle"
-                    size="xl"
-                    radius="xl"
-                    onClick={onClose}
-                    className="text-muted-foreground hover:text-foreground h-11 w-11"
-                    aria-label="Close player"
-                  >
-                    <X className="h-4 w-4" />
-                  </ActionIcon>
+                    <ActionIcon
+                      variant="subtle"
+                      size="xl"
+                      radius="xl"
+                      onClick={onClose}
+                      className="text-muted-foreground hover:text-foreground h-11 w-11"
+                      aria-label="Close player"
+                    >
+                      <X className="h-4 w-4" />
+                    </ActionIcon>
+                  </div>
                 </div>
               </div>
             </div>
