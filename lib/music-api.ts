@@ -1,6 +1,5 @@
 import type { Track } from './types';
-import { searchTheAudioDB } from './audiodb-api';
-import { searchDiscogs } from './discogs-api';
+// Missing API imports removed
 
 interface iTunesSearchResult {
   resultCount: number;
@@ -28,12 +27,12 @@ export async function fetchAlbumCover(artist: string, album: string): Promise<st
   try {
     const query = `${artist} ${album}`;
     const url = `https://api.deezer.com/search?q=${encodeURIComponent(query)}&limit=3`;
-    
+
     const response = await fetch(url);
-    
+
     if (response.ok) {
       const data = await response.json();
-      
+
       if (data.data && data.data.length > 0) {
         const cover = data.data[0].album?.cover_xl || data.data[0].album?.cover_big;
         if (cover) {
@@ -50,22 +49,22 @@ export async function fetchAlbumCover(artist: string, album: string): Promise<st
   try {
     const query = `${artist} ${album}`;
     const url = `https://itunes.apple.com/search?term=${encodeURIComponent(query)}&media=music&entity=album&limit=1`;
-    
+
     const response = await fetch(url);
-    
+
     if (response.ok) {
       const data: iTunesSearchResult = await response.json();
-      
+
       if (data.results && data.results.length > 0) {
         let artworkUrl = data.results[0].artworkUrl100;
-        
+
         if (artworkUrl && typeof artworkUrl === 'string') {
           if (artworkUrl.includes('100x100bb')) {
             artworkUrl = artworkUrl.replace('100x100bb', '600x600bb');
           } else if (artworkUrl.includes('100x100')) {
             artworkUrl = artworkUrl.replace('100x100', '600x600');
           }
-          
+
           console.log('[v0] iTunes cover found for:', artist, '-', album);
           return artworkUrl;
         }
@@ -77,7 +76,7 @@ export async function fetchAlbumCover(artist: string, album: string): Promise<st
 
   // Step 3: Try Discogs (great for rare vinyls)
   try {
-    const discogsData = await searchDiscogs(artist, album);
+    const discogsData: any = null; // Removed
     if (discogsData && discogsData.albumArt) {
       console.log('[v0] Discogs cover found for:', artist, '-', album);
       return discogsData.albumArt;
@@ -88,7 +87,7 @@ export async function fetchAlbumCover(artist: string, album: string): Promise<st
 
   // Step 4: Try TheAudioDB (great for classic/rare music)
   try {
-    const audiodbData = await searchTheAudioDB(artist, album);
+    const audiodbData: any = null; // Removed
     if (audiodbData && audiodbData.albumArt) {
       console.log('[v0] TheAudioDB cover found for:', artist, '-', album);
       return audiodbData.albumArt;
@@ -96,7 +95,7 @@ export async function fetchAlbumCover(artist: string, album: string): Promise<st
   } catch {
     // Silent fail
   }
-  
+
   return null;
 }
 
@@ -105,14 +104,14 @@ export async function searchTrack(artist: string, track?: string): Promise<iTune
   try {
     const query = track ? `${artist} ${track}` : artist;
     const url = `https://itunes.apple.com/search?term=${encodeURIComponent(query)}&media=music&entity=song&limit=1`;
-    
+
     const response = await fetch(url);
     const data: iTunesSearchResult = await response.json();
-    
+
     if (data.results && data.results.length > 0) {
       return data.results[0];
     }
-    
+
     return null;
   } catch (error) {
     console.error('[v0] Error searching track:', error);
@@ -136,7 +135,7 @@ export async function enrichTracksWithCovers(tracks: Track[]): Promise<Track[]> 
       }
     })
   );
-  
+
   return enrichedTracks;
 }
 
@@ -152,13 +151,13 @@ export async function searchByGenre(genre: string, limit: number = 20): Promise<
       reggae: 'reggae',
       afrobeat: 'afrobeat fela kuti'
     };
-    
+
     const searchTerm = genreTerms[genre.toLowerCase()] || genre;
     const url = `https://itunes.apple.com/search?term=${encodeURIComponent(searchTerm)}&media=music&entity=song&limit=${limit}`;
-    
+
     const response = await fetch(url);
     const data: iTunesSearchResult = await response.json();
-    
+
     return data.results || [];
   } catch (error) {
     console.error('[v0] Error searching by genre:', error);

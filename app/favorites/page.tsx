@@ -8,7 +8,7 @@ import { getLocalTracks } from '@/lib/tracks-data';
 import { TrackCard } from '@/components/track-card';
 import { TrackCardErrorBoundary } from '@/components/track-card-error-boundary';
 import { AudioPlayer } from '@/components/audio-player';
-import { Button } from '@/components/ui/button';
+import { Button, ActionIcon } from '@mantine/core';
 import { ArrowLeft, Heart, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 
@@ -46,7 +46,7 @@ export default function FavoritesPage() {
         const favB = favorites.find(f => f.trackId === b.id);
         return (favB?.addedAt.getTime() || 0) - (favA?.addedAt.getTime() || 0);
       });
-    
+
     setFavoriteTracks(tracks);
   };
 
@@ -60,11 +60,11 @@ export default function FavoritesPage() {
     };
 
     window.addEventListener('storage', handleStorageChange);
-    
+
     const handleFavoritesUpdate = () => {
       loadFavorites();
     };
-    
+
     window.addEventListener('favoritesUpdated', handleFavoritesUpdate);
 
     return () => {
@@ -95,13 +95,14 @@ export default function FavoritesPage() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center gap-4">
             <Link href="/">
-              <Button 
-                variant="ghost" 
-                size="icon"
+              <ActionIcon
+                variant="subtle"
+                size="lg"
+                radius="xl"
                 className="hover:bg-secondary"
               >
                 <ArrowLeft className="h-5 w-5 text-foreground" />
-              </Button>
+              </ActionIcon>
             </Link>
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-xl gradient-bg">
@@ -158,7 +159,7 @@ export default function FavoritesPage() {
               Start discovering rare grooves and save your favorite tracks here by clicking the heart icon.
             </p>
             <Link href="/">
-              <Button className="gradient-bg hover:opacity-90 px-8">
+              <Button className="gradient-bg border-0 hover:opacity-90 px-8">
                 Discover Tracks
               </Button>
             </Link>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 interface LoadingProgressProps {
   total: number;
@@ -10,48 +10,45 @@ interface LoadingProgressProps {
 
 export function LoadingProgress({ total, loaded, label = 'Loading tracks' }: LoadingProgressProps) {
   const [progress, setProgress] = useState(0);
-  const [displayLoaded, setDisplayLoaded] = useState(0);
+  const targetProgress = total > 0 ? (loaded / total) * 100 : 0;
+  const requestRef = useRef<number>(null);
+  const previousTimeRef = useRef<number>(null);
 
   useEffect(() => {
-    // Animate progress smoothly
-    const targetProgress = total > 0 ? (loaded / total) * 100 : 0;
-    const duration = 300;
-    const startTime = Date.now();
-    const startProgress = progress;
-
-    const animate = () => {
-      const elapsed = Date.now() - startTime;
-      const easeOutQuart = 1 - Math.pow(1 - Math.min(elapsed / duration, 1), 4);
-      const currentProgress = startProgress + (targetProgress - startProgress) * easeOutQuart;
-      
-      setProgress(currentProgress);
-      setDisplayLoaded(Math.round(loaded * easeOutQuart));
-
-      if (elapsed < duration) {
-        requestAnimationFrame(animate);
-      } else {
-        setDisplayLoaded(loaded);
+    const animate = (time: number) => {
+      if (previousTimeRef.current !== undefined) {
+        setProgress(prev => {
+          const diff = targetProgress - prev;
+          const step = diff * 0.1; // Smooth easing
+          if (Math.abs(diff) < 0.1) return targetProgress;
+          return prev + step;
+        });
       }
+      previousTimeRef.current = time;
+      requestRef.current = requestAnimationFrame(animate);
     };
 
-    requestAnimationFrame(animate);
-  }, [loaded, total, progress]);
+    requestRef.current = requestAnimationFrame(animate);
+    return () => {
+      if (requestRef.current) cancelAnimationFrame(requestRef.current);
+    };
+  }, [targetProgress]);
 
   return (
     <div className="w-full max-w-md mx-auto">
       <div className="flex justify-between items-center mb-2">
-        <span className="text-sm text-white/60">{label}</span>
-        <span className="text-sm text-white/60">
-          {displayLoaded} / {total}
+        <span className="text-sm text-foreground/60">{label}</span>
+        <span className="text-sm text-foreground/60">
+          {loaded} / {total}
         </span>
       </div>
-      <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+      <div className="h-2 bg-secondary rounded-full overflow-hidden">
         <div
-          className="h-full bg-gradient-to-r from-[#0a4d7f] to-[#1db954] transition-all duration-300 ease-out"
+          className="h-full gradient-bg transition-all duration-300 ease-out"
           style={{ width: `${Math.min(progress, 100)}%` }}
         />
       </div>
-      <div className="mt-2 text-xs text-white/40 text-center">
+      <div className="mt-2 text-xs text-foreground/40 text-center">
         {Math.round(progress)}%
       </div>
     </div>

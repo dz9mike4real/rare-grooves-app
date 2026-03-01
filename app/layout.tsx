@@ -1,22 +1,24 @@
 import React from "react"
 import type { Metadata } from 'next'
-import { Poppins, Open_Sans } from 'next/font/google'
+import { Inter, Outfit } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
-import { Toaster } from '@/components/ui/toaster'
-import { ThemeProvider } from '@/components/theme-provider'
+import '@mantine/core/styles.css';
+import '@mantine/notifications/styles.css';
+import { MantineProvider, ColorSchemeScript } from '@mantine/core';
+import { Notifications } from '@mantine/notifications';
 import './globals.css'
 
-const poppins = Poppins({
+const outfit = Outfit({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700', '800'],
-  variable: '--font-poppins',
+  variable: '--font-outfit',
   display: 'swap',
 })
 
-const openSans = Open_Sans({
+const inter = Inter({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
-  variable: '--font-open-sans',
+  variable: '--font-inter',
   display: 'swap',
 })
 
@@ -50,13 +52,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${poppins.variable} ${openSans.variable} font-sans antialiased min-h-screen bg-background text-foreground`}>
-        <ThemeProvider>
+      <head>
+        <ColorSchemeScript />
+      </head>
+      <body suppressHydrationWarning className={`${outfit.variable} ${inter.variable} font-sans antialiased min-h-screen bg-background text-foreground tracking-tight`}>
+        <div className="bg-noise" aria-hidden="true" />
+        <MantineProvider defaultColorScheme="auto">
           {children}
-          <Toaster />
+          <Notifications />
           <Analytics />
-        </ThemeProvider>
+        </MantineProvider>
       </body>
-    </html>
+    </html >
   )
 }

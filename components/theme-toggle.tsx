@@ -1,89 +1,77 @@
 'use client';
 
-import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
-import { Button } from '@/components/ui/button';
+import { useMantineColorScheme, useComputedColorScheme, ActionIcon, Button } from '@mantine/core';
 import { Sun, Moon, Monitor } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 export function ThemeToggle() {
-  const { theme, setTheme, resolvedTheme } = useTheme();
+  const { toggleColorScheme } = useMantineColorScheme();
+  const computedColorScheme = useComputedColorScheme('light', { getInitialValueInEffect: true });
   const [mounted, setMounted] = useState(false);
 
-  // Avoid hydration mismatch
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  useEffect(() => setMounted(true), []);
 
   if (!mounted) {
     return (
-      <Button variant="ghost" size="icon" className="w-9 h-9">
+      <ActionIcon
+        variant="subtle"
+        size="xl"
+        radius="xl"
+        className="h-11 w-11 relative hover:bg-secondary"
+      >
         <span className="sr-only">Toggle theme</span>
-      </Button>
-    );
+      </ActionIcon>
+    )
   }
 
-  const toggleTheme = () => {
-    if (theme === 'system') {
-      setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
-    } else {
-      setTheme(theme === 'dark' ? 'light' : 'dark');
-    }
-  };
-
   return (
-    <Button
-      variant="ghost"
-      size="icon"
-      onClick={toggleTheme}
-      className="w-9 h-9 relative hover:bg-secondary"
+    <ActionIcon
+      variant="subtle"
+      size="xl"
+      radius="xl"
+      onClick={() => toggleColorScheme()}
+      className="h-11 w-11 relative hover:bg-secondary"
       aria-label="Toggle theme"
     >
-      {resolvedTheme === 'dark' ? (
+      {computedColorScheme === 'dark' ? (
         <Sun className="h-5 w-5 text-foreground" />
       ) : (
         <Moon className="h-5 w-5 text-foreground" />
       )}
-    </Button>
+    </ActionIcon>
   );
 }
 
 export function ThemeSelector() {
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) return null;
+  const { colorScheme, setColorScheme } = useMantineColorScheme();
 
   return (
     <div className="flex items-center gap-1 bg-white/5 rounded-lg p-1">
       <Button
-        variant={theme === 'light' ? 'secondary' : 'ghost'}
+        variant={colorScheme === 'light' ? 'light' : 'subtle'}
         size="sm"
-        onClick={() => setTheme('light')}
+        onClick={() => setColorScheme('light')}
         className="h-7 px-2"
+        leftSection={<Sun className="h-4 w-4" />}
       >
-        <Sun className="h-4 w-4 mr-1" />
         Light
       </Button>
       <Button
-        variant={theme === 'dark' ? 'secondary' : 'ghost'}
+        variant={colorScheme === 'dark' ? 'light' : 'subtle'}
         size="sm"
-        onClick={() => setTheme('dark')}
+        onClick={() => setColorScheme('dark')}
         className="h-7 px-2"
+        leftSection={<Moon className="h-4 w-4" />}
       >
-        <Moon className="h-4 w-4 mr-1" />
         Dark
       </Button>
       <Button
-        variant={theme === 'system' ? 'secondary' : 'ghost'}
+        variant={colorScheme === 'auto' ? 'light' : 'subtle'}
         size="sm"
-        onClick={() => setTheme('system')}
+        onClick={() => setColorScheme('auto')}
         className="h-7 px-2"
+        leftSection={<Monitor className="h-4 w-4" />}
       >
-        <Monitor className="h-4 w-4 mr-1" />
         Auto
       </Button>
     </div>

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Track } from '@/lib/types';
-import { Button } from '@/components/ui/button';
+import { Button, ActionIcon } from '@mantine/core';
 import { Sparkles, X, Loader2, RefreshCw } from 'lucide-react';
 import { DISCOVERY } from '@/lib/constants';
 
@@ -10,9 +10,10 @@ interface DiscoveryButtonProps {
   tracks: Track[];
   onDiscover: (discovered: Track[]) => void;
   currentTrack?: Track | null;
+  iconOnly?: boolean;
 }
 
-export function DiscoveryButton({ tracks, onDiscover, currentTrack }: DiscoveryButtonProps) {
+export function DiscoveryButton({ tracks, onDiscover, currentTrack, iconOnly }: DiscoveryButtonProps) {
   const [isDiscovering, setIsDiscovering] = useState(false);
 
   const handleDiscover = async () => {
@@ -29,11 +30,10 @@ export function DiscoveryButton({ tracks, onDiscover, currentTrack }: DiscoveryB
         })
       });
 
-      if (response.ok) {
-        // Use algorithmic discovery to find similar tracks
-        const discovered = discoverSimilarTracks(tracks, currentTrack || null);
-        onDiscover(discovered);
-      }
+      // Use algorithmic discovery as primary/fallback
+      // We always use local discovery for now as it's faster and reliable
+      const discovered = discoverSimilarTracks(tracks, currentTrack || null);
+      onDiscover(discovered);
     } catch (error) {
       console.error('[v0] Discovery error:', error);
       // Fallback to algorithmic discovery
@@ -44,11 +44,31 @@ export function DiscoveryButton({ tracks, onDiscover, currentTrack }: DiscoveryB
     }
   };
 
+  if (iconOnly) {
+    return (
+      <ActionIcon
+        onClick={handleDiscover}
+        disabled={isDiscovering}
+        variant="subtle"
+        size="xl"
+        className="bg-background border-2 border-primary/20 rounded-none hover:border-primary h-11 w-11 transition-all"
+        color="gray"
+        title="Discover Similar"
+      >
+        {isDiscovering ? (
+          <Loader2 className="h-4 w-4 animate-spin text-primary" />
+        ) : (
+          <Sparkles className="h-4 w-4 text-foreground" />
+        )}
+      </ActionIcon>
+    );
+  }
+
   return (
     <Button
       onClick={handleDiscover}
       disabled={isDiscovering}
-      className="gradient-bg hover:opacity-90"
+      className="gradient-bg hover:opacity-90 border-0"
       size="sm"
     >
       {isDiscovering ? (
@@ -126,7 +146,7 @@ export function DiscoveryPanel({ isOpen, onClose, discoveredTracks, onPlayTrack 
   return (
     <>
       {/* Backdrop */}
-      <div 
+      <div
         className="fixed inset-0 bg-black/60 z-40"
         onClick={onClose}
         onKeyDown={(e) => {
@@ -136,34 +156,35 @@ export function DiscoveryPanel({ isOpen, onClose, discoveredTracks, onPlayTrack 
         tabIndex={-1}
         aria-label="Close discovery panel"
       />
-      
+
       {/* Panel */}
-      <div 
-        className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl glass-card z-50 p-6 rounded-2xl"
+      <div
+        className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl bg-background border-4 border-primary z-50 p-8 shadow-[12px_12px_0px_rgba(0,85,164,0.3)]"
         role="dialog"
         aria-modal="true"
         aria-labelledby="discovery-title"
         aria-describedby="discovery-description"
       >
         <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg gradient-bg" aria-hidden="true">
-              <Sparkles className="h-5 w-5 text-white" />
+          <div className="flex items-center gap-4">
+            <div className="p-2 bg-primary text-primary-foreground" aria-hidden="true">
+              <Sparkles className="h-6 w-6" />
             </div>
             <div>
-              <h3 id="discovery-title" className="text-xl font-bold text-foreground">AI Discovery</h3>
-              <p id="discovery-description" className="text-sm text-muted-foreground">Tracks selected just for you</p>
+              <h3 id="discovery-title" className="text-3xl font-black tracking-tighter uppercase leading-none">AI Selection</h3>
+              <p id="discovery-description" className="text-xs font-bold text-primary uppercase tracking-widest mt-1">Rare records picked for you</p>
             </div>
           </div>
-          <Button
-            variant="ghost"
-            size="icon"
+          <ActionIcon
+            variant="subtle"
+            size="xl"
+            radius="xl"
             onClick={onClose}
-            className="text-muted-foreground hover:text-foreground"
+            className="text-muted-foreground hover:text-foreground h-11 w-11"
             aria-label="Close discovery panel"
           >
             <X className="h-5 w-5" />
-          </Button>
+          </ActionIcon>
         </div>
 
         {discoveredTracks.length > 0 ? (
@@ -173,7 +194,7 @@ export function DiscoveryPanel({ isOpen, onClose, discoveredTracks, onPlayTrack 
                 key={track.id}
                 role="option"
                 aria-selected="false"
-                className="flex items-center gap-4 p-3 rounded-xl hover:bg-secondary cursor-pointer transition-colors"
+                className="flex items-center gap-4 p-4 border-2 border-primary/5 hover:border-primary hover:bg-primary/5 cursor-pointer transition-all"
                 onClick={() => {
                   onPlayTrack(track);
                   onClose();
@@ -190,22 +211,22 @@ export function DiscoveryPanel({ isOpen, onClose, discoveredTracks, onPlayTrack 
                 <span className="text-2xl font-bold text-muted-foreground/30 w-8" aria-hidden="true">
                   {String(index + 1).padStart(2, '0')}
                 </span>
-                <div className="w-12 h-12 rounded-lg bg-muted flex-shrink-0" aria-hidden="true" />
+                <div className="w-12 h-12 bg-primary/10 flex-shrink-0 border border-primary/20" aria-hidden="true" />
                 <div className="flex-1 min-w-0">
-                  <p className="font-medium text-foreground truncate">{track.title}</p>
-                  <p className="text-sm text-muted-foreground truncate">{track.artist}</p>
+                  <p className="font-semibold text-foreground truncate">{track.title}</p>
+                  <p className="text-xs font-bold text-primary truncate uppercase tracking-wider">{track.artist}</p>
                 </div>
                 <div className="text-right flex-shrink-0">
-                  <p className="text-xs text-muted-foreground/60 capitalize">{track.genre}</p>
-                  <p className="text-xs text-muted-foreground/60">{track.year}</p>
+                  <p className="text-xs font-medium text-muted-foreground capitalize">{track.genre}</p>
+                  <p className="text-xs font-medium text-muted-foreground">{track.year}</p>
                 </div>
               </div>
             ))}
           </div>
         ) : (
-          <div className="text-center py-8 text-muted-foreground" role="status">
-            <Sparkles className="h-12 w-12 mx-auto mb-4 opacity-50" aria-hidden="true" />
-            <p>Click "AI Discovery" to find new tracks</p>
+          <div className="text-center py-12 text-muted-foreground border-2 border-dashed border-primary/20" role="status">
+            <Sparkles className="h-16 w-16 mx-auto mb-4 text-primary opacity-20" aria-hidden="true" />
+            <p className="font-bold uppercase tracking-widest text-xs">No records found in this crate</p>
           </div>
         )}
 
@@ -218,7 +239,7 @@ export function DiscoveryPanel({ isOpen, onClose, discoveredTracks, onPlayTrack 
               onPlayTrack(shuffled[0]);
             }}
             disabled={discoveredTracks.length === 0}
-            className="border-border text-muted-foreground hover:text-foreground"
+            className="border-2 border-primary text-primary font-black uppercase tracking-tighter rounded-none hover:bg-primary hover:text-primary-foreground transition-colors"
           >
             <RefreshCw className="h-4 w-4 mr-2" />
             Shuffle
@@ -231,7 +252,7 @@ export function DiscoveryPanel({ isOpen, onClose, discoveredTracks, onPlayTrack 
               }
             }}
             disabled={discoveredTracks.length === 0}
-            className="gradient-bg"
+            className="bg-primary text-primary-foreground border-0 font-black uppercase tracking-tighter rounded-none hover:opacity-90 transition-opacity px-8"
           >
             <Sparkles className="h-4 w-4 mr-2" />
             Play All

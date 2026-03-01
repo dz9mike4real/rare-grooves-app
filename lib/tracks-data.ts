@@ -1,4 +1,5 @@
 import { Track } from './types';
+import localDataRaw from './tracks-local.json';
 
 interface LocalTrackData {
   localFilename: string;
@@ -21,8 +22,8 @@ export const getLocalTracks = (): Track[] => {
   }
 
   try {
-    const localData = require('./tracks-local.json') as LocalTrackData[];
-    
+    const localData = localDataRaw as LocalTrackData[];
+
     localTracks = localData.map((track, index) => ({
       id: `local-${index + 1}`,
       title: track.title,
@@ -36,7 +37,7 @@ export const getLocalTracks = (): Track[] => {
       audioUrl: `/audio/${track.localFilename}`,
       label: 'iTunes Preview',
     }));
-    
+
     return localTracks;
   } catch (error) {
     console.error('[v0] Failed to load local tracks:', error);

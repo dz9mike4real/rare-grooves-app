@@ -1,7 +1,7 @@
 'use client';
 
 import { Component, ReactNode } from 'react';
-import { Button } from '@/components/ui/button';
+import { Button } from '@mantine/core';
 import { AlertTriangle, RefreshCw } from 'lucide-react';
 
 interface Props {
@@ -45,9 +45,9 @@ export class ErrorBoundary extends Component<Props, State> {
             </p>
             <Button
               onClick={this.handleReset}
-              className="gradient-bg"
+              className="gradient-bg border-0"
+              leftSection={<RefreshCw className="h-4 w-4" />}
             >
-              <RefreshCw className="h-4 w-4 mr-2" />
               Try Again
             </Button>
           </div>

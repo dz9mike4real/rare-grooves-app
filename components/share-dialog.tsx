@@ -1,10 +1,7 @@
 'use client';
 
 import { Track } from '@/lib/types';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { Modal, Button, TextInput, Text, ActionIcon } from '@mantine/core';
 import { Copy, Check, Mail, MessageCircle, Share2, Youtube } from 'lucide-react';
 import { useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
@@ -30,7 +27,7 @@ export function ShareDialog({ track, onClose }: ShareDialogProps) {
         title: 'Link copied',
         description: 'Share link has been copied to clipboard.',
       });
-      
+
       setTimeout(() => setCopied(false), 2000);
     } catch {
       toast({
@@ -68,7 +65,7 @@ export function ShareDialog({ track, onClose }: ShareDialogProps) {
           text: shareText,
           url: shareUrl,
         });
-    } catch {
+      } catch {
         // User cancelled or share failed
         console.log('[v0] Share cancelled or failed');
       }
@@ -82,113 +79,107 @@ export function ShareDialog({ track, onClose }: ShareDialogProps) {
   };
 
   return (
-    <Dialog open onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader>
-          <DialogTitle>Share Track</DialogTitle>
-          <DialogDescription>
-            Share this rare groove with your friends
-          </DialogDescription>
-        </DialogHeader>
+    <Modal opened={true} onClose={onClose} title="Share Track" centered>
+      <Text size="sm" c="dimmed" mb="md">
+        Share this rare groove with your friends
+      </Text>
 
-        <div className="space-y-6 py-4">
-          {/* Track Info */}
-          <div className="space-y-1">
-            <p className="font-semibold text-sm text-balance">{track.title}</p>
-            <p className="text-sm text-muted-foreground">{track.artist}</p>
-            <p className="text-xs text-muted-foreground">
-              {track.album} • {track.year}
-            </p>
+      <div className="space-y-6 py-4">
+        {/* Track Info */}
+        <div className="space-y-1">
+          <p className="font-semibold text-sm text-balance">{track.title}</p>
+          <p className="text-sm text-muted-foreground">{track.artist}</p>
+          <p className="text-xs text-muted-foreground">
+            {track.album} • {track.year}
+          </p>
+        </div>
+
+        {/* Share Link */}
+        <div className="space-y-2">
+          <Text size="sm" fw={500}>Share Link</Text>
+          <div className="flex gap-2">
+            <TextInput
+              id="share-link"
+              value={shareUrl}
+              readOnly
+              className="flex-1"
+            />
+            <ActionIcon
+              variant="default"
+              size="lg"
+              onClick={copyToClipboard}
+            >
+              {copied ? (
+                <Check className="h-4 w-4" />
+              ) : (
+                <Copy className="h-4 w-4" />
+              )}
+            </ActionIcon>
           </div>
+        </div>
 
-          {/* Share Link */}
-          <div className="space-y-2">
-            <Label htmlFor="share-link">Share Link</Label>
-            <div className="flex gap-2">
-              <Input
-                id="share-link"
-                value={shareUrl}
-                readOnly
-                className="flex-1"
-              />
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={copyToClipboard}
-              >
-                {copied ? (
-                  <Check className="h-4 w-4" />
-                ) : (
-                  <Copy className="h-4 w-4" />
-                )}
-              </Button>
-            </div>
-          </div>
-
-          {/* Share Buttons */}
-          <div className="space-y-2">
-            <Label>Share via</Label>
-            <div className="grid grid-cols-2 gap-2">
-              <Button
-                variant="outline"
-                className="w-full bg-transparent"
-                onClick={shareViaEmail}
-              >
-                <Mail className="h-4 w-4 mr-2" />
-                Email
-              </Button>
-              <Button
-                variant="outline"
-                className="w-full bg-transparent"
-                onClick={shareViaWhatsApp}
-              >
-                <MessageCircle className="h-4 w-4 mr-2" />
-                WhatsApp
-              </Button>
-              <Button
-                variant="outline"
-                className="w-full col-span-2 bg-transparent"
-                onClick={shareViaTwitter}
-              >
+        {/* Share Buttons */}
+        <div className="space-y-2">
+          <Text size="sm" fw={500}>Share via</Text>
+          <div className="grid grid-cols-2 gap-2">
+            <Button
+              variant="default"
+              className="w-full bg-transparent"
+              onClick={shareViaEmail}
+              leftSection={<Mail className="h-4 w-4" />}
+            >
+              Email
+            </Button>
+            <Button
+              variant="default"
+              className="w-full bg-transparent"
+              onClick={shareViaWhatsApp}
+              leftSection={<MessageCircle className="h-4 w-4" />}
+            >
+              WhatsApp
+            </Button>
+            <Button
+              variant="default"
+              className="w-full col-span-2 bg-transparent"
+              onClick={shareViaTwitter}
+              leftSection={
                 <svg
-                  className="h-4 w-4 mr-2"
+                  className="h-4 w-4"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                   aria-hidden="true"
                 >
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                 </svg>
-                X (Twitter)
-              </Button>
-              <Button
-                variant="outline"
-                className="w-full col-span-2 bg-transparent hover:bg-red-500/10 hover:border-red-500/50"
-                asChild
-              >
-                <a
-                  href={`https://www.youtube.com/results?search_query=${encodeURIComponent(`${track.artist} ${track.title}`)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Youtube className="h-4 w-4 mr-2 text-red-500" />
-                  <span className="text-red-400">Listen on YouTube</span>
-                </a>
-              </Button>
-            </div>
-          </div>
-
-          {/* Native Share (if available) */}
-          {typeof navigator.share === 'function' && (
-            <Button
-              className="w-full"
-              onClick={shareViaNative}
+              }
             >
-              <Share2 className="h-4 w-4 mr-2" />
-              More Options
+              X (Twitter)
             </Button>
-          )}
+            <Button
+              variant="default"
+              className="w-full col-span-2 bg-transparent hover:bg-red-500/10 hover:border-red-500/50"
+              component="a"
+              href={`https://www.youtube.com/results?search_query=${encodeURIComponent(`${track.artist} ${track.title}`)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              leftSection={<Youtube className="h-4 w-4 text-red-500" />}
+            >
+              <span className="text-red-400">Listen on YouTube</span>
+            </Button>
+          </div>
         </div>
-      </DialogContent>
-    </Dialog>
+
+        {/* Native Share (if available) */}
+        {typeof navigator !== 'undefined' && typeof navigator.share === 'function' && (
+          <Button
+            className="w-full"
+            onClick={shareViaNative}
+            leftSection={<Share2 className="h-4 w-4" />}
+          >
+            More Options
+          </Button>
+        )}
+      </div>
+    </Modal>
   );
 }

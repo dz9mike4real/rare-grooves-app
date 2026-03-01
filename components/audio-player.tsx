@@ -2,14 +2,13 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Track } from '@/lib/types';
-import { Button } from '@/components/ui/button';
-import { Slider } from '@/components/ui/slider';
-import { 
-  Play, 
-  Pause, 
-  SkipBack, 
-  SkipForward, 
-  Volume2, 
+import { ActionIcon, Slider } from '@mantine/core';
+import {
+  Play,
+  Pause,
+  SkipBack,
+  SkipForward,
+  Volume2,
   VolumeX,
   Scissors,
   X,
@@ -17,9 +16,9 @@ import {
   Share2,
   Shuffle,
   Repeat,
-  Youtube,
   Loader2,
-  Keyboard
+  ChevronDown,
+  ChevronUp
 } from 'lucide-react';
 import Image from 'next/image';
 import { isFavorite, addFavorite, removeFavorite } from '@/lib/storage';
@@ -45,10 +44,11 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
   const [isFav, setIsFav] = useState(false);
   const [showSampleCreator, setShowSampleCreator] = useState(false);
   const [showShareDialog, setShowShareDialog] = useState(false);
-  const [showKeyboardHelp, setShowKeyboardHelp] = useState(false);
+  const [showKeyboardHelp] = useState(false);
   const [isLoadingAudio, setIsLoadingAudio] = useState(true);
   const [audioUrl, setAudioUrl] = useState<string>('');
   const [audioReady, setAudioReady] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   useEffect(() => {
     setIsFav(isFavorite(track.id));
@@ -167,17 +167,17 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
     }
   }, [isPlaying, audioUrl, audioReady]);
 
-  const handleSeek = (value: number[]) => {
+  const handleSeek = (value: number) => {
     const audio = audioRef.current;
     if (audio) {
-      audio.currentTime = value[0];
-      setCurrentTime(value[0]);
+      audio.currentTime = value;
+      setCurrentTime(value);
     }
   };
 
-  const handleVolumeChange = (value: number[]) => {
+  const handleVolumeChange = (value: number) => {
     const audio = audioRef.current;
-    const newVolume = value[0];
+    const newVolume = value;
     if (audio) {
       audio.volume = newVolume;
       setVolume(newVolume);
@@ -239,182 +239,269 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
 
   return (
     <>
-      <div className="fixed bottom-0 left-0 right-0 z-[60]">
-        {/* Progress Bar at Top */}
-        <div className="h-1 bg-white/10 cursor-pointer group">
-          <div 
-            className="h-full gradient-bg transition-all duration-100"
-            style={{ width: `${(currentTime / (duration || 1)) * 100}%` }}
-          />
-        </div>
-        
-        {/* Main Player */}
-        <div className="glass border-t border-border/50 bg-background/95 dark:bg-[#181818]/95 backdrop-blur-xl">
-          <div className="container mx-auto px-3 sm:px-4 py-2">
-            <div className="flex items-center gap-3 sm:gap-4">
-              {/* Track Info */}
-              <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0 w-32 sm:w-48 md:w-56">
-                <div className="relative h-12 w-12 sm:h-14 sm:w-14 flex-shrink-0 rounded-lg overflow-hidden shadow-lg">
-                  <Image
-                    src={track.albumArt || "/placeholder.svg"}
-                    alt={track.album}
-                    fill
-                    className="object-cover"
-                    sizes="56px"
-                  />
-                  {isPlaying && (
-                    <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                      <div className="flex items-end gap-0.5 h-3 sm:h-4">
-                        <span className="w-0.5 sm:w-1 bg-[#0a4d7f] rounded-full animate-pulse" style={{ animationDelay: '0ms', height: '40%' }} />
-                        <span className="w-0.5 sm:w-1 bg-[#0a4d7f] rounded-full animate-pulse" style={{ animationDelay: '150ms', height: '70%' }} />
-                        <span className="w-0.5 sm:w-1 bg-[#0a4d7f] rounded-full animate-pulse" style={{ animationDelay: '300ms', height: '50%' }} />
-                        <span className="w-0.5 sm:w-1 bg-[#0a4d7f] rounded-full animate-pulse" style={{ animationDelay: '450ms', height: '80%' }} />
+      <div className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] group/player transition-all duration-300 ${isCollapsed ? 'w-auto max-w-sm' : 'w-[calc(100%-2rem)] max-w-4xl'}`}>
+        {isCollapsed ? (
+          /* Collapsed Mini Bar */
+          <div className="glass-card overflow-hidden transition-all duration-300 border-2 border-primary/20 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.2)] dark:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.8)]" style={{ borderRadius: '5px' }}>
+            {/* Thin progress indicator */}
+            <div className="h-0.5 w-full bg-primary/10 relative">
+              <div
+                className="absolute left-0 top-0 h-full gradient-bg"
+                style={{ width: `${(currentTime / (duration || 1)) * 100}%` }}
+              />
+            </div>
+            <div className="px-3 py-2 flex items-center gap-2">
+              <div className="relative h-8 w-8 flex-shrink-0 rounded-md overflow-hidden">
+                <Image
+                  src={track.albumArt || "/placeholder.svg"}
+                  alt={track.album}
+                  fill
+                  className="object-cover"
+                  sizes="32px"
+                />
+              </div>
+              <div className="min-w-0 max-w-[140px]">
+                <p className="font-semibold text-xs text-foreground truncate">{track.title}</p>
+                <p className="text-[10px] font-bold text-primary uppercase tracking-wider truncate">{track.artist}</p>
+              </div>
+              <button
+                type="button"
+                onClick={togglePlayPause}
+                className="h-9 w-9 rounded-full gradient-bg hover:opacity-90 flex items-center justify-center flex-shrink-0"
+              >
+                {isPlaying ? (
+                  <Pause className="h-4 w-4 text-white" />
+                ) : (
+                  <Play className="h-4 w-4 text-white ml-0.5" />
+                )}
+              </button>
+              <ActionIcon
+                variant="subtle"
+                size="xl"
+                radius="xl"
+                onClick={() => setIsCollapsed(false)}
+                className="text-muted-foreground hover:text-foreground h-11 w-11"
+                aria-label="Expand player"
+              >
+                <ChevronUp className="h-4 w-4" />
+              </ActionIcon>
+              <ActionIcon
+                variant="subtle"
+                size="xl"
+                radius="xl"
+                onClick={onClose}
+                className="text-muted-foreground hover:text-foreground h-11 w-11"
+                aria-label="Close player"
+              >
+                <X className="h-4 w-4" />
+              </ActionIcon>
+            </div>
+          </div>
+        ) : (
+          /* Full Player */
+          <div className="glass-card overflow-hidden transition-all duration-300 border-2 border-primary/20 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.2)] dark:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.8)]" style={{ borderRadius: '5px' }}>
+
+            {/* Progress Bar at Top Edge */}
+            <div className="h-1 w-full bg-primary/10 cursor-pointer group/progress relative">
+              <div
+                className="absolute left-0 top-0 h-full gradient-bg transition-all duration-100"
+                style={{ width: `${(currentTime / (duration || 1)) * 100}%` }}
+              />
+            </div>
+
+            <div className="px-4 sm:px-6 py-3">
+              <div className="flex items-center gap-3 sm:gap-6">
+                {/* Track Info */}
+                <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0 w-32 sm:w-48 md:w-56">
+                  <div className="relative h-12 w-12 sm:h-14 sm:w-14 flex-shrink-0 rounded-[10px] overflow-hidden shadow-lg">
+                    <Image
+                      src={track.albumArt || "/placeholder.svg"}
+                      alt={track.album}
+                      fill
+                      className="object-cover"
+                      sizes="56px"
+                    />
+                    {isPlaying && (
+                      <div className="absolute inset-0 bg-black/40 flex items-center justify-center backdrop-blur-[1px]">
+                        <div className="flex items-end gap-0.5 h-3 sm:h-4">
+                          <span className="w-0.5 sm:w-1 bg-[#0a4d7f] rounded-full animate-pulse" style={{ animationDelay: '0ms', height: '40%' }} />
+                          <span className="w-0.5 sm:w-1 bg-[#0a4d7f] rounded-full animate-pulse" style={{ animationDelay: '150ms', height: '70%' }} />
+                          <span className="w-0.5 sm:w-1 bg-[#0a4d7f] rounded-full animate-pulse" style={{ animationDelay: '300ms', height: '50%' }} />
+                          <span className="w-0.5 sm:w-1 bg-[#0a4d7f] rounded-full animate-pulse" style={{ animationDelay: '450ms', height: '80%' }} />
+                        </div>
                       </div>
-                    </div>
-                  )}
-                </div>
-                <div className="flex-1 min-w-0 hidden sm:block">
-                  <h3 className="font-semibold text-xs sm:text-sm text-foreground line-clamp-1">
-                    {track.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-muted-foreground line-clamp-1">
-                    {track.artist}
-                  </p>
-                </div>
-              </div>
-
-              {/* Controls */}
-              <div className="flex-1 flex flex-col items-center gap-1.5 sm:gap-2 max-w-lg mx-auto">
-                <div className="flex items-center gap-3 sm:gap-4">
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="h-8 w-8 text-muted-foreground hover:text-foreground hidden sm:flex"
-                  >
-                    <Shuffle className="h-4 w-4" />
-                  </Button>
-                  
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={skipBackward}
-                    disabled={!hasPrevious && !onPrevious}
-                    className="h-9 w-9 sm:h-10 sm:w-10 text-foreground hover:text-primary disabled:text-muted-foreground/30"
-                  >
-                    <SkipBack className="h-4 w-4 sm:h-5 sm:w-5" />
-                  </Button>
-
-                  <button
-                    type="button"
-                    onClick={togglePlayPause}
-                    disabled={isLoadingAudio}
-                    className="h-11 w-11 sm:h-12 sm:w-12 rounded-full gradient-bg hover:opacity-90 flex items-center justify-center disabled:opacity-50"
-                  >
-                    {isLoadingAudio ? (
-                      <Loader2 className="h-5 w-5 sm:h-6 sm:w-6 text-white animate-spin" />
-                    ) : isPlaying ? (
-                      <Pause className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
-                    ) : (
-                      <Play className="h-5 w-5 sm:h-6 sm:w-6 text-white ml-0.5" />
                     )}
-                  </button>
-
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={skipForward}
-                    disabled={!hasNext && !onNext}
-                    className="h-9 w-9 sm:h-10 sm:w-10 text-foreground hover:text-primary disabled:text-muted-foreground/30"
-                  >
-                    <SkipForward className="h-4 w-4 sm:h-5 sm:w-5" />
-                  </Button>
-                  
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="h-8 w-8 text-muted-foreground hover:text-foreground hidden sm:flex"
-                  >
-                    <Repeat className="h-4 w-4" />
-                  </Button>
-                </div>
-                
-                {/* Progress Slider */}
-                <div className="w-full flex items-center gap-2">
-                  <span className="text-xs text-muted-foreground/70 w-10 text-right tabular-nums">{formatTime(currentTime)}</span>
-                  <Slider
-                    value={[currentTime]}
-                    max={duration || 100}
-                    step={0.1}
-                    onValueChange={handleSeek}
-                    className="flex-1 cursor-pointer"
-                  />
-                  <span className="text-xs text-muted-foreground/70 w-10 tabular-nums">{formatTime(duration)}</span>
-                </div>
-              </div>
-
-              {/* Volume & Actions */}
-              <div className="flex items-center gap-1 sm:gap-2 w-20 sm:w-28 md:w-36 flex-shrink-0">
-                <div className="hidden md:flex items-center gap-1.5 w-24">
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={toggleMute}
-                    className="h-8 w-8 text-muted-foreground hover:text-foreground"
-                  >
-                    {isMuted || volume === 0 ? (
-                      <VolumeX className="h-4 w-4" />
-                    ) : (
-                      <Volume2 className="h-4 w-4" />
-                    )}
-                  </Button>
-                  <Slider
-                    value={[isMuted ? 0 : volume]}
-                    max={1}
-                    step={0.01}
-                    onValueChange={handleVolumeChange}
-                    className="flex-1"
-                  />
+                  </div>
+                  <div className="flex-1 min-w-0 hidden sm:block">
+                    <h3 className="font-semibold text-xs sm:text-sm text-foreground line-clamp-1">
+                      {track.title}
+                    </h3>
+                    <p className="text-[10px] sm:text-xs font-bold text-primary uppercase tracking-wider line-clamp-1">
+                      {track.artist}
+                    </p>
+                  </div>
                 </div>
 
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={handleFavoriteToggle}
-                  className={`h-9 w-9 ${isFav ? 'text-primary' : 'text-muted-foreground hover:text-foreground'}`}
-                >
-                  <Heart className={`h-4 w-4 ${isFav ? 'fill-primary' : ''}`} />
-                </Button>
+                {/* Controls */}
+                <div className="flex-1 flex flex-col items-center gap-1.5 sm:gap-2 max-w-lg mx-auto">
+                  <div className="flex items-center gap-3 sm:gap-4">
+                    <ActionIcon
+                      variant="subtle"
+                      size="xl"
+                      radius="xl"
+                      className="text-muted-foreground hover:text-foreground hidden sm:flex h-11 w-11"
+                    >
+                      <Shuffle className="h-4 w-4" />
+                    </ActionIcon>
 
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => setShowSampleCreator(true)}
-                  className="h-9 w-9 text-muted-foreground hover:text-green-500"
-                >
-                  <Scissors className="h-4 w-4" />
-                </Button>
+                    <ActionIcon
+                      variant="subtle"
+                      size="xl"
+                      radius="xl"
+                      onClick={skipBackward}
+                      disabled={!hasPrevious && !onPrevious}
+                      className="text-foreground hover:text-primary disabled:text-muted-foreground/30"
+                    >
+                      <SkipBack className="h-4 w-4 sm:h-5 sm:w-5" />
+                    </ActionIcon>
 
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => setShowShareDialog(true)}
-                  className="h-9 w-9 text-muted-foreground hover:text-foreground hidden sm:flex"
-                >
-                  <Share2 className="h-4 w-4" />
-                </Button>
+                    <button
+                      type="button"
+                      onClick={togglePlayPause}
+                      disabled={isLoadingAudio}
+                      className="h-11 w-11 sm:h-12 sm:w-12 rounded-full gradient-bg hover:opacity-90 flex items-center justify-center disabled:opacity-50"
+                    >
+                      {isLoadingAudio ? (
+                        <Loader2 className="h-5 w-5 sm:h-6 sm:w-6 text-white animate-spin" />
+                      ) : isPlaying ? (
+                        <Pause className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
+                      ) : (
+                        <Play className="h-5 w-5 sm:h-6 sm:w-6 text-white ml-0.5" />
+                      )}
+                    </button>
 
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={onClose}
-                  className="h-9 w-9 text-muted-foreground hover:text-foreground"
-                >
-                  <X className="h-4 w-4" />
-                </Button>
+                    <ActionIcon
+                      variant="subtle"
+                      size="xl"
+                      radius="xl"
+                      onClick={skipForward}
+                      disabled={!hasNext && !onNext}
+                      className="text-foreground hover:text-primary disabled:text-muted-foreground/30"
+                    >
+                      <SkipForward className="h-4 w-4 sm:h-5 sm:w-5" />
+                    </ActionIcon>
+
+                    <ActionIcon
+                      variant="subtle"
+                      size="xl"
+                      radius="xl"
+                      className="text-muted-foreground hover:text-foreground hidden sm:flex h-11 w-11"
+                    >
+                      <Repeat className="h-4 w-4" />
+                    </ActionIcon>
+                  </div>
+
+                  {/* Progress Controls (Hidden for Pill) */}
+                  <div className="w-full hidden items-center gap-2">
+                    <span className="text-xs text-muted-foreground w-10 text-right tabular-nums">{formatTime(currentTime)}</span>
+                    <Slider
+                      value={currentTime}
+                      max={duration || 100}
+                      step={0.1}
+                      onChange={handleSeek}
+                      className="flex-1 cursor-pointer"
+                      label={null}
+                      color="gray"
+                      size="sm"
+                    />
+                    <span className="text-xs text-muted-foreground w-10 tabular-nums">{formatTime(duration)}</span>
+                  </div>
+                </div>
+
+                {/* Volume & Actions */}
+                <div className="flex items-center gap-1 sm:gap-2 w-auto flex-shrink-0">
+                  <div className="hidden md:flex items-center gap-1.5 w-24">
+                    <ActionIcon
+                      variant="subtle"
+                      size="xl"
+                      radius="xl"
+                      onClick={toggleMute}
+                      className="text-muted-foreground hover:text-foreground h-11 w-11"
+                    >
+                      {isMuted || volume === 0 ? (
+                        <VolumeX className="h-4 w-4" />
+                      ) : (
+                        <Volume2 className="h-4 w-4" />
+                      )}
+                    </ActionIcon>
+                    <Slider
+                      value={isMuted ? 0 : volume}
+                      max={1}
+                      step={0.01}
+                      onChange={handleVolumeChange}
+                      className="flex-1"
+                      label={null}
+                      color="gray"
+                      size="sm"
+                    />
+                  </div>
+
+                  <ActionIcon
+                    variant="subtle"
+                    size="xl"
+                    radius="xl"
+                    onClick={handleFavoriteToggle}
+                    className={`h-11 w-11 ${isFav ? 'text-primary' : 'text-muted-foreground hover:text-foreground'}`}
+                  >
+                    <Heart className={`h-4 w-4 ${isFav ? 'fill-primary' : ''}`} />
+                  </ActionIcon>
+
+                  <ActionIcon
+                    variant="subtle"
+                    size="xl"
+                    radius="xl"
+                    onClick={() => setShowSampleCreator(true)}
+                    className="text-muted-foreground hover:text-green-500 h-11 w-11"
+                  >
+                    <Scissors className="h-4 w-4" />
+                  </ActionIcon>
+
+                  <ActionIcon
+                    variant="subtle"
+                    size="xl"
+                    radius="xl"
+                    onClick={() => setShowShareDialog(true)}
+                    className="text-muted-foreground hover:text-foreground hidden sm:flex h-11 w-11"
+                  >
+                    <Share2 className="h-4 w-4" />
+                  </ActionIcon>
+
+                  <ActionIcon
+                    variant="subtle"
+                    size="xl"
+                    radius="xl"
+                    onClick={() => setIsCollapsed(true)}
+                    className="text-muted-foreground hover:text-foreground h-11 w-11"
+                    aria-label="Collapse player"
+                  >
+                    <ChevronDown className="h-4 w-4" />
+                  </ActionIcon>
+
+                  <ActionIcon
+                    variant="subtle"
+                    size="xl"
+                    radius="xl"
+                    onClick={onClose}
+                    className="text-muted-foreground hover:text-foreground h-11 w-11"
+                    aria-label="Close player"
+                  >
+                    <X className="h-4 w-4" />
+                  </ActionIcon>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* Keyboard Shortcuts Help */}
         {showKeyboardHelp && (
@@ -433,10 +520,10 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
         )}
 
         {/* Hidden Audio Element */}
-        <audio 
-          ref={audioRef} 
-          src={audioUrl || undefined} 
-          preload="auto" 
+        <audio
+          ref={audioRef}
+          src={audioUrl || undefined}
+          preload="auto"
           onCanPlay={() => console.log('[v0] Audio can play')}
           onError={(e) => console.log('[v0] Audio error:', e)}
         />

@@ -4,10 +4,7 @@ import React from "react"
 
 import { useState, useEffect, useRef } from 'react';
 import { Track } from '@/lib/types';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { Slider } from '@/components/ui/slider';
-import { Label } from '@/components/ui/label';
+import { Modal, Button, Slider, Text } from '@mantine/core';
 import { Play, Pause, Download, Check } from 'lucide-react';
 import { saveSample } from '@/lib/storage';
 import { useToast } from '@/hooks/use-toast';
@@ -44,8 +41,8 @@ export function SampleCreator({ track, currentTime, duration, onClose, audioRef 
 
   const endTime = Math.min(startTime + SAMPLE_DURATION, duration);
 
-  const handleStartTimeChange = (value: number[]) => {
-    const newStart = value[0];
+  const handleStartTimeChange = (value: number) => {
+    const newStart = value;
     // Ensure sample doesn't exceed track duration
     if (newStart + SAMPLE_DURATION <= duration) {
       setStartTime(newStart);
@@ -100,7 +97,7 @@ export function SampleCreator({ track, currentTime, duration, onClose, audioRef 
 
   const handleExportSample = async () => {
     if (isExporting) return; // Prevent multiple simultaneous exports
-    
+
     const audio = audioRef.current;
     if (!audio || !audio.src) {
       toast({
@@ -112,12 +109,12 @@ export function SampleCreator({ track, currentTime, duration, onClose, audioRef 
     }
 
     setIsExporting(true);
-    
+
     try {
       console.log('[v0] Starting sample export...');
       console.log('[v0] Audio source:', audio.src);
       console.log('[v0] Sample range:', startTime, 'to', endTime, 'seconds');
-      
+
       // Fetch the audio file with CORS mode
       let audioBlob: Blob;
       try {
@@ -135,9 +132,9 @@ export function SampleCreator({ track, currentTime, duration, onClose, audioRef 
         });
         return;
       }
-      
+
       console.log('[v0] Fetched audio blob, size:', audioBlob.size, 'bytes');
-      
+
       // Create AudioContext
       const getAudioContext = () => {
         if (typeof window === 'undefined') return null;
@@ -149,23 +146,23 @@ export function SampleCreator({ track, currentTime, duration, onClose, audioRef 
       }
       const audioContext = new AudioContextClass();
       audioContextRef.current = audioContext;
-      
+
       const arrayBuffer = await audioBlob.arrayBuffer();
       const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
-      
+
       // Calculate sample frames
       const sampleRate = audioBuffer.sampleRate;
       const startFrame = Math.floor(startTime * sampleRate);
       const endFrame = Math.floor(endTime * sampleRate);
       const frameCount = endFrame - startFrame;
-      
+
       // Create new buffer for the sample
       const sampleBuffer = audioContext.createBuffer(
         audioBuffer.numberOfChannels,
         frameCount,
         sampleRate
       );
-      
+
       // Copy the audio data
       for (let channel = 0; channel < audioBuffer.numberOfChannels; channel++) {
         const channelData = audioBuffer.getChannelData(channel);
@@ -174,35 +171,35 @@ export function SampleCreator({ track, currentTime, duration, onClose, audioRef 
           sampleData[i] = channelData[startFrame + i];
         }
       }
-      
+
       // Convert to WAV format
       const wavBlob = bufferToWave(sampleBuffer, sampleRate);
-      
+
       // Create download link with better browser compatibility
       const url = URL.createObjectURL(wavBlob);
       const filename = `${track.artist.replace(/[^a-z0-9]/gi, '_')} - ${track.title.replace(/[^a-z0-9]/gi, '_')}_Sample.wav`;
-      
+
       // Try direct download first
       const link = document.createElement('a');
       link.href = url;
       link.download = filename;
       document.body.appendChild(link);
       link.click();
-      
+
       console.log('[v0] Sample exported successfully, WAV blob size:', wavBlob.size, 'bytes');
       console.log('[v0] Download triggered for:', filename);
-      
+
       // Cleanup after a delay
       setTimeout(() => {
         document.body.removeChild(link);
         URL.revokeObjectURL(url);
       }, 1000);
-      
+
       toast({
         title: 'Sample exported',
         description: `8-second WAV sample (${(wavBlob.size / 1024 / 1024).toFixed(1)}MB) downloading now. Check your Downloads folder.`,
       });
-      
+
       handleSaveSample();
     } catch (error) {
       console.error('[v0] Export error:', error);
@@ -226,14 +223,14 @@ export function SampleCreator({ track, currentTime, duration, onClose, audioRef 
     const length = buffer.length * buffer.numberOfChannels * 2;
     const arrayBuffer = new ArrayBuffer(44 + length);
     const view = new DataView(arrayBuffer);
-    
+
     // Write WAV header
     const writeString = (offset: number, string: string) => {
       for (let i = 0; i < string.length; i++) {
         view.setUint8(offset + i, string.charCodeAt(i));
       }
     };
-    
+
     writeString(0, 'RIFF');
     view.setUint32(4, 36 + length, true);
     writeString(8, 'WAVE');
@@ -247,13 +244,13 @@ export function SampleCreator({ track, currentTime, duration, onClose, audioRef 
     view.setUint16(34, 16, true);
     writeString(36, 'data');
     view.setUint32(40, length, true);
-    
+
     // Write audio data
     const channels = [];
     for (let i = 0; i < buffer.numberOfChannels; i++) {
       channels.push(buffer.getChannelData(i));
     }
-    
+
     let offset = 44;
     for (let i = 0; i < buffer.length; i++) {
       for (let channel = 0; channel < buffer.numberOfChannels; channel++) {
@@ -262,7 +259,7 @@ export function SampleCreator({ track, currentTime, duration, onClose, audioRef 
         offset += 2;
       }
     }
-    
+
     return new Blob([arrayBuffer], { type: 'audio/wav' });
   };
 
@@ -274,98 +271,79 @@ export function SampleCreator({ track, currentTime, duration, onClose, audioRef 
   };
 
   return (
-    <Dialog open onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader>
-          <DialogTitle>Create 8-Second Sample</DialogTitle>
-          <DialogDescription>
-            Select the start point for your sample. The sample will be exactly 8 seconds long.
-          </DialogDescription>
-        </DialogHeader>
+    <Modal opened={true} onClose={onClose} title="Create 8-Second Sample" centered>
+      <Text size="sm" c="dimmed" mb="md">
+        Select the start point for your sample. The sample will be exactly 8 seconds long.
+      </Text>
 
-        <div className="space-y-6 py-4">
-          {/* Track Info */}
-          <div className="space-y-1">
-            <p className="font-semibold text-sm text-balance">{track.title}</p>
-            <p className="text-sm text-muted-foreground">{track.artist}</p>
+      <div className="space-y-6 py-4">
+        {/* Track Info */}
+        <div className="space-y-1">
+          <p className="font-semibold text-sm text-balance">{track.title}</p>
+          <p className="text-sm text-muted-foreground">{track.artist}</p>
+        </div>
+
+        {/* Sample Range */}
+        <div className="space-y-2">
+          <Text size="sm" fw={500}>Sample Start Time</Text>
+          <Slider
+            value={startTime}
+            max={Math.max(0, duration - SAMPLE_DURATION)}
+            step={0.1}
+            onChange={handleStartTimeChange}
+            className="cursor-pointer"
+            label={null}
+          />
+          <div className="flex justify-between text-xs text-muted-foreground">
+            <span>Start: {formatTime(startTime)}</span>
+            <span>End: {formatTime(endTime)}</span>
           </div>
+        </div>
 
-          {/* Sample Range */}
-          <div className="space-y-2">
-            <Label>Sample Start Time</Label>
-            <Slider
-              value={[startTime]}
-              max={Math.max(0, duration - SAMPLE_DURATION)}
-              step={0.1}
-              onValueChange={handleStartTimeChange}
-              className="cursor-pointer"
-            />
-            <div className="flex justify-between text-xs text-muted-foreground">
-              <span>Start: {formatTime(startTime)}</span>
-              <span>End: {formatTime(endTime)}</span>
-            </div>
+        {/* Sample Duration Display */}
+        <div className="rounded-lg border border-border bg-muted/50 p-3">
+          <div className="flex items-center justify-between">
+            <span className="text-sm font-medium">Sample Duration</span>
+            <span className="text-sm font-semibold text-primary">8 seconds</span>
           </div>
+        </div>
 
-          {/* Sample Duration Display */}
-          <div className="rounded-lg border border-border bg-muted/50 p-3">
-            <div className="flex items-center justify-between">
-              <span className="text-sm font-medium">Sample Duration</span>
-              <span className="text-sm font-semibold text-primary">8 seconds</span>
-            </div>
-          </div>
-
-          {/* Preview & Actions */}
-          <div className="flex gap-2">
-            <Button
-              variant="outline"
-              className="flex-1 bg-transparent"
-              onClick={previewSample}
-            >
-              {isPreviewPlaying ? (
-                <>
-                  <Pause className="h-4 w-4 mr-2" />
-                  Stop Preview
-                </>
-              ) : (
-                <>
-                  <Play className="h-4 w-4 mr-2" />
-                  Preview Sample
-                </>
-              )}
-            </Button>
-
-            <Button
-              variant="outline"
-              onClick={handleSaveSample}
-              disabled={isSaved}
-            >
-              {isSaved ? (
-                <>
-                  <Check className="h-4 w-4 mr-2" />
-                  Saved
-                </>
-              ) : (
-                'Save'
-              )}
-            </Button>
-          </div>
-
-          {/* Export Button */}
+        {/* Preview & Actions */}
+        <div className="flex gap-2">
           <Button
-            type="button"
-            className="w-full"
-            onClick={handleExportSample}
-            disabled={isExporting}
+            variant="default"
+            className="flex-1 bg-transparent"
+            onClick={previewSample}
+            leftSection={isPreviewPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
           >
-            <Download className="h-4 w-4 mr-2" />
-            {isExporting ? 'Exporting...' : 'Export Sample'}
+            {isPreviewPlaying ? 'Stop Preview' : 'Preview Sample'}
           </Button>
 
-          <p className="text-xs text-muted-foreground text-center text-pretty">
-            Exported samples can be used in your music production. Make sure to respect copyright laws.
-          </p>
+          <Button
+            variant="default"
+            onClick={handleSaveSample}
+            disabled={isSaved}
+            leftSection={isSaved && <Check className="h-4 w-4" />}
+          >
+            {isSaved ? 'Saved' : 'Save'}
+          </Button>
         </div>
-      </DialogContent>
-    </Dialog>
+
+        {/* Export Button */}
+        <Button
+          type="button"
+          className="w-full gradient-bg border-0"
+          onClick={handleExportSample}
+          disabled={isExporting}
+          leftSection={<Download className="h-4 w-4" />}
+        >
+          {isExporting ? 'Exporting...' : 'Export Sample'}
+        </Button>
+
+        <p className="text-xs text-muted-foreground text-center text-pretty">
+          Exported samples can be used in your music production. Make sure to respect copyright laws.
+        </p>
+      </div>
+    </Modal>
   );
 }
