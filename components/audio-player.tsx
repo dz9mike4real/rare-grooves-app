@@ -239,7 +239,7 @@ export function AudioPlayer({ track, onClose, onNext, onPrevious, hasNext, hasPr
 
   return (
     <>
-      <div className={`fixed bottom-[76px] md:bottom-6 left-1/2 -translate-x-1/2 z-[60] group/player transition-all duration-300 ${isCollapsed ? 'w-[calc(100%-1rem)] max-w-sm' : 'w-[calc(100%-1rem)] max-w-4xl'}`}>
+      <div className={`fixed bottom-[70px] md:bottom-6 left-1/2 -translate-x-1/2 z-[60] group/player transition-all duration-300 ${isCollapsed ? 'w-[calc(100%-1rem)] max-w-sm' : 'w-[calc(100%-1rem)] max-w-4xl'}`}>
         {isCollapsed ? (
           /* Collapsed Mini Bar */
           <div className="glass-card overflow-hidden transition-all duration-300 border-2 border-primary/20 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.2)] dark:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.8)]" style={{ borderRadius: '5px' }}>

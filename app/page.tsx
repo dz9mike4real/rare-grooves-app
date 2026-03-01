@@ -573,7 +573,7 @@ export default function Home() {
         />
       )}
       {/* Mobile Bottom Navigation Bar */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-background/90 backdrop-blur-md border-t-2 border-primary/20 p-3 pb-safe flex justify-center gap-8 sm:gap-12 items-center shadow-[0_-10px_40px_-10px_rgba(0,0,0,0.1)]">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-background/90 backdrop-blur-md border-t-2 border-primary/20 p-3 flex justify-center gap-8 sm:gap-12 items-center shadow-[0_-10px_40px_-10px_rgba(0,0,0,0.1)]">
         <SurpriseMeButton
           tracks={tracksWithCovers}
           onPlayTrack={(track) => {
